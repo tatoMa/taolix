@@ -2,7 +2,7 @@ import Image from "next/image";
 import { PlayIcon, XIcon } from "@heroicons/react/solid";
 import { InformationCircleIcon } from "@heroicons/react/outline";
 import React from "react";
-import VideoJS from "./VideoJS";
+import VideoJS from "./Videojs";
 import { useState } from "react";
 const Banner = () => {
   const [play, setPlay] = useState(false);

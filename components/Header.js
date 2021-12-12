@@ -1,19 +1,12 @@
 // import logo from "../assets/logo.png";
 
 import Link from "next/link";
-import { useRef } from 'react'
 
 function Header() {
-  const navbarRef = useRef()
-  console.log(navbarRef.current.offsetTop)
   return (
     <div
-    ref={navbarRef}
       className="header top-0 fixed z-50 w-full h-16 transition duration-700"
       className={"bg-background"}
-      onClick={() => {
-        console.log(navbarRef.current.offsetTop)
-      }}
     >
       <div className="header__overlay absolute inset-0 w-full h-full"
       ></div>
