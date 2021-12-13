@@ -15,7 +15,7 @@ const Footer = () => {
               </div>
 
               <p className="max-w-md mt-2 text-gray-400">
-                A video steam service.
+                Your favorite movies and shows streaming service
               </p>
 
               <div className="flex mt-4 -mx-2">
@@ -61,18 +61,6 @@ const Footer = () => {
                   className="block mt-2 text-sm text-gray-400 hover:underline"
                 >
                   Company
-                </a>
-                <a
-                  href="#"
-                  className="block mt-2 text-sm text-gray-400 hover:underline"
-                >
-                  community
-                </a>
-                <a
-                  href="#"
-                  className="block mt-2 text-sm text-gray-400 hover:underline"
-                >
-                  Careers
                 </a>
               </div>
 
