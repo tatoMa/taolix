@@ -27,11 +27,11 @@ export default function Home() {
       <Header />
 
       {/* Main section */}
-      <div className="min-h-screen">
-        <main className="w-full h-full md:pb-44">
+      {/* <div className="min-h-screen"> */}
+        <main className="w-full h-full md:pb-8">
           <Banner />
         </main>
-      </div>
+      {/* </div> */}
 
       {/* Footer component */}
       <Footer />

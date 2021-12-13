@@ -22,7 +22,22 @@ function Header() {
               transition
               duration-300
               text-white
-              px-4
+              px-3
+            "
+            >
+              HOME
+            </a>
+          </Link>
+          <Link href="#">
+            <a
+              className="
+              hover:text-white
+              text-sm
+              font-netflix_medium
+              transition
+              duration-300
+              text-gray-400
+              px-3
             "
             >
               MOVIE
@@ -37,7 +52,7 @@ function Header() {
               transition
               duration-300
               text-gray-400
-              px-4
+              px-3
             "
             >
               TV SHOW
@@ -52,7 +67,7 @@ function Header() {
               transition
               duration-300
               text-gray-400
-              px-4
+              px-3
             "
             >
               REALITY SHOW
@@ -67,7 +82,7 @@ function Header() {
               transition
               duration-300
               text-gray-400
-              px-4
+              px-3
             "
             >
               ANIME
