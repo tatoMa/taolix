@@ -9,7 +9,7 @@ export default function Home() {
       {/* HTML Head Element */}
       <Head>
         <title>TAOLIX - Free videos online</title>
-        <meta charset="UTF-8"></meta>
+        <meta charSet="UTF-8"></meta>
         <meta name="keywords" content="movie, show, video, taolix"></meta>
         <meta
           name="description"

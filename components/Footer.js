@@ -14,7 +14,7 @@ const Footer = () => {
                 </a>
               </div>
 
-              <p className="max-w-md mt-2 text-gray-400">
+              <p className="max-w-md mt-2 text-gray-400 pr-6">
                 Your favorite movies and shows streaming service
               </p>
 
@@ -41,7 +41,7 @@ const Footer = () => {
 
                 <a
                   href="#"
-                  className="mx-2 text-gray-200 dark:hover:text-gray-400"
+                  className="mx-2 text-gray-200 hover:text-gray-400"
                   aria-label="Twitter"
                 >
                   <svg className="w-4 h-4 fill-current" viewBox="0 0 512 512">
@@ -53,36 +53,33 @@ const Footer = () => {
           </div>
 
           <div className="mt-6 lg:mt-0 lg:flex-1">
-            <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4">
-              <div>
-                <h3 className="uppercase text-white">About</h3>
-                <a
-                  href="#"
-                  className="block mt-2 text-sm text-gray-400 hover:underline"
-                >
-                  Company
-                </a>
-              </div>
+            <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-3">
 
               <div>
-                <h3 className="uppercase text-white">Blog</h3>
+                <h3 className="uppercase text-white">Video</h3>
                 <a
                   href="#"
                   className="block mt-2 text-sm text-gray-400 hover:underline"
                 >
-                  Tec
+                  Movies
                 </a>
                 <a
                   href="#"
                   className="block mt-2 text-sm text-gray-400 hover:underline"
                 >
-                  Music
+                  TV Shows
                 </a>
                 <a
                   href="#"
                   className="block mt-2 text-sm text-gray-400 hover:underline"
                 >
-                  Videos
+                  Reality Shows
+                </a>
+                <a
+                  href="#"
+                  className="block mt-2 text-sm text-gray-400 hover:underline"
+                >
+                  Anime
                 </a>
               </div>
 
@@ -92,29 +89,29 @@ const Footer = () => {
                   href="#"
                   className="block mt-2 text-sm text-gray-400 hover:underline"
                 >
-                  Mega cloud
+                  TAOLIX
                 </a>
                 <a
                   href="#"
                   className="block mt-2 text-sm text-gray-400 hover:underline"
                 >
-                  Aperion UI
-                </a>
-                <a
-                  href="#"
-                  className="block mt-2 text-sm text-gray-400 hover:underline"
-                >
-                  Meraki UI
+                  TAOTIFY
                 </a>
               </div>
 
               <div>
+
+                <h3 className="uppercase text-white">About</h3>
+                <a
+                  href="#"
+                  className="block mt-2 text-sm text-gray-400 hover:underline mb-4"
+                >
+                  Company
+                </a>
+
                 <h3 className="uppercase text-white">Contact</h3>
                 <span className="block mt-2 text-sm text-gray-400 hover:underline">
-                  +1 526 654 8965
-                </span>
-                <span className="block mt-2 text-sm text-gray-400 hover:underline">
-                  example@email.com
+                  service@taolix.com
                 </span>
               </div>
             </div>
@@ -125,7 +122,7 @@ const Footer = () => {
 
         <div>
           <p className="text-center text-white">
-            © Brand 2020 - All rights reserved
+            © TAOLIX 2021 - All rights reserved
           </p>
         </div>
       </div>
@@ -134,16 +131,3 @@ const Footer = () => {
 };
 
 export default Footer;
-
-// import IconHeart from "~icons/ion/md-heart";
-// import IconGithub from "~icons/mdi/github";
-// import { GITHUB_URL } from "../constants";
-
-// export default {
-//   data() {
-//     return {
-//       GITHUB_URL,
-//     };
-//   },
-
-// };
