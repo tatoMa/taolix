@@ -1,15 +1,14 @@
-// import logo from "../assets/logo.png";
-
 import Link from "next/link";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 function Header() {
+  const { data: session } = useSession();
   return (
     <div
       className="header top-0 fixed z-50 w-full h-16 transition duration-700"
       className={"bg-background"}
     >
-      <div className="header__overlay absolute inset-0 w-full h-full"
-      ></div>
+      <div className="header__overlay absolute inset-0 w-full h-full"></div>
       <div
         className="
         relative
@@ -93,7 +92,25 @@ function Header() {
           </div>
         </div>
 
-        <search />
+        {/* <search /> */}
+        {session ? (
+          <div className="flex gap-2 items-center">
+            Signed in as {session.user.email} <br />
+            <button
+              onClick={() => signOut()}
+              className="text-white bg-red-600 px-6 py-1 rounded-md hover:bg-opacity-80"
+            >
+              Sign out
+            </button>
+          </div>
+        ) : (
+          <button
+            onClick={() => signIn()}
+            className="text-white bg-red-600 px-6 py-1 rounded-md hover:bg-opacity-80"
+          >
+            Sign in
+          </button>
+        )}
       </div>
       <style jsx>{`
         .header__overlay {
