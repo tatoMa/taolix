@@ -1,40 +1,12 @@
 import Image from "next/image";
 import { PlayIcon, XIcon } from "@heroicons/react/solid";
 import { InformationCircleIcon } from "@heroicons/react/outline";
-import React from "react";
-import VideoJS from "./Videojs";
 import { useState } from "react";
+import VideoPlayer from "./VideoPlayer";
+
 const Banner = () => {
   const [play, setPlay] = useState(false);
-
-  const playerRef = React.useRef(null);
-
-  const videoJsOptions = {
-    // lookup the options in the docs for more options
-    autoplay: true,
-    controls: true,
-    responsive: true,
-    fluid: true,
-    sources: [
-      {
-        src: "https://s1.yh5125.com/20211105/450FAdFS/index.m3u8",
-        type: "application/x-mpegURL",
-      },
-    ],
-  };
-
-  const handlePlayerReady = (player) => {
-    playerRef.current = player;
-
-    // you can handle player events here
-    player.on("waiting", () => {
-      console.log("player is waiting");
-    });
-
-    player.on("dispose", () => {
-      console.log("player will dispose");
-    });
-  };
+  const url = "https://s1.yh5125.com/20211105/450FAdFS/index.m3u8"
 
   return (
     <>
@@ -42,10 +14,10 @@ const Banner = () => {
       {play && (
         <div className="flex h-full w-full absolute top-0 left-0 items-center bg-black/50 z-10">
           <XIcon
-            className="h-10 w-10 text-blue-white absolute right-4 top-12 bg-black cursor-pointer hover:bg-white hover:text-black animate-fadeIn"
+            className="h-10 w-10 text-blue-white absolute right-4 top-12 bg-black cursor-pointer hover:bg-white hover:text-black animate-fadeIn z-50"
             onClick={() => setPlay(false)}
           />
-          <VideoJS options={videoJsOptions} onReady={handlePlayerReady} />
+          <VideoPlayer src={url} />
         </div>
       )}
 
@@ -61,7 +33,7 @@ const Banner = () => {
             className="object-cover blur-sm relative brightness-50"
             layout="fill"
           />
-          <div className="absolute h-[90%] w-[90%] top-[10%] left-[5%]">
+          <div className="absolute h-[90%] w-[100%-7rem] top-[3.8rem] left-[3.5rem] right-[3.5rem]">
             <p>test</p>
             <Image
               src="https://www.themoviedb.org/t/p/original/wmv0oIun52Xeq65sBKfHiUkiBKc.jpg"
@@ -161,5 +133,4 @@ const Banner = () => {
     </>
   );
 };
-
 export default Banner;
