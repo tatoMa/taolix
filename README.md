@@ -1,27 +1,54 @@
-# Next.js + Tailwind CSS Example
+# TAOLIX
+## The open source online video steam service site
 
-This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v3.0)](https://tailwindcss.com/blog/tailwindcss-v3) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
+[Deployed link](https://taolix.vercel.app/)
 
-## Preview
+[![](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHcAAABHCAMAAAAKnSgVAAAAZlBMVEX///8AAADQ0NBDQ0O1tbXo6OgjIyPi4uI/Pz/T09MwMDChoaHW1tbu7u75+fkrKyvFxcWurq7c3NyKiopzc3MTExOnp6eUlJRqamphYWFMTEyamppaWlqEhIQaGhq+vr58fHw3Nzcgoz+iAAADLUlEQVRogcWabXuqMAyGkyKiQkFQXnWA//9PnuCmQptSuM5Ynw9u2tKbpe2TFAewmeLthp6TL51gZeQECzs32MLN7HZuohyETrBQucHWvhNsmTrBirsTrEQ3Wyg5O8FWVyfYFJ1gj5i5wMZYusBCc1jcNRJmC48EJx+kEGz/L/SBvWRQMO17QvOUUBujC8QtcsZ/xgKAvWSQss49xJOJ62G400Xx8RH1KEms6XXUscC2+7wT6tgV/QUmrsngd7jXPmtQqagk02k0dnbHo6kt4BvIHtS4wQVVo/ItXN8U6RluvMdpBSW0G7FyyWS+1nIhwskkSGy1dGDlgiHSc1y4oTd61zALzc6VmHDJa5ZLqI853bi1aedCh/1qrkR87Q2BnFEt4NL6ZCxonks3+5Pi45ztaOE+L4nbXI+0hUu+WD9/3ln7WsSlUPWruWSkQwlXYMO2LuLSzWsFipVLfhkMO4o/+i3jQqJF2uyTLxV40BxkLTfTHMfDLjoqEtO/raJMYzodLORCqUba4/KZ0geRWZDruPR7rLSVoarbNPRCv5P13EAJmX1+ZY69aVkt59Iy6YxtrO6UUSo0HEyWc2mc2NjG6IYPek3w9r9cOYm0jRvhs0NkKNFWcMlzd8Y2VWTL351DZE8Ja7hQjyJt4Vbv4Nz1YmMtNx6tknluisn7ohyZszbDDehO01NbMmOfP5Ge5QbjWRXIbDmGGyGNn/nNhRm7f+/HWW4ySX6X58q2c3MohuQlOW/YvyI9x+2VXevptSHPlQlWHetJ0WuyZrgd5lOXkrpf8lxKQCFeWC8sfyJt5o5qq5d2ml+q3CiCrIWOSlfx4D340Vi4HlM/XlW/nHCzXHaYej1Fqtidbjw3GE52M9wLW9mofjnhyjCG83VYisevK83vgc054fPTAyYnTUk97BouBWXKKdHHlr/tQXXC5rrnyb0+MHpUcDjxKTd9NOO0IhO+3puT/I7030tYc+9GKnUD+hs1fDbfXLGrSIvE3mcTlaYHLlurcfK0kaZ4+XO/39XZVaRLw6OtzXV19HWqdOQeYHjmu71SR5F29VUuSEfuAb6rSP/+vwj8A0d1INb1qPqLAAAAAElFTkSuQmCC)](https://nodesource.com/products/nsolid)
+powered by NEXT.js
 
-Preview the example live on [StackBlitz](http://stackblitz.com/):
+## Features
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-tailwindcss)
+- Modern UI design
+- Top movies and shows list from Netflix
+- Play video steam
+- Auto and manage your profile
+- Play history and favorite list
 
-## Deploy your own
+## Tech
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
+Taolix uses a number of open source projects to work properly:
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
+- NEXTJS (SSG + SSR)
+- NEXT-AUTH
+- Axios
+- Videojs
 
-## How to use
+## Deployment
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
-
-```bash
-npx create-next-app --example with-tailwindcss with-tailwindcss-app
-# or
-yarn create next-app --example with-tailwindcss with-tailwindcss-app
+Dev:
+```sh
+npm run dev
 ```
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+Prod:
+```sh
+npm run build
+```
+## feature roadmap
+- [x] Home page
+- [x] Auth
+- [x] Videos list
+- [x] Player window
+- [ ] Pagination
+- [ ] Video detail
+- [ ] Search
+- [ ] Type page
+- [ ] More source
+- [ ] Full Responsive
+- [ ] App
+- [ ] Profile manage
+- [ ] History page
+
+## License
+
+MIT
