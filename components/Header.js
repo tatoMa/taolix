@@ -7,12 +7,12 @@ function Header() {
   const scrolled = useOnScrolled();
   // console.log(session.user.image);
   return (
-    <div className={`max-w-screen-2xl mx-auto top-0 fixed w-full h-16 z-10 bg-gradient-to-b from-gray-900 to-transparent transition duration-1000 ${scrolled?'bg-black':''}`}>
-      <div className="flex justify-between items-center h-16 px-14">
+    <div className={`flex justify-center top-0 fixed w-full h-16 z-10 bg-gradient-to-b from-gray-900 to-transparent transition duration-1000 ${scrolled?'bg-black':''}`}>
+      <div className="max-w-screen-2xl flex grow justify-between items-center h-16 px-2 sm:px-6 md:px-10 lg:px-14">
         <div>
           <img src="/logo.png" alt="logo" className="h-4 object-contain" />
         </div>
-        <div>
+        <div className=" hidden md:block">
           <Link href="#">
             <a
               className="

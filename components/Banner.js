@@ -33,8 +33,7 @@ const Banner = () => {
             className="object-cover blur-sm relative brightness-50"
             layout="fill"
           />
-          <div className="absolute h-[90%] w-[100%-7rem] top-[3.8rem] left-[3.5rem] right-[3.5rem]">
-            <p>test</p>
+          <div className="absolute h-[90%] w-[100%-7rem] top-[3.8rem] left-[0.5rem] right-[0.5rem] sm:left-[1.5rem] sm:right-[1.5rem] md:left-[2.5rem] md:right-[2.5rem] lg:left-[3.5rem] lg:right-[3.5rem]">
             <Image
               src="https://www.themoviedb.org/t/p/original/wmv0oIun52Xeq65sBKfHiUkiBKc.jpg"
               alt="banner"
@@ -45,14 +44,14 @@ const Banner = () => {
         </div>
 
         {/* text section */}
-        <div className=" absolute inset-0 flex items-center justify-between mx-20 mt-16 border-x-2 border-gray-300/20">
+        <div className=" absolute inset-0 flex items-center justify-between mx-2 sm:mx-10 md:mx-16 lg:mx-20 mt-16 border-x-2 border-gray-300/20">
           <div className="w-[50%] space-y-6">
-            <h1 className="font-bold text-5xl line-clamp-2 text-white">
+            <h1 className="font-bold text-2xl sm:text-3xl md:text-5xl line-clamp-2 text-white">
               {/* {{ banner.title || banner.name }} */}
               The Walking Dead (2010)
             </h1>
 
-            <p className="text-sm line-clamp-4 font-medium">
+            <p className="text-sm line-clamp-2 font-medium sm:line-clamp-3 md:line-clamp-4">
               {/* {{ banner.overview }} */}
               Sheriff's deputy Rick Grimes awakens from a coma to find a
               post-apocalyptic world dominated by flesh-eating zombies. He sets
@@ -62,7 +61,7 @@ const Banner = () => {
 
             <div className="flex items-center space-x-2">
               <button
-                className="text-black bg-white flex items-center space-x-3 px-20 py-3 hover:bg-black hover:text-white border-2"
+                className="text-black bg-white flex items-center space-x-3 px-10 sm:px-16 md:px-20 py-3 hover:bg-black hover:text-white border-2 "
                 onClick={() => setPlay(true)}
               >
                 <PlayIcon className="h-6 w-6 text-blue-white" />
@@ -82,20 +81,20 @@ const Banner = () => {
               >
                 <InformationCircleIcon className="h-6 w-6 text-blue-white" />
 
-                <p className="text-bold">Info</p>
+                <p className="text-bold hidden md:block">Info</p>
               </button>
             </div>
           </div>
           <div className="w-[30%] h-full border-l-2 border-gray-300/20 text-white text-sm">
             <div className="h-full flex items-end pb-24">
               <div className="flex flex-col">
-                <div className="flex justify-between w-full mb-4">
+                <div className="flex flex-col md:flex-row justify-between w-full mb-4">
                   <div>
-                    <p>Director</p>
+                    <p className="text-gray-300">Director</p>
                     <p>Frank Darabont</p>
                   </div>
-                  <div className="text-right">
-                    <p>Stars</p>
+                  <div className="text-right hidden sm:block">
+                    <p className="text-gray-300">Stars</p>
                     <p>Norman Reedus</p>
                     <p>Andrew Lincoln</p>
                     <p>Melissa McBride</p>

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { PlayIcon, XIcon } from "@heroicons/react/solid";
 import VideoPlayer from "./VideoPlayer";
+import Image from "next/image";
 
 const VideoList = ({ name, type, pic, url }) => {
   const [play, setPlay] = useState(false);
@@ -22,7 +23,17 @@ const VideoList = ({ name, type, pic, url }) => {
           </div>
         )}
         <div className="relative" onClick={() => togglePlay()}>
-          <img className="object-cover w-full h-40" src={pic} alt="avatar" />
+          {/* <img className="object-cover w-full h-40" src={pic} alt="avatar" /> */}
+          
+          <div className="h-40 relative">
+          <Image
+            src={pic}
+            alt={name}
+            className="object-cover"
+            layout="fill"
+          />
+          
+        </div>
 
           <div className="absolute bottom-0 left-0 bg-black/75">
             <div className="block text-xl font-bold text-white">
