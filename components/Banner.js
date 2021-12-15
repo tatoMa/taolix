@@ -4,9 +4,20 @@ import { InformationCircleIcon } from "@heroicons/react/outline";
 import { useState } from "react";
 import VideoPlayer from "./VideoPlayer";
 
-const Banner = () => {
+const Banner = ({ detail }) => {
+  console.log(detail);
+  let vod_pic, vod_name, vod_blurb, vod_director, vod_actor, vod_class;
+
+  if (detail) {
+     vod_pic = detail.vod_pic
+     vod_name = detail.vod_name
+     vod_blurb = detail.vod_blurb
+     vod_director = detail.vod_director
+     vod_actor = detail.vod_actor
+     vod_class = detail.vod_class
+  } 
   const [play, setPlay] = useState(false);
-  const url = ["https://s1.yh5125.com/20211105/450FAdFS/index.m3u8"];
+  const url = "https://s1.yh5125.com/20211105/450FAdFS/index.m3u8";
 
   return (
     <>
@@ -28,14 +39,22 @@ const Banner = () => {
         {/* image section */}
         <div className="relative h-[85vh]">
           <Image
-            src="https://www.themoviedb.org/t/p/original/wmv0oIun52Xeq65sBKfHiUkiBKc.jpg"
+            src={
+              vod_pic
+                ? vod_pic
+                : "https://www.themoviedb.org/t/p/original/wmv0oIun52Xeq65sBKfHiUkiBKc.jpg"
+            }
             alt="banner"
             className="object-cover blur-sm relative brightness-50"
             layout="fill"
           />
           <div className="absolute h-[90%] w-[100%-7rem] top-[3.8rem] left-[0.5rem] right-[0.5rem] sm:left-[1.5rem] sm:right-[1.5rem] md:left-[2.5rem] md:right-[2.5rem] lg:left-[3.5rem] lg:right-[3.5rem]">
             <Image
-              src="https://www.themoviedb.org/t/p/original/wmv0oIun52Xeq65sBKfHiUkiBKc.jpg"
+              src={
+                vod_pic
+                  ? vod_pic
+                  : "https://www.themoviedb.org/t/p/original/wmv0oIun52Xeq65sBKfHiUkiBKc.jpg"
+              }
               alt="banner"
               className="object-cover"
               layout="fill"
@@ -46,17 +65,16 @@ const Banner = () => {
         {/* text section */}
         <div className=" absolute inset-0 flex items-center justify-between mx-2 sm:mx-10 md:mx-16 lg:mx-20 mt-16 border-x-2 border-gray-300/20">
           <div className="w-[50%] space-y-6">
-            <h1 className="font-bold text-2xl sm:text-3xl md:text-5xl line-clamp-2 text-white">
+            <h1 className="font-bold text-2xl sm:text-3xl md:text-4xl line-clamp-2 text-white">
               {/* {{ banner.title || banner.name }} */}
-              The Walking Dead (2010)
+              {vod_name ? vod_name : "The Walking Dead (2010)"}
             </h1>
 
             <p className="text-sm line-clamp-2 font-medium sm:line-clamp-3 md:line-clamp-4">
               {/* {{ banner.overview }} */}
-              Sheriff's deputy Rick Grimes awakens from a coma to find a
-              post-apocalyptic world dominated by flesh-eating zombies. He sets
-              out to find his family and encounters many other survivors along
-              the way.
+              {vod_blurb
+                ? vod_blurb
+                : "Sheriff's deputy Rick Grimes awakens from a coma to find a post-apocalyptic world dominated by flesh-eating zombies. He sets out to find his family and encounters many other survivors along the way."}
             </p>
 
             <div className="flex items-center space-x-2">
@@ -83,17 +101,27 @@ const Banner = () => {
                 <div className="flex flex-col md:flex-row justify-between w-full mb-4">
                   <div>
                     <p className="text-gray-300">Director</p>
-                    <p>Frank Darabont</p>
+                    <p>{vod_director ? vod_director : "Frank Darabont"}</p>
                   </div>
                   <div className="text-right hidden sm:block">
                     <p className="text-gray-300">Stars</p>
-                    <p>Norman Reedus</p>
-                    <p>Andrew Lincoln</p>
-                    <p>Melissa McBride</p>
-                    <p>Lauren Cohan</p>
+                    {vod_actor ? (
+                      vod_actor
+                    ) : (
+                      <div>
+                        <p>Norman Reedus</p>
+                        <p>Andrew Lincoln</p>
+                        <p>Melissa McBride</p>
+                        <p>Lauren Cohan</p>
+                      </div>
+                    )}
                   </div>
                 </div>
-                <div>Action & Adventure, Drama, Sci-Fi & Fantasy</div>
+                <div>
+                  {vod_class
+                    ? vod_class
+                    : "Action & Adventure, Drama, Sci-Fi & Fantasy"}
+                </div>
               </div>
             </div>
           </div>

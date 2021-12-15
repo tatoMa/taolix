@@ -8,7 +8,7 @@ import Header from "../components/Header";
 import VideoList from "../components/VideoList";
 
 export default function Home({ videos, page }) {
-  // console.log(videos);
+  console.log(videos);
   return (
     <>
       {/* HTML Head Element */}
@@ -45,6 +45,7 @@ export default function Home({ videos, page }) {
               url={movie.vod_play_url
                 .split("$$$")[1]
                 .substring(movie.vod_play_url.split("$$$")[1].indexOf("h"))}
+              id={movie.vod_id}
               key={movie.vod_id}
             />
           ))}

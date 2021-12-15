@@ -2,10 +2,12 @@ import { useState } from "react";
 import { PlayIcon, XIcon } from "@heroicons/react/solid";
 import VideoPlayer from "./VideoPlayer";
 import Image from "next/image";
+import { useRouter } from 'next/router'
 
-const VideoList = ({ name, type, pic, url }) => {
+const VideoList = ({ name, type, pic, url, id }) => {
+  const router = useRouter()
   const [play, setPlay] = useState(false);
-  console.log(play);
+  console.log(id, 'list id');
   function togglePlay() {
     setPlay(!play);
   }
@@ -22,7 +24,7 @@ const VideoList = ({ name, type, pic, url }) => {
             <VideoPlayer src={url} />
           </div>
         )}
-        <div className="relative" onClick={() => togglePlay()}>
+        <div className="relative" onClick={() => router.push(`/detail/${id}`)}>
           {/* <img className="object-cover w-full h-40" src={pic} alt="avatar" /> */}
           
           <div className="h-40 relative">
