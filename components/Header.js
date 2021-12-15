@@ -7,13 +7,19 @@ function Header() {
   const scrolled = useOnScrolled();
   // console.log(session.user.image);
   return (
-    <div className={`flex justify-center top-0 fixed w-full h-16 z-10 bg-gradient-to-b from-gray-900 to-transparent transition duration-1000 ${scrolled?'bg-black':''}`}>
+    <div
+      className={`flex justify-center top-0 fixed w-full h-16 z-10 bg-gradient-to-b from-gray-900 to-transparent transition duration-1000 ${
+        scrolled ? "bg-black" : ""
+      }`}
+    >
       <div className="max-w-screen-2xl flex grow justify-between items-center h-16 px-2 sm:px-6 md:px-10 lg:px-14">
         <div>
-          <img src="/logo.png" alt="logo" className="h-4 object-contain" />
+          <Link href="/">
+            <img src="/logo.png" alt="logo" className="h-4 object-contain cursor-pointer" />
+          </Link>
         </div>
         <div className=" hidden md:block">
-          <Link href="#">
+          <Link href="/">
             <a
               className="
               hover:text-white
@@ -22,13 +28,13 @@ function Header() {
               transition
               duration-300
               text-white
-              px-3
+              p-3
             "
             >
               HOME
             </a>
           </Link>
-          <Link href="#">
+          <Link href={`/list/?t=6`}>
             <a
               className="
               hover:text-white
@@ -37,13 +43,13 @@ function Header() {
               transition
               duration-300
               text-gray-400
-              px-3
+              p-3
             "
             >
               MOVIE
             </a>
           </Link>
-          <Link href="#">
+          <Link href={`/list/?t=16`}>
             <a
               className="
               hover:text-white
@@ -52,13 +58,13 @@ function Header() {
               transition
               duration-300
               text-gray-400
-              px-3
+              p-3
             "
             >
               TV SHOW
             </a>
           </Link>
-          <Link href="#">
+          <Link href={`/list/?t=27`}>
             <a
               className="
               hover:text-white
@@ -67,13 +73,13 @@ function Header() {
               transition
               duration-300
               text-gray-400
-              px-3
+              p-3
             "
             >
               REALITY SHOW
             </a>
           </Link>
-          <Link href="#">
+          <Link href={`/list/?t=31`}>
             <a
               className="
               hover:text-white
@@ -82,7 +88,7 @@ function Header() {
               transition
               duration-300
               text-gray-400
-              px-3
+              p-3
             "
             >
               ANIME
@@ -92,10 +98,9 @@ function Header() {
         <div>
           {session ? (
             <div className="flex gap-2 items-center">
-              
               <button
                 onClick={() => signOut()}
-                className="text-white bg-red-600 px-6 py-1 rounded-md hover:bg-opacity-80"
+                className="text-white border border-white px-4 py-1 bg-black transition-colors duration-200 hover:bg-white hover:text-black "
               >
                 Sign out
               </button>

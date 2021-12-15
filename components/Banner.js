@@ -6,7 +6,7 @@ import VideoPlayer from "./VideoPlayer";
 
 const Banner = () => {
   const [play, setPlay] = useState(false);
-  const url = "https://s1.yh5125.com/20211105/450FAdFS/index.m3u8"
+  const url = ["https://s1.yh5125.com/20211105/450FAdFS/index.m3u8"];
 
   return (
     <>
@@ -61,22 +61,14 @@ const Banner = () => {
 
             <div className="flex items-center space-x-2">
               <button
-                className="text-black bg-white flex items-center space-x-3 px-10 sm:px-16 md:px-20 py-3 hover:bg-black hover:text-white border-2 "
+                className="text-black bg-white flex items-center space-x-3 px-10 sm:px-16 md:px-20 py-3 transition-colors duration-200 hover:bg-black hover:text-white border-2 "
                 onClick={() => setPlay(true)}
               >
                 <PlayIcon className="h-6 w-6 text-blue-white" />
                 <p className="font-thin tracking-widest">Play</p>
               </button>
               <button
-                className="
-                flex items-center space-x-1 px-3 py-3 
-                bg-black/30
-                  text-white
-                  border-2
-                  hover:bg-white
-                  hover:text-black
-                  shadow-lg
-                "
+                className="flex items-center space-x-1 px-3 py-3 bg-black/30 text-white border-2 transition-colors duration-200 hover:bg-white hover:text-black shadow-lg"
                 // onClick="handleMoreInfoClick"
               >
                 <InformationCircleIcon className="h-6 w-6 text-blue-white" />

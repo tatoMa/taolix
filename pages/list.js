@@ -7,8 +7,8 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 import VideoList from "../components/VideoList";
 
-export default function Home({ videos, page }) {
-  // console.log(videos);
+export default function Home({ videos, page, t }) {
+    console.log(t)
   return (
     <>
       {/* HTML Head Element */}
@@ -33,9 +33,8 @@ export default function Home({ videos, page }) {
 
       {/* Main section */}
       {/* <div className="min-h-screen"> */}
-      <main className="w-full h-full md:pb-8 max-w-screen-2xl mx-auto">
-        <Banner />
-        <div className=" text-3xl text-white border-b -translate-y-6 pb-2 mx-2 sm:mx-6 md:mx-10 lg:mx-14">LATEST</div>
+      <main className="w-full h-full md:pb-8 max-w-screen-2xl mx-auto mt-16">
+
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-2 sm:px-6 md:px-10 lg:px-14">
           {videos.list.map((movie) => (
             <VideoList
@@ -53,7 +52,7 @@ export default function Home({ videos, page }) {
 
       {/* pagination */}
       <div className="w-full h-full max-w-screen-2xl mx-auto flex justify-center mt-8 md:mt-0 mb-2">
-        <Link href={`/?page=${parseInt(page) - 1}`}>
+        <Link href={`/list/?t=${t}&page=${parseInt(page) - 1}`}>
           <a
             className={`px-4 py-2 mx-1 ${
               page == 1
@@ -65,23 +64,23 @@ export default function Home({ videos, page }) {
           </a>
         </Link>
 
-        <Link href={`/?page=${parseInt(page) + 1}`}>
+        <Link href={`/list/?t=${t}&page=${parseInt(page) + 1}`}>
           <a className="px-4 py-2 mx-1 text-white transition-colors duration-200 transform bg-black border border-white hover:bg-white hover:text-black">
             {parseInt(page) + 1}
           </a>
         </Link>
-        <Link href={`/?page=${parseInt(page) + 2}`}>
+        <Link href={`/list/?t=${t}&page=${parseInt(page) + 2}`}>
           <a className="px-4 py-2 mx-1 text-white transition-colors duration-200 transform bg-black border border-white hover:bg-white hover:text-black">
             {parseInt(page) + 2}
           </a>
         </Link>
-        <Link href={`/?page=${parseInt(page) + 3}`}>
+        <Link href={`/list/?t=${t}&page=${parseInt(page) + 3}`}>
           <a className="px-4 py-2 mx-1 text-white transition-colors duration-200 transform bg-black border border-white hover:bg-white hover:text-black">
             {parseInt(page) + 3}
           </a>
         </Link>
 
-        <Link href={`/?page=${parseInt(page) + 1}`}>
+        <Link href={`/list/?t=${t}&page=${parseInt(page) + 1}`}>
           <a className="px-4 py-2 mx-1 text-white transition-colors duration-200 transform bg-black border border-white hover:bg-white hover:text-black">
             NEXT
           </a>
@@ -94,11 +93,11 @@ export default function Home({ videos, page }) {
   );
 }
 
-export async function getServerSideProps({ query: { page = 1 } }) {
+export async function getServerSideProps({ query: { page = 1 , t} }) {
   // Call an external API endpoint to get posts.
   // You can use any data fetching library
   const res = await fetch(
-    `https://m3u8.xiangkanapi.com/provide/vod/?ac=detail&pg=${page}`
+    `https://m3u8.xiangkanapi.com/provide/vod/?ac=detail&t=${t}&pg=${page}`
   );
   const videos = await res.json();
 
@@ -108,6 +107,7 @@ export async function getServerSideProps({ query: { page = 1 } }) {
     props: {
       videos,
       page,
+      t,
     },
   };
 }
