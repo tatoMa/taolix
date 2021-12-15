@@ -1,5 +1,5 @@
 # TAOLIX
-## The open source online video steam service site
+## The open source online video stream service site
 
 [Deployed link](https://taolix.vercel.app/)
 
@@ -10,7 +10,7 @@ powered by NEXT.js
 
 - Modern UI design
 - Top movies and shows list from Netflix
-- Play video steam
+- Play video stream
 - Auto and manage your profile
 - Play history and favorite list
 
