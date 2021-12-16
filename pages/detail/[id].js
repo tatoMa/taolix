@@ -11,8 +11,8 @@ import { PlayIcon, XIcon } from "@heroicons/react/solid";
 import VideoPlayer from "../../components/VideoPlayer";
 
 function Detail({ detail, id }) {
-  console.log(id)
-  console.log(detail.list[0].vod_play_url.split("$$$"))
+  console.log(id);
+  console.log(detail.list[0].vod_play_url.split("$$$"));
   const videoList = detail.list[0].vod_play_url.split("$$$")[1].split("#");
   const [play, setPlay] = useState(false);
   const [url, setUrl] = useState("");
@@ -59,15 +59,20 @@ function Detail({ detail, id }) {
         {videoList.map((video) => {
           const [name, url] = video.split("$");
           return (
-            <div key={url} className="py-2 mx-2 sm:mx-6 md:mx-10 lg:mx-14 border-b botder-white hover:text-gray-500">
+            <div
+              key={url}
+              className="py-2 mx-2 sm:mx-6 md:mx-10 lg:mx-14 border-b botder-white hover:text-gray-500"
+            >
               <a
-                href="#"
+                className=" cursor-pointer overflow-hidden"
                 onClick={() => {
                   setPlay(true);
                   setUrl(url);
                 }}
               >
-                {name} ： {url}
+                {name} ： <span className=" hidden sm:block md:inline">
+                {url}
+                  </span>
               </a>{" "}
             </div>
           );
