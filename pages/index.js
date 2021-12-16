@@ -35,7 +35,7 @@ export default function Home({ videos, page }) {
       {/* <div className="min-h-screen"> */}
       <main className="w-full h-full md:pb-8 max-w-screen-2xl mx-auto">
         <Banner />
-        <div className=" text-3xl text-white border-b -translate-y-6 pb-2 mx-2 sm:mx-6 md:mx-10 lg:mx-14">LATEST</div>
+        <div className="text-3xl text-white border-b -translate-y-6 pb-2 mx-2 sm:mx-6 md:mx-10 lg:mx-14">LATEST</div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-2 sm:px-6 md:px-10 lg:px-14">
           {videos.list.map((movie) => (
             <VideoList

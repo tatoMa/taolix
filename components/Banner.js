@@ -4,6 +4,15 @@ import { InformationCircleIcon } from "@heroicons/react/outline";
 import { useState } from "react";
 import VideoPlayer from "./VideoPlayer";
 
+import { Navigation, Pagination, Scrollbar, A11y, Autoplay} from 'swiper';
+
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/scrollbar';
+import 'swiper/css/autoplay';
+
 const Banner = ({ detail }) => {
   console.log(detail);
   let vod_pic, vod_name, vod_blurb, vod_director, vod_actor, vod_class;
@@ -32,9 +41,20 @@ const Banner = ({ detail }) => {
         </div>
       )}
 
-      {/* Main section */}
-
       {/* <banner-skeleton v-if="isLoading" /> */}
+      <Swiper
+      // install Swiper modules
+      modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
+      spaceBetween={50}
+      slidesPerView={1}
+      navigation
+      autoPlay
+      pagination={{ clickable: true }}
+      scrollbar={{ draggable: true }}
+      onSwiper={(swiper) => console.log(swiper)}
+      onSlideChange={() => console.log('slide change')}
+    >
+      <SwiperSlide>
       <div className="relative w-full h-full">
         {/* image section */}
         <div className="relative h-[85vh]">
@@ -62,9 +82,10 @@ const Banner = ({ detail }) => {
           </div>
         </div>
 
+       
         {/* text section */}
         <div className=" absolute inset-0 flex items-center justify-between mx-2 sm:mx-10 md:mx-16 lg:mx-20 mt-16 border-x-2 border-gray-300/20">
-          <div className="w-[50%] space-y-6">
+          <div className="w-[70%] md:w-[60%] lg:w-[50%] space-y-6 backdrop-blur-md bg-black/40 p-1 md:p-4">
             <h1 className="font-bold text-2xl sm:text-3xl md:text-4xl line-clamp-2 text-white">
               {/* {{ banner.title || banner.name }} */}
               {vod_name ? vod_name : "The Walking Dead (2010)"}
@@ -95,16 +116,16 @@ const Banner = ({ detail }) => {
               </button>
             </div>
           </div>
-          <div className="w-[30%] h-full border-l-2 border-gray-300/20 text-white text-sm">
+          <div className="w-[40%] lg:w-[30%] h-full border-l-2 border-gray-300/20 text-white text-sm">
             <div className="h-full flex items-end pb-24">
-              <div className="flex flex-col">
+              <div className="flex flex-col backdrop-blur-md bg-black/40 p-1 md:p-4">
                 <div className="flex flex-col md:flex-row justify-between w-full mb-4">
                   <div>
-                    <p className="text-gray-300">Director</p>
+                    <p className="text-gray-400">Director</p>
                     <p>{vod_director ? vod_director : "Frank Darabont"}</p>
                   </div>
                   <div className="text-right hidden sm:block">
-                    <p className="text-gray-300">Stars</p>
+                    <p className="text-gray-400">Stars</p>
                     {vod_actor ? (
                       vod_actor
                     ) : (
@@ -118,6 +139,8 @@ const Banner = ({ detail }) => {
                   </div>
                 </div>
                 <div>
+                <p className="text-gray-400">Genre</p>
+
                   {vod_class
                     ? vod_class
                     : "Action & Adventure, Drama, Sci-Fi & Fantasy"}
@@ -130,6 +153,11 @@ const Banner = ({ detail }) => {
 
         <div className="banner__overlay--down absolute bottom-0 h-32 w-full"></div>
       </div>
+      </SwiperSlide>
+      <SwiperSlide>Slide 2</SwiperSlide>
+      <SwiperSlide>Slide 3</SwiperSlide>
+      <SwiperSlide>Slide 4</SwiperSlide>
+    </Swiper>
 
       <style jsx>{`
         .banner__overlay--down {

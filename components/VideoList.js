@@ -7,7 +7,7 @@ import { useRouter } from 'next/router'
 const VideoList = ({ name, type, pic, url, id }) => {
   const router = useRouter()
   const [play, setPlay] = useState(false);
-  console.log(id, 'list id');
+  // console.log(id, 'list id');
   function togglePlay() {
     setPlay(!play);
   }

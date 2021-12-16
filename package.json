@@ -15,7 +15,7 @@
     "next-auth": "^4.0.5",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "swiper": "^7.3.1",
+    "swiper": "^7.3.2",
     "video.js": "^7.17.0",
     "videojs-youtube": "^2.6.1"
   },

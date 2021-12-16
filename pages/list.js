@@ -88,7 +88,7 @@ export default function Home({ videos, page, t }) {
       </div>
 
       {/* Footer component */}
-      <Footer className="max-w-screen-2xl" />
+      <Footer />
     </>
   );
 }
