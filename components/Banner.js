@@ -6,18 +6,32 @@ import VideoPlayer from "./VideoPlayer";
 
 const Banner = ({ detail }) => {
   console.log(detail);
-  let vod_pic, vod_name, vod_blurb, vod_director, vod_actor, vod_class;
+  let vod_pic, vod_name, vod_blurb, vod_director, vod_actor, vod_class, url;
+  url = "https://s1.yh5125.com/20211105/450FAdFS/index.m3u8";
+  vod_pic = detail.vod_pic;
+  vod_name = detail.vod_name;
+  vod_blurb = detail.vod_blurb;
+  vod_director = detail.vod_director;
+  vod_actor = detail.vod_actor;
+  vod_class = detail.vod_class;
+  if (detail.mode !== "homePage") {
+    url = detail.vod_play_url
+      .split("$$$")[1]
+      .split("#")
+      .slice(-1)[0]
+      .split("$")[1];
+  } else {
+    // fetch(
+    //   `${process.env.MOVIE_API}/?ac=detail&wd=${vod_name}`
+    // ).then(response => response.json())
+    // .then(data => {
+    //   console.log('Success:', data);
+    // })
+    // const detail = await res.json();
 
-  if (detail) {
-    vod_pic = detail.vod_pic;
-    vod_name = detail.vod_name;
-    vod_blurb = detail.vod_blurb;
-    vod_director = detail.vod_director;
-    vod_actor = detail.vod_actor;
-    vod_class = detail.vod_class;
+    // const videoList = detail.list[0].vod_play_url.split("$$$")[1].split("#");
   }
   const [play, setPlay] = useState(false);
-  const url = "https://s1.yh5125.com/20211105/450FAdFS/index.m3u8";
 
   return (
     <>
@@ -154,4 +168,3 @@ const Banner = ({ detail }) => {
   );
 };
 export default Banner;
-

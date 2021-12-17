@@ -5,20 +5,28 @@ import Head from "next/head";
 import Banner from "../../components/Banner";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
-import VideoList from "../../components/VideoList";
+import VideoItem from "../../components/VideoItem";
 import { useState } from "react";
 import { PlayIcon, XIcon } from "@heroicons/react/solid";
 import VideoPlayer from "../../components/VideoPlayer";
 
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 
 function Detail({ detail }) {
-  const router = useRouter()
-  console.log(router.query.key)
+  const router = useRouter();
+  // console.log(router.query.key);
 
   // console.log(detail.list[0].vod_play_url.split("$$$"));
-  console.log(detail);
-  const videoList = detail.list[0].vod_play_url.split("$$$")[1].split("#");
+  // console.log(detail);
+  if ((detail.list.length == 1)) {
+    if (detail.list[0].vod_play_url) {
+      const videoList = detail.list[0].vod_play_url.split("#");
+    } else {
+      const videoList = detail.list[0].vod_play_url;
+    }
+  } else {
+    const videoList = detail.list[0].vod_play_url.split("$$$")[1].split("#");
+  }
   const [play, setPlay] = useState(false);
   const [url, setUrl] = useState("");
 
@@ -41,16 +49,14 @@ function Detail({ detail }) {
         <meta name="author" content="TATO"></meta>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
       {/* Header component */}
       <Header />
-
       {/* Main section */}
       {/* <div className="min-h-screen"> */}
       <main className="w-full h-full md:pb-8 max-w-screen-2xl mx-auto mt-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-2 sm:px-6 md:px-10 lg:px-14">
           {detail.list.map((movie) => (
-            <VideoList
+            <VideoItem
               name={movie.vod_name}
               type={movie.vod_class}
               pic={movie.vod_pic}
@@ -63,7 +69,6 @@ function Detail({ detail }) {
           ))}
         </div>
       </main>
-
       {/* pagination */}
       {/* <div className="w-full h-full max-w-screen-2xl mx-auto flex justify-center mt-8 md:mt-0 mb-2">
         <Link href={`/?page=${parseInt(page) - 1}`}>
@@ -100,7 +105,6 @@ function Detail({ detail }) {
           </a>
         </Link>
       </div> */}
-
       {/* Footer component */}
       <Footer className="max-w-screen-2xl" />
     </>

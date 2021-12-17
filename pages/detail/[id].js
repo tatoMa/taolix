@@ -5,14 +5,14 @@ import Head from "next/head";
 import Banner from "../../components/Banner";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
-import VideoList from "../../components/VideoList";
+// import VideoList from "../../components/VideoList";
 import { useState } from "react";
 import { PlayIcon, XIcon } from "@heroicons/react/solid";
 import VideoPlayer from "../../components/VideoPlayer";
 
 function Detail({ detail, id }) {
-  console.log(id);
-  console.log(detail.list[0].vod_play_url.split("$$$"));
+  // console.log(id);
+  // console.log(detail.list[0].vod_play_url.split("$$$"));
   const videoList = detail.list[0].vod_play_url.split("$$$")[1].split("#");
   const [play, setPlay] = useState(false);
   const [url, setUrl] = useState("");

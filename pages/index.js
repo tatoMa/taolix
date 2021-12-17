@@ -1,89 +1,36 @@
 import { Router } from "next/router";
 import Link from "next/link";
 
-import Head from "next/head";
-import Banner from "../components/Banner";
+import HeadTag from "../components/HeadTag";
 import Footer from "../components/Footer";
-import Header from "../components/Header";
-import VideoList from "../components/VideoList";
+import { default as Navbar } from "../components/Header";
+import SwiperTag from "../components/SwiperTag";
+import VideoListsSection from "../components/VideoListsSection";
 
-import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from "swiper";
-
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/scrollbar";
-import "swiper/css/autoplay";
+import {randomSelect5FromArray} from "../utils/utils"
 
 export default function Home({ videos, page, top250 }) {
-  console.log(videos);
-  console.log(top250);
-  top250.sort( () => .5 - Math.random() ).length=5
+  console.log(videos)
+  const top5 = randomSelect5FromArray(top250)
   return (
     <>
       {/* HTML Head Element */}
-      <Head>
-        <title>TAOLIX - Free videos online</title>
-        <meta charSet="UTF-8"></meta>
-        <meta name="keywords" content="movie, show, video, taolix"></meta>
-        <meta
-          name="description"
-          content="Taolix, Your favorite movies and shows online"
-        ></meta>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0"
-        ></meta>
-        <meta name="author" content="TATO"></meta>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <HeadTag />
 
-      {/* Header component */}
-      <Header />
+      {/* Navigation component */}
+      <Navbar />
 
       {/* Main section */}
-      {/* <div className="min-h-screen"> */}
       <main className="w-full h-full md:pb-8 max-w-screen-2xl mx-auto">
-        <Swiper
-          // install Swiper modules
-          modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
-          spaceBetween={50}
-          slidesPerView={1}
-          navigation
-          autoPlay
-          pagination={{ clickable: true }}
-          scrollbar={{ draggable: true }}
-          onSwiper={(swiper) => console.log(swiper)}
-          onSlideChange={() => console.log("slide change")}
-        >
-          {top250.map((movie)=>(
-            <SwiperSlide>
-            <Banner detail={{vod_pic:movie.data[0].poster, vod_name:movie.data[0].name, vod_blurb:movie.data[0].description, vod_director:'', vod_actor:'', vod_class:movie.data[0].genre}}/>
-          </SwiperSlide>
-          ))}
-          
-          {/* <SwiperSlide>Slide 2</SwiperSlide>
-          <SwiperSlide>Slide 3</SwiperSlide>
-          <SwiperSlide>Slide 4</SwiperSlide> */}
-        </Swiper>
+        {/* Swiper section */}
+        <SwiperTag top5={top5} />
+
         <div className="text-3xl text-white border-b -translate-y-6 mt-5 mx-2 sm:mx-6 md:mx-10 lg:mx-14">
           LATEST
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-2 sm:px-6 md:px-10 lg:px-14">
-          {videos.list.map((movie) => (
-            <VideoList
-              name={movie.vod_name}
-              type={movie.vod_class}
-              pic={movie.vod_pic}
-              url={movie.vod_play_url
-                .split("$$$")[1]
-                .substring(movie.vod_play_url.split("$$$")[1].indexOf("h"))}
-              id={movie.vod_id}
-              key={movie.vod_id}
-            />
-          ))}
-        </div>
+
+        {/* Video List Section */}
+        <VideoListsSection videos={videos} />
       </main>
 
       {/* pagination */}
@@ -132,10 +79,10 @@ export default function Home({ videos, page, top250 }) {
 export async function getServerSideProps({ query: { page = 1 } }) {
   // Call an external API endpoint to get posts.
   // You can use any data fetching library
-  const res = await fetch(
-    `${process.env.MOVIE_API}/?ac=detail&pg=${page}`
-  );
+  const res = await fetch(`${process.env.MOVIE_API}/?ac=detail&pg=${page}`);
   const videos = await res.json();
+  console.log(videos)
+
 
   const resTop250 = await fetch(
     `https://api.wmdb.tv/api/v1/top?type=Douban&skip=0&limit=100&lang=Cn`

@@ -5,7 +5,7 @@ import Head from "next/head";
 import Banner from "../components/Banner";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-import VideoList from "../components/VideoList";
+import VideoItem from "../components/VideoItem";
 
 export default function Home({ videos, page, t }) {
   console.log(t);
@@ -36,7 +36,7 @@ export default function Home({ videos, page, t }) {
       <main className="w-full h-full md:pb-8 max-w-screen-2xl mx-auto mt-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-2 sm:px-6 md:px-10 lg:px-14">
           {videos.list.map((movie) => (
-            <VideoList
+            <VideoItem
               name={movie.vod_name}
               type={movie.vod_class}
               pic={movie.vod_pic}
