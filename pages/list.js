@@ -97,7 +97,7 @@ export async function getServerSideProps({ query: { page = 1, t } }) {
   // Call an external API endpoint to get posts.
   // You can use any data fetching library
   const res = await fetch(
-    `https://m3u8.xiangkanapi.com/provide/vod/?ac=detail&t=${t}&pg=${page}`
+    `${process.env.MOVIE_API}/?ac=detail&t=${t}&pg=${page}`
   );
   const videos = await res.json();
 

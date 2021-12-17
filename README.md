@@ -39,12 +39,12 @@ npm run build
 - [x] Auth
 - [x] Videos list
 - [x] Player window
-- [ ] Pagination
-- [ ] Video detail
-- [ ] Search
-- [ ] Type page
+- [x] Pagination
+- [x] Video detail
+- [x] Search
+- [x] Type page
+- [x] Full Responsive
 - [ ] More source
-- [ ] Full Responsive
 - [ ] App
 - [ ] Profile manage
 - [ ] History page

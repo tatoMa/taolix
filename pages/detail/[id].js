@@ -142,7 +142,7 @@ export async function getServerSideProps({ params }) {
   // Call an external API endpoint to get posts.
   // You can use any data fetching library
   const res = await fetch(
-    `https://m3u8.xiangkanapi.com/provide/vod/?ac=detail&ids=${params.id}`
+    `${process.env.MOVIE_API}/?ac=detail&ids=${params.id}`
   );
   const detail = await res.json();
 

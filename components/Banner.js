@@ -154,3 +154,4 @@ const Banner = ({ detail }) => {
   );
 };
 export default Banner;
+

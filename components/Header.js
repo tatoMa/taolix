@@ -2,12 +2,21 @@ import Link from "next/link";
 import { useSession, signIn, signOut } from "next-auth/react";
 import useOnScrolled from "../hooks/useOnScrolled";
 import { useState } from "react";
+import { useRouter } from 'next/router'
 
 function Header() {
+  const router = useRouter()
   const { data: session } = useSession();
   const [menu, setMenu] = useState(false);
 
   const scrolled = useOnScrolled();
+
+  const _handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      setMenu(false)
+      router.push('/search/'+e.target.value)
+    }
+  }
 
   return (
     <div
@@ -29,8 +38,8 @@ function Header() {
 
         {/* Page Links */}
         <div
-          className={`absolute md:relative w-screen md:w-fit h-screen left-0 top-0 md:h-6 md:block flex flex-col transition-all duration-200 bg-black/90 md:bg-transparent ${
-            menu ? "flex" : "hidden"
+          className={`absolute lg:relative w-screen lg:w-fit h-screen left-0 top-0 lg:h-6 lg:block flex flex-col transition-all duration-200 bg-black/90 lg:bg-transparent ${
+            menu ? "flex justify-center items-center" : "hidden"
           }`}
         >
           <Link href="/">
@@ -44,7 +53,7 @@ function Header() {
               text-white
               p-3
               mt-20 md:mt-0
-              text-4xl md:text-sm
+              text-4xl md:text-4xl lg:text-sm
             "
             >
               HOME
@@ -61,7 +70,7 @@ function Header() {
               text-gray-400
               p-3
               mt-6 md:mt-0
-              text-4xl md:text-sm
+              text-4xl md:text-4xl lg:text-sm
             "
             >
               MOVIE
@@ -78,7 +87,7 @@ function Header() {
               text-gray-400
               p-3
               mt-6 md:mt-0
-              text-4xl md:text-sm
+              text-4xl md:text-4xl lg:text-sm
             "
             >
               TV SHOW
@@ -95,7 +104,7 @@ function Header() {
               text-gray-400
               p-3
               mt-6 md:mt-0
-              text-4xl md:text-sm
+              text-4xl md:text-4xl lg:text-sm
             "
             >
               REALITY SHOW
@@ -112,7 +121,7 @@ function Header() {
               text-gray-400
               p-3
               mt-6 md:mt-0
-              text-4xl md:text-sm
+              text-4xl md:text-4xl lg:text-sm
             "
             >
               ANIME
@@ -121,34 +130,35 @@ function Header() {
         </div>
 
         {/* <!-- Search input on desktop screen --> */}
-        <div class="hidden mx-0 lg:block">
-          <div class="relative">
-            <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+        <div className={`mx-0 md:block ${menu ? "block" : "hidden"}`}>
+          <div className="relative">
+            <span className="absolute inset-y-0 left-0 flex items-center pl-3">
               <svg
-                class="w-5 h-5 text-gray-400"
+                className="w-5 h-5 text-gray-400"
                 viewBox="0 0 24 24"
                 fill="none"
               >
                 <path
                   d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z"
                   stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 ></path>
               </svg>
             </span>
 
             <input
               type="text"
-              class="w-32 lg:w-full py-1 pl-10 text-white bg-black border border-white focus:border-red-500 dark:focus:border-red-500 focus:outline-none focus:ring-red"
+              className="w-64 lg:w-full py-1 pl-10 text-white bg-black border border-white focus:border-red-500 dark:focus:border-red-500 focus:outline-none focus:ring-red"
               placeholder="Search"
+              onKeyDown={_handleKeyDown}
             />
           </div>
         </div>
 
         {/* Auth components */}
-        <div className="hidden md:block">
+        <div className="hidden lg:block">
           {session ? (
             <div className="flex gap-2 items-center">
               <img
@@ -170,16 +180,16 @@ function Header() {
         </div>
 
         {/* <!-- Mobile menu button --> */}
-        <div class="flex md:hidden">
+        <div className="flex lg:hidden">
           <button
             type="button"
-            class="text-white p-4 hover:text-gray-600 focus:outline-none focus:text-white z-10"
+            className="text-white p-4 hover:text-gray-600 focus:outline-none focus:text-white z-10"
             aria-label="toggle menu"
             onClick={() => setMenu(!menu)}
           >
-            <svg viewBox="0 0 24 24" class="w-6 h-6 fill-current">
+            <svg viewBox="0 0 24 24" className="w-6 h-6 fill-current">
               <path
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"
               ></path>
             </svg>
