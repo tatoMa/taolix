@@ -1,7 +1,7 @@
 const Footer = () => {
   return (
     <footer className="max-w-screen-2xl mx-auto">
-      <div className="mx-2 sm:mx-6 md:mx-10 lg:mx-14 mb-4">
+      <div className="mx-2 sm:mx-6 md:mx-10 lg:mx-14 mb-4 mt-8">
         <div className="lg:flex">
           <div className="w-full -mx-6 lg:w-2/5">
             <div className="px-6">
@@ -54,7 +54,6 @@ const Footer = () => {
 
           <div className="mt-6 lg:mt-0 lg:flex-1">
             <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-3">
-
               <div>
                 <h3 className="uppercase text-white">Video</h3>
                 <a
@@ -100,7 +99,6 @@ const Footer = () => {
               </div>
 
               <div>
-
                 <h3 className="uppercase text-white">About</h3>
                 <a
                   href="#"

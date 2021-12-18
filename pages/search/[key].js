@@ -13,27 +13,26 @@ import VideoPlayer from "../../components/VideoPlayer";
 import { useRouter } from "next/router";
 
 function Detail({ detail }) {
+  // console.log(detail);
   const router = useRouter();
   // console.log(router.query.key);
 
   // console.log(detail.list[0].vod_play_url.split("$$$"));
   // console.log(detail);
-  if ((detail.list.length == 1)) {
+  if (detail.list.length == 1) {
     if (detail.list[0].vod_play_url) {
-      const videoList = detail.list[0].vod_play_url.split("#");
+      const videoList = detail.list[0].vod_play_url?.split("#");
     } else {
       const videoList = detail.list[0].vod_play_url;
     }
   } else {
-    const videoList = detail.list[0].vod_play_url.split("$$$")[1].split("#");
+    const videoList = detail.list[0]?.vod_play_url.split("$$$")[1]?.split("#");
   }
   const [play, setPlay] = useState(false);
   const [url, setUrl] = useState("");
 
-  console.log();
   return (
     <>
-      HTML Head Element
       <Head>
         <title>TAOLIX - Free videos online</title>
         <meta charSet="UTF-8"></meta>
@@ -55,18 +54,24 @@ function Detail({ detail }) {
       {/* <div className="min-h-screen"> */}
       <main className="w-full h-full md:pb-8 max-w-screen-2xl mx-auto mt-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-2 sm:px-6 md:px-10 lg:px-14">
-          {detail.list.map((movie) => (
-            <VideoItem
-              name={movie.vod_name}
-              type={movie.vod_class}
-              pic={movie.vod_pic}
-              // url={movie.vod_play_url
-              //   .split("$$$")[1]
-              //   .substring(movie.vod_play_url.split("$$$")[1].indexOf("h"))}
-              id={movie.vod_id}
-              key={movie.vod_id}
-            />
-          ))}
+          {detail.list[0] ? (
+            detail.list.map((movie) => (
+              <VideoItem
+                name={movie.vod_name}
+                type={movie.vod_class}
+                pic={movie.vod_pic}
+                // url={movie.vod_play_url
+                //   .split("$$$")[1]
+                //   .substring(movie.vod_play_url.split("$$$")[1].indexOf("h"))}
+                id={movie.vod_id}
+                key={movie.vod_id}
+              />
+            ))
+          ) : (
+            <div className="text-2xl text-gray-400 mt-12">
+              Can't find this video
+            </div>
+          )}
         </div>
       </main>
       {/* pagination */}
@@ -114,7 +119,7 @@ function Detail({ detail }) {
 export default Detail;
 
 export async function getServerSideProps({ params }) {
-  console.log(params);
+  // console.log(params);
   // Call an external API endpoint to get posts.
   // You can use any data fetching library
   const res = await fetch(

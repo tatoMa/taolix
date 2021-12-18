@@ -3,41 +3,38 @@ import { PlayIcon, XIcon } from "@heroicons/react/solid";
 import { InformationCircleIcon } from "@heroicons/react/outline";
 import { useState } from "react";
 import VideoPlayer from "./VideoPlayer";
+import { useRouter } from "next/router";
 
 const Banner = ({ detail }) => {
-  console.log(detail);
-  let vod_pic, vod_name, vod_blurb, vod_director, vod_actor, vod_class, url;
-  url = "https://s1.yh5125.com/20211105/450FAdFS/index.m3u8";
-  vod_pic = detail.vod_pic;
-  vod_name = detail.vod_name;
-  vod_blurb = detail.vod_blurb;
-  vod_director = detail.vod_director;
-  vod_actor = detail.vod_actor;
-  vod_class = detail.vod_class;
+  const router = useRouter();
+
+  // console.log(detail);
+  let { vod_pic, vod_name, vod_blurb, vod_director, vod_actor, vod_class } =
+    detail;
+  let url = "https://s1.yh5125.com/20211105/450FAdFS/index.m3u8";
   if (detail.mode !== "homePage") {
     url = detail.vod_play_url
-      .split("$$$")[1]
+      .split("$$$")[1]?
       .split("#")
       .slice(-1)[0]
       .split("$")[1];
   } else {
-    // fetch(
-    //   `${process.env.MOVIE_API}/?ac=detail&wd=${vod_name}`
-    // ).then(response => response.json())
-    // .then(data => {
-    //   console.log('Success:', data);
-    // })
-    // const detail = await res.json();
-
-    // const videoList = detail.list[0].vod_play_url.split("$$$")[1].split("#");
   }
   const [play, setPlay] = useState(false);
+  const playButtonHandler = () => {
+    if (detail.mode === "homePage") {
+      router.push("/search/" + vod_name);
+    } else {
+      setPlay(true);
+      scroll(0,0)
+    }
+  };
 
   return (
     <>
       {/* Player */}
       {play && (
-        <div className="flex h-full w-full absolute top-0 left-0 items-center bg-black/50 z-10">
+        <div className="flex h-full w-full absolute top-0 left-0 items-center bg-black/50 z-10 ">
           <XIcon
             className="h-10 w-10 text-blue-white absolute right-4 top-12 bg-black cursor-pointer hover:bg-white hover:text-black animate-fadeIn z-50"
             onClick={() => setPlay(false)}
@@ -93,19 +90,23 @@ const Banner = ({ detail }) => {
             <div className="flex items-center space-x-2">
               <button
                 className="text-black bg-white flex items-center space-x-3 px-10 sm:px-16 md:px-20 py-3 transition-colors duration-200 hover:bg-black hover:text-white border-2 "
-                onClick={() => setPlay(true)}
+                onClick={() => playButtonHandler()}
               >
-                <PlayIcon className="h-6 w-6 text-blue-white" />
-                <p className="font-thin tracking-widest">Play</p>
+                {detail.mode !== "homePage" && url && (
+                  <PlayIcon className="h-6 w-6 text-blue-white" />
+                )}
+                <p className="font-thin tracking-widest">
+                  {detail.mode === "homePage" ? "Find This" : url ? "Play" : "Not found"}
+                </p>
               </button>
-              <button
+              {/* <button
                 className="flex items-center space-x-1 px-3 py-3 bg-black/30 text-white border-2 transition-colors duration-200 hover:bg-white hover:text-black shadow-lg"
                 // onClick="handleMoreInfoClick"
               >
                 <InformationCircleIcon className="h-6 w-6 text-blue-white" />
 
                 <p className="text-bold hidden md:block">Info</p>
-              </button>
+              </button> */}
             </div>
           </div>
           <div className="w-[40%] lg:w-[30%] h-full border-l-2 border-gray-300/20 text-white text-sm">

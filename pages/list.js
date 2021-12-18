@@ -8,7 +8,7 @@ import Header from "../components/Header";
 import VideoItem from "../components/VideoItem";
 
 export default function Home({ videos, page, t }) {
-  console.log(t);
+  // console.log(t);
   return (
     <>
       {/* HTML Head Element */}

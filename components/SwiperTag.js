@@ -10,7 +10,7 @@ import "swiper/css/autoplay";
 import Banner from "../components/Banner";
 
 const SwiperTag = ({ top5 }) => {
-  console.log(top5);
+  // console.log(top5);
   return (
     <Swiper
       // install Swiper modules

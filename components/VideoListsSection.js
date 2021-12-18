@@ -1,7 +1,7 @@
 import VideoItem from "../components/VideoItem";
 
-const VideoListsSection = ({videos}) => {
-  console.log(videos)
+const VideoListsSection = ({ videos }) => {
+  // console.log(videos)
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-2 sm:px-6 md:px-10 lg:px-14">
       {videos.list.map((movie) => (

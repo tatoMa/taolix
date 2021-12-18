@@ -2,21 +2,21 @@ import Link from "next/link";
 import { useSession, signIn, signOut } from "next-auth/react";
 import useOnScrolled from "../hooks/useOnScrolled";
 import { useState } from "react";
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 
 function Header() {
-  const router = useRouter()
+  const router = useRouter();
   const { data: session } = useSession();
   const [menu, setMenu] = useState(false);
 
   const scrolled = useOnScrolled();
 
   const _handleKeyDown = (e) => {
-    if (e.key === 'Enter') {
-      setMenu(false)
-      router.push('/search/'+e.target.value)
+    if (e.key === "Enter") {
+      setMenu(false);
+      router.push("/search/" + e.target.value);
     }
-  }
+  };
 
   return (
     <div
@@ -31,12 +31,12 @@ function Header() {
             <img
               src="/logo.png"
               alt="logo"
-              className="h-4 object-contain cursor-pointer ml-3 md:ml-0"
+              className="h-9 object-contain cursor-pointer ml-3 md:ml-0 p-2"
             />
           </Link>
         </div>
 
-        {/* Page Links */}
+        {/* Navigation Links */}
         <div
           className={`absolute lg:relative w-screen lg:w-fit h-screen left-0 top-0 lg:h-6 lg:block flex flex-col transition-all duration-200 bg-black/90 lg:bg-transparent ${
             menu ? "flex justify-center items-center" : "hidden"
@@ -129,8 +129,20 @@ function Header() {
           </Link>
         </div>
 
+        {/* <a
+          onClick={() => router.back()}
+          className="block lg:hidden absolute left-0 top-10 text-white p-5 pl-2 hover:text-gray-600 focus:outline-none focus:text-white z-10
+            "
+        >
+          {"< Back"}
+        </a> */}
+
         {/* <!-- Search input on desktop screen --> */}
-        <div className={`mx-0 md:block ${menu ? "block" : "hidden"}`}>
+        <div
+          className={`mx-0 md:block md:translate-x-28 ${
+            menu ? "block" : "hidden"
+          }`}
+        >
           <div className="relative">
             <span className="absolute inset-y-0 left-0 flex items-center pl-3">
               <svg
