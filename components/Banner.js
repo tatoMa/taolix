@@ -14,10 +14,10 @@ const Banner = ({ detail }) => {
   let url = "https://s1.yh5125.com/20211105/450FAdFS/index.m3u8";
   if (detail.mode !== "homePage") {
     url = detail.vod_play_url
-      .split("$$$")[1]?
+      .split("$$$")[0]?
       .split("#")
       .slice(-1)[0]
-      .split("$")[1];
+      .split("$")[1]
   } else {
   }
   const [play, setPlay] = useState(false);
@@ -25,8 +25,9 @@ const Banner = ({ detail }) => {
     if (detail.mode === "homePage") {
       router.push("/search/" + vod_name);
     } else {
-      setPlay(true);
-      scroll(0,0)
+        window.location.href = url;
+      // setPlay(true);
+      // scroll(0,0)
     }
   };
 

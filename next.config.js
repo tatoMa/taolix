@@ -16,7 +16,8 @@ module.exports = {
       "img7.doubanio.com",
       "img8.doubanio.com",
       "img9.doubanio.com",
-      "btbtt20.com"
+      "btbtt20.com",
+      "p2.qhimg.com",
     ],
   },
 };

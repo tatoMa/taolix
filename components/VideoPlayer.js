@@ -1,7 +1,7 @@
 import VideoJS from "./Videojs";
 import React from "react";
 
-const VideoPlayer = ({src}) => {
+const VideoPlayer = ({ src }) => {
   const playerRef = React.useRef(null);
 
   const videoJsOptions = {

@@ -10,7 +10,7 @@ import VideoPlayer from "../../components/VideoPlayer";
 function Detail({ detail, id }) {
   // console.log(detail);
   // console.log(detail.list[0].vod_play_url.split("$$$"));
-  const videoList = detail.list[0].vod_play_url.split("$$$")[1]?.split("#");
+  const videoList = detail.list[0].vod_play_url.split("$$$")[0]?.split("#");
   // console.log(videoList);
   const [play, setPlay] = useState(false);
   const [url, setUrl] = useState("");
@@ -60,10 +60,13 @@ function Detail({ detail, id }) {
               <a
                 key={name}
                 className="cursor-pointer overflow-hidden flex items-center py-3 px-2 sm:mx-6 md:mx-10 lg:mx-14 border-b border-gray-400 text-gray-400 hover:text-white hover:border-white"
+                // onClick={() => {
+                //   setPlay(true);
+                //   setUrl(url);
+                //   scroll(0, 0);
+                // }}
                 onClick={() => {
-                  setPlay(true);
-                  setUrl(url);
-                  scroll(0, 0);
+                  window.location.href = url;
                 }}
               >
                 <div>
