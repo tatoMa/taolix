@@ -1,7 +1,7 @@
 module.exports = {
   content: [
-    './pages/**/*.{js,ts,jsx,tsx}',
-    './components/**/*.{js,ts,jsx,tsx}',
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
   ],
   plugins: [require("@tailwindcss/line-clamp")],
   theme: {
@@ -17,8 +17,10 @@ module.exports = {
         },
       },
       fontFamily: {
-        netflix: ["Netflix", "Helvetica", "Arial", "sans-serif"],
-        netflix_medium: ["Netflix_Medium", "Helvetica", "Arial", "sans-serif"],
+        netflix: ["Helvetica", "Arial", "sans-serif"],
+        netflix_medium: ["Helvetica", "Arial", "sans-serif"],
+        // netflix: ["Netflix", "Helvetica", "Arial", "sans-serif"],
+        // netflix_medium: ["Netflix_Medium", "Helvetica", "Arial", "sans-serif"],
       },
       animation: {
         "card-hover": "card-hover 300ms forwards",
@@ -83,4 +85,4 @@ module.exports = {
       },
     },
   },
-}
+};

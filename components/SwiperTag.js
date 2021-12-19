@@ -1,4 +1,11 @@
-import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from "swiper";
+import {
+  Navigation,
+  Pagination,
+  Scrollbar,
+  A11y,
+  Autoplay,
+  EffectCoverflow,
+} from "swiper";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -6,6 +13,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import "swiper/css/autoplay";
+import "swiper/css/effect-coverflow";
 
 import Banner from "../components/Banner";
 
@@ -14,11 +22,23 @@ const SwiperTag = ({ top5 }) => {
   return (
     <Swiper
       // install Swiper modules
-      modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
+      modules={[
+        Navigation,
+        Pagination,
+        Scrollbar,
+        A11y,
+        Autoplay,
+        EffectCoverflow,
+      ]}
+      autoplay={{
+        delay: 8000,
+        disableOnInteraction: true,
+      }}
+      effect="coverflow"
+      loop
       spaceBetween={50}
       slidesPerView={1}
       navigation
-      autoPlay
       pagination={{ clickable: true }}
       scrollbar={{ draggable: true }}
       onSwiper={(swiper) => console.log()}
@@ -39,6 +59,16 @@ const SwiperTag = ({ top5 }) => {
           />
         </SwiperSlide>
       ))}
+      <style global jsx>{`
+        .swiper-pagination-bullet {
+          background-color: white;
+          padding: 0.4rem;
+        }
+        .swiper-button-next,
+        .swiper-button-prev {
+          color: white;
+        }
+      `}</style>
     </Swiper>
   );
 };
