@@ -67,6 +67,8 @@ const SwiperTag = ({ top5 }) => {
         .swiper-button-next,
         .swiper-button-prev {
           color: white;
+          text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
+            1px 1px 0 #000;
         }
       `}</style>
     </Swiper>

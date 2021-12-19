@@ -6,17 +6,39 @@ import { useRouter } from "next/router";
 
 function Header() {
   const router = useRouter();
-  const { data: session } = useSession();
-  const [menu, setMenu] = useState(false);
-
   const scrolled = useOnScrolled();
+  const [menu, setMenu] = useState(false);
+  const { data: session } = useSession();
 
-  const _handleKeyDown = (e) => {
+  const handleKeyDown = (e) => {
     if (e.key === "Enter") {
       setMenu(false);
       router.push("/search/" + e.target.value);
     }
   };
+
+  const links = [
+    {
+      name: "HOME",
+      linkUrl: "/",
+    },
+    {
+      name: "MOVIE",
+      linkUrl: "/list?t=6",
+    },
+    {
+      name: "TV SHOW",
+      linkUrl: "/list?t=16",
+    },
+    {
+      name: "REALITY SHOW",
+      linkUrl: "/list?t=27",
+    },
+    {
+      name: "ANIME",
+      linkUrl: "/list?t=31",
+    },
+  ];
 
   return (
     <div
@@ -42,91 +64,25 @@ function Header() {
             menu ? "flex justify-center items-center" : "hidden"
           }`}
         >
-          <Link href="/">
-            <a
-              onClick={() => setMenu(false)}
-              className="
+          {links.map((link) => (
+            <Link href={link.linkUrl} key={link.name}>
+              <a
+                onClick={() => setMenu(false)}
+                className={`
               hover:text-white
-              font-netflix_medium
               transition
               duration-300
-              text-white
-              p-3
-              mt-20 md:mt-0
-              text-4xl md:text-4xl lg:text-sm
-            "
-            >
-              HOME
-            </a>
-          </Link>
-          <Link href={`/list/?t=6`}>
-            <a
-              onClick={() => setMenu(false)}
-              className="
-              hover:text-white
-              font-netflix_medium
-              transition
-              duration-300
-              text-gray-400
+              font-medium
               p-3
               mt-6 md:mt-0
-              text-4xl md:text-4xl lg:text-sm
-            "
-            >
-              MOVIE
-            </a>
-          </Link>
-          <Link href={`/list/?t=16`}>
-            <a
-              onClick={() => setMenu(false)}
-              className="
-              hover:text-white
-              font-netflix_medium
-              transition
-              duration-300
-              text-gray-400
-              p-3
-              mt-6 md:mt-0
-              text-4xl md:text-4xl lg:text-sm
-            "
-            >
-              TV SHOW
-            </a>
-          </Link>
-          <Link href={`/list/?t=27`}>
-            <a
-              onClick={() => setMenu(false)}
-              className="
-              hover:text-white
-              font-netflix_medium
-              transition
-              duration-300
-              text-gray-400
-              p-3
-              mt-6 md:mt-0
-              text-4xl md:text-4xl lg:text-sm
-            "
-            >
-              REALITY SHOW
-            </a>
-          </Link>
-          <Link href={`/list/?t=31`}>
-            <a
-              onClick={() => setMenu(false)}
-              className="
-              hover:text-white
-              font-netflix_medium
-              transition
-              duration-300
-              text-gray-400
-              p-3
-              mt-6 md:mt-0
-              text-4xl md:text-4xl lg:text-sm
-            "
-            >
-              ANIME
-            </a>
-          </Link>
+              text-4xl md:text-4xl lg:text-base
+              ${router.asPath == link.linkUrl ? "text-white" : "text-gray-400"}
+            `}
+              >
+                {link.name}
+              </a>
+            </Link>
+          ))}
         </div>
 
         {/* <a
@@ -164,7 +120,7 @@ function Header() {
               type="text"
               className="w-64 lg:w-full py-1 pl-10 text-white bg-black border border-white focus:border-red-500 dark:focus:border-red-500 focus:outline-none focus:ring-red"
               placeholder="Search"
-              onKeyDown={_handleKeyDown}
+              onKeyDown={handleKeyDown}
             />
           </div>
         </div>

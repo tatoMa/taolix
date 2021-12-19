@@ -18,6 +18,8 @@ module.exports = {
       "img9.doubanio.com",
       "btbtt20.com",
       "p2.qhimg.com",
+      "pic0.iqiyipic.com",
+      "p1.ssl.qhimgs1.com",
     ],
   },
 };
