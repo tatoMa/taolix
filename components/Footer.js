@@ -4,6 +4,7 @@ const Footer = () => {
   return (
     <footer className="max-w-screen-2xl mx-auto">
       <div className="mx-2 sm:mx-6 md:mx-10 lg:mx-14 mb-4 mt-4">
+        <hr className="h-px my-6  border-none bg-gray-700" />
         <div className="lg:flex">
           <div className="w-full -mx-6 lg:w-2/5">
             <div className="px-6">
@@ -61,22 +62,22 @@ const Footer = () => {
               <div>
                 <h3 className="uppercase text-white">Video</h3>
                 <Link href={`/list/?t=6`}>
-                  <a className="block mt-2 text-sm text-gray-400 hover:underline">
+                  <a className="block mt-2 text-sm text-gray-400 hover:text-white">
                     Movies
                   </a>
                 </Link>
                 <Link href={`/list/?t=16`}>
-                  <a className="block mt-2 text-sm text-gray-400 hover:underline">
+                  <a className="block mt-2 text-sm text-gray-400 hover:text-white">
                     TV Shows
                   </a>
                 </Link>
                 <Link href={`/list/?t=27`}>
-                  <a className="block mt-2 text-sm text-gray-400 hover:underline">
+                  <a className="block mt-2 text-sm text-gray-400 hover:text-white">
                     Reality Shows
                   </a>
                 </Link>
                 <Link href={`/list/?t=31`}>
-                  <a className="block mt-2 text-sm text-gray-400 hover:underline">
+                  <a className="block mt-2 text-sm text-gray-400 hover:text-white">
                     Anime
                   </a>
                 </Link>
@@ -86,14 +87,14 @@ const Footer = () => {
                 <h3 className="uppercase text-white">Products</h3>
                 <a
                   href="https://www.taolix.com/"
-                  className="block mt-2 text-sm text-gray-400 hover:underline"
+                  className="block mt-2 text-sm text-gray-400 hover:text-white"
                   target="_blank"
                 >
                   TAOLIX
                 </a>
                 <a
                   href="https://www.taotify.com/"
-                  className="block mt-2 text-sm text-gray-400 hover:underline"
+                  className="block mt-2 text-sm text-gray-400 hover:text-white"
                   target="_blank"
                 >
                   TAOTIFY
@@ -103,13 +104,13 @@ const Footer = () => {
               <div>
                 <h3 className="uppercase text-white">About</h3>
                 <Link href="#">
-                  <a className="block mt-2 text-sm text-gray-400 hover:underline mb-4">
+                  <a className="block mt-2 text-sm text-gray-400 hover:text-white mb-4">
                     Company
                   </a>
                 </Link>
 
                 <h3 className="uppercase text-white">Contact</h3>
-                <div className="block mt-2 text-sm text-gray-400 hover:underline">
+                <div className="block mt-2 text-sm text-gray-400 hover:text-white">
                   <a href="mailto:taolixtv@gmail.com">taolixtv@gmail.com</a>
                 </div>
               </div>

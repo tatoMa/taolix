@@ -34,11 +34,8 @@ export default function Home({ videos, page, top250 }) {
       {/* pagination */}
       <Pagination page={page} />
 
-      {/* Line Break  */}
-      <LineBreak title=" " />
-
       {/* Footer component */}
-      <Footer className="max-w-screen-2xl" />
+      <Footer />
     </>
   );
 }

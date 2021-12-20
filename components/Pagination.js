@@ -30,17 +30,17 @@ const Pagination = ({ page }) => {
           {parseInt(page) + 3}
         </a>
       </Link>
-      <Link href={`/?page=${parseInt(page) + 3}`}>
+      <Link href={`/?page=${parseInt(page) + 4}`}>
         <a className="hidden md:block px-4 py-2 mx-1 text-white transition-colors duration-200 transform bg-black border border-white hover:bg-white hover:text-black">
           {parseInt(page) + 4}
         </a>
       </Link>
-      <Link href={`/?page=${parseInt(page) + 3}`}>
+      <Link href={`/?page=${parseInt(page) + 5}`}>
         <a className="hidden md:block px-4 py-2 mx-1 text-white transition-colors duration-200 transform bg-black border border-white hover:bg-white hover:text-black">
           {parseInt(page) + 5}
         </a>
       </Link>
-      <Link href={`/?page=${parseInt(page) + 3}`}>
+      <Link href={`/?page=${parseInt(page) + 6}`}>
         <a className="hidden md:block px-4 py-2 mx-1 text-white transition-colors duration-200 transform bg-black border border-white hover:bg-white hover:text-black">
           {parseInt(page) + 6}
         </a>
