@@ -1,5 +1,7 @@
+import dynamic from "next/dynamic";
 import { XIcon } from "@heroicons/react/solid";
-import ReactPlayer from "react-player";
+// import ReactPlayer from "react-player";
+const ReactPlayer = dynamic(() => import("react-player"));
 
 const Player = ({ url, setPlay }) => {
   return (
