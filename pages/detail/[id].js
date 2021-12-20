@@ -4,13 +4,16 @@ import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 // import VideoList from "../../components/VideoList";
 import { useState } from "react";
-import { PlayIcon, XIcon } from "@heroicons/react/solid";
-import VideoPlayer from "../../components/VideoPlayer";
+import { PlayIcon } from "@heroicons/react/solid";
+
+import LineBreak from "../../components/LineBreak";
+
+import Player from "../../components/Player";
 
 function Detail({ detail, id }) {
   // console.log(detail);
   // console.log(detail.list[0].vod_play_url.split("$$$"));
-  const videoList = detail.list[0].vod_play_url.split("$$$")[0]?.split("#");
+  const videoList = detail.list[0]?.vod_play_url.split("$$$")[1]?.split("#");
   // console.log(videoList);
   const [play, setPlay] = useState(false);
   const [url, setUrl] = useState("");
@@ -40,34 +43,26 @@ function Detail({ detail, id }) {
       {/* Main section */}
       {/* <div className="min-h-screen"> */}
       <main className="w-full h-full md:pb-8 max-w-screen-2xl mx-auto">
-        {play && (
-          <div className="flex h-full w-full absolute top-0 left-0 items-center bg-black/50 z-10">
-            <XIcon
-              className="h-10 w-10 text-blue-white absolute right-4 top-12 bg-black cursor-pointer hover:bg-white hover:text-black animate-fadeIn z-50"
-              onClick={() => setPlay(false)}
-            />
-            <VideoPlayer src={url} />
-          </div>
-        )}
+        {/* Player */}
+        {play && <Player url={url} setPlay={setPlay} />}
+
         <Banner detail={detail.list[0]} />
-        <div className=" text-3xl text-white border-b -translate-y-6 pb-2 mx-2 sm:mx-6 md:mx-10 lg:mx-14">
-          DETAILS
-        </div>
-        {videoList &&
+        <LineBreak title="PLAY LIST" />
+        {videoList[0] ? (
           videoList.map((video) => {
             const [name, url] = video.split("$");
             return (
               <a
                 key={name}
                 className="cursor-pointer overflow-hidden flex items-center py-3 px-2 sm:mx-6 md:mx-10 lg:mx-14 border-b border-gray-400 text-gray-400 hover:text-white hover:border-white"
-                // onClick={() => {
-                //   setPlay(true);
-                //   setUrl(url);
-                //   scroll(0, 0);
-                // }}
                 onClick={() => {
-                  window.location.href = url;
+                  setPlay(true);
+                  setUrl(url);
+                  scroll(0, 0);
                 }}
+                // onClick={() => {
+                //   window.location.href = url;
+                // }}
               >
                 <div>
                   <PlayIcon className="h-8 w-8 mr-4 text-blue-white" />
@@ -75,7 +70,12 @@ function Detail({ detail, id }) {
                 <div>{name}</div>
               </a>
             );
-          })}
+          })
+        ) : (
+          <p className="mx-2 sm:mx-6 md:mx-10 lg:mx-14 font-bold">
+            No result found
+          </p>
+        )}
       </main>
 
       {/* Footer component */}

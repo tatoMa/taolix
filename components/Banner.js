@@ -1,9 +1,10 @@
 import Image from "next/image";
-import { PlayIcon, XIcon } from "@heroicons/react/solid";
-import { InformationCircleIcon } from "@heroicons/react/outline";
+import { PlayIcon } from "@heroicons/react/solid";
+// import { InformationCircleIcon } from "@heroicons/react/outline";
 import { useState } from "react";
-import VideoPlayer from "./VideoPlayer";
 import { useRouter } from "next/router";
+
+import Player  from "./Player";
 
 const Banner = ({ detail }) => {
   const router = useRouter();
@@ -12,37 +13,33 @@ const Banner = ({ detail }) => {
   let { vod_pic, vod_name, vod_blurb, vod_director, vod_actor, vod_class } =
     detail;
   let url = "https://s1.yh5125.com/20211105/450FAdFS/index.m3u8";
+  let latestName = ""
   if (detail.mode !== "homePage") {
-    url = detail.vod_play_url
-      .split("$$$")[0]?
+    let latest = detail.vod_play_url
+      .split("$$$")[1]?
       .split("#")
       .slice(-1)[0]
-      .split("$")[1]
+      .split("$");
+
+    latestName= latest[0]
+    url= latest[1]
   } else {
   }
   const [play, setPlay] = useState(false);
-  const playButtonHandler = () => {
+  const playButtonHandler = (e) => {
     if (detail.mode === "homePage") {
       router.push("/search/" + vod_name);
     } else {
-        window.location.href = url;
-      // setPlay(true);
-      // scroll(0,0)
+        // window.location.href = url;
+      setPlay(true);
+      scroll(0,0)
     }
   };
 
   return (
     <>
       {/* Player */}
-      {play && (
-        <div className="flex h-full w-full absolute top-0 left-0 items-center bg-black/50 z-10 ">
-          <XIcon
-            className="h-10 w-10 text-blue-white absolute right-4 top-12 bg-black cursor-pointer hover:bg-white hover:text-black animate-fadeIn z-50"
-            onClick={() => setPlay(false)}
-          />
-          <VideoPlayer src={url} />
-        </div>
-      )}
+      {play && <Player url={url} setPlay={setPlay}/>}
 
       {/* <banner-skeleton v-if="isLoading" /> */}
 
@@ -74,7 +71,7 @@ const Banner = ({ detail }) => {
         </div>
 
         {/* text section */}
-        <div className=" absolute inset-0 flex items-center justify-between mx-2 sm:mx-10 md:mx-16 lg:mx-20 mt-16 border-x-2 border-gray-300/20">
+        <div className=" absolute inset-0 flex items-center justify-between mx-6 sm:mx-10 md:mx-16 lg:mx-20 mt-16 border-x-2 border-gray-300/20">
           <div className="w-[70%] md:w-[60%] lg:w-[50%] space-y-6 backdrop-blur-md bg-black/40 p-1 md:p-4">
             <h1 className="font-bold text-2xl sm:text-3xl md:text-4xl line-clamp-2 text-white">
               {/* {{ banner.title || banner.name }} */}
@@ -97,7 +94,7 @@ const Banner = ({ detail }) => {
                   <PlayIcon className="h-6 w-6 text-blue-white" />
                 )}
                 <p className="font-thin tracking-widest">
-                  {detail.mode === "homePage" ? "Find This" : url ? "Play" : "Not found"}
+                  {detail.mode === "homePage" ? "Find This" : url ? `Play ${latestName}` : "Not found"}
                 </p>
               </button>
               {/* <button

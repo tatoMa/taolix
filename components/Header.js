@@ -95,7 +95,7 @@ function Header() {
 
         {/* <!-- Search input on desktop screen --> */}
         <div
-          className={`mx-0 md:block md:translate-x-28 ${
+          className={`mx-0 md:block md:translate-x-6 ${
             menu ? "block" : "hidden"
           }`}
         >

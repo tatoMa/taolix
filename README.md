@@ -1,4 +1,5 @@
 # TAOLIX
+
 ## The open source online video stream service site
 
 [Deployed link](https://www.taolix.com/)
@@ -26,15 +27,19 @@ Taolix uses a number of open source projects to work properly:
 ## Deployment
 
 Dev:
+
 ```sh
 npm run dev
 ```
 
 Prod:
+
 ```sh
 npm run build
 ```
+
 ## feature roadmap
+
 - [x] Home page
 - [x] Auth
 - [x] Videos list
@@ -43,11 +48,15 @@ npm run build
 - [x] Video detail
 - [x] Search
 - [x] Type page
-- [x] Full Responsive
+- [x] Fully Responsive
+- [ ] More video lists on homepage
+- [ ] ISG
+- [ ] Refactor
+- [ ] Chromecast
 - [ ] More source
-- [ ] App
 - [ ] Profile manage
 - [ ] History page
+- [ ] App
 
 ## License
 

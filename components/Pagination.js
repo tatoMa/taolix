@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const Pagination = ({ page }) => {
   return (
-    <div className="w-full h-full max-w-screen-2xl mx-auto flex justify-center mt-8 md:mt-0 mb-2">
+    <div className="w-full h-full max-w-screen-2xl mx-auto flex justify-center mt-8 md:mt-0 mb-16">
       <Link href={`/?page=${parseInt(page) - 1}`}>
         <a
           className={`px-4 py-2 mx-1 ${

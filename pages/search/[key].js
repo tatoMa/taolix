@@ -8,7 +8,6 @@ import Header from "../../components/Header";
 import VideoItem from "../../components/VideoItem";
 import { useState } from "react";
 import { PlayIcon, XIcon } from "@heroicons/react/solid";
-import VideoPlayer from "../../components/VideoPlayer";
 
 import { useRouter } from "next/router";
 

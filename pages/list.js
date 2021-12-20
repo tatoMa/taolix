@@ -1,39 +1,28 @@
 import { Router } from "next/router";
 import Link from "next/link";
 
-import Head from "next/head";
+import HeadTag from "../components/HeadTag";
+import { default as Navbar } from "../components/Header";
 import Banner from "../components/Banner";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import VideoItem from "../components/VideoItem";
+import LineBreak from "../components/LineBreak";
 
 export default function Home({ videos, page, t }) {
   // console.log(t);
   return (
     <>
       {/* HTML Head Element */}
-      <Head>
-        <title>TAOLIX - Free videos online</title>
-        <meta charSet="UTF-8"></meta>
-        <meta name="keywords" content="movie, show, video, taolix"></meta>
-        <meta
-          name="description"
-          content="Taolix, Your favorite movies and shows online"
-        ></meta>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0"
-        ></meta>
-        <meta name="author" content="TATO"></meta>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      {/* Header component */}
-      <Header />
+      <HeadTag />
+      {/* Navigation component */}
+      <Navbar />
 
       {/* Main section */}
       {/* <div className="min-h-screen"> */}
-      <main className="w-full h-full md:pb-8 max-w-screen-2xl mx-auto mt-16">
+      <main className="w-full h-full md:pb-8 max-w-screen-2xl mx-auto mt-16 pt-6">
+        {/* Line Break  */}
+        <LineBreak title=" " />
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-2 sm:px-6 md:px-10 lg:px-14">
           {videos.list.map((movie) => (
             <VideoItem
