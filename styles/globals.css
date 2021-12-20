@@ -13,17 +13,17 @@
   --typography-color-rgb: 229, 229, 216;
 }
 
-@font-face {
-  font-family: "Netflix";
+/* @font-face {
+  font-family: "Helvetica", "Arial", "sans-serif";
   /* src: local("Netflix"), url(../fonts/Netflix_Regular.woff2) format("woff2"); */
-  src: local("Netflix");
-}
+
+/* }
 
 @font-face {
   font-family: "Netflix_Medium";
   src: local("Netflix_Medium"),
     url(../fonts/Netflix_Medium.woff2) format("woff2");
-}
+} */
 
 body {
   @apply text-typography font-netflix;
