@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
 import { XIcon } from "@heroicons/react/solid";
 // import ReactPlayer from "react-player";
-const ReactPlayer = dynamic(() => import("react-player"));
+const ReactPlayer = dynamic(() => import("react-player/lazy"));
 
 const Player = ({ url, setPlay }) => {
   return (
@@ -17,6 +17,10 @@ const Player = ({ url, setPlay }) => {
           config={{
             file: {
               forceHLS: true,
+              attributes: {
+                autoPlay: true,
+                // muted: true,
+              },
             },
           }}
           width="100%"

@@ -18,7 +18,7 @@ const VideoItem = ({ name, type, pic, id }) => {
               alt={name}
               className="object-cover"
               layout="fill"
-              referrerpolicy="no-referrer"
+              referrerPolicy="no-referrer"
             />
           </div>
 
