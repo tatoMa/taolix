@@ -5,6 +5,7 @@
 
 module.exports = {
   images: {
+    // loader: "custom",
     domains: [
       "image.tmdb.org",
       "www.themoviedb.org",

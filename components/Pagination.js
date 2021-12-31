@@ -1,9 +1,15 @@
 import Link from "next/link";
 
-const Pagination = ({ page }) => {
+const Pagination = ({ page, t }) => {
   return (
     <div className="w-full h-full max-w-screen-2xl mx-auto flex justify-center mt-8 md:mt-0 mb-16">
-      <Link href={`/?page=${parseInt(page) - 1}`}>
+      <Link
+        href={
+          t
+            ? `/list?t=${t}&page=${parseInt(page) + 1}`
+            : `/?page=${parseInt(page) - 1}`
+        }
+      >
         <a
           className={`px-4 py-2 mx-1 ${
             page == 1
@@ -15,38 +21,80 @@ const Pagination = ({ page }) => {
         </a>
       </Link>
 
-      <Link href={`/?page=${parseInt(page) + 1}`}>
+      <Link
+        href={
+          t
+            ? `/list?t=${t}&page=${parseInt(page) + 1}`
+            : `/?page=${parseInt(page) + 1}`
+        }
+      >
         <a className="px-4 py-2 mx-1 text-white transition-colors duration-200 transform bg-black border border-white hover:bg-white hover:text-black">
           {parseInt(page) + 1}
         </a>
       </Link>
-      <Link href={`/?page=${parseInt(page) + 2}`}>
+      <Link
+        href={
+          t
+            ? `/list?t=${t}&page=${parseInt(page) + 2}`
+            : `/?page=${parseInt(page) + 2}`
+        }
+      >
         <a className="px-4 py-2 mx-1 text-white transition-colors duration-200 transform bg-black border border-white hover:bg-white hover:text-black">
           {parseInt(page) + 2}
         </a>
       </Link>
-      <Link href={`/?page=${parseInt(page) + 3}`}>
+      <Link
+        href={
+          t
+            ? `/list?t=${t}&page=${parseInt(page) + 3}`
+            : `/?page=${parseInt(page) + 3}`
+        }
+      >
         <a className="px-4 py-2 mx-1 text-white transition-colors duration-200 transform bg-black border border-white hover:bg-white hover:text-black">
           {parseInt(page) + 3}
         </a>
       </Link>
-      <Link href={`/?page=${parseInt(page) + 4}`}>
+      <Link
+        href={
+          t
+            ? `/list?t=${t}&page=${parseInt(page) + 4}`
+            : `/?page=${parseInt(page) + 4}`
+        }
+      >
         <a className="hidden md:block px-4 py-2 mx-1 text-white transition-colors duration-200 transform bg-black border border-white hover:bg-white hover:text-black">
           {parseInt(page) + 4}
         </a>
       </Link>
-      <Link href={`/?page=${parseInt(page) + 5}`}>
+      <Link
+        href={
+          t
+            ? `/list?t=${t}&page=${parseInt(page) + 5}`
+            : `/?page=${parseInt(page) + 5}`
+        }
+      >
         <a className="hidden md:block px-4 py-2 mx-1 text-white transition-colors duration-200 transform bg-black border border-white hover:bg-white hover:text-black">
           {parseInt(page) + 5}
         </a>
       </Link>
-      <Link href={`/?page=${parseInt(page) + 6}`}>
+      <Link
+        href={
+          t
+            ? `/list?t=${t}&page=${parseInt(page) + 6}`
+            : `/?page=${parseInt(page) + 6}`
+        }
+      >
         <a className="hidden md:block px-4 py-2 mx-1 text-white transition-colors duration-200 transform bg-black border border-white hover:bg-white hover:text-black">
           {parseInt(page) + 6}
         </a>
       </Link>
 
-      <Link href={`/?page=${parseInt(page) + 1}`}>
+      <Link
+        href={
+          t
+            ? `/list?t=${t}&page=${parseInt(page) + 1}`
+            : `/?page=${parseInt(page) + 1}`
+        }
+      >
         <a className="px-4 py-2 mx-1 text-white transition-colors duration-200 transform bg-black border border-white hover:bg-white hover:text-black">
           NEXT
         </a>

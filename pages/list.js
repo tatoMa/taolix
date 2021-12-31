@@ -31,7 +31,7 @@ export default function Home({ videos, page, t }) {
       </main>
 
       {/* pagination */}
-      <Pagination page={page} />
+      <Pagination page={page} t={t} />
 
       {/* Footer component */}
       <Footer />

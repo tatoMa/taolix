@@ -6,9 +6,9 @@ const VideoItem = ({ name, type, pic, id }) => {
 
   return (
     <>
-      <div className="overflow-hidden bg-black cursor-pointer">
+      <div className="overflow-hidden bg-black cursor-pointer hover:brightness-75">
         <div className="relative" onClick={() => router.push(`/detail/${id}`)}>
-          <div className="h-40 relative">
+          <div className="w-full aspect-[3/4]">
             <Image
               unoptimized={true}
               src={
@@ -18,12 +18,13 @@ const VideoItem = ({ name, type, pic, id }) => {
               alt={name}
               className="object-cover"
               layout="fill"
+              referrerpolicy="no-referrer"
             />
           </div>
 
           <div className="absolute bottom-0 left-0 bg-black/75">
             <div className="block text-xl font-bold text-white">{name}</div>
-            <div className="text-xs text-white">{type}</div>
+            <div className="text-xs text-gray-400">{type}</div>
           </div>
         </div>
       </div>

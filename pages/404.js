@@ -23,6 +23,7 @@ export default function Custom500({}) {
             alt="Picture of the author"
             layout="fill"
             className="object-cover"
+            referrerpolicy="no-referrer"
           />
         </div>
         <div className="absolute top-1/3">
