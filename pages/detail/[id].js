@@ -3,7 +3,7 @@ import Banner from "../../components/Banner";
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 // import VideoList from "../../components/VideoList";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PlayIcon } from "@heroicons/react/solid";
 
 import LineBreak from "../../components/LineBreak";
@@ -17,6 +17,13 @@ function Detail({ detail, id }) {
   // console.log(videoList);
   const [play, setPlay] = useState(false);
   const [url, setUrl] = useState("");
+
+  useEffect(() => {
+    return () => {
+      document.documentElement.style.overflowY = "auto";
+      console.log("cleaned up");
+    };
+  }, []);
 
   return (
     <>
@@ -42,7 +49,11 @@ function Detail({ detail, id }) {
 
       {/* Main section */}
       {/* <div className="min-h-screen"> */}
-      <main className="w-full h-full md:pb-8 max-w-screen-2xl mx-auto">
+      <main
+        className={`w-full h-full md:pb-8 max-w-screen-2xl mx-auto ${
+          play && "pointer-events-none"
+        }`}
+      >
         {/* Player */}
         {play && <Player url={url} setPlay={setPlay} />}
 
@@ -59,6 +70,7 @@ function Detail({ detail, id }) {
                   setPlay(true);
                   setUrl(url);
                   scroll(0, 0);
+                  document.documentElement.style.overflowY = "hidden";
                 }}
                 // onClick={() => {
                 //   window.location.href = url;

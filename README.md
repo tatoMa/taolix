@@ -49,7 +49,8 @@ npm run build
 - [x] Search
 - [x] Type page
 - [x] Fully Responsive
-- [ ] More video lists on homepage
+- [x] More video lists on homepage
+- [x] Video autoplay
 - [ ] ISG
 - [ ] Refactor
 - [ ] Chromecast

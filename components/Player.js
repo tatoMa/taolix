@@ -5,10 +5,13 @@ const ReactPlayer = dynamic(() => import("react-player/lazy"));
 
 const Player = ({ url, setPlay }) => {
   return (
-    <div className="flex h-full w-full absolute top-0 left-0 items-center bg-black/50 z-10 ">
+    <div className="flex h-full w-full absolute top-0 left-0 items-center pb-14 bg-black/50 z-10 ">
       <XIcon
-        className="h-10 w-10 text-blue-white absolute right-4 top-12 bg-black cursor-pointer hover:bg-white hover:text-black animate-fadeIn z-50"
-        onClick={() => setPlay(false)}
+        className="h-10 w-10 text-blue-white absolute right-4 top-12 bg-black cursor-pointer pointer-events-auto hover:bg-white hover:text-black animate-fadeIn z-50"
+        onClick={() => {
+          setPlay(false);
+          document.documentElement.style.overflowY = "auto";
+        }}
       />
       <div className="w-full aspect-video">
         <ReactPlayer
