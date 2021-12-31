@@ -18,6 +18,7 @@ export default function Custom500({}) {
       <div className="w-full h-[70vh] max-w-screen-2xl mx-auto flex justify-center mt-8 md:mt-0 mb-2">
         <div className="relative w-full h-full">
           <Image
+            unoptimized={true}
             src={lostPic}
             alt="Picture of the author"
             layout="fill"
