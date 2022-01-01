@@ -10,6 +10,7 @@ import VideoItem from "../components/VideoItem";
 import LineBreak from "../components/LineBreak";
 import VideoListsSection from "../components/VideoListsSection";
 import Pagination from "../components/Pagination";
+import GenreList from "../components/genreList";
 
 export default function Home({ videos, page, t }) {
   // console.log(t);
@@ -22,9 +23,11 @@ export default function Home({ videos, page, t }) {
 
       {/* Main section */}
       {/* <div className="min-h-screen"> */}
-      <main className="w-full h-full md:pb-8 max-w-screen-2xl mx-auto mt-16 pt-6">
+      <main className="w-full h-full md:pb-8 max-w-screen-2xl mx-auto mt-8 pt-6">
         {/* Line Break  */}
         <LineBreak title=" " />
+
+        <GenreList t={t} />
 
         {/* Video List Section */}
         <VideoListsSection videos={videos} />

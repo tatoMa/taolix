@@ -1,4 +1,5 @@
 import Link from "next/link";
+import MobileBottomMenu from "./MobileBottomMenu";
 
 const Footer = () => {
   return (
@@ -126,6 +127,8 @@ const Footer = () => {
           </p>
         </div>
       </div>
+      {/* Mobile Bottom Menu */}
+      <MobileBottomMenu />
     </footer>
   );
 };

@@ -28,11 +28,11 @@ function Header() {
     },
     {
       name: "TV SHOW",
-      linkUrl: "/list?t=16",
+      linkUrl: "/list?t=13",
     },
     {
       name: "REALITY SHOW",
-      linkUrl: "/list?t=27",
+      linkUrl: "/list?t=26",
     },
     {
       name: "ANIME",
@@ -73,7 +73,8 @@ function Header() {
               transition
               duration-300
               font-medium
-              p-3
+              p-2
+              xl:p-3
               mt-6 md:mt-0
               text-4xl md:text-4xl lg:text-base
               ${router.asPath == link.linkUrl ? "text-white" : "text-gray-400"}
@@ -118,7 +119,7 @@ function Header() {
 
             <input
               type="text"
-              className="w-64 lg:w-full py-1 pl-10 text-white bg-black border border-white focus:border-red-500 dark:focus:border-red-500 focus:outline-none focus:ring-red"
+              className="mr-[8vw] sm:mr-[11vw] lg:mr-0 w-64 lg:w-40 xl:w-60 py-1 pl-10 text-white bg-black border border-white focus:border-red-500 dark:focus:border-red-500 focus:outline-none focus:ring-red"
               placeholder="Search"
               onKeyDown={handleKeyDown}
             />
