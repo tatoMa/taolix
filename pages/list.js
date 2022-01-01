@@ -10,7 +10,7 @@ import VideoItem from "../components/VideoItem";
 import LineBreak from "../components/LineBreak";
 import VideoListsSection from "../components/VideoListsSection";
 import Pagination from "../components/Pagination";
-import GenreList from "../components/genreList";
+import GenreList from "../components/GenreList";
 
 export default function Home({ videos, page, t }) {
   // console.log(t);
