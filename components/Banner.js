@@ -47,7 +47,7 @@ const Banner = ({ detail }) => {
 
       <div className="relative w-full h-full">
         {/* image section */}
-        <div className="relative h-[85vh] 2xl:h-[65vh]">
+        <div className="relative h-[75vh] lg:h-[85vh] 2xl:h-[65vh]">
           <Image
             unoptimized={true}
             src={
