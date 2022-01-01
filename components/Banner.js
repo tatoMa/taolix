@@ -33,6 +33,8 @@ const Banner = ({ detail }) => {
         // window.location.href = url;
       setPlay(true);
       scroll(0,0)
+      document.documentElement.style.overflowY = "hidden";
+
     }
   };
 

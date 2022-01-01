@@ -39,12 +39,15 @@ export default function Home({ videos, page, t }) {
   );
 }
 
-export async function getServerSideProps({ query: { page = 1, t } }) {
+export async function getServerSideProps({ query: { page = 1, t = 0 } }) {
   // Call an external API endpoint to get posts.
   // You can use any data fetching library
-  const res = await fetch(
-    `${process.env.MOVIE_API}/?ac=detail&t=${t}&pg=${page}`
-  );
+  let res;
+  if (t) {
+    res = await fetch(`${process.env.MOVIE_API}/?ac=detail&t=${t}&pg=${page}`);
+  } else {
+    res = await fetch(`${process.env.MOVIE_API}/?ac=detail&pg=${page}`);
+  }
   const videos = await res.json();
 
   // By returning { props: { posts } }, the Blog component

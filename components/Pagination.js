@@ -7,7 +7,7 @@ const Pagination = ({ page, t }) => {
         href={
           t
             ? `/list?t=${t}&page=${parseInt(page) + 1}`
-            : `/?page=${parseInt(page) - 1}`
+            : `/list?page=${parseInt(page) - 1}`
         }
       >
         <a
@@ -25,7 +25,7 @@ const Pagination = ({ page, t }) => {
         href={
           t
             ? `/list?t=${t}&page=${parseInt(page) + 1}`
-            : `/?page=${parseInt(page) + 1}`
+            : `/list?page=${parseInt(page) + 1}`
         }
       >
         <a className="px-4 py-2 mx-1 text-white transition-colors duration-200 transform bg-black border border-white hover:bg-white hover:text-black">
@@ -36,7 +36,7 @@ const Pagination = ({ page, t }) => {
         href={
           t
             ? `/list?t=${t}&page=${parseInt(page) + 2}`
-            : `/?page=${parseInt(page) + 2}`
+            : `/list?page=${parseInt(page) + 2}`
         }
       >
         <a className="px-4 py-2 mx-1 text-white transition-colors duration-200 transform bg-black border border-white hover:bg-white hover:text-black">
@@ -47,7 +47,7 @@ const Pagination = ({ page, t }) => {
         href={
           t
             ? `/list?t=${t}&page=${parseInt(page) + 3}`
-            : `/?page=${parseInt(page) + 3}`
+            : `/list?page=${parseInt(page) + 3}`
         }
       >
         <a className="px-4 py-2 mx-1 text-white transition-colors duration-200 transform bg-black border border-white hover:bg-white hover:text-black">
@@ -58,7 +58,7 @@ const Pagination = ({ page, t }) => {
         href={
           t
             ? `/list?t=${t}&page=${parseInt(page) + 4}`
-            : `/?page=${parseInt(page) + 4}`
+            : `/list?page=${parseInt(page) + 4}`
         }
       >
         <a className="hidden md:block px-4 py-2 mx-1 text-white transition-colors duration-200 transform bg-black border border-white hover:bg-white hover:text-black">
@@ -69,7 +69,7 @@ const Pagination = ({ page, t }) => {
         href={
           t
             ? `/list?t=${t}&page=${parseInt(page) + 5}`
-            : `/?page=${parseInt(page) + 5}`
+            : `/list?page=${parseInt(page) + 5}`
         }
       >
         <a className="hidden md:block px-4 py-2 mx-1 text-white transition-colors duration-200 transform bg-black border border-white hover:bg-white hover:text-black">
@@ -80,7 +80,7 @@ const Pagination = ({ page, t }) => {
         href={
           t
             ? `/list?t=${t}&page=${parseInt(page) + 6}`
-            : `/?page=${parseInt(page) + 6}`
+            : `/list?page=${parseInt(page) + 6}`
         }
       >
         <a className="hidden md:block px-4 py-2 mx-1 text-white transition-colors duration-200 transform bg-black border border-white hover:bg-white hover:text-black">
@@ -92,7 +92,7 @@ const Pagination = ({ page, t }) => {
         href={
           t
             ? `/list?t=${t}&page=${parseInt(page) + 1}`
-            : `/?page=${parseInt(page) + 1}`
+            : `/list?page=${parseInt(page) + 1}`
         }
       >
         <a className="px-4 py-2 mx-1 text-white transition-colors duration-200 transform bg-black border border-white hover:bg-white hover:text-black">

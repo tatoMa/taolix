@@ -53,7 +53,7 @@ function Header() {
             <img
               src="/logo.png"
               alt="logo"
-              className="h-9 object-contain cursor-pointer ml-3 md:ml-0 p-2"
+              className="h-9 object-contain cursor-pointer ml-0 py-[0.4em] px-2"
             />
           </Link>
         </div>

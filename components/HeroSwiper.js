@@ -15,9 +15,9 @@ import "swiper/css/scrollbar";
 import "swiper/css/autoplay";
 import "swiper/css/effect-coverflow";
 
-import Banner from "../components/Banner";
+import Banner from "./Banner";
 
-const SwiperTag = ({ top5 }) => {
+const HeroSwiper = ({ top5 }) => {
   // console.log(top5);
   return (
     <Swiper
@@ -64,15 +64,39 @@ const SwiperTag = ({ top5 }) => {
           background-color: white;
           padding: 0.4rem;
         }
+        .swiper-button-next {
+          transform: translate(0.65rem, -41%);
+          height: 100%;
+          background-image: linear-gradient(
+            to right,
+            rgba(0, 0, 0, 0),
+            rgba(30, 30, 30, 0.9)
+          );
+        }
+        .swiper-button-prev {
+          transform: translate(-0.65rem, -40%);
+          height: 100%;
+          background-image: linear-gradient(
+            to left,
+            rgba(0, 0, 0, 0),
+            rgba(10, 10, 10, 0.9)
+          );
+        }
+        .swiper-button-next:hover,
+        .swiper-button-prev:hover {
+          color: #999;
+        }
         .swiper-button-next,
         .swiper-button-prev {
           color: white;
-          text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000,
-            1px 1px 0 #000;
+        }
+        .swiper-button-next.swiper-button-disabled,
+        .swiper-button-prev.swiper-button-disabled {
+          opacity: 0.2;
         }
       `}</style>
     </Swiper>
   );
 };
 
-export default SwiperTag;
+export default HeroSwiper;
