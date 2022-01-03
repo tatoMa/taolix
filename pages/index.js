@@ -1,21 +1,15 @@
-import {
-  randomSelect5FromArray,
-  getInfoFromApiToIndex,
-  getVideosListFromApi,
-} from "../utils/utils";
+import { randomSelect5FromArray, getVideosListFromApi } from "../utils/utils";
 
 import HeadTag from "../components/HeadTag";
 import Footer from "../components/Footer";
 import { default as Navbar } from "../components/Header";
 import HeroSwiper from "../components/HeroSwiper";
-import VideoListsSection from "../components/VideoListsSection";
-import Pagination from "../components/Pagination";
 import LineBreak from "../components/LineBreak";
 import GroupSwiper from "../components/GroupSwiper";
 
 export default function Home({
   videosNewAll,
-  top250,
+  selected5FromTop250,
   videosNewAction,
   videosNewHorror,
   videosNewCnTvShow,
@@ -25,8 +19,8 @@ export default function Home({
   videosNewJpAnime,
   videosNewCnAnime,
 }) {
-  // console.log(videosNewAll);
-  const top5 = randomSelect5FromArray(top250);
+  // console.log(selected5FromTop250);
+  const top5 = selected5FromTop250;
   return (
     <>
       {/* HTML Head Element */}
@@ -149,7 +143,7 @@ export async function getStaticProps() {
 
   return {
     props: {
-      top250,
+      selected5FromTop250: randomSelect5FromArray(top250),
       videosNewAll,
       videosNewAction,
       videosNewHorror,
@@ -160,6 +154,6 @@ export async function getStaticProps() {
       videosNewJpAnime,
       videosNewCnAnime,
     },
-    revalidate: 21600,
+    revalidate: 7200,
   };
 }

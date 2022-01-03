@@ -61,16 +61,12 @@ const GroupSwiper = ({ videos }) => {
         }}
       >
         {videos.list.map((movie) => (
-          <SwiperSlide>
+          <SwiperSlide key={movie.vod_id}>
             <VideoItem
               name={movie.vod_name}
               type={movie.vod_class}
               pic={movie.vod_pic}
-              // url={movie.vod_play_url
-              //   .split("$$$")[1]
-              //   .substring(movie.vod_play_url.split("$$$")[1].indexOf("h"))}
               id={movie.vod_id}
-              key={movie.vod_id}
             />
           </SwiperSlide>
         ))}
