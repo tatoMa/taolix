@@ -1,4 +1,8 @@
-import { randomSelect5FromArray } from "../utils/utils";
+import {
+  randomSelect5FromArray,
+  getInfoFromApiToIndex,
+  getVideosListFromApi,
+} from "../utils/utils";
 
 import HeadTag from "../components/HeadTag";
 import Footer from "../components/Footer";
@@ -101,40 +105,42 @@ export default function Home({
 export async function getStaticProps() {
   // Call an external API endpoint to get posts.
   // You can use any data fetching library
-  const resNewAll = await fetch(`${process.env.MOVIE_API}/?ac=detail`);
-  const videosNewAll = await resNewAll.json();
 
-  const resNewAction = await fetch(`${process.env.MOVIE_API}/?ac=detail&t=6`);
-  const videosNewAction = await resNewAction.json();
+  const videosNewAll = await getVideosListFromApi(
+    `${process.env.MOVIE_API}/?ac=detail`
+  );
 
-  const resNewHorror = await fetch(`${process.env.MOVIE_API}/?ac=detail&t=9`);
-  const videosNewHorror = await resNewHorror.json();
+  const videosNewAction = await getVideosListFromApi(
+    `${process.env.MOVIE_API}/?ac=detail&t=6`
+  );
 
-  const resNewCnTvShow = await fetch(
+  const videosNewHorror = await getVideosListFromApi(
+    `${process.env.MOVIE_API}/?ac=detail&t=9`
+  );
+
+  const videosNewCnTvShow = await getVideosListFromApi(
     `${process.env.MOVIE_API}/?ac=detail&t=13`
   );
-  const videosNewCnTvShow = await resNewCnTvShow.json();
 
-  const resNewKrTvShow = await fetch(
+  const videosNewKrTvShow = await getVideosListFromApi(
     `${process.env.MOVIE_API}/?ac=detail&t=16`
   );
-  const videosNewKrTvShow = await resNewKrTvShow.json();
 
-  const resNewUsTvShow = await fetch(
+  const videosNewUsTvShow = await getVideosListFromApi(
     `${process.env.MOVIE_API}/?ac=detail&t=15`
   );
-  const videosNewUsTvShow = await resNewUsTvShow.json();
 
-  const resNewCnReality = await fetch(
+  const videosNewCnReality = await getVideosListFromApi(
     `${process.env.MOVIE_API}/?ac=detail&t=26`
   );
-  const videosNewCnReality = await resNewCnReality.json();
 
-  const resNewJpAnime = await fetch(`${process.env.MOVIE_API}/?ac=detail&t=31`);
-  const videosNewJpAnime = await resNewJpAnime.json();
+  const videosNewJpAnime = await getVideosListFromApi(
+    `${process.env.MOVIE_API}/?ac=detail&t=31`
+  );
 
-  const resNewCnAnime = await fetch(`${process.env.MOVIE_API}/?ac=detail&t=30`);
-  const videosNewCnAnime = await resNewCnAnime.json();
+  const videosNewCnAnime = await getVideosListFromApi(
+    `${process.env.MOVIE_API}/?ac=detail&t=30`
+  );
 
   const resTop250 = await fetch(
     `https://api.wmdb.tv/api/v1/top?type=Douban&skip=0&limit=200&lang=Cn`
@@ -143,8 +149,8 @@ export async function getStaticProps() {
 
   return {
     props: {
-      videosNewAll,
       top250,
+      videosNewAll,
       videosNewAction,
       videosNewHorror,
       videosNewCnTvShow,

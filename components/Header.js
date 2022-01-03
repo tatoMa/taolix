@@ -4,16 +4,21 @@ import useOnScrolled from "../hooks/useOnScrolled";
 import { useState } from "react";
 import { useRouter } from "next/router";
 
+import Loading from "./Loading";
+
 function Header() {
   const router = useRouter();
   const scrolled = useOnScrolled();
   const [menu, setMenu] = useState(false);
   const { data: session } = useSession();
+  const [isSearching, setIsSearching] = useState(false);
 
   const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
+    if (e.key === "Enter" && e.target.value && !isSearching) {
+      setIsSearching(true);
       setMenu(false);
       router.push("/search/" + e.target.value);
+      e.target.value = "";
     }
   };
 
@@ -46,6 +51,9 @@ function Header() {
         scrolled ? "bg-black" : ""
       }`}
     >
+      {/* Loading spinner */}
+      <Loading isLoading={isSearching} setIsLoading={setIsSearching} />
+
       <div className="max-w-screen-2xl flex grow justify-between items-center h-16 px-2 sm:px-6 md:px-10 lg:px-14">
         {/* Logo */}
         <div>
@@ -85,14 +93,6 @@ function Header() {
             </Link>
           ))}
         </div>
-
-        {/* <a
-          onClick={() => router.back()}
-          className="block lg:hidden absolute left-0 top-10 text-white p-5 pl-2 hover:text-gray-600 focus:outline-none focus:text-white z-10
-            "
-        >
-          {"< Back"}
-        </a> */}
 
         {/* <!-- Search input on desktop screen --> */}
         <div
