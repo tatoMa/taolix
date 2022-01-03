@@ -104,9 +104,9 @@ const Footer = () => {
 
               <div>
                 <h3 className="uppercase text-white">About</h3>
-                <Link href="#">
+                <Link href="/about">
                   <a className="block mt-2 text-sm text-gray-400 hover:text-white mb-4">
-                    Company
+                    About
                   </a>
                 </Link>
 
