@@ -1,12 +1,3 @@
-import { Router } from "next/router";
-import Link from "next/link";
-
-import HeadTag from "../components/HeadTag";
-import { default as Navbar } from "../components/Header";
-import Banner from "../components/Banner";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
-import VideoItem from "../components/VideoItem";
 import LineBreak from "../components/LineBreak";
 import VideoListsSection from "../components/VideoListsSection";
 import Pagination from "../components/Pagination";
@@ -16,11 +7,6 @@ export default function Home({ videos, page, t }) {
   // console.log(t);
   return (
     <>
-      {/* HTML Head Element */}
-      <HeadTag />
-      {/* Navigation component */}
-      <Navbar />
-
       {/* Main section */}
       {/* <div className="min-h-screen"> */}
       <main className="w-full h-full md:pb-8 max-w-screen-2xl mx-auto mt-8 pt-6">
@@ -35,9 +21,6 @@ export default function Home({ videos, page, t }) {
 
       {/* pagination */}
       <Pagination page={page} t={t} />
-
-      {/* Footer component */}
-      <Footer />
     </>
   );
 }

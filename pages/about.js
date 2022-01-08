@@ -1,11 +1,6 @@
-import Footer from "../components/Footer";
-import { default as Navbar } from "../components/Header";
-
 const about = () => {
   return (
     <>
-      {/* Navigation component */}
-      <Navbar />
       <div className="container mx-auto mt-24 mb-24">
         <div className="grid grid-cols-1 lg:grid-cols-2">
           <div className="h-[25vh] lg:h-full ">
@@ -49,8 +44,6 @@ const about = () => {
           </div>
         </div>
       </div>
-      {/* Footer component */}
-      <Footer />
     </>
   );
 };

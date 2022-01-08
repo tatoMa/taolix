@@ -16,12 +16,12 @@ module.exports = {
           DEFAULT: "var(--typography-color)",
         },
       },
-      fontFamily: {
-        netflix: ["Helvetica", "Arial", "sans-serif"],
-        netflix_medium: ["Helvetica", "Arial", "sans-serif"],
-        // netflix: ["Netflix", "Helvetica", "Arial", "sans-serif"],
-        // netflix_medium: ["Netflix_Medium", "Helvetica", "Arial", "sans-serif"],
-      },
+      // fontFamily: {
+      //   netflix: ["Helvetica", "Arial", "sans-serif"],
+      //   netflix_medium: ["Helvetica", "Arial", "sans-serif"],
+      //   // netflix: ["Netflix", "Helvetica", "Arial", "sans-serif"],
+      //   // netflix_medium: ["Netflix_Medium", "Helvetica", "Arial", "sans-serif"],
+      // },
       animation: {
         "card-hover": "card-hover 300ms forwards",
         "card-unhover": "card-unhover 300ms forwards",

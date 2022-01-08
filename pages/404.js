@@ -1,6 +1,3 @@
-import HeadTag from "../components/HeadTag";
-import Footer from "../components/Footer";
-import { default as Navbar } from "../components/Header";
 import Image from "next/image";
 import lostPic from "../public/lost.jpg";
 import Link from "next/link";
@@ -8,12 +5,6 @@ import Link from "next/link";
 export default function Custom500({}) {
   return (
     <>
-      {/* HTML Head Element */}
-      <HeadTag />
-
-      {/* Navigation component */}
-      <Navbar />
-
       {/* Main section */}
       <div className="w-full h-[70vh] max-w-screen-2xl mx-auto flex justify-center mt-8 md:mt-0 mb-2">
         <div className="relative w-full h-full">
@@ -43,9 +34,6 @@ export default function Custom500({}) {
           </div>
         </div>
       </div>
-
-      {/* Footer component */}
-      <Footer className="max-w-screen-2xl" />
     </>
   );
 }

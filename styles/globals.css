@@ -26,7 +26,6 @@
 } */
 
 body {
-  @apply text-typography font-netflix;
   background-color: var(--background-color);
 }
 

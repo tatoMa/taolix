@@ -1,8 +1,4 @@
 import { randomSelect5FromArray, getVideosListFromApi } from "../utils/utils";
-
-import HeadTag from "../components/HeadTag";
-import Footer from "../components/Footer";
-import { default as Navbar } from "../components/Header";
 import HeroSwiper from "../components/HeroSwiper";
 import LineBreak from "../components/LineBreak";
 import GroupSwiper from "../components/GroupSwiper";
@@ -23,12 +19,6 @@ export default function Home({
   const top5 = selected5FromTop250;
   return (
     <>
-      {/* HTML Head Element */}
-      <HeadTag />
-
-      {/* Navigation component */}
-      <Navbar />
-
       {/* Main section */}
       <main className="w-full h-full max-w-screen-2xl mx-auto">
         {/* Swiper section */}
@@ -89,9 +79,6 @@ export default function Home({
           <GroupSwiper videos={videosNewHorror} />
         </div>
       </main>
-
-      {/* Footer component */}
-      <Footer />
     </>
   );
 }
