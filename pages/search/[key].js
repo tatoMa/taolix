@@ -32,27 +32,8 @@ function Detail({ detail }) {
 
   return (
     <>
-      <Head>
-        <title>TAOLIX - Free videos online</title>
-        <meta charSet="UTF-8"></meta>
-        <meta name="keywords" content="movie, show, video, taolix"></meta>
-        <meta
-          name="description"
-          content="Taolix, Your favorite movies and shows online"
-        ></meta>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0"
-        ></meta>
-        <meta name="author" content="TATO"></meta>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      {/* Header component */}
-      <Header />
       {/* Main section */}
-      {/* <div className="min-h-screen"> */}
-
-      <main className="w-full h-full md:pb-8 max-w-screen-2xl mx-auto mt-16">
+      <main className="w-full h-full md:pb-8 max-w-screen-2xl mx-auto mt-16 text-white">
         <h1 className="text-2xl my-4 px-2 sm:px-6 md:px-10 lg:px-14">
           Your search results:
         </h1>
@@ -113,8 +94,6 @@ function Detail({ detail }) {
           </a>
         </Link>
       </div> */}
-      {/* Footer component */}
-      <Footer className="max-w-screen-2xl" />
     </>
   );
 }

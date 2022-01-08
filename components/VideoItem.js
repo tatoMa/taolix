@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
 
-const VideoItem = ({ name, type, pic, id }) => {
+const VideoItem = ({ name, type, pic, id, remarks }) => {
   const router = useRouter();
 
   return (
@@ -22,9 +22,14 @@ const VideoItem = ({ name, type, pic, id }) => {
             />
           </div>
 
-          <div className="absolute bottom-0 left-0 bg-black/75">
-            <div className="block text-xl font-bold text-white">{name}</div>
+          <div className="absolute bottom-0 left-0 bg-black/75 text-white">
+            <div className="block text-xl font-bold text-white line-clamp-2">
+              {name}
+            </div>
             <div className="text-xs text-gray-400">{type}</div>
+          </div>
+          <div className="absolute top-0 right-0 bg-black/75 text-sm text-gray-300 pt-1">
+            {remarks}
           </div>
         </div>
       </div>

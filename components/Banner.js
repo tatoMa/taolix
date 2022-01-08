@@ -12,7 +12,7 @@ const Banner = ({ detail }) => {
   // console.log(detail);
   let { vod_pic, vod_name, vod_blurb, vod_director, vod_actor, vod_class } =
     detail;
-  let url = "https://s1.yh5125.com/20211105/450FAdFS/index.m3u8";
+  let url = "";
   let latestName = ""
   if (detail.mode !== "homePage") {
     let latest = detail.vod_play_url
@@ -39,13 +39,11 @@ const Banner = ({ detail }) => {
   };
 
   return (
-    <>
+      <div className="relative w-full h-full">
+
       {/* Player */}
       {play && <Player url={url} setPlay={setPlay}/>}
 
-      {/* <banner-skeleton v-if="isLoading" /> */}
-
-      <div className="relative w-full h-full">
         {/* image section */}
         <div className="relative h-[75vh] lg:h-[85vh] 2xl:h-[65vh]">
           <Image
@@ -79,16 +77,14 @@ const Banner = ({ detail }) => {
         {/* text section */}
         <div className=" absolute inset-0 flex items-center justify-between mx-6 sm:mx-10 md:mx-16 lg:mx-20 mt-16 border-x-2 border-gray-300/20">
           <div className="w-[70%] md:w-[60%] lg:w-[50%] space-y-6 backdrop-blur-md bg-black/40 p-1 md:p-4">
-            <h1 className="font-bold text-2xl sm:text-3xl md:text-4xl line-clamp-2 text-white">
+            <h1 className="font-bold text-2xl sm:text-3xl md:text-4xl line-clamp-2 pb-2 text-white border-b-2 border-red-600">
               {/* {{ banner.title || banner.name }} */}
-              {vod_name ? vod_name : "The Walking Dead (2010)"}
+              {vod_name }
             </h1>
 
-            <p className="text-sm line-clamp-2 font-medium sm:line-clamp-3 md:line-clamp-4">
+            <p className="text-sm line-clamp-5 sm:line-clamp-4 md:line-clamp-3 text-gray-200">
               {/* {{ banner.overview }} */}
-              {vod_blurb
-                ? vod_blurb
-                : "Sheriff's deputy Rick Grimes awakens from a coma to find a post-apocalyptic world dominated by flesh-eating zombies. He sets out to find his family and encounters many other survivors along the way."}
+              {vod_blurb}
             </p>
 
             <div className="flex items-center space-x-2">
@@ -97,10 +93,10 @@ const Banner = ({ detail }) => {
                 onClick={() => playButtonHandler()}
               >
                 {detail.mode !== "homePage" && url && (
-                  <PlayIcon className="h-6 w-6 text-blue-white" />
+                  <PlayIcon className="h-7 w-7" />
                 )}
                 <p className="font-thin tracking-widest">
-                  {detail.mode === "homePage" ? "Find This" : url ? `Play ${latestName}` : "Not found"}
+                  {detail.mode === "homePage" ? "Find This" : url ? `${latestName}` : "Not found"}
                 </p>
               </button>
               {/* <button
@@ -118,38 +114,24 @@ const Banner = ({ detail }) => {
               <div className="flex flex-col backdrop-blur-md bg-black/40 p-1 md:p-4">
                 <div className="flex flex-col md:flex-row justify-between w-full mb-4">
                   <div>
-                    <p className="text-gray-400">Director</p>
-                    <p>{vod_director ? vod_director : "Frank Darabont"}</p>
+                    <p className="text-gray-400">{vod_director && 'Director'}</p>
+                    <p>{vod_director}</p>
                   </div>
                   <div className="text-right hidden sm:block">
-                    <p className="text-gray-400">Stars</p>
-                    {vod_actor ? (
-                      vod_actor
-                    ) : (
-                      <div>
-                        <p>Norman Reedus</p>
-                        <p>Andrew Lincoln</p>
-                        <p>Melissa McBride</p>
-                        <p>Lauren Cohan</p>
-                      </div>
-                    )}
+                    <p className="text-gray-400">{vod_actor && 'Stars'}</p>
+                    {vod_actor}
                   </div>
                 </div>
                 <div>
-                  <p className="text-gray-400">Genre</p>
-
-                  {vod_class
-                    ? vod_class
-                    : "Action & Adventure, Drama, Sci-Fi & Fantasy"}
+                  <p className="text-gray-400">{vod_class && 'Genre'}</p>
+                  {vod_class}
                 </div>
               </div>
             </div>
           </div>
-          {/* </transition> */}
         </div>
 
         <div className="banner__overlay--down absolute bottom-0 h-32 w-full"></div>
-      </div>
 
       <style jsx>{`
         .banner__overlay--down {
@@ -169,7 +151,8 @@ const Banner = ({ detail }) => {
           );
         }
       `}</style>
-    </>
+      </div>
+
   );
 };
 export default Banner;

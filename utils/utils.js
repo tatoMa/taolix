@@ -44,8 +44,9 @@ export const getInfoFromApiToIndex = ({
   vod_name,
   vod_class,
   vod_pic,
+  vod_remarks,
 }) => {
-  return { vod_id, vod_name, vod_class, vod_pic };
+  return { vod_id, vod_name, vod_class, vod_pic, vod_remarks };
 };
 
 export async function getVideosListFromApi(url) {

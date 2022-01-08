@@ -66,6 +66,7 @@ const GroupSwiper = ({ videos }) => {
               name={movie.vod_name}
               type={movie.vod_class}
               pic={movie.vod_pic}
+              remarks={movie.vod_remarks}
               id={movie.vod_id}
             />
           </SwiperSlide>

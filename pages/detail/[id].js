@@ -27,28 +27,7 @@ function Detail({ detail, id }) {
 
   return (
     <>
-      {/* HTML Head Element */}
-      <Head>
-        <title>TAOLIX - Free videos online</title>
-        <meta charSet="UTF-8"></meta>
-        <meta name="keywords" content="movie, show, video, taolix"></meta>
-        <meta
-          name="description"
-          content="Taolix, Your favorite movies and shows online"
-        ></meta>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0"
-        ></meta>
-        <meta name="author" content="TATO"></meta>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      {/* Header component */}
-      <Header />
-
       {/* Main section */}
-      {/* <div className="min-h-screen"> */}
       <main
         className={`w-full h-full md:pb-8 max-w-screen-2xl mx-auto ${
           play && "pointer-events-none"
@@ -59,39 +38,41 @@ function Detail({ detail, id }) {
 
         <Banner detail={detail.list[0]} />
         <LineBreak title="PLAY LIST" />
-        {videoList[0] ? (
-          videoList.map((video) => {
-            const [name, url] = video.split("$");
-            return (
-              <a
-                key={name}
-                className="cursor-pointer overflow-hidden flex items-center py-3 px-2 sm:mx-6 md:mx-10 lg:mx-14 border-b border-gray-400 text-gray-400 hover:text-white hover:border-white"
-                onClick={() => {
-                  setPlay(true);
-                  setUrl(url);
-                  scroll(0, 0);
-                  document.documentElement.style.overflowY = "hidden";
-                }}
-                // onClick={() => {
-                //   window.location.href = url;
-                // }}
-              >
-                <div>
-                  <PlayIcon className="h-8 w-8 mr-4 text-blue-white" />
-                </div>
-                <div>{name}</div>
-              </a>
-            );
-          })
-        ) : (
-          <p className="mx-2 sm:mx-6 md:mx-10 lg:mx-14 font-bold">
-            No result found
-          </p>
-        )}
+        <div className="text-gray-400 text-sm mt-3 mx-2 sm:mx-6 md:mx-10 lg:mx-14">
+          ALL resources are from 3rd party website.
+        </div>
+        <div className="mt-1">
+          {videoList[0] ? (
+            videoList.map((video) => {
+              const [name, url] = video.split("$");
+              return (
+                <a
+                  key={name}
+                  className="odd:bg-black even:bg-gray-800 cursor-pointer overflow-hidden flex items-center py-3 px-2 sm:mx-6 md:mx-10 lg:mx-14 border-b border-gray-400 text-gray-400 hover:text-white hover:border-white"
+                  onClick={() => {
+                    setPlay(true);
+                    setUrl(url);
+                    scroll(0, 0);
+                    document.documentElement.style.overflowY = "hidden";
+                  }}
+                  // onClick={() => {
+                  //   window.location.href = url;
+                  // }}
+                >
+                  <div>
+                    <PlayIcon className="h-8 w-8 mr-4 text-blue-white" />
+                  </div>
+                  <div>{name}</div>
+                </a>
+              );
+            })
+          ) : (
+            <p className="mx-2 sm:mx-6 md:mx-10 lg:mx-14 font-bold">
+              No result found
+            </p>
+          )}
+        </div>
       </main>
-
-      {/* Footer component */}
-      <Footer className="max-w-screen-2xl" />
     </>
   );
 }

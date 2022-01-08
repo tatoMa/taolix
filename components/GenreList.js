@@ -39,15 +39,18 @@ const GenreList = ({ t }) => {
     },
     { group: 26, type: 29, name: "english reality", classify: "reality show" },
 
-    { group: 31, type: 30, name: "chinese", classify: "anime" },
     { group: 31, type: 31, name: "japanese", classify: "anime" },
+    { group: 31, type: 30, name: "chinese", classify: "anime" },
     { group: 31, type: 32, name: "english", classify: "anime" },
     { group: 31, type: 33, name: "other", classify: "anime" },
   ];
   const group = genres.filter((item) => item.type == t)[0];
+  // console.log(group);
   return (
     <div className="px-2 sm:px-6 md:px-10 lg:px-14 w-full">
-      <div className=" uppercase text-2xl border-b mb-2">{group.classify}</div>
+      <div className="text-white uppercase text-3xl border-b py-3 my-2">
+        {group.classify}
+      </div>
       <div className="flex justify-center flex-wrap border-b pb-2 mb-4">
         {genres
           .filter((item) => item.group == group.group)
