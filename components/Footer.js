@@ -3,7 +3,7 @@ import MobileBottomMenu from "./MobileBottomMenu";
 
 const Footer = () => {
   return (
-    <footer className="max-w-screen-2xl mx-auto">
+    <footer className="max-w-screen-2xl mx-auto mb-20 lg:mb-0">
       <div className="mx-2 sm:mx-6 md:mx-10 lg:mx-14 mb-4 mt-4">
         <hr className="h-px my-6  border-none bg-gray-700" />
         <div className="lg:flex">

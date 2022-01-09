@@ -25,10 +25,8 @@ function Detail({ detail, searchKey }) {
       />
       {/* Main section */}
       <main className="w-full h-full md:pb-8 max-w-screen-2xl mx-auto mt-16 text-white">
-        <h1 className="text-2xl my-4 px-2 sm:px-6 md:px-10 lg:px-14">
-          Your search results:
-        </h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 px-2 sm:px-6 md:px-10 lg:px-14">
+        <h1 className="text-2xl my-4">Your search results:</h1>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {detail.list[0] ? (
             detail.list.map((movie) => (
               <VideoItem

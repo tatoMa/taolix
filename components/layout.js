@@ -11,7 +11,7 @@ export default function Layout({ children }) {
       {/* Navigation component */}
       <Navbar />
 
-      <main>{children}</main>
+      <main className="mx-2 sm:mx-6 md:mx-10 lg:mx-14">{children}</main>
 
       {/* Footer component */}
       <Footer />

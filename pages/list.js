@@ -19,7 +19,6 @@ export default function Home({ videos, page, t }) {
       {/* <div className="min-h-screen"> */}
       <main className="w-full h-full md:pb-8 max-w-screen-2xl mx-auto mt-8 pt-6">
         {/* Line Break  */}
-        <LineBreak title=" " />
 
         <GenreList t={t} />
 

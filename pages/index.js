@@ -20,7 +20,7 @@ export default function Home({
   return (
     <>
       {/* Main section */}
-      <main className="w-full h-full max-w-screen-2xl mx-auto">
+      <div className="w-full h-full max-w-screen-2xl mx-auto ">
         {/* Swiper section */}
         <HeroSwiper top5={top5} />
         <div className="-translate-y-9">
@@ -78,7 +78,7 @@ export default function Home({
           {/* Video List Section */}
           <GroupSwiper videos={videosNewHorror} />
         </div>
-      </main>
+      </div>
     </>
   );
 }

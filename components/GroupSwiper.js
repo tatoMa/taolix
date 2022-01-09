@@ -18,7 +18,7 @@ SwiperCore.use([Pagination, Navigation]);
 
 const GroupSwiper = ({ videos }) => {
   return (
-    <div className="mx-2 sm:mx-6 md:mx-10 lg:mx-14 mb-4 mt-4">
+    <>
       <Swiper
         style={{
           "--swiper-pagination-color": "red",
@@ -30,7 +30,7 @@ const GroupSwiper = ({ videos }) => {
         slidesPerView={2.25}
         slidesPerGroup={2}
         spaceBetween={6}
-        className=" h-full mx-10"
+        className="h-full mx-10 mb-4 mt-4"
         lazy={true}
         breakpoints={{
           640: {
@@ -72,7 +72,7 @@ const GroupSwiper = ({ videos }) => {
           </SwiperSlide>
         ))}
       </Swiper>
-    </div>
+    </>
   );
 };
 

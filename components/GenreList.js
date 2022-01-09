@@ -5,7 +5,7 @@ const GenreList = ({ t }) => {
   const group = genres.filter((item) => item.type == t)[0];
   // console.log(group);
   return (
-    <div className="px-2 sm:px-6 md:px-10 lg:px-14 w-full">
+    <div className="w-full">
       <div className="text-white uppercase text-3xl border-b py-3 my-2">
         {group.classify}
       </div>
@@ -15,7 +15,7 @@ const GenreList = ({ t }) => {
           .map((genre) => (
             <Link key={genre.type} href={`/list?t=${genre.type}&page=1`}>
               <a
-                className={`uppercase px-5 py-1 mx-1 my-2 rounded-full text-gray-900 bg-white text-sm flex align-center w-max cursor-pointer hover:bg-gray-600 hover:text-gray-100 transition duration-200 ease ${
+                className={`uppercase px-3 lg:px-5 py-[0.2rem] mx-1 my-2 rounded-full text-gray-900 bg-white text-xs lg:text-sm flex align-center w-max cursor-pointer hover:bg-gray-600 hover:text-gray-100 transition duration-200 ease ${
                   genre.type == t
                     ? " bg-gray-500 cursor-default hover:text-gray-900 hover:bg-gray-500"
                     : ""
