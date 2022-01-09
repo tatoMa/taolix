@@ -2,11 +2,19 @@ import LineBreak from "../components/LineBreak";
 import VideoListsSection from "../components/VideoListsSection";
 import Pagination from "../components/Pagination";
 import GenreList from "../components/GenreList";
+import NextHeadSeo from "next-head-seo";
+import { genres } from "../utils/utils";
 
 export default function Home({ videos, page, t }) {
+  const group = genres.filter((item) => item.type == t)[0];
   // console.log(t);
   return (
     <>
+      <NextHeadSeo
+        title={`All ${group.classify}s free to play - Taolix`}
+        description={`All new ${group.classify}s users can play online for free.`}
+        canonical={`https://www.taolix.com/list?t=${t}`}
+      />
       {/* Main section */}
       {/* <div className="min-h-screen"> */}
       <main className="w-full h-full md:pb-8 max-w-screen-2xl mx-auto mt-8 pt-6">

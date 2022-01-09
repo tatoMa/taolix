@@ -1,10 +1,16 @@
 import Image from "next/image";
 import lostPic from "../public/lost.jpg";
 import Link from "next/link";
+import NextHeadSeo from "next-head-seo";
 
 export default function Custom500({}) {
   return (
     <>
+      <NextHeadSeo
+        title={`500 Error page - Taolix`}
+        description={`500 Error page on Taolix.`}
+        canonical={`https://www.taolix.com/500`}
+      />
       {/* Main section */}
       <div className="w-full h-[70vh] max-w-screen-2xl mx-auto flex justify-center mt-8 md:mt-0 mb-2">
         <div className="relative w-full h-full">

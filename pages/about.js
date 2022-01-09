@@ -1,6 +1,13 @@
+import NextHeadSeo from "next-head-seo";
+
 const about = () => {
   return (
     <>
+      <NextHeadSeo
+        title={`About us - Taolix`}
+        description={`About us page on Taolix.`}
+        canonical={`https://www.taolix.com/about`}
+      />
       <div className="container mx-auto mt-24 mb-24">
         <div className="grid grid-cols-1 lg:grid-cols-2">
           <div className="h-[25vh] lg:h-full ">

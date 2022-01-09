@@ -1,23 +1,11 @@
-import { Router } from "next/router";
-import Link from "next/link";
-
-import Head from "next/head";
-import Banner from "../../components/Banner";
-import Footer from "../../components/Footer";
-import Header from "../../components/Header";
 import VideoItem from "../../components/VideoItem";
-import { useState } from "react";
-import { PlayIcon, XIcon } from "@heroicons/react/solid";
+import NextHeadSeo from "next-head-seo";
 
 import { useRouter } from "next/router";
 
-function Detail({ detail }) {
-  // console.log(detail);
+function Detail({ detail, searchKey }) {
+  console.log(detail);
   const router = useRouter();
-  // console.log(router.query.key);
-
-  // console.log(detail.list[0].vod_play_url.split("$$$"));
-  // console.log(detail);
   if (detail.list.length == 1) {
     if (detail.list[0].vod_play_url) {
       const videoList = detail.list[0].vod_play_url?.split("#");
@@ -27,11 +15,14 @@ function Detail({ detail }) {
   } else {
     const videoList = detail.list[0]?.vod_play_url.split("$$$")[1]?.split("#");
   }
-  const [play, setPlay] = useState(false);
-  const [url, setUrl] = useState("");
 
   return (
     <>
+      <NextHeadSeo
+        title={`${searchKey}'s searching results - Taolix`}
+        description={`Searching ${searchKey} results and play online for free.`}
+        canonical={`https://www.taolix.com/search/${searchKey}`}
+      />
       {/* Main section */}
       <main className="w-full h-full md:pb-8 max-w-screen-2xl mx-auto mt-16 text-white">
         <h1 className="text-2xl my-4 px-2 sm:px-6 md:px-10 lg:px-14">
@@ -58,42 +49,6 @@ function Detail({ detail }) {
           )}
         </div>
       </main>
-      {/* pagination */}
-      {/* <div className="w-full h-full max-w-screen-2xl mx-auto flex justify-center mt-8 md:mt-0 mb-2">
-        <Link href={`/?page=${parseInt(page) - 1}`}>
-          <a
-            className={`px-4 py-2 mx-1 ${
-              page == 1
-                ? "text-gray-500 cursor-not-allowed bg-black border border-white"
-                : "text-white transition-colors duration-200 transform bg-black border border-white hover:bg-white hover:text-black"
-            }`}
-          >
-            PREVIOUS
-          </a>
-        </Link>
-
-        <Link href={`/?page=${parseInt(page) + 1}`}>
-          <a className="px-4 py-2 mx-1 text-white transition-colors duration-200 transform bg-black border border-white hover:bg-white hover:text-black">
-            {parseInt(page) + 1}
-          </a>
-        </Link>
-        <Link href={`/?page=${parseInt(page) + 2}`}>
-          <a className="px-4 py-2 mx-1 text-white transition-colors duration-200 transform bg-black border border-white hover:bg-white hover:text-black">
-            {parseInt(page) + 2}
-          </a>
-        </Link>
-        <Link href={`/?page=${parseInt(page) + 3}`}>
-          <a className="px-4 py-2 mx-1 text-white transition-colors duration-200 transform bg-black border border-white hover:bg-white hover:text-black">
-            {parseInt(page) + 3}
-          </a>
-        </Link>
-
-        <Link href={`/?page=${parseInt(page) + 1}`}>
-          <a className="px-4 py-2 mx-1 text-white transition-colors duration-200 transform bg-black border border-white hover:bg-white hover:text-black">
-            NEXT
-          </a>
-        </Link>
-      </div> */}
     </>
   );
 }
@@ -114,6 +69,7 @@ export async function getServerSideProps({ params }) {
   return {
     props: {
       detail,
+      searchKey: params.key,
     },
   };
 }

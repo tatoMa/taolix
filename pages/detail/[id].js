@@ -9,9 +9,10 @@ import { PlayIcon } from "@heroicons/react/solid";
 import LineBreak from "../../components/LineBreak";
 
 import Player from "../../components/Player";
+import NextHeadSeo from "next-head-seo";
 
 function Detail({ detail, id }) {
-  // console.log(detail);
+  // console.log(detail.list[0]);
   // console.log(detail.list[0].vod_play_url.split("$$$"));
   const videoList = detail.list[0]?.vod_play_url.split("$$$")[1]?.split("#");
   // console.log(videoList);
@@ -27,6 +28,18 @@ function Detail({ detail, id }) {
 
   return (
     <>
+      <NextHeadSeo
+        title={`${detail.list[0].vod_name} free to play - Taolix`}
+        description={`${detail.list[0].vod_name} video users can play online for free.`}
+        canonical={`https://www.taolix.com/detail/${id}}`}
+        og={{
+          title: `${detail.list[0].vod_name} free to play - Taolix`,
+          description: `${detail.list[0].vod_name} video users can play online for free.`,
+          image: detail.list[0].vod_pic,
+          type: "video.movie",
+          siteName: "Taolix",
+        }}
+      />
       {/* Main section */}
       <main
         className={`w-full h-full md:pb-8 max-w-screen-2xl mx-auto ${
