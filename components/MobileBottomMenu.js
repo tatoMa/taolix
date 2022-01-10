@@ -12,7 +12,7 @@ import { useRouter } from "next/router";
 const MobileBottomMenu = () => {
   const router = useRouter();
 
-  console.log(router.asPath);
+  // console.log(router.asPath);
   const links = [
     {
       name: "HOME",
@@ -21,22 +21,22 @@ const MobileBottomMenu = () => {
     },
     {
       name: "MOVIE",
-      linkUrl: "/list?t=6",
+      linkUrl: "/list/6/1",
       icon: FilmIcon,
     },
     {
       name: "TV SHOW",
-      linkUrl: "/list?t=13",
+      linkUrl: "/list/13/1",
       icon: VideoCameraIcon,
     },
     {
       name: "REALITY",
-      linkUrl: "/list?t=26",
+      linkUrl: "/list/26/1",
       icon: UserGroupIcon,
     },
     {
       name: "ANIME",
-      linkUrl: "/list?t=31",
+      linkUrl: "/list/31/1",
       icon: PhotographIcon,
     },
   ];

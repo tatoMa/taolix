@@ -2,7 +2,7 @@ import Link from "next/link";
 import { genres } from "../utils/utils";
 
 const GenreList = ({ t }) => {
-  const group = genres.filter((item) => item.type == t)[0];
+  const group = genres.find((item) => item.type == t);
   // console.log(group);
   return (
     <div className="w-full">
@@ -13,7 +13,7 @@ const GenreList = ({ t }) => {
         {genres
           .filter((item) => item.group == group.group)
           .map((genre) => (
-            <Link key={genre.type} href={`/list?t=${genre.type}&page=1`}>
+            <Link key={genre.type} href={`/list/${genre.type}/1`}>
               <a
                 className={`uppercase px-3 lg:px-5 py-[0.2rem] mx-1 my-2 rounded-full text-gray-900 bg-white text-xs lg:text-sm flex align-center w-max cursor-pointer hover:bg-gray-600 hover:text-gray-100 transition duration-200 ease ${
                   genre.type == t

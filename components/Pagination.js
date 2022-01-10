@@ -6,7 +6,7 @@ const Pagination = ({ page, t }) => {
       <Link
         href={
           t
-            ? `/list?t=${t}&page=${parseInt(page) + 1}`
+            ? `/list/${t}/${parseInt(page) - 1}`
             : `/list?page=${parseInt(page) - 1}`
         }
       >
@@ -24,7 +24,7 @@ const Pagination = ({ page, t }) => {
       <Link
         href={
           t
-            ? `/list?t=${t}&page=${parseInt(page) + 1}`
+            ? `/list/${t}/${parseInt(page) + 1}`
             : `/list?page=${parseInt(page) + 1}`
         }
       >
@@ -35,7 +35,7 @@ const Pagination = ({ page, t }) => {
       <Link
         href={
           t
-            ? `/list?t=${t}&page=${parseInt(page) + 2}`
+            ? `/list/${t}/${parseInt(page) + 2}`
             : `/list?page=${parseInt(page) + 2}`
         }
       >
@@ -46,7 +46,7 @@ const Pagination = ({ page, t }) => {
       <Link
         href={
           t
-            ? `/list?t=${t}&page=${parseInt(page) + 3}`
+            ? `/list/${t}/${parseInt(page) + 3}`
             : `/list?page=${parseInt(page) + 3}`
         }
       >
@@ -57,7 +57,7 @@ const Pagination = ({ page, t }) => {
       <Link
         href={
           t
-            ? `/list?t=${t}&page=${parseInt(page) + 4}`
+            ? `/list/${t}/${parseInt(page) + 4}`
             : `/list?page=${parseInt(page) + 4}`
         }
       >
@@ -68,7 +68,7 @@ const Pagination = ({ page, t }) => {
       <Link
         href={
           t
-            ? `/list?t=${t}&page=${parseInt(page) + 5}`
+            ? `/list/${t}/${parseInt(page) + 5}`
             : `/list?page=${parseInt(page) + 5}`
         }
       >
@@ -79,7 +79,7 @@ const Pagination = ({ page, t }) => {
       <Link
         href={
           t
-            ? `/list?t=${t}&page=${parseInt(page) + 6}`
+            ? `/list/${t}/${parseInt(page) + 6}`
             : `/list?page=${parseInt(page) + 6}`
         }
       >
@@ -91,7 +91,7 @@ const Pagination = ({ page, t }) => {
       <Link
         href={
           t
-            ? `/list?t=${t}&page=${parseInt(page) + 1}`
+            ? `/list/${t}/${parseInt(page) + 1}`
             : `/list?page=${parseInt(page) + 1}`
         }
       >

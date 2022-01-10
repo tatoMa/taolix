@@ -29,19 +29,19 @@ function Header() {
     },
     {
       name: "MOVIE",
-      linkUrl: "/list?t=6",
+      linkUrl: "/list/6/1",
     },
     {
       name: "TV SHOW",
-      linkUrl: "/list?t=13",
+      linkUrl: "/list/13/1",
     },
     {
       name: "REALITY SHOW",
-      linkUrl: "/list?t=26",
+      linkUrl: "/list/26/1",
     },
     {
       name: "ANIME",
-      linkUrl: "/list?t=31",
+      linkUrl: "/list/31/1",
     },
   ];
 
