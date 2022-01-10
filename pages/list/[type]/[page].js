@@ -35,7 +35,7 @@ export async function getStaticProps({ params: { type, page } }) {
   // Call an external API endpoint to get posts.
   // You can use any data fetching library
   let res;
-  res = await fetch(`${process.env.MOVIE_API}/?ac=detail&t=${type}`);
+  res = await fetch(`${process.env.MOVIE_API}/?ac=detail&t=${type}&pg=${page}`);
   // }
   const videos = await res.json();
 
