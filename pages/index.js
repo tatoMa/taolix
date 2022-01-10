@@ -146,7 +146,7 @@ export async function getStaticProps() {
 
   return {
     props: {
-      selected5FromTop250: selected5FromTop250.map((item) => {
+      selected5FromTop250: selected5FromTop250.filter(Boolean).map((item) => {
         return {
           vod_pic: item.vod_pic,
           vod_name: item.vod_name,
