@@ -51,12 +51,16 @@ npm run build
 - [x] Fully Responsive
 - [x] More video lists on homepage
 - [x] Video autoplay
-- [ ] ISG
-- [ ] Refactor
+- [x] swiper list
+- [x] mobile bottom menu
+- [x] SEO
+- [x] Error pages
+- [x] ISG
+- [x] Refactor
+- [ ] Profile manager
+- [ ] History page
 - [ ] Chromecast
 - [ ] More source
-- [ ] Profile manage
-- [ ] History page
 - [ ] App
 
 ## License

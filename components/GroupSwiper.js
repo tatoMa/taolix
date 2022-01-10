@@ -2,6 +2,8 @@ import React, { useRef, useState } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
+import { useInView } from "react-intersection-observer";
+
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
@@ -17,8 +19,15 @@ import VideoItem from "./VideoItem";
 SwiperCore.use([Pagination, Navigation]);
 
 const GroupSwiper = ({ videos }) => {
+  const { ref, inView, entry } = useInView({
+    /* Optional options */
+    threshold: 0,
+    triggerOnce: true,
+  });
   return (
     <>
+      {/* <InView> */}
+
       <Swiper
         style={{
           "--swiper-pagination-color": "red",
@@ -72,6 +81,8 @@ const GroupSwiper = ({ videos }) => {
           </SwiperSlide>
         ))}
       </Swiper>
+
+      {/* </InView> */}
     </>
   );
 };
