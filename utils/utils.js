@@ -2,7 +2,7 @@ export const randomSelect5FromArray = (arr) =>
   arr.sort(() => 0.5 - Math.random()).slice(-5);
 
 export const getInfoFromApiToDetail = (info) => {
-  console.log(info);
+  // console.log(info);
   const {
     vod_id,
     vod_name,
@@ -39,7 +39,7 @@ export const getInfoFromApiToDetail = (info) => {
   };
 };
 
-export const getInfoFromApiToIndex = ({
+export const filterNeededVideoInfo = ({
   vod_id,
   vod_name,
   vod_class,
@@ -52,8 +52,18 @@ export const getInfoFromApiToIndex = ({
 export async function getVideosListFromApi(url) {
   const res = await fetch(url);
   const result = await res.json();
-  result.list = result.list.map((i) => getInfoFromApiToIndex(i));
+  result.list = result.list.map((i) => filterNeededVideoInfo(i));
   // console.log(JSON.parse(JSON.stringify(result)));
+  return result;
+}
+
+export async function findMovieFromApiByTitle(title) {
+  // console.log(`${process.env.MOVIE_API}/?ac=detail&wd=${title}`);
+  const res = await fetch(
+    `${process.env.MOVIE_API}/?ac=detail&wd=${encodeURI(title)}`
+  );
+  const result = await res.json();
+  if (!result.total) return false;
   return result;
 }
 

@@ -57,6 +57,7 @@ npm run build
 - [x] Error pages
 - [x] ISG
 - [x] Refactor
+- [x] Lazy loading DOMs for performance purpuses
 - [ ] Profile manager
 - [ ] History page
 - [ ] Chromecast

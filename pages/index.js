@@ -1,4 +1,9 @@
-import { randomSelect5FromArray, getVideosListFromApi } from "../utils/utils";
+import {
+  randomSelect5FromArray,
+  getVideosListFromApi,
+  findMovieFromApiByTitle,
+  filterNeededVideoInfo,
+} from "../utils/utils";
 import HeroSwiper from "../components/HeroSwiper";
 import LineBreak from "../components/LineBreak";
 import GroupSwiper from "../components/GroupSwiper";
@@ -128,9 +133,31 @@ export async function getStaticProps() {
   );
   const top250 = await resTop250.json();
 
+  const videosFoundBySearchingTop250List = await Promise.all(
+    randomSelect5FromArray(top250).map(
+      async (item) => await findMovieFromApiByTitle(item.data[0].name)
+    )
+  );
+
+  // const found = await findMovieFromApiByTitle("一年一度喜剧大赛");
+  const selected5FromTop250 = videosFoundBySearchingTop250List.map((item) => {
+    if (item) return item.list[0];
+  });
+
   return {
     props: {
-      selected5FromTop250: randomSelect5FromArray(top250),
+      selected5FromTop250: selected5FromTop250.map((item) => {
+        return {
+          vod_pic: item.vod_pic,
+          vod_name: item.vod_name,
+          vod_blurb: item.vod_blurb,
+          vod_director: item.vod_director,
+          vod_actor: item.vod_actor,
+          vod_class: item.vod_class,
+          vod_play_url: item.vod_play_url,
+          vod_id: item.vod_id,
+        };
+      }),
       videosNewAll,
       videosNewAction,
       videosNewHorror,

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { PlayIcon } from "@heroicons/react/solid";
+import { PlayIcon, FilmIcon } from "@heroicons/react/solid";
 // import { InformationCircleIcon } from "@heroicons/react/outline";
 import { useState } from "react";
 import { useRouter } from "next/router";
@@ -28,7 +28,7 @@ const Banner = ({ detail }) => {
   const [play, setPlay] = useState(false);
   const playButtonHandler = (e) => {
     if (detail.mode === "homePage") {
-      router.push("/search/" + vod_name);
+      router.push(`/detail/${detail.vod_id}`)
     } else {
         // window.location.href = url;
       setPlay(true);
@@ -95,8 +95,10 @@ const Banner = ({ detail }) => {
                 {detail.mode !== "homePage" && url && (
                   <PlayIcon className="h-7 w-7" />
                 )}
+                {detail.mode === "homePage" && (
+                <FilmIcon className="h-7 w-7" />)}
                 <p className="font-thin tracking-widest">
-                  {detail.mode === "homePage" ? "Find This" : url ? `${latestName}` : "Not found"}
+                  {detail.mode === "homePage" ? "Details" : url ? `${latestName}` : "Not found"}
                 </p>
               </button>
               {/* <button
@@ -115,11 +117,11 @@ const Banner = ({ detail }) => {
                 <div className="flex flex-col md:flex-row justify-between w-full mb-4">
                   <div>
                     <p className="text-gray-400">{vod_director && 'Director'}</p>
-                    <p>{vod_director}</p>
+                    <p className="whitespace-nowrap">{vod_director}</p>
                   </div>
-                  <div className="text-right hidden sm:block">
+                  <div className="pl-3 text-right hidden sm:block">
                     <p className="text-gray-400">{vod_actor && 'Stars'}</p>
-                    {vod_actor}
+                    <p className="line-clamp-5">{vod_actor}</p>
                   </div>
                 </div>
                 <div>

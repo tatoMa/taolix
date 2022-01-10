@@ -51,7 +51,7 @@ function Detail({ detail, id }) {
 
         <Banner detail={detail.list[0]} />
         <LineBreak title="PLAY LIST" />
-        <div className="text-gray-400 text-sm mt-3 mx-2 sm:mx-6 md:mx-10 lg:mx-14">
+        <div className="text-gray-400 text-sm my-3">
           ALL resources are from 3rd party website.
         </div>
         <div className="mt-1">
@@ -61,7 +61,7 @@ function Detail({ detail, id }) {
               return (
                 <a
                   key={name}
-                  className="odd:bg-black even:bg-gray-800 cursor-pointer overflow-hidden flex items-center py-3 px-2 sm:mx-6 md:mx-10 lg:mx-14 border-b border-gray-400 text-gray-400 hover:text-white hover:border-white"
+                  className="odd:bg-black first:border-t even:bg-gray-800 cursor-pointer overflow-hidden flex items-center py-3 border-b border-gray-400 text-gray-400 hover:text-white hover:border-white"
                   onClick={() => {
                     setPlay(true);
                     setUrl(url);
