@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "postbuild": "next-sitemap",
     "start": "next start",
     "analyze": "cross-env ANALYZE=true next build",
     "analyze:server": "cross-env BUNDLE_ANALYZE=server next build",
@@ -24,6 +25,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.0",
+    "next-sitemap": "^1.8.4",
     "postcss": "^8.4.4",
     "tailwindcss": "^3.0.0"
   }
