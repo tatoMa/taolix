@@ -27,6 +27,10 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
             name: "author",
             content: "TATO",
           },
+          {
+            name: "theme-color",
+            content: "black",
+          },
         ]}
         og={{
           title:

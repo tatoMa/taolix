@@ -58,6 +58,10 @@ npm run build
 - [x] ISG
 - [x] Refactor
 - [x] Lazy loading DOMs for performance purpuses
+- [x] PWA
+  - [x] Icons for all platform
+  - [x] Cache stragary
+  - [x] All needs for Lighthouse
 - [ ] Profile manager
 - [ ] History page
 - [ ] Chromecast

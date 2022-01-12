@@ -1,9 +1,8 @@
-// const withBundleAnalyzer = require("@next/bundle-analyzer")({
-//   enabled: process.env.ANALYZE === "true",
-// });
-// module.exports = withBundleAnalyzer({});
-
-module.exports = {
+const withPWA = require("next-pwa");
+module.exports = withPWA({
+  pwa: {
+    dest: "public",
+  },
   images: {
     // loader: "custom",
     domains: [
@@ -28,4 +27,4 @@ module.exports = {
       "p1.ssl.qhimgs1.com",
     ],
   },
-};
+});
