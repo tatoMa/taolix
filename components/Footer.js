@@ -61,7 +61,7 @@ const Footer = () => {
           <div className="mt-6 lg:mt-0 lg:flex-1">
             <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-3">
               <div>
-                <h3 className="uppercase text-white">Video</h3>
+                <div className="uppercase text-white">Video</div>
                 <Link href={`/list/?t=6`}>
                   <a className="block mt-2 text-sm text-gray-400 hover:text-white">
                     Movies
@@ -97,6 +97,7 @@ const Footer = () => {
                   href="https://www.taotify.com/"
                   className="block mt-2 text-sm text-gray-400 hover:text-white"
                   target="_blank"
+                  rel="noreferrer"
                 >
                   TAOTIFY
                 </a>

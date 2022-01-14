@@ -2,8 +2,12 @@ import "../styles/globals.css";
 import { SessionProvider } from "next-auth/react";
 import Layout from "../components/layout";
 import NextHeadSeo from "next-head-seo";
+import { useEffect } from "react";
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
+  useEffect(() => {
+    document.documentElement.lang = "en-us";
+  });
   return (
     <SessionProvider session={session}>
       <NextHeadSeo
