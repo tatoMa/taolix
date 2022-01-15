@@ -85,7 +85,7 @@ const Footer = () => {
               </div>
 
               <div>
-                <h3 className="uppercase text-white">Products</h3>
+                <div className="uppercase text-white">Products</div>
                 <a
                   href="https://www.taolix.com/"
                   className="block mt-2 text-sm text-gray-400 hover:text-white"
@@ -104,14 +104,14 @@ const Footer = () => {
               </div>
 
               <div>
-                <h3 className="uppercase text-white">About</h3>
+                <div className="uppercase text-white">About</div>
                 <Link href="/about">
                   <a className="block mt-2 text-sm text-gray-400 hover:text-white mb-4">
                     About
                   </a>
                 </Link>
 
-                <h3 className="uppercase text-white">Contact</h3>
+                <div className="uppercase text-white">Contact</div>
                 <div className="block mt-2 text-sm text-gray-400 hover:text-white">
                   <a href="mailto:taolixtv@gmail.com">taolixtv@gmail.com</a>
                 </div>
