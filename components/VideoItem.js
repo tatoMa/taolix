@@ -2,6 +2,10 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useInView } from "react-intersection-observer";
 
+const myLoader = ({ src, width, quality }) => {
+  return `https://example.com/${src}?w=${width}&q=${quality || 75}`;
+};
+
 const VideoItem = ({ name, type, pic, id, remarks }) => {
   const router = useRouter();
   const { ref, inView, entry } = useInView({
@@ -12,7 +16,7 @@ const VideoItem = ({ name, type, pic, id, remarks }) => {
 
   return (
     <div ref={ref}>
-      {inView && (
+      {inView ? (
         <div
           className="overflow-hidden relative bg-black cursor-pointer hover:brightness-75"
           onClick={() => router.push(`/detail/${id}`)}
@@ -28,6 +32,7 @@ const VideoItem = ({ name, type, pic, id, remarks }) => {
               className="object-cover"
               layout="fill"
               referrerPolicy="no-referrer"
+              loader={myLoader}
             />
           </div>
 
@@ -40,6 +45,10 @@ const VideoItem = ({ name, type, pic, id, remarks }) => {
           <div className="absolute top-0 right-0 bg-black/75 text-sm text-gray-300 pt-1">
             {remarks}
           </div>
+        </div>
+      ) : (
+        <div class="animate-pulse">
+          <div class="rounded bg-slate-200 w-full aspect-[3/4] p-2"></div>
         </div>
       )}
     </div>

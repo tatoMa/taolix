@@ -50,21 +50,29 @@ export const filterNeededVideoInfo = ({
 };
 
 export async function getVideosListFromApi(url) {
-  const res = await fetch(url);
-  const result = await res.json();
-  result.list = result.list.map((i) => filterNeededVideoInfo(i));
+  try {
+    const res = await fetch(url);
+    const result = await res.json();
+    result.list = result.list.map((i) => filterNeededVideoInfo(i));
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
   // console.log(JSON.parse(JSON.stringify(result)));
-  return result;
 }
 
 export async function findMovieFromApiByTitle(title) {
-  // console.log(`${process.env.MOVIE_API}/?ac=detail&wd=${title}`);
-  const res = await fetch(
-    `${process.env.MOVIE_API}/?ac=detail&wd=${encodeURI(title)}`
-  );
-  const result = await res.json();
-  if (!result.total) return false;
-  return result;
+  try {
+    // console.log(`${process.env.MOVIE_API}/?ac=detail&wd=${title}`);
+    const res = await fetch(
+      `${process.env.MOVIE_API}/?ac=detail&wd=${encodeURI(title)}`
+    );
+    const result = await res.json();
+    if (!result.total) return false;
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export const genres = [

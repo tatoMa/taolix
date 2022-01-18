@@ -57,6 +57,7 @@ const Banner = ({ detail }) => {
             className="object-cover blur-sm relative brightness-50"
             layout="fill"
             referrerPolicy="no-referrer"
+            priority
           />
           <div className="absolute h-[90%] w-[100%-7rem] top-[3.8rem] left-[0.5rem] right-[0.5rem] sm:left-[1.5rem] sm:right-[1.5rem] md:left-[2.5rem] md:right-[2.5rem] lg:left-[3.5rem] lg:right-[3.5rem]">
             <Image
@@ -70,6 +71,7 @@ const Banner = ({ detail }) => {
               className="object-cover"
               layout="fill"
               referrerPolicy="no-referrer"
+              priority
             />
           </div>
         </div>
