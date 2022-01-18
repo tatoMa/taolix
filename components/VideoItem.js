@@ -6,7 +6,7 @@ const myLoader = ({ src, width, quality }) => {
   return `https://example.com/${src}?w=${width}&q=${quality || 75}`;
 };
 
-const VideoItem = ({ name, type, pic, id, remarks }) => {
+const VideoItem = ({ name, type, pic, id, remarks, rate }) => {
   const router = useRouter();
   const { ref, inView, entry } = useInView({
     /* Optional options */
@@ -45,10 +45,15 @@ const VideoItem = ({ name, type, pic, id, remarks }) => {
           <div className="absolute top-0 right-0 bg-black/75 text-sm text-gray-300 pt-1">
             {remarks}
           </div>
+          {rate && (
+            <div className="absolute top-0 left-0 bg-black/75 text-sm text-orange-400 pt-1 pl-1">
+              豆瓣{rate}
+            </div>
+          )}
         </div>
       ) : (
-        <div class="animate-pulse">
-          <div class="rounded bg-slate-200 w-full aspect-[3/4] p-2"></div>
+        <div className="animate-pulse">
+          <div className="rounded bg-slate-200 w-full aspect-[3/4] p-2"></div>
         </div>
       )}
     </div>

@@ -3,6 +3,7 @@ import {
   getVideosListFromApi,
   findMovieFromApiByTitle,
   filterNeededVideoInfo,
+  getVideosListFromDouban,
 } from "../utils/utils";
 import HeroSwiper from "../components/HeroSwiper";
 import LineBreak from "../components/LineBreak";
@@ -19,8 +20,9 @@ export default function Home({
   videosNewCnReality,
   videosNewJpAnime,
   videosNewCnAnime,
+  videosHotListDoubanFiltered,
 }) {
-  // console.log(selected5FromTop250);
+  console.log(videosHotListDoubanFiltered);
   const top5 = selected5FromTop250;
   return (
     <>
@@ -29,6 +31,12 @@ export default function Home({
         {/* Swiper section */}
         <HeroSwiper top5={top5} />
         <div className="-translate-y-9">
+          {/* Line Break  */}
+          <LineBreak title="WHATS HOT" />
+
+          {/* Video List Section */}
+          <GroupSwiper videos={videosHotListDoubanFiltered} />
+
           {/* Line Break  */}
           <LineBreak title="NEW ARRIVALS" />
 
@@ -127,6 +135,24 @@ export async function getStaticProps() {
   const videosNewCnAnime = await getVideosListFromApi(
     `${process.env.MOVIE_API}/?ac=detail&t=30`
   );
+  const videosHotListDouban = await getVideosListFromDouban(
+    `${process.env.DOUBAN_URL}${encodeURI(
+      "/j/search_subjects?type=tv&tag=热门&sort=recommend&page_limit=30&page_start=0"
+    )}`
+  );
+  const videosHotListDoubanFindResource = await Promise.all(
+    videosHotListDouban.map(async (item) => {
+      let temp = await findMovieFromApiByTitle(item.title);
+      if (temp) {
+        temp = { ...filterNeededVideoInfo(temp.list[0]), ...item };
+      }
+      return temp;
+    })
+  );
+
+  const videosHotListDoubanFiltered = {};
+  videosHotListDoubanFiltered.list =
+    videosHotListDoubanFindResource.filter(Boolean);
 
   const resTop250 = await fetch(
     `https://api.wmdb.tv/api/v1/top?type=Douban&skip=0&limit=200&lang=Cn`
@@ -167,6 +193,7 @@ export async function getStaticProps() {
       videosNewCnReality,
       videosNewJpAnime,
       videosNewCnAnime,
+      videosHotListDoubanFiltered,
     },
     revalidate: 7200,
   };

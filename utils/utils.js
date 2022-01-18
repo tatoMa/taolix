@@ -60,6 +60,17 @@ export async function getVideosListFromApi(url) {
   }
   // console.log(JSON.parse(JSON.stringify(result)));
 }
+export async function getVideosListFromDouban(url) {
+  try {
+    const res = await fetch(url);
+    const result = await res.json();
+    // result.list = result.subjects.map((i) => filterNeededVideoInfo(i));
+    return result.subjects;
+  } catch (error) {
+    console.log(error);
+  }
+  // console.log(JSON.parse(JSON.stringify(result)));
+}
 
 export async function findMovieFromApiByTitle(title) {
   try {
