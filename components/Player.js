@@ -4,16 +4,25 @@ import { XIcon } from "@heroicons/react/solid";
 const ReactPlayer = dynamic(() => import("react-player/lazy"));
 
 const Player = ({ url, setPlay }) => {
+  const handleKeyDown = (event) => {
+    if (event.keyCode == 27) {
+      setPlay(false);
+      document.documentElement.style.overflowY = "auto";
+    }
+  };
   return (
-    <div className="flex h-full w-full absolute top-0 left-0 items-center pb-14 bg-black/50 z-10 pointer-events-auto ">
-      <XIcon
-        className="h-10 w-10 text-blue-white absolute right-4 top-12 text-white bg-black cursor-pointer pointer-events-auto hover:bg-white hover:text-black animate-fadeIn z-50"
-        onClick={() => {
-          setPlay(false);
-          document.documentElement.style.overflowY = "auto";
-        }}
-      />
+    <div
+      className="flex h-full w-full fixed top-0 left-0 items-center bg-black/50 z-10 pointer-events-auto "
+      onKeyDown={handleKeyDown}
+    >
       <div className="w-full aspect-video">
+        <XIcon
+          className="h-20 w-20 max-h-[8vw] max-w-[8vw] text-blue-white absolute right-0 text-white bg-black/40 cursor-pointer pointer-events-auto hover:bg-white hover:text-black animate-fadeIn z-50"
+          onClick={() => {
+            setPlay(false);
+            document.documentElement.style.overflowY = "auto";
+          }}
+        />
         <ReactPlayer
           controls
           url={url}

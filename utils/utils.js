@@ -1,3 +1,20 @@
+export const getVideoUrlsFromUrlStr = (url) => {
+  if (!url) return;
+  return url
+    ?.split("$$$")
+    .filter((s) => s.includes("m3u8"))
+    .toString()
+    ?.split("#")
+    .filter((s) => s.includes("m3u8"))
+    .map((item) => {
+      let temp = item?.split("$");
+      return {
+        name: temp[0],
+        url: temp[1],
+      };
+    });
+};
+
 export const randomSelect5FromArray = (arr) =>
   arr.sort(() => 0.5 - Math.random()).slice(-5);
 

@@ -1,1 +1,114 @@
-if(!self.define){let e,a={};const i=(i,s)=>(i=new URL(i+".js",s).href,a[i]||new Promise((a=>{if("document"in self){const e=document.createElement("script");e.src=i,e.onload=a,document.head.appendChild(e)}else e=i,importScripts(i),a()})).then((()=>{let e=a[i];if(!e)throw new Error(`Module ${i} didn’t register its module`);return e})));self.define=(s,n)=>{const r=e||("document"in self?document.currentScript.src:"")||location.href;if(a[r])return;let o={};const c=e=>i(e,r),d={module:{uri:r},exports:o,require:c};a[r]=Promise.all(s.map((e=>d[e]||c(e)))).then((e=>(n(...e),o)))}}define(["./workbox-1846d813"],(function(e){"use strict";importScripts(),self.skipWaiting(),e.clientsClaim(),e.precacheAndRoute([{url:"/_next//static/media/lost.66736c2d.jpg",revision:"F7zTzGRm15XiUzKQJX7co"},{url:"/_next/static/F7zTzGRm15XiUzKQJX7co/_buildManifest.js",revision:"F7zTzGRm15XiUzKQJX7co"},{url:"/_next/static/F7zTzGRm15XiUzKQJX7co/_middlewareManifest.js",revision:"F7zTzGRm15XiUzKQJX7co"},{url:"/_next/static/F7zTzGRm15XiUzKQJX7co/_ssgManifest.js",revision:"F7zTzGRm15XiUzKQJX7co"},{url:"/_next/static/chunks/307-1a0401b36abd371d.js",revision:"F7zTzGRm15XiUzKQJX7co"},{url:"/_next/static/chunks/310.3bfd339c05ebedde.js",revision:"F7zTzGRm15XiUzKQJX7co"},{url:"/_next/static/chunks/675-69abce8ee6e53914.js",revision:"F7zTzGRm15XiUzKQJX7co"},{url:"/_next/static/chunks/857-22fab6b49215d84f.js",revision:"F7zTzGRm15XiUzKQJX7co"},{url:"/_next/static/chunks/framework-8957c350a55da097.js",revision:"F7zTzGRm15XiUzKQJX7co"},{url:"/_next/static/chunks/main-3a656f8a5c66426a.js",revision:"F7zTzGRm15XiUzKQJX7co"},{url:"/_next/static/chunks/pages/404-bfdf5504c9bf3589.js",revision:"F7zTzGRm15XiUzKQJX7co"},{url:"/_next/static/chunks/pages/500-240cc4623c108786.js",revision:"F7zTzGRm15XiUzKQJX7co"},{url:"/_next/static/chunks/pages/_app-da8bfbc1d2e1a2d3.js",revision:"F7zTzGRm15XiUzKQJX7co"},{url:"/_next/static/chunks/pages/_error-2280fa386d040b66.js",revision:"F7zTzGRm15XiUzKQJX7co"},{url:"/_next/static/chunks/pages/about-4038b956fa2d07df.js",revision:"F7zTzGRm15XiUzKQJX7co"},{url:"/_next/static/chunks/pages/detail/%5Bid%5D-9589668c663195fb.js",revision:"F7zTzGRm15XiUzKQJX7co"},{url:"/_next/static/chunks/pages/index-1df20ce757a8ae91.js",revision:"F7zTzGRm15XiUzKQJX7co"},{url:"/_next/static/chunks/pages/list/%5Btype%5D/%5Bpage%5D-203a2e6d216ded25.js",revision:"F7zTzGRm15XiUzKQJX7co"},{url:"/_next/static/chunks/pages/search/%5Bkey%5D-1628c1b879820236.js",revision:"F7zTzGRm15XiUzKQJX7co"},{url:"/_next/static/chunks/pages/signin-77b4c8387048f7de.js",revision:"F7zTzGRm15XiUzKQJX7co"},{url:"/_next/static/chunks/polyfills-5cd94c89d3acac5f.js",revision:"F7zTzGRm15XiUzKQJX7co"},{url:"/_next/static/chunks/reactPlayerDailyMotion.4bef17427eebc12c.js",revision:"F7zTzGRm15XiUzKQJX7co"},{url:"/_next/static/chunks/reactPlayerFacebook.135ce0a5edc64d87.js",revision:"F7zTzGRm15XiUzKQJX7co"},{url:"/_next/static/chunks/reactPlayerFilePlayer.4e1d19fe83dbef9f.js",revision:"F7zTzGRm15XiUzKQJX7co"},{url:"/_next/static/chunks/reactPlayerKaltura.46c4bdf2f0197f16.js",revision:"F7zTzGRm15XiUzKQJX7co"},{url:"/_next/static/chunks/reactPlayerMixcloud.9e3b3275d7c4c7d4.js",revision:"F7zTzGRm15XiUzKQJX7co"},{url:"/_next/static/chunks/reactPlayerPreview.a28c66eff5f994c1.js",revision:"F7zTzGRm15XiUzKQJX7co"},{url:"/_next/static/chunks/reactPlayerSoundCloud.bedf8f65aaafb209.js",revision:"F7zTzGRm15XiUzKQJX7co"},{url:"/_next/static/chunks/reactPlayerStreamable.ec01cde19d67759d.js",revision:"F7zTzGRm15XiUzKQJX7co"},{url:"/_next/static/chunks/reactPlayerTwitch.7b9d96994c76ffdc.js",revision:"F7zTzGRm15XiUzKQJX7co"},{url:"/_next/static/chunks/reactPlayerVidyard.62eeba6bd2be856d.js",revision:"F7zTzGRm15XiUzKQJX7co"},{url:"/_next/static/chunks/reactPlayerVimeo.0dc845497e81c97e.js",revision:"F7zTzGRm15XiUzKQJX7co"},{url:"/_next/static/chunks/reactPlayerWistia.b5e909253dc4f321.js",revision:"F7zTzGRm15XiUzKQJX7co"},{url:"/_next/static/chunks/reactPlayerYouTube.569d4b45b936262a.js",revision:"F7zTzGRm15XiUzKQJX7co"},{url:"/_next/static/chunks/webpack-3b4d9580d939df3d.js",revision:"F7zTzGRm15XiUzKQJX7co"},{url:"/_next/static/css/67b2448acc121b7a.css",revision:"F7zTzGRm15XiUzKQJX7co"},{url:"/_next/static/css/922cfc29bc36a9b5.css",revision:"F7zTzGRm15XiUzKQJX7co"},{url:"/android-chrome-192x192.png",revision:"e89ca005c0011c300c5291c4dd3d6508"},{url:"/android-chrome-512x512.png",revision:"ea4fd37c8235f7a20a0392e64ea574f6"},{url:"/android/android-launchericon-144-144.png",revision:"bc8a1d38036d3da53c51af597dd6eae0"},{url:"/android/android-launchericon-192-192.png",revision:"b64a9579458d877b06d69fd19b81cfa9"},{url:"/android/android-launchericon-48-48.png",revision:"12164ab0f8081f2f28ad88eb627b01a2"},{url:"/android/android-launchericon-512-512.png",revision:"218e3abde2d6bf91a78b8aed279b7d0b"},{url:"/android/android-launchericon-72-72.png",revision:"7752c3f349e80458640de9fe20deb93e"},{url:"/android/android-launchericon-96-96.png",revision:"d96e6dbddccb3898025452bef3c4d3cd"},{url:"/apple-touch-icon.png",revision:"6894035a6af050e5f5bc67548a78ad2a"},{url:"/auth_pic.jpg",revision:"c6f1668ce43e4ea2284b3db549a1ca2e"},{url:"/favicon-16x16.png",revision:"500633f851498e926ebfd7044c7e8d2c"},{url:"/favicon-32x32.png",revision:"0149ce741cb6caa7f43f596603ccc21c"},{url:"/favicon.ico",revision:"28176d0cbb706f95f8613a9fa39c0924"},{url:"/ios/100.png",revision:"6f32b591a5928dee4da843620f4b6b27"},{url:"/ios/1024.png",revision:"4a3cec8979c7cb023d8202c03dbf4ec6"},{url:"/ios/114.png",revision:"264b25b8b14e2a060cdd1250821eb2f4"},{url:"/ios/120.png",revision:"ace7f5f6553904e18c526ab968f6745a"},{url:"/ios/128.png",revision:"ac5d3ace1afab07c0db5c7172e801abd"},{url:"/ios/144.png",revision:"bc8a1d38036d3da53c51af597dd6eae0"},{url:"/ios/152.png",revision:"60eb3683886236430ca546e4c57a05fa"},{url:"/ios/16.png",revision:"5ab3d71dce8c56c0eb6aa511d6ee5e1d"},{url:"/ios/167.png",revision:"35b6718486e734325e857edbb541ab44"},{url:"/ios/180.png",revision:"d0db120bf5bee14ecbd98f5f5beb201b"},{url:"/ios/192.png",revision:"b64a9579458d877b06d69fd19b81cfa9"},{url:"/ios/20.png",revision:"f534a7aa6b06dee9f596a838ad91b1d0"},{url:"/ios/256.png",revision:"2a50a5f8a849a36e5b8e7598d43cddf7"},{url:"/ios/29.png",revision:"87cdcc9e942a99327226e76e6eafbfde"},{url:"/ios/32.png",revision:"b36b4bca221c490b2049e544f39756da"},{url:"/ios/40.png",revision:"248a3862358f1746d4b585508b0c9917"},{url:"/ios/50.png",revision:"0c5d34a5d9b326558afd112a39d76394"},{url:"/ios/512.png",revision:"218e3abde2d6bf91a78b8aed279b7d0b"},{url:"/ios/57.png",revision:"44d6456a5f33ac1fff3422bd29763be8"},{url:"/ios/58.png",revision:"26eb185dd27f41ce9c0942591e6020b7"},{url:"/ios/60.png",revision:"53bb421d947c45d4d0c7b13f3fc6902d"},{url:"/ios/64.png",revision:"8db4a862ba9c493cfb42c523bf861fe9"},{url:"/ios/72.png",revision:"7752c3f349e80458640de9fe20deb93e"},{url:"/ios/76.png",revision:"6404c8cc33ee57d57a5e70529d51359e"},{url:"/ios/80.png",revision:"5c5feeae13e96bf594e7990bbca3b8bb"},{url:"/ios/87.png",revision:"3011aefbed3f0a4e3bcb1e12c8ed6d8e"},{url:"/logo.png",revision:"a179ba27f36b48d8e136772efc89138c"},{url:"/lost.jpg",revision:"8d6f643fb5bebac9e2f69184bdb1ba74"},{url:"/maskable_icon.png",revision:"72914591176d8cbfa68facc1a9670649"},{url:"/robots.txt",revision:"8884d44118e827c96bad53f2923e747a"},{url:"/site.webmanifest",revision:"493441a70caf2a74d7e0296bc2173d26"},{url:"/sitemap.xml",revision:"295e3a311537de524254d9e734d248b2"},{url:"/splashscreens/ipad_splash.png",revision:"921133a97ffc1eef4047bc0c84def244"},{url:"/splashscreens/ipadpro1_splash.png",revision:"f3639a667300c1075c180f83a36b7192"},{url:"/splashscreens/ipadpro2_splash.png",revision:"69cdf14968e5c7e857819feb24c28044"},{url:"/splashscreens/ipadpro3_splash.png",revision:"ea56215c25384ed21c70cc1432ee78d4"},{url:"/splashscreens/iphone5_splash.png",revision:"7338331633292f30c1ee5471a5c7c3b4"},{url:"/splashscreens/iphone6_splash.png",revision:"135077d9abd3adc9ad9b8d843e2c54e6"},{url:"/splashscreens/iphoneplus_splash.png",revision:"c172c94043e2384e40f860685b8529aa"},{url:"/splashscreens/iphonex_splash.png",revision:"fee96599d1d06fe392647985c6f69b85"},{url:"/splashscreens/iphonexr_splash.png",revision:"003a03a121f81bad20029cbc8bb39fa5"},{url:"/splashscreens/iphonexsmax_splash.png",revision:"219b6d74992d61a626f6ff695fee7ec4"},{url:"/vercel.svg",revision:"4b4f1876502eb6721764637fe5c41702"},{url:"/windows11/LargeTile.scale-100.png",revision:"03503094fb8717899bd86ab71e7bc7c6"},{url:"/windows11/LargeTile.scale-125.png",revision:"7e789ea1f89d5443e29c9ff43123f3e2"},{url:"/windows11/LargeTile.scale-150.png",revision:"e14080750e59b5f32e6e1a26100aeee3"},{url:"/windows11/LargeTile.scale-200.png",revision:"bcab0dd170d878ed7eb8a95d1cc772c9"},{url:"/windows11/LargeTile.scale-400.png",revision:"77dbf52fa32c5efbe1200c889121ea69"},{url:"/windows11/SmallTile.scale-100.png",revision:"ff3a4c7ae2c06915c07d47f06191fcea"},{url:"/windows11/SmallTile.scale-125.png",revision:"44daf725dbac891597c850d6326b1b57"},{url:"/windows11/SmallTile.scale-150.png",revision:"d2411b1cc0d440a6f58aa90c882c1464"},{url:"/windows11/SmallTile.scale-200.png",revision:"4ab30da548463905b1befe3a6602c3de"},{url:"/windows11/SmallTile.scale-400.png",revision:"d1ce9c919b0300a7bade6c33a5385e7e"},{url:"/windows11/SplashScreen.scale-100.png",revision:"289546199696b86f2982b9a07b538c06"},{url:"/windows11/SplashScreen.scale-125.png",revision:"1eefddc203f41c1d15df3100da91ef73"},{url:"/windows11/SplashScreen.scale-150.png",revision:"867b255447cff511b1a3a37028065dc0"},{url:"/windows11/SplashScreen.scale-200.png",revision:"754c79a386c268c21eb50b2c7a6859e6"},{url:"/windows11/SplashScreen.scale-400.png",revision:"498de52d1f75932b415ef2f010e531bf"},{url:"/windows11/Square150x150Logo.scale-100.png",revision:"aa764ecef4a64b16485685ed7bbcf0b7"},{url:"/windows11/Square150x150Logo.scale-125.png",revision:"1d6620c4ac44261ed6f58ede1f2e470b"},{url:"/windows11/Square150x150Logo.scale-150.png",revision:"217ea98c0a5fb998345036ef77d55e81"},{url:"/windows11/Square150x150Logo.scale-200.png",revision:"251e3ad9ebe99628ce17e111f8bcfe66"},{url:"/windows11/Square150x150Logo.scale-400.png",revision:"536cfa16308c77bec230fe688b365a3e"},{url:"/windows11/Square44x44Logo.altform-lightunplated_targetsize-16.png",revision:"964ff1e4182d00392238db9a4f027728"},{url:"/windows11/Square44x44Logo.altform-lightunplated_targetsize-20.png",revision:"4eb2a55ec59b3e146a4f857e9e1da6df"},{url:"/windows11/Square44x44Logo.altform-lightunplated_targetsize-24.png",revision:"ca96e1d3d369bbb03d7552a6fff55efd"},{url:"/windows11/Square44x44Logo.altform-lightunplated_targetsize-256.png",revision:"2c02f771ac55aa8c1d22ec15e33bf467"},{url:"/windows11/Square44x44Logo.altform-lightunplated_targetsize-30.png",revision:"90a9469ef9a987795ddb1597aab65c18"},{url:"/windows11/Square44x44Logo.altform-lightunplated_targetsize-32.png",revision:"32d426dbd6b5c534f01b57ef7d2af07d"},{url:"/windows11/Square44x44Logo.altform-lightunplated_targetsize-36.png",revision:"4b8a9c7d361a2a8f6fdd38800f777bc3"},{url:"/windows11/Square44x44Logo.altform-lightunplated_targetsize-40.png",revision:"2959b762eb3850488bee193bad323449"},{url:"/windows11/Square44x44Logo.altform-lightunplated_targetsize-44.png",revision:"c2faae9a24101d6d71d0f052a68ab249"},{url:"/windows11/Square44x44Logo.altform-lightunplated_targetsize-48.png",revision:"debf2228f80262cf1bd34e85bbdde649"},{url:"/windows11/Square44x44Logo.altform-lightunplated_targetsize-60.png",revision:"881f1f4bd913de81fc4548e0ca5aabb0"},{url:"/windows11/Square44x44Logo.altform-lightunplated_targetsize-64.png",revision:"48203f2ada67d321079c400bf389c3a5"},{url:"/windows11/Square44x44Logo.altform-lightunplated_targetsize-72.png",revision:"a7a19796065bc1b345c6da7a4d4e58c7"},{url:"/windows11/Square44x44Logo.altform-lightunplated_targetsize-80.png",revision:"6ba26a4350c71e1eb5c4ff92f5e85d8c"},{url:"/windows11/Square44x44Logo.altform-lightunplated_targetsize-96.png",revision:"9a5f235ef9ac72bb77a61ec3597f996c"},{url:"/windows11/Square44x44Logo.altform-unplated_targetsize-16.png",revision:"964ff1e4182d00392238db9a4f027728"},{url:"/windows11/Square44x44Logo.altform-unplated_targetsize-20.png",revision:"4eb2a55ec59b3e146a4f857e9e1da6df"},{url:"/windows11/Square44x44Logo.altform-unplated_targetsize-24.png",revision:"ca96e1d3d369bbb03d7552a6fff55efd"},{url:"/windows11/Square44x44Logo.altform-unplated_targetsize-256.png",revision:"2c02f771ac55aa8c1d22ec15e33bf467"},{url:"/windows11/Square44x44Logo.altform-unplated_targetsize-30.png",revision:"90a9469ef9a987795ddb1597aab65c18"},{url:"/windows11/Square44x44Logo.altform-unplated_targetsize-32.png",revision:"32d426dbd6b5c534f01b57ef7d2af07d"},{url:"/windows11/Square44x44Logo.altform-unplated_targetsize-36.png",revision:"4b8a9c7d361a2a8f6fdd38800f777bc3"},{url:"/windows11/Square44x44Logo.altform-unplated_targetsize-40.png",revision:"2959b762eb3850488bee193bad323449"},{url:"/windows11/Square44x44Logo.altform-unplated_targetsize-44.png",revision:"c2faae9a24101d6d71d0f052a68ab249"},{url:"/windows11/Square44x44Logo.altform-unplated_targetsize-48.png",revision:"debf2228f80262cf1bd34e85bbdde649"},{url:"/windows11/Square44x44Logo.altform-unplated_targetsize-60.png",revision:"881f1f4bd913de81fc4548e0ca5aabb0"},{url:"/windows11/Square44x44Logo.altform-unplated_targetsize-64.png",revision:"48203f2ada67d321079c400bf389c3a5"},{url:"/windows11/Square44x44Logo.altform-unplated_targetsize-72.png",revision:"a7a19796065bc1b345c6da7a4d4e58c7"},{url:"/windows11/Square44x44Logo.altform-unplated_targetsize-80.png",revision:"6ba26a4350c71e1eb5c4ff92f5e85d8c"},{url:"/windows11/Square44x44Logo.altform-unplated_targetsize-96.png",revision:"9a5f235ef9ac72bb77a61ec3597f996c"},{url:"/windows11/Square44x44Logo.scale-100.png",revision:"c2faae9a24101d6d71d0f052a68ab249"},{url:"/windows11/Square44x44Logo.scale-125.png",revision:"9410132238b81138e013ecf975e42473"},{url:"/windows11/Square44x44Logo.scale-150.png",revision:"24b38e2638e522678d9aeaa647fb6925"},{url:"/windows11/Square44x44Logo.scale-200.png",revision:"ec14670c40c8d9c09be55bda5f5701a8"},{url:"/windows11/Square44x44Logo.scale-400.png",revision:"73c573c4744cb310e83598debaeec972"},{url:"/windows11/Square44x44Logo.targetsize-16.png",revision:"964ff1e4182d00392238db9a4f027728"},{url:"/windows11/Square44x44Logo.targetsize-20.png",revision:"4eb2a55ec59b3e146a4f857e9e1da6df"},{url:"/windows11/Square44x44Logo.targetsize-24.png",revision:"ca96e1d3d369bbb03d7552a6fff55efd"},{url:"/windows11/Square44x44Logo.targetsize-256.png",revision:"2c02f771ac55aa8c1d22ec15e33bf467"},{url:"/windows11/Square44x44Logo.targetsize-30.png",revision:"90a9469ef9a987795ddb1597aab65c18"},{url:"/windows11/Square44x44Logo.targetsize-32.png",revision:"32d426dbd6b5c534f01b57ef7d2af07d"},{url:"/windows11/Square44x44Logo.targetsize-36.png",revision:"4b8a9c7d361a2a8f6fdd38800f777bc3"},{url:"/windows11/Square44x44Logo.targetsize-40.png",revision:"2959b762eb3850488bee193bad323449"},{url:"/windows11/Square44x44Logo.targetsize-44.png",revision:"c2faae9a24101d6d71d0f052a68ab249"},{url:"/windows11/Square44x44Logo.targetsize-48.png",revision:"debf2228f80262cf1bd34e85bbdde649"},{url:"/windows11/Square44x44Logo.targetsize-60.png",revision:"881f1f4bd913de81fc4548e0ca5aabb0"},{url:"/windows11/Square44x44Logo.targetsize-64.png",revision:"48203f2ada67d321079c400bf389c3a5"},{url:"/windows11/Square44x44Logo.targetsize-72.png",revision:"a7a19796065bc1b345c6da7a4d4e58c7"},{url:"/windows11/Square44x44Logo.targetsize-80.png",revision:"6ba26a4350c71e1eb5c4ff92f5e85d8c"},{url:"/windows11/Square44x44Logo.targetsize-96.png",revision:"9a5f235ef9ac72bb77a61ec3597f996c"},{url:"/windows11/StoreLogo.scale-100.png",revision:"0c5d34a5d9b326558afd112a39d76394"},{url:"/windows11/StoreLogo.scale-125.png",revision:"46e3b6377807e07f53cfb88dd213b48a"},{url:"/windows11/StoreLogo.scale-150.png",revision:"69bffb3f1dfdc090f39b130d273ded5b"},{url:"/windows11/StoreLogo.scale-200.png",revision:"6f32b591a5928dee4da843620f4b6b27"},{url:"/windows11/StoreLogo.scale-400.png",revision:"32793c47f6e744e4577e5926e6727b16"},{url:"/windows11/Wide310x150Logo.scale-100.png",revision:"497a6e1ad1d333ecf1ceb3a153314855"},{url:"/windows11/Wide310x150Logo.scale-125.png",revision:"847f1fb295c2e653059432a0de09b561"},{url:"/windows11/Wide310x150Logo.scale-150.png",revision:"582629d3c11bc93e07b51e18a244853f"},{url:"/windows11/Wide310x150Logo.scale-200.png",revision:"289546199696b86f2982b9a07b538c06"},{url:"/windows11/Wide310x150Logo.scale-400.png",revision:"754c79a386c268c21eb50b2c7a6859e6"}],{ignoreURLParametersMatching:[]}),e.cleanupOutdatedCaches(),e.registerRoute("/",new e.NetworkFirst({cacheName:"start-url",plugins:[{cacheWillUpdate:async({request:e,response:a,event:i,state:s})=>a&&"opaqueredirect"===a.type?new Response(a.body,{status:200,statusText:"OK",headers:a.headers}):a}]}),"GET"),e.registerRoute(/^https:\/\/fonts\.(?:gstatic)\.com\/.*/i,new e.CacheFirst({cacheName:"google-fonts-webfonts",plugins:[new e.ExpirationPlugin({maxEntries:4,maxAgeSeconds:31536e3})]}),"GET"),e.registerRoute(/^https:\/\/fonts\.(?:googleapis)\.com\/.*/i,new e.StaleWhileRevalidate({cacheName:"google-fonts-stylesheets",plugins:[new e.ExpirationPlugin({maxEntries:4,maxAgeSeconds:604800})]}),"GET"),e.registerRoute(/\.(?:eot|otf|ttc|ttf|woff|woff2|font.css)$/i,new e.StaleWhileRevalidate({cacheName:"static-font-assets",plugins:[new e.ExpirationPlugin({maxEntries:4,maxAgeSeconds:604800})]}),"GET"),e.registerRoute(/\.(?:jpg|jpeg|gif|png|svg|ico|webp)$/i,new e.StaleWhileRevalidate({cacheName:"static-image-assets",plugins:[new e.ExpirationPlugin({maxEntries:64,maxAgeSeconds:86400})]}),"GET"),e.registerRoute(/\/_next\/image\?url=.+$/i,new e.StaleWhileRevalidate({cacheName:"next-image",plugins:[new e.ExpirationPlugin({maxEntries:64,maxAgeSeconds:86400})]}),"GET"),e.registerRoute(/\.(?:mp3|wav|ogg)$/i,new e.CacheFirst({cacheName:"static-audio-assets",plugins:[new e.RangeRequestsPlugin,new e.ExpirationPlugin({maxEntries:32,maxAgeSeconds:86400})]}),"GET"),e.registerRoute(/\.(?:mp4)$/i,new e.CacheFirst({cacheName:"static-video-assets",plugins:[new e.RangeRequestsPlugin,new e.ExpirationPlugin({maxEntries:32,maxAgeSeconds:86400})]}),"GET"),e.registerRoute(/\.(?:js)$/i,new e.StaleWhileRevalidate({cacheName:"static-js-assets",plugins:[new e.ExpirationPlugin({maxEntries:32,maxAgeSeconds:86400})]}),"GET"),e.registerRoute(/\.(?:css|less)$/i,new e.StaleWhileRevalidate({cacheName:"static-style-assets",plugins:[new e.ExpirationPlugin({maxEntries:32,maxAgeSeconds:86400})]}),"GET"),e.registerRoute(/\/_next\/data\/.+\/.+\.json$/i,new e.StaleWhileRevalidate({cacheName:"next-data",plugins:[new e.ExpirationPlugin({maxEntries:32,maxAgeSeconds:86400})]}),"GET"),e.registerRoute(/\.(?:json|xml|csv)$/i,new e.NetworkFirst({cacheName:"static-data-assets",plugins:[new e.ExpirationPlugin({maxEntries:32,maxAgeSeconds:86400})]}),"GET"),e.registerRoute((({url:e})=>{if(!(self.origin===e.origin))return!1;const a=e.pathname;return!a.startsWith("/api/auth/")&&!!a.startsWith("/api/")}),new e.NetworkFirst({cacheName:"apis",networkTimeoutSeconds:10,plugins:[new e.ExpirationPlugin({maxEntries:16,maxAgeSeconds:86400})]}),"GET"),e.registerRoute((({url:e})=>{if(!(self.origin===e.origin))return!1;return!e.pathname.startsWith("/api/")}),new e.NetworkFirst({cacheName:"others",networkTimeoutSeconds:10,plugins:[new e.ExpirationPlugin({maxEntries:32,maxAgeSeconds:86400})]}),"GET"),e.registerRoute((({url:e})=>!(self.origin===e.origin)),new e.NetworkFirst({cacheName:"cross-origin",networkTimeoutSeconds:10,plugins:[new e.ExpirationPlugin({maxEntries:32,maxAgeSeconds:3600})]}),"GET")}));
+/**
+ * Copyright 2018 Google Inc. All Rights Reserved.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+// If the loader is already loaded, just stop.
+if (!self.define) {
+  let registry = {};
+
+  // Used for `eval` and `importScripts` where we can't get script URL by other means.
+  // In both cases, it's safe to use a global var because those functions are synchronous.
+  let nextDefineUri;
+
+  const singleRequire = (uri, parentUri) => {
+    uri = new URL(uri + ".js", parentUri).href;
+    return registry[uri] || (
+      
+        new Promise(resolve => {
+          if ("document" in self) {
+            const script = document.createElement("script");
+            script.src = uri;
+            script.onload = resolve;
+            document.head.appendChild(script);
+          } else {
+            nextDefineUri = uri;
+            importScripts(uri);
+            resolve();
+          }
+        })
+      
+      .then(() => {
+        let promise = registry[uri];
+        if (!promise) {
+          throw new Error(`Module ${uri} didn’t register its module`);
+        }
+        return promise;
+      })
+    );
+  };
+
+  self.define = (depsNames, factory) => {
+    const uri = nextDefineUri || ("document" in self ? document.currentScript.src : "") || location.href;
+    if (registry[uri]) {
+      // Module is already loading or loaded.
+      return;
+    }
+    let exports = {};
+    const require = depUri => singleRequire(depUri, uri);
+    const specialDeps = {
+      module: { uri },
+      exports,
+      require
+    };
+    registry[uri] = Promise.all(depsNames.map(
+      depName => specialDeps[depName] || require(depName)
+    )).then(deps => {
+      factory(...deps);
+      return exports;
+    });
+  };
+}
+define(['./workbox-9a8b0a38'], (function (workbox) { 'use strict';
+
+  /**
+  * Welcome to your Workbox-powered service worker!
+  *
+  * You'll need to register this file in your web app.
+  * See https://goo.gl/nhQhGp
+  *
+  * The rest of the code is auto-generated. Please don't update this file
+  * directly; instead, make changes to your Workbox build configuration
+  * and re-run your build process.
+  * See https://goo.gl/2aRDsh
+  */
+
+  importScripts();
+  self.skipWaiting();
+  workbox.clientsClaim();
+  workbox.registerRoute("/", new workbox.NetworkFirst({
+    "cacheName": "start-url",
+    plugins: [{
+      cacheWillUpdate: async ({
+        request,
+        response,
+        event,
+        state
+      }) => {
+        if (response && response.type === 'opaqueredirect') {
+          return new Response(response.body, {
+            status: 200,
+            statusText: 'OK',
+            headers: response.headers
+          });
+        }
+
+        return response;
+      }
+    }]
+  }), 'GET');
+  workbox.registerRoute(/.*/i, new workbox.NetworkOnly({
+    "cacheName": "dev",
+    plugins: []
+  }), 'GET');
+
+}));
+//# sourceMappingURL=sw.js.map

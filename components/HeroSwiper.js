@@ -72,7 +72,7 @@ const HeroSwiper = ({ top5 }) => {
           background-image: linear-gradient(
             to right,
             rgba(0, 0, 0, 0),
-            rgba(30, 30, 30, 0.9)
+            rgba(10, 10, 10, 0.3)
           );
         }
         .swiper-button-prev {
@@ -81,12 +81,12 @@ const HeroSwiper = ({ top5 }) => {
           background-image: linear-gradient(
             to left,
             rgba(0, 0, 0, 0),
-            rgba(10, 10, 10, 0.9)
+            rgba(10, 10, 10, 0.3)
           );
         }
         .swiper-button-next:hover,
         .swiper-button-prev:hover {
-          color: #999;
+          color: #888;
         }
         .swiper-button-next,
         .swiper-button-prev {
@@ -94,7 +94,7 @@ const HeroSwiper = ({ top5 }) => {
         }
         .swiper-button-next.swiper-button-disabled,
         .swiper-button-prev.swiper-button-disabled {
-          opacity: 0.2;
+          opacity: 0.1;
         }
       `}</style>
     </Swiper>

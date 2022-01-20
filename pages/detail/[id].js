@@ -10,19 +10,19 @@ import LineBreak from "../../components/LineBreak";
 
 import Player from "../../components/Player";
 import NextHeadSeo from "next-head-seo";
+import { getVideoUrlsFromUrlStr } from "../../utils/utils";
 
 function Detail({ detail, id }) {
-  // console.log(detail.list[0]);
-  // console.log(detail.list[0].vod_play_url.split("$$$"));
-  const videoList = detail.list[0]?.vod_play_url.split("$$$")[1]?.split("#");
-  // console.log(videoList);
+  const videoList = getVideoUrlsFromUrlStr(detail.list[0]?.vod_play_url);
+
+  // console.log("detail page", videoList);
   const [play, setPlay] = useState(false);
   const [url, setUrl] = useState("");
 
   useEffect(() => {
     return () => {
       document.documentElement.style.overflowY = "auto";
-      console.log("cleaned up");
+      // console.log("cleaned up");
     };
   }, []);
 
@@ -50,14 +50,18 @@ function Detail({ detail, id }) {
         {play && <Player url={url} setPlay={setPlay} />}
 
         <Banner detail={detail.list[0]} />
-        <LineBreak title="PLAY LIST" />
-        <div className="text-gray-400 text-sm my-3">
-          ALL resources are from 3rd party website.
-        </div>
+        {videoList && (
+          <>
+            <LineBreak title="PLAY LIST" />
+            <div className="text-gray-400 text-sm my-3">
+              ALL resources are from 3rd party website.
+            </div>
+          </>
+        )}
         <div className="mt-1">
-          {videoList[0] ? (
+          {videoList ? (
             videoList.map((video) => {
-              const [name, url] = video.split("$");
+              const { name, url } = video;
               return (
                 <a
                   key={name}
@@ -80,9 +84,7 @@ function Detail({ detail, id }) {
               );
             })
           ) : (
-            <p className="mx-2 sm:mx-6 md:mx-10 lg:mx-14 font-bold">
-              No result found
-            </p>
+            <p className="font-bold text-gray-300 text-3xl">No result found</p>
           )}
         </div>
       </main>

@@ -4,7 +4,7 @@ import NextHeadSeo from "next-head-seo";
 import { useRouter } from "next/router";
 
 function Detail({ detail, searchKey }) {
-  console.log(detail);
+  // console.log(detail);
   const router = useRouter();
   if (detail.list.length == 1) {
     if (detail.list[0].vod_play_url) {
