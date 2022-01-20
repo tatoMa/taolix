@@ -47,14 +47,12 @@ const VideoItem = ({ name, type, pic, id, remarks, rate }) => {
           </div>
           {rate && (
             <div className="absolute top-0 left-0 bg-black/75 text-sm text-orange-400 pt-1 pl-1">
-              豆瓣{rate}
+              豆瓣{rate}★
             </div>
           )}
         </div>
       ) : (
-        <div className="animate-pulse">
-          <div className="rounded bg-slate-200 w-full aspect-[3/4] p-2"></div>
-        </div>
+        <div className="animate-pulse rounded bg-slate-200 w-full aspect-[3/4] p-2"></div>
       )}
     </div>
   );

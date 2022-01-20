@@ -68,28 +68,28 @@ export default function Home({
           <GroupSwiper videos={videosNewUsTvShow} />
 
           {/* Line Break  */}
-          <LineBreak title="CHINESE REALITY TV" />
-
-          {/* Video List Section */}
-          <GroupSwiper videos={videosNewCnReality} />
-
-          {/* Line Break  */}
           <LineBreak title="JAPANESE ANIME" />
 
           {/* Video List Section */}
           <GroupSwiper videos={videosNewJpAnime} />
 
           {/* Line Break  */}
-          <LineBreak title="CHINESE ANIME" />
+          <LineBreak title="CHINESE REALITY TV" />
 
           {/* Video List Section */}
-          <GroupSwiper videos={videosNewCnAnime} />
+          <GroupSwiper videos={videosNewCnReality} />
 
           {/* Line Break  */}
-          <LineBreak title="HORROR MOVIES" />
+          {/* <LineBreak title="CHINESE ANIME" /> */}
 
           {/* Video List Section */}
-          <GroupSwiper videos={videosNewHorror} />
+          {/* <GroupSwiper videos={videosNewCnAnime} /> */}
+
+          {/* Line Break  */}
+          {/* <LineBreak title="HORROR MOVIES" /> */}
+
+          {/* Video List Section */}
+          {/* <GroupSwiper videos={videosNewHorror} /> */}
         </div>
       </div>
     </>
