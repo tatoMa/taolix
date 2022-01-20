@@ -1,0 +1,6 @@
+[{
+        "relation": ["delegate_permission/common.handle_all_urls"],
+        "target" : { "namespace": "android_app", "package_name": "com.taolix.www.twa",
+                     "sha256_cert_fingerprints": ["FB:16:EF:09:70:20:50:D6:4B:CD:48:7E:DF:72:CA:3F:F9:6C:35:8A:AE:9A:0B:C1:63:9C:7A:77:59:38:05:94"] }
+      }
+]

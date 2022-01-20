@@ -64,6 +64,10 @@ export async function getVideosListFromDouban(url) {
   try {
     const res = await fetch(url);
     const result = await res.json();
+    if (res.status !== 200) {
+      console.error(json);
+      throw new Error("Failed to fetch API");
+    }
     // result.list = result.subjects.map((i) => filterNeededVideoInfo(i));
     return result.subjects;
   } catch (error) {
@@ -79,6 +83,10 @@ export async function findMovieFromApiByTitle(title) {
       `${process.env.MOVIE_API}/?ac=detail&wd=${encodeURI(title)}`
     );
     const result = await res.json();
+    if (res.status !== 200) {
+      console.error(json);
+      throw new Error("Failed to fetch API");
+    }
     if (!result.total) return false;
     return result;
   } catch (error) {

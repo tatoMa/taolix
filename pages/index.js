@@ -22,7 +22,7 @@ export default function Home({
   videosNewCnAnime,
   videosHotListDoubanFiltered,
 }) {
-  console.log(videosHotListDoubanFiltered);
+  // console.log(videosHotListDoubanFiltered);
   const top5 = selected5FromTop250;
   return (
     <>
