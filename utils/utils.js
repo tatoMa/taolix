@@ -56,14 +56,76 @@ export const getInfoFromApiToDetail = (info) => {
   };
 };
 
-export const filterNeededVideoInfo = ({
-  vod_id,
-  vod_name,
-  vod_class,
-  vod_pic,
-  vod_remarks,
-}) => {
+export const filterNeededVideoInfo = (
+  { vod_id, vod_name, vod_class, vod_pic, vod_remarks } = {
+    vod_id: 0,
+    vod_name: "",
+    vod_class: "",
+    vod_pic: "",
+    vod_remarks: "",
+  }
+) => {
   return { vod_id, vod_name, vod_class, vod_pic, vod_remarks };
+};
+
+export const filterNeededVideoInfoForHero = (
+  {
+    vod_id,
+    vod_name,
+    vod_class,
+    vod_pic,
+    vod_remarks,
+    rate,
+    type_name,
+    url,
+    vod_actor,
+    vod_blurb,
+    vod_director,
+    vod_content,
+    vod_pubdate,
+    vod_tag,
+    vod_time,
+    vod_year,
+    vod_writer,
+  } = {
+    vod_id: 0,
+    vod_name: "",
+    vod_class: "",
+    vod_pic: "",
+    vod_remarks: "",
+    rate: "",
+    type_name: "",
+    url: "",
+    vod_actor: "",
+    vod_blurb: "",
+    vod_director: "",
+    vod_content: "",
+    vod_pubdate: "",
+    vod_tag: "",
+    vod_time: "",
+    vod_year: "",
+    vod_writer: "",
+  }
+) => {
+  return {
+    vod_id,
+    vod_name,
+    vod_class,
+    vod_pic,
+    vod_remarks,
+    rate,
+    type_name,
+    url,
+    vod_actor,
+    vod_blurb,
+    vod_director,
+    vod_content,
+    vod_pubdate,
+    vod_tag,
+    vod_time,
+    vod_year,
+    vod_writer,
+  };
 };
 
 export async function getVideosListFromApi(url) {

@@ -48,14 +48,7 @@ const HeroSwiper = ({ top5 }) => {
         <SwiperSlide key={movie.vod_id}>
           <Banner
             detail={{
-              vod_pic: movie.vod_pic,
-              vod_name: movie.vod_name,
-              vod_blurb: movie.vod_blurb,
-              vod_director: movie.vod_director,
-              vod_actor: movie.vod_actor,
-              vod_class: movie.vod_class,
-              vod_play_url: movie.vod_play_url,
-              vod_id: movie.vod_id,
+              ...movie,
               mode: "homePage",
             }}
           />

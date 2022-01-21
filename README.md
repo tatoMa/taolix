@@ -43,16 +43,16 @@ npm run build
 - [x] Home page
 - [x] Auth
 - [x] Videos list
-- [x] Player window
+- [x] Player lib and component
 - [x] Pagination
 - [x] Video detail
 - [x] Search
-- [x] Type page
+- [x] Genre
 - [x] Fully Responsive
 - [x] More video lists on homepage
 - [x] Video autoplay
-- [x] swiper list
-- [x] mobile bottom menu
+- [x] swiper
+- [x] mobile navigation and bottom menu
 - [x] SEO
 - [x] Error pages
 - [x] ISG
@@ -62,8 +62,9 @@ npm run build
   - [x] Icons for all platform
   - [x] Cache stragary
   - [x] All needs for Lighthouse
-- [ ] Profile manager
+- [ ] Adaptive design
 - [ ] History page
+- [ ] Profile manager
 - [ ] Chromecast
 - [ ] More source
 - [ ] App

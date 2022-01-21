@@ -4,25 +4,26 @@ import {
   findMovieFromApiByTitle,
   filterNeededVideoInfo,
   getVideosListFromDouban,
+  filterNeededVideoInfoForHero,
 } from "../utils/utils";
 import HeroSwiper from "../components/HeroSwiper";
 import LineBreak from "../components/LineBreak";
 import GroupSwiper from "../components/GroupSwiper";
 
 export default function Home({
-  videosNewAll,
   selected5FromTop250,
+  videosHotListDoubanFiltered,
+  videosNewAll,
   videosNewAction,
-  videosNewHorror,
   videosNewCnTvShow,
   videosNewKrTvShow,
   videosNewUsTvShow,
   videosNewCnReality,
   videosNewJpAnime,
-  videosNewCnAnime,
-  videosHotListDoubanFiltered,
+  // videosNewCnAnime,
+  // videosNewHorror,
 }) {
-  // console.log(videosHotListDoubanFiltered);
+  // console.log(selected5FromTop250);
   const top5 = selected5FromTop250;
   return (
     <>
@@ -108,10 +109,6 @@ export async function getStaticProps() {
     `${process.env.MOVIE_API}/?ac=detail&t=6`
   );
 
-  const videosNewHorror = await getVideosListFromApi(
-    `${process.env.MOVIE_API}/?ac=detail&t=9`
-  );
-
   const videosNewCnTvShow = await getVideosListFromApi(
     `${process.env.MOVIE_API}/?ac=detail&t=13`
   );
@@ -132,21 +129,30 @@ export async function getStaticProps() {
     `${process.env.MOVIE_API}/?ac=detail&t=31`
   );
 
-  const videosNewCnAnime = await getVideosListFromApi(
-    `${process.env.MOVIE_API}/?ac=detail&t=30`
-  );
+  // const videosNewCnAnime = await getVideosListFromApi(
+  //   `${process.env.MOVIE_API}/?ac=detail&t=30`
+  // );
+
+  // const videosNewHorror = await getVideosListFromApi(
+  //   `${process.env.MOVIE_API}/?ac=detail&t=9`
+  // );
+
+  // douban APIs
   const videosHotListDouban = await getVideosListFromDouban(
     `${process.env.DOUBAN_URL}${encodeURI(
-      "/j/search_subjects?type=tv&tag=热门&sort=recommend&page_limit=30&page_start=0"
+      "/j/search_subjects?type=tv&tag=热门&sort=recommend&page_limit=50&page_start=0"
     )}`
   );
   const videosHotListDoubanFindResource = await Promise.all(
     videosHotListDouban.map(async (item) => {
       let temp = await findMovieFromApiByTitle(item.title);
       if (temp) {
-        temp = { ...filterNeededVideoInfo(temp.list[0]), ...item };
+        // temp = { ...temp.list[0], ...item };
+        temp = {
+          ...filterNeededVideoInfoForHero({ ...temp.list[0], ...item }),
+        };
+        if (temp.vod_id) return temp;
       }
-      return temp;
     })
   );
 
@@ -154,46 +160,51 @@ export async function getStaticProps() {
   videosHotListDoubanFiltered.list =
     videosHotListDoubanFindResource.filter(Boolean);
 
-  const resTop250 = await fetch(
-    `https://api.wmdb.tv/api/v1/top?type=Douban&skip=0&limit=200&lang=Cn`
-  );
-  const top250 = await resTop250.json();
+  const selected5FromTop250 = videosHotListDoubanFiltered.list
+    .sort(() => Math.random() - 0.5)
+    .slice(0, 5);
+  // top 250 best videos
+  // const resTop250 = await fetch(
+  //   `https://api.wmdb.tv/api/v1/top?type=Douban&skip=0&limit=200&lang=Cn`
+  // );
+  // const top250 = await resTop250.json();
 
-  const videosFoundBySearchingTop250List = await Promise.all(
-    randomSelect5FromArray(top250).map(
-      async (item) => await findMovieFromApiByTitle(item.data[0].name)
-    )
-  );
+  // const videosFoundBySearchingTop250List = await Promise.all(
+  //   randomSelect5FromArray(top250).map(
+  //     async (item) => await findMovieFromApiByTitle(item.data[0].name)
+  //   )
+  // );
 
-  // const found = await findMovieFromApiByTitle("一年一度喜剧大赛");
-  const selected5FromTop250 = videosFoundBySearchingTop250List.map((item) => {
-    if (item) return item.list[0];
-  });
+  // // const found = await findMovieFromApiByTitle("一年一度喜剧大赛");
+  // const selected5FromTop250 = videosFoundBySearchingTop250List.map((item) => {
+  //   if (item) return item.list[0];
+  // });
 
   return {
     props: {
-      selected5FromTop250: selected5FromTop250.filter(Boolean).map((item) => {
-        return {
-          vod_pic: item.vod_pic,
-          vod_name: item.vod_name,
-          vod_blurb: item.vod_blurb,
-          vod_director: item.vod_director,
-          vod_actor: item.vod_actor,
-          vod_class: item.vod_class,
-          vod_play_url: item.vod_play_url,
-          vod_id: item.vod_id,
-        };
-      }),
+      // selected5FromTop250: selected5FromTop250.filter(Boolean).map((item) => {
+      //   return {
+      //     vod_pic: item.vod_pic,
+      //     vod_name: item.vod_name,
+      //     vod_blurb: item.vod_blurb,
+      //     vod_director: item.vod_director,
+      //     vod_actor: item.vod_actor,
+      //     vod_class: item.vod_class,
+      //     vod_play_url: item.vod_play_url,
+      //     vod_id: item.vod_id,
+      //   };
+      // }),
+      selected5FromTop250,
+      videosHotListDoubanFiltered,
       videosNewAll,
       videosNewAction,
-      videosNewHorror,
       videosNewCnTvShow,
       videosNewKrTvShow,
       videosNewUsTvShow,
       videosNewCnReality,
       videosNewJpAnime,
-      videosNewCnAnime,
-      videosHotListDoubanFiltered,
+      // videosNewCnAnime,
+      // videosNewHorror,
     },
     revalidate: 7200,
   };

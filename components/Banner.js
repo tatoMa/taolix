@@ -10,9 +10,25 @@ import { getVideoUrlsFromUrlStr } from "../utils/utils";
 const Banner = ({ detail }) => {
   const router = useRouter();
 
-  // console.log(detail);
-  let { vod_pic, vod_name, vod_blurb, vod_director, vod_actor, vod_class } =
-    detail;
+  // console.log(detail.vod_name, detail.vod_content);
+  let {
+    vod_id,
+    vod_name,
+    vod_class,
+    vod_pic,
+    vod_remarks,
+    rate,
+    type_name,
+    vod_actor,
+    vod_blurb,
+    vod_director,
+    vod_content,
+    vod_pubdate,
+    vod_tag,
+    vod_time,
+    vod_year,
+    vod_writer,
+  } = detail;
   let url = "";
   let latestName = "";
   if (detail.mode !== "homePage") {
@@ -85,7 +101,7 @@ const Banner = ({ detail }) => {
 
           <p className="text-sm line-clamp-5 sm:line-clamp-4 md:line-clamp-3 text-gray-200">
             {/* {{ banner.overview }} */}
-            {vod_blurb}
+            {vod_content.split(/<[^/].*?>(.*?)<\/.*?>/g).filter((x) => x != "")}
           </p>
 
           <div className="flex items-center space-x-2">
