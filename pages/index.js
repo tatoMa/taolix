@@ -206,6 +206,6 @@ export async function getStaticProps() {
       // videosNewCnAnime,
       // videosNewHorror,
     },
-    revalidate: 7200,
+    revalidate: 3600,
   };
 }
