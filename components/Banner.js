@@ -60,7 +60,7 @@ const Banner = ({ detail }) => {
     <div
       className={`w-full md:aspect-[3/2] lg:aspect-[16/7] ${
         detail.mode === "homePage" &&
-        "px-8 cursor-pointer active:brightness-125 hover:brightness-110"
+        "px-0 md:px-6 lg:px-8 cursor-pointer active:brightness-125 hover:brightness-110"
       }`}
       onClick={() => indexButtonHandler()}
     >
