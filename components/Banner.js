@@ -1,6 +1,6 @@
 import Image from "next/image";
-import { PlayIcon, FilmIcon } from "@heroicons/react/solid";
-// import { InformationCircleIcon } from "@heroicons/react/outline";
+import { PlayIcon } from "@heroicons/react/solid";
+
 import { useState } from "react";
 import { useRouter } from "next/router";
 
@@ -32,20 +32,19 @@ const Banner = ({ detail }) => {
   const router = useRouter();
   const [play, setPlay] = useState(false);
 
-  let url = "";
-  let latestName = "";
-  if (detail.mode !== "homePage") {
-    if (detail.vod_play_url) {
-      let videoList = getVideoUrlsFromUrlStr(detail.vod_play_url);
-      if (videoList) {
-        let latest = videoList.slice(-1)[0];
-        latestName = latest.name;
-        url = latest.url;
+  // find the latest episode of this video series
+  const getLatestVideoUrlAndName = () => {
+    if (detail.mode !== "homePage") {
+      if (detail.vod_play_url) {
+        let videoList = getVideoUrlsFromUrlStr(detail.vod_play_url);
+        if (videoList) return videoList.slice(-1)[0];
       }
     }
-  } else {
-  }
+    return { url: "", name: "" };
+  };
+  const { url, name: latestName } = getLatestVideoUrlAndName();
 
+  // button handler
   const playButtonHandler = (e) => {
     // window.location.href = url;
     setPlay(true);
@@ -67,7 +66,7 @@ const Banner = ({ detail }) => {
       {/* Player */}
       {play && <Player url={url} setPlay={setPlay} />}
 
-      {/* image section */}
+      {/* background image section */}
       <div className="absolute top-0 left-0 w-full h-full z-0 pointer-events-none">
         <Image
           unoptimized={true}
@@ -83,15 +82,17 @@ const Banner = ({ detail }) => {
           priority
         />
       </div>
-      <div className="relative w-full h-full flex flex-col-reverse md:flex-row z-10">
+
+      {/* main section */}
+      <main className="relative w-full h-full flex flex-col-reverse md:flex-row z-10">
         <div className="md:w-1/2 lg:w-3/5 text-white flex items-center md:pr-4 -translate-y-10 md:translate-y-10 z-20">
           <div className="overflow-hidden relative">
-            <h1 className="relative text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-orange-600 to-red-600 border-b border-red-500">
-              {vod_name}
+            <div className="relative text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-orange-600 to-red-600 border-b border-red-500">
+              <h1>{vod_name && vod_name}</h1>
               <h2 className="text-sm font-light text-red-700/60 line-clamp-1">
                 {vod_sub && vod_sub}
               </h2>
-            </h1>
+            </div>
             <div className="absolute right-0 top-6 text-sm mt-4 text-gray-200/75">
               {vod_lang && vod_lang}
             </div>
@@ -101,7 +102,7 @@ const Banner = ({ detail }) => {
                 onClick={() => playButtonHandler()}
                 className="absolute animate-bounce right-0 top-2 hover:animate-none text-transparent bg-clip-text bg-gradient-to-br from-orange-600 to-red-600 cursor-pointer flex items-center justify-end"
               >
-                <PlayIcon className="h-8 w-8 text-red-600 " />
+                <PlayIcon className="h-8 w-8 text-red-500 " />
                 <a className="text-lg">
                   {detail.mode === "homePage"
                     ? "Details"
@@ -119,13 +120,14 @@ const Banner = ({ detail }) => {
 
             <div className="flex mt-3 flex-nowrap">
               {vod_tag &&
-                vod_tag
-                  .split(",")
-                  .map((i) => (
-                    <div className=" bg-red-600 text-white text-xs px-2 py-[0.12rem] mr-2 rounded-full inline-block whitespace-nowrap">
-                      {i}
-                    </div>
-                  ))}
+                vod_tag.split(",").map((i) => (
+                  <div
+                    key={i}
+                    className=" bg-red-600 text-white text-xs px-2 py-[0.12rem] mr-2 rounded-full inline-block whitespace-nowrap"
+                  >
+                    {i}
+                  </div>
+                ))}
             </div>
 
             <h2 className="text-sm mt-4 text-gray-200/90 line-clamp-1">
@@ -155,12 +157,17 @@ const Banner = ({ detail }) => {
             referrerPolicy="no-referrer"
             // priority
           />
+          {rate && (
+            <div className="absolute right-0 bottom-0 bg-black/70 text-orange-500 px-2 py-1">
+              {"豆瓣 " + rate + "★"}
+            </div>
+          )}
           <div className="absolute w-full h-1/3 bg-gradient-to-b from-black/40 via-transparent to-transparent"></div>
           <div className="hidden md:block absolute left-0 w-1/6 h-full bg-gradient-to-r from-black/90 to-transparent"></div>
           <div className="absolute bottom-0 w-full h-1/6 bg-gradient-to-t md:hidden from-black via-black/70 to-transparent"></div>
           {/* <div>123</div> */}
         </div>
-      </div>
+      </main>
       {/* <Image
           unoptimized={true}
           src={
