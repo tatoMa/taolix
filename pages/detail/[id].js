@@ -50,43 +50,41 @@ function Detail({ detail, id }) {
         {play && <Player url={url} setPlay={setPlay} />}
 
         <Banner detail={detail.list[0]} />
-        {videoList && (
-          <>
+        {videoList ? (
+          <div className="-translate-y-12 md:translate-y-0">
             <LineBreak title="PLAY LIST" />
             <div className="text-gray-400 text-sm my-3">
               ALL resources are from 3rd party website.
             </div>
-          </>
+            <div className="mt-1">
+              {videoList.map((video) => {
+                const { name, url } = video;
+                return (
+                  <a
+                    key={name}
+                    className="odd:bg-black first:border-t even:bg-gray-800 cursor-pointer overflow-hidden flex items-center py-3 border-b border-gray-400 text-gray-400 hover:text-white hover:border-white"
+                    onClick={() => {
+                      setPlay(true);
+                      setUrl(url);
+                      scroll(0, 0);
+                      document.documentElement.style.overflowY = "hidden";
+                    }}
+                    // onClick={() => {
+                    //   window.location.href = url;
+                    // }}
+                  >
+                    <div>
+                      <PlayIcon className="h-8 w-8 mr-4 text-blue-white" />
+                    </div>
+                    <div>{name}</div>
+                  </a>
+                );
+              })}
+            </div>
+          </div>
+        ) : (
+          <p className="font-bold text-gray-300 text-3xl">No result found</p>
         )}
-        <div className="mt-1">
-          {videoList ? (
-            videoList.map((video) => {
-              const { name, url } = video;
-              return (
-                <a
-                  key={name}
-                  className="odd:bg-black first:border-t even:bg-gray-800 cursor-pointer overflow-hidden flex items-center py-3 border-b border-gray-400 text-gray-400 hover:text-white hover:border-white"
-                  onClick={() => {
-                    setPlay(true);
-                    setUrl(url);
-                    scroll(0, 0);
-                    document.documentElement.style.overflowY = "hidden";
-                  }}
-                  // onClick={() => {
-                  //   window.location.href = url;
-                  // }}
-                >
-                  <div>
-                    <PlayIcon className="h-8 w-8 mr-4 text-blue-white" />
-                  </div>
-                  <div>{name}</div>
-                </a>
-              );
-            })
-          ) : (
-            <p className="font-bold text-gray-300 text-3xl">No result found</p>
-          )}
-        </div>
       </main>
     </>
   );

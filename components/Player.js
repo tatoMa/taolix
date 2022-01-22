@@ -12,7 +12,7 @@ const Player = ({ url, setPlay }) => {
   };
   return (
     <div
-      className="flex h-full w-full fixed top-0 left-0 items-center bg-black/50 z-10 pointer-events-auto "
+      className="flex h-full w-full fixed top-0 left-0 items-center bg-black/60 z-50 pointer-events-auto "
       onKeyDown={handleKeyDown}
     >
       <div className="w-full aspect-video">

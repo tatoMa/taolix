@@ -8,9 +8,7 @@ import Player from "./Player";
 import { getVideoUrlsFromUrlStr } from "../utils/utils";
 
 const Banner = ({ detail }) => {
-  const router = useRouter();
-
-  // console.log(detail.vod_name, detail.vod_content);
+  // console.log(detail);
   let {
     vod_id,
     vod_name,
@@ -28,7 +26,12 @@ const Banner = ({ detail }) => {
     vod_time,
     vod_year,
     vod_writer,
+    vod_lang,
+    vod_sub,
   } = detail;
+  const router = useRouter();
+  const [play, setPlay] = useState(false);
+
   let url = "";
   let latestName = "";
   if (detail.mode !== "homePage") {
@@ -42,25 +45,30 @@ const Banner = ({ detail }) => {
     }
   } else {
   }
-  const [play, setPlay] = useState(false);
+
   const playButtonHandler = (e) => {
-    if (detail.mode === "homePage") {
-      router.push(`/detail/${detail.vod_id}`);
-    } else {
-      // window.location.href = url;
-      setPlay(true);
-      scroll(0, 0);
-      document.documentElement.style.overflowY = "hidden";
-    }
+    // window.location.href = url;
+    setPlay(true);
+    scroll(0, 0);
+    document.documentElement.style.overflowY = "hidden";
+  };
+  const indexButtonHandler = (e) => {
+    if (detail.mode === "homePage") router.push(`/detail/${detail.vod_id}`);
   };
 
   return (
-    <div className="relative w-full h-full">
+    <div
+      className={`w-full md:aspect-[3/2] lg:aspect-[16/7] ${
+        detail.mode === "homePage" &&
+        "px-8 cursor-pointer active:brightness-125 hover:brightness-110"
+      }`}
+      onClick={() => indexButtonHandler()}
+    >
       {/* Player */}
       {play && <Player url={url} setPlay={setPlay} />}
 
       {/* image section */}
-      <div className="relative h-[75vh] lg:h-[85vh] 2xl:h-[65vh]">
+      <div className="absolute top-0 left-0 w-full h-full z-0 pointer-events-none">
         <Image
           unoptimized={true}
           src={
@@ -69,12 +77,104 @@ const Banner = ({ detail }) => {
               : "https://www.themoviedb.org/t/p/original/wmv0oIun52Xeq65sBKfHiUkiBKc.jpg"
           }
           alt="banner"
-          className="object-cover blur-sm relative brightness-50"
+          className="object-cover blur-sm relative opacity-20"
           layout="fill"
           referrerPolicy="no-referrer"
           priority
         />
-        <div className="absolute h-[90%] w-[100%-7rem] top-[3.8rem] left-[0.5rem] right-[0.5rem] sm:left-[1.5rem] sm:right-[1.5rem] md:left-[2.5rem] md:right-[2.5rem] lg:left-[3.5rem] lg:right-[3.5rem]">
+      </div>
+      <div className="relative w-full h-full flex flex-col-reverse md:flex-row z-10">
+        <div className="md:w-1/2 lg:w-3/5 text-white flex items-center md:pr-4 -translate-y-10 md:translate-y-10 z-20">
+          <div className="overflow-hidden relative">
+            <h1 className="relative text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-orange-600 to-red-600 border-b border-red-500">
+              {vod_name}
+              <h2 className="text-sm font-light text-red-700/60 line-clamp-1">
+                {vod_sub && vod_sub}
+              </h2>
+            </h1>
+            <div className="absolute right-0 top-6 text-sm mt-4 text-gray-200/75">
+              {vod_lang && vod_lang}
+            </div>
+
+            {detail.mode !== "homePage" && (
+              <button
+                onClick={() => playButtonHandler()}
+                className="absolute animate-bounce right-0 top-2 hover:animate-none text-transparent bg-clip-text bg-gradient-to-br from-orange-600 to-red-600 cursor-pointer flex items-center justify-end"
+              >
+                <PlayIcon className="h-8 w-8 text-red-600 " />
+                <a className="text-lg">
+                  {detail.mode === "homePage"
+                    ? "Details"
+                    : url
+                    ? `${latestName}`
+                    : "Not found"}
+                </a>
+              </button>
+            )}
+
+            <div className="flex text-gray-400 text-sm mt-7">
+              <div className="flex-1">{vod_remarks}</div>
+              <div>{vod_time && vod_time.split(" ")[0]}</div>
+            </div>
+
+            <div className="flex mt-3 flex-nowrap">
+              {vod_tag &&
+                vod_tag
+                  .split(",")
+                  .map((i) => (
+                    <div className=" bg-red-600 text-white text-xs px-2 py-[0.12rem] mr-2 rounded-full inline-block whitespace-nowrap">
+                      {i}
+                    </div>
+                  ))}
+            </div>
+
+            <h2 className="text-sm mt-4 text-gray-200/90 line-clamp-1">
+              {vod_director && "Direct: " + vod_director}
+            </h2>
+            <h2 className="text-sm mt-1 text-gray-200/90 line-clamp-1">
+              {vod_actor && "Actor: " + vod_actor}
+            </h2>
+
+            <p className="text-sm mt-3 opacity-90 text-gray-400 line-clamp-4 md:line-clamp-3 lg:line-clamp-5">
+              {vod_content}
+            </p>
+          </div>
+        </div>
+
+        <div className="w-full min-h-[60vh] md:min-h-full md:w-1/2 lg:w-2/5 md:aspect-[3/4] relative">
+          <Image
+            unoptimized={true}
+            src={
+              vod_pic
+                ? vod_pic
+                : "https://www.themoviedb.org/t/p/original/wmv0oIun52Xeq65sBKfHiUkiBKc.jpg"
+            }
+            alt="banner"
+            className="object-cover z-0"
+            layout="fill"
+            referrerPolicy="no-referrer"
+            // priority
+          />
+          <div className="absolute w-full h-1/3 bg-gradient-to-b from-black/40 via-transparent to-transparent"></div>
+          <div className="hidden md:block absolute left-0 w-1/6 h-full bg-gradient-to-r from-black/90 to-transparent"></div>
+          <div className="absolute bottom-0 w-full h-1/6 bg-gradient-to-t md:hidden from-black via-black/70 to-transparent"></div>
+          {/* <div>123</div> */}
+        </div>
+      </div>
+      {/* <Image
+          unoptimized={true}
+          src={
+            vod_pic
+              ? vod_pic
+              : "https://www.themoviedb.org/t/p/original/wmv0oIun52Xeq65sBKfHiUkiBKc.jpg"
+          }
+          alt="banner"
+          className="object-cover blur-sm relative opacity-10"
+          layout="fill"
+          referrerPolicy="no-referrer"
+          priority
+        /> */}
+      {/* <div className="absolute h-[90%] w-[100%-7rem] top-[3.8rem] left-[0.5rem] right-[0.5rem] sm:left-[1.5rem] sm:right-[1.5rem] md:left-[2.5rem] md:right-[2.5rem] lg:left-[3.5rem] lg:right-[3.5rem]">
           <Image
             unoptimized={true}
             src={
@@ -88,20 +188,23 @@ const Banner = ({ detail }) => {
             referrerPolicy="no-referrer"
             priority
           />
-        </div>
-      </div>
+        </div> */}
 
       {/* text section */}
-      <div className=" absolute inset-0 flex items-center justify-between mx-6 sm:mx-10 md:mx-16 lg:mx-20 mt-16 border-x-2 border-gray-300/20">
+      {/* <div className=" absolute inset-0 flex items-center justify-between mx-6 sm:mx-10 md:mx-16 lg:mx-20 mt-16 border-x-2 border-gray-300/20">
         <div className="w-[70%] md:w-[60%] lg:w-[50%] space-y-6 backdrop-blur-md bg-black/40 p-1 md:p-4">
           <h1 className="font-bold text-2xl sm:text-3xl md:text-4xl line-clamp-2 pb-2 text-white border-b-2 border-red-600">
-            {/* {{ banner.title || banner.name }} */}
             {vod_name}
           </h1>
 
           <p className="text-sm line-clamp-5 sm:line-clamp-4 md:line-clamp-3 text-gray-200">
-            {/* {{ banner.overview }} */}
-            {vod_content.split(/<[^/].*?>(.*?)<\/.*?>/g).filter((x) => x != "")}
+            {vod_content
+              ? vod_content
+                  .split(/<[^/].*?>(.*?)<\/.*?>/g)
+                  .filter((x) => x != "")
+              : vod_blurb
+              ? vod_blurb
+              : ""}
           </p>
 
           <div className="flex items-center space-x-2">
@@ -121,14 +224,6 @@ const Banner = ({ detail }) => {
                   : "Not found"}
               </p>
             </button>
-            {/* <button
-                className="flex items-center space-x-1 px-3 py-3 bg-black/30 text-white border-2 transition-colors duration-200 hover:bg-white hover:text-black shadow-lg"
-                // onClick="handleMoreInfoClick"
-              >
-                <InformationCircleIcon className="h-6 w-6 text-blue-white" />
-
-                <p className="text-bold hidden md:block">Info</p>
-              </button> */}
           </div>
         </div>
         <div className="w-[40%] lg:w-[30%] h-full border-l-2 border-gray-300/20 text-white text-sm">
@@ -151,11 +246,11 @@ const Banner = ({ detail }) => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
-      <div className="banner__overlay--down absolute bottom-0 h-32 w-full"></div>
+      {/* <div className="banner__overlay--down absolute bottom-0 h-32 w-full"></div> */}
 
-      <style jsx>{`
+      {/* <style jsx>{`
         .banner__overlay--down {
           background-image: linear-gradient(
             to bottom,
@@ -172,7 +267,7 @@ const Banner = ({ detail }) => {
             transparent 85%
           );
         }
-      `}</style>
+      `}</style> */}
     </div>
   );
 };

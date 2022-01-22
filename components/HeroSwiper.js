@@ -4,7 +4,7 @@ import {
   Scrollbar,
   A11y,
   Autoplay,
-  EffectCoverflow,
+  // EffectCoverflow,
 } from "swiper";
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -13,12 +13,12 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import "swiper/css/autoplay";
-import "swiper/css/effect-coverflow";
+// import "swiper/css/effect-coverflow";
 
 import Banner from "./Banner";
 
 const HeroSwiper = ({ top5 }) => {
-  // console.log(top5);
+  // console.log("top5", top5);
   return (
     <Swiper
       // install Swiper modules
@@ -28,21 +28,21 @@ const HeroSwiper = ({ top5 }) => {
         Scrollbar,
         A11y,
         Autoplay,
-        EffectCoverflow,
+        // EffectCoverflow,
       ]}
       autoplay={{
         delay: 8000,
         disableOnInteraction: true,
       }}
-      effect="coverflow"
+      // effect="coverflow"
       loop
       spaceBetween={50}
       slidesPerView={1}
       navigation
       pagination={{ clickable: true }}
       scrollbar={{ draggable: true }}
-      onSwiper={(swiper) => console.log()}
-      onSlideChange={() => console.log("slide change")}
+      // onSwiper={(swiper) => console.log()}
+      // onSlideChange={() => console.log("slide change")}
     >
       {top5.map((movie) => (
         <SwiperSlide key={movie.vod_id}>

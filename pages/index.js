@@ -5,13 +5,14 @@ import {
   filterNeededVideoInfo,
   getVideosListFromDouban,
   filterNeededVideoInfoForHero,
+  shuffle,
 } from "../utils/utils";
 import HeroSwiper from "../components/HeroSwiper";
 import LineBreak from "../components/LineBreak";
 import GroupSwiper from "../components/GroupSwiper";
 
 export default function Home({
-  selected5FromTop250,
+  selectedVideosForHero,
   videosHotListDoubanFiltered,
   videosNewAll,
   videosNewAction,
@@ -23,14 +24,13 @@ export default function Home({
   // videosNewCnAnime,
   // videosNewHorror,
 }) {
-  // console.log(selected5FromTop250);
-  const top5 = selected5FromTop250;
+  // console.log(selectedVideosForHero);
   return (
     <>
       {/* Main section */}
       <div className="w-full h-full max-w-screen-2xl mx-auto ">
         {/* Swiper section */}
-        <HeroSwiper top5={top5} />
+        <HeroSwiper top5={selectedVideosForHero} />
         <div className="-translate-y-9">
           {/* Line Break  */}
           <LineBreak title="WHATS HOT" />
@@ -160,9 +160,10 @@ export async function getStaticProps() {
   videosHotListDoubanFiltered.list =
     videosHotListDoubanFindResource.filter(Boolean);
 
-  const selected5FromTop250 = videosHotListDoubanFiltered.list
-    .sort(() => Math.random() - 0.5)
-    .slice(0, 5);
+  const selectedVideosForHero = shuffle([
+    ...videosHotListDoubanFiltered.list,
+  ]).slice(0, 5);
+
   // top 250 best videos
   // const resTop250 = await fetch(
   //   `https://api.wmdb.tv/api/v1/top?type=Douban&skip=0&limit=200&lang=Cn`
@@ -176,13 +177,13 @@ export async function getStaticProps() {
   // );
 
   // // const found = await findMovieFromApiByTitle("一年一度喜剧大赛");
-  // const selected5FromTop250 = videosFoundBySearchingTop250List.map((item) => {
+  // const selectedVideosForHero = videosFoundBySearchingTop250List.map((item) => {
   //   if (item) return item.list[0];
   // });
 
   return {
     props: {
-      // selected5FromTop250: selected5FromTop250.filter(Boolean).map((item) => {
+      // selectedVideosForHero: selectedVideosForHero.filter(Boolean).map((item) => {
       //   return {
       //     vod_pic: item.vod_pic,
       //     vod_name: item.vod_name,
@@ -194,7 +195,7 @@ export async function getStaticProps() {
       //     vod_id: item.vod_id,
       //   };
       // }),
-      selected5FromTop250,
+      selectedVideosForHero,
       videosHotListDoubanFiltered,
       videosNewAll,
       videosNewAction,

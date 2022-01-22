@@ -47,7 +47,7 @@ function Header() {
 
   return (
     <div
-      className={`flex justify-center top-0 fixed w-full h-16 z-10 bg-gradient-to-b from-gray-900 to-transparent transition duration-1000 ${
+      className={`flex justify-center top-0 fixed w-full h-16 z-30 bg-gradient-to-b from-black to-transparent transition duration-1000 ${
         scrolled ? "bg-black" : ""
       }`}
     >
