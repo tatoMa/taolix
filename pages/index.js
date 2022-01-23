@@ -1,11 +1,8 @@
 import {
-  randomSelect5FromArray,
   getVideosListFromApi,
-  findMovieFromApiByTitle,
-  filterNeededVideoInfo,
   getVideosListFromDouban,
-  filterNeededVideoInfoForHero,
   shuffle,
+  findResourceFromDoubanItem,
 } from "../utils/utils";
 import HeroSwiper from "../components/HeroSwiper";
 import LineBreak from "../components/LineBreak";
@@ -144,16 +141,9 @@ export async function getStaticProps() {
     )}`
   );
   const videosHotListDoubanFindResource = await Promise.all(
-    videosHotListDouban.map(async (item) => {
-      let temp = await findMovieFromApiByTitle(item.title);
-      if (temp) {
-        // temp = { ...temp.list[0], ...item };
-        temp = {
-          ...filterNeededVideoInfoForHero({ ...temp.list[0], ...item }),
-        };
-        if (temp.vod_id) return temp;
-      }
-    })
+    videosHotListDouban.map(
+      async (item) => await findResourceFromDoubanItem(item)
+    )
   );
 
   const videosHotListDoubanFiltered = {};
@@ -162,7 +152,7 @@ export async function getStaticProps() {
 
   const selectedVideosForHero = shuffle([
     ...videosHotListDoubanFiltered.list,
-  ]).slice(0, 5);
+  ]).slice(0, 6);
 
   // top 250 best videos
   // const resTop250 = await fetch(

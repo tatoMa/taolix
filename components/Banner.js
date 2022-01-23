@@ -5,7 +5,10 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 
 import Player from "./Player";
-import { getVideoUrlsFromUrlStr } from "../utils/utils";
+import {
+  filterHtmlTagsFromString,
+  getVideoUrlsFromUrlStr,
+} from "../utils/utils";
 
 const Banner = ({ detail }) => {
   // console.log(detail);
@@ -138,7 +141,7 @@ const Banner = ({ detail }) => {
             </h2>
 
             <p className="text-sm mt-3 opacity-90 text-gray-400 line-clamp-4 md:line-clamp-3 lg:line-clamp-5">
-              {vod_content}
+              {vod_blurb ? vod_blurb : filterHtmlTagsFromString(vod_content)}
             </p>
           </div>
         </div>
@@ -158,7 +161,7 @@ const Banner = ({ detail }) => {
             // priority
           />
           {rate && (
-            <div className="absolute right-0 bottom-0 bg-black/70 text-orange-500 px-2 py-1">
+            <div className="absolute right-0 top-[4rem] md:top-[90%] bg-black/70 text-sm text-orange-400 pl-2 pr-1 py-[0.125rem] rounded-l-full">
               {"豆瓣 " + rate + "★"}
             </div>
           )}
@@ -167,6 +170,7 @@ const Banner = ({ detail }) => {
           <div className="absolute bottom-0 w-full h-1/6 bg-gradient-to-t md:hidden from-black via-black/70 to-transparent"></div>
           {/* <div>123</div> */}
         </div>
+        {/* <div className="absolute w-full z-20 h-1/4 -bottom-1 bg-gradient-to-t from-black via-transparent to-transparent"></div> */}
       </main>
       {/* <Image
           unoptimized={true}

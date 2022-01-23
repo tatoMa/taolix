@@ -1,3 +1,19 @@
+export const findResourceFromDoubanItem = async (item) => {
+  try {
+    let temp = await findMovieFromApiByTitle(item.title);
+    if (temp && temp.list.length) {
+      // temp = { ...temp.list[0], ...item };
+      temp = {
+        ...filterNeededVideoInfoForHero({ ...temp.list[0], ...item }),
+      };
+      if (temp.vod_id) return temp;
+    }
+  } catch (error) {}
+};
+
+export const filterHtmlTagsFromString = (str) => {
+  return str.replace(/<\/?[^>]+(>|$)/g, "");
+};
 export const shuffle = (array) => {
   let currentIndex = array.length,
     randomIndex;
