@@ -32,11 +32,11 @@ const about = () => {
                 <p className="mb-4 text-gray-400">
                   All videos on TAOLIX are NOT hosted on TAOLIX server. We only
                   collect links and information from the Internet. Every videos
-                  on TAOLIX are linkes to 3rd party. We do not provides any
-                  video from our end.
+                  on TAOLIX are links to 3rd party. We do not provides any video
+                  from our end.
                 </p>
                 <p className="mb-4 text-gray-400">
-                  If you find any video are related to your privacy please
+                  If you find any video are violated to your privacy please
                   contact us. I will remove it as fast as possible.
                 </p>
               </div>

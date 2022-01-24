@@ -96,7 +96,11 @@ const Banner = ({ detail }) => {
       <main className="relative w-full h-full flex flex-col-reverse md:flex-row z-10">
         <div className="md:w-1/2 lg:w-3/5 text-white flex items-center md:pr-4 -translate-y-10 md:translate-y-10 z-20">
           <div className="overflow-hidden relative">
-            <div className=" pr-28 md:pr-0 relative text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-orange-600 to-red-600 border-b border-red-500">
+            <div
+              className={`${
+                detail.mode !== "homePage" && "pr-28"
+              } md:pr-0 relative text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-orange-600 to-red-600 border-b border-red-500`}
+            >
               <h1>{vod_name && vod_name}</h1>
               <h2 className="text-sm font-light text-red-700/60 line-clamp-1">
                 {vod_sub && vod_sub}

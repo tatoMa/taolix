@@ -8,15 +8,16 @@ import { useInView } from "react-intersection-observer";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import "swiper/css/virtual";
 
 // import "./styles.css";
 
 // import Swiper core and required modules
-import SwiperCore, { Pagination, Navigation } from "swiper";
+import SwiperCore, { Pagination, Navigation, Virtual } from "swiper";
 import VideoItem from "./VideoItem";
 
 // install Swiper modules
-SwiperCore.use([Pagination, Navigation]);
+SwiperCore.use([Pagination, Navigation, Virtual]);
 
 const GroupSwiper = ({ videos }) => {
   const { ref, inView, entry } = useInView({
@@ -29,6 +30,12 @@ const GroupSwiper = ({ videos }) => {
       {/* <InView> */}
 
       <Swiper
+        virtual={{
+          addSlidesAfter: 6,
+          cache: true,
+          // addSlidesBefore: 8,
+          // slides: [1, 2, 3, 4, 5, 6, 7, 8],
+        }}
         style={{
           "--swiper-pagination-color": "red",
         }}
@@ -42,6 +49,7 @@ const GroupSwiper = ({ videos }) => {
         className="h-full mx-10 mb-4 mt-4"
         lazy={true}
         breakpoints={{
+          630: { slidesPerView: 7.25, slidesPerGroup: 2, spaceBetween: 6 },
           640: {
             slidesPerView: 3.25,
             slidesPerGroup: 3,
@@ -69,8 +77,8 @@ const GroupSwiper = ({ videos }) => {
           },
         }}
       >
-        {videos.list.map((movie) => (
-          <SwiperSlide key={movie.vod_id}>
+        {videos.list.map((movie, index) => (
+          <SwiperSlide key={movie.vod_id} virtualIndex={index}>
             <VideoItem
               name={movie.vod_name}
               type={movie.vod_class}
