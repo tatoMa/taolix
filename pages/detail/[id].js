@@ -12,19 +12,34 @@ import Player from "../../components/Player";
 import NextHeadSeo from "next-head-seo";
 import { getVideoUrlsFromUrlStr } from "../../utils/utils";
 
+import fetch from "isomorphic-unfetch";
+
 function Detail({ detail, id }) {
   const videoList = getVideoUrlsFromUrlStr(detail.list[0]?.vod_play_url);
 
   // console.log("detail page", videoList);
   const [play, setPlay] = useState(false);
   const [url, setUrl] = useState("");
+  const [data, setData] = useState({});
+  const getVideoListFromOtherApi = async () => {
+    try {
+      const res = await fetch(
+        "/api/cors?url=https://m3u8.feisuzyapi.com/vod/?ac=detail"
+      );
+      const data = await res.json();
+      return data;
+    } catch (error) {
+      console.log(error.toString());
+    }
+  };
 
-  useEffect(() => {
-    return () => {
-      document.documentElement.style.overflowY = "auto";
-      // console.log("cleaned up");
-    };
-  }, []);
+  // useEffect(() => {
+  //   getVideoListFromOtherApi().then((res) => console.log(res));
+  //   return () => {
+  //     document.documentElement.style.overflowY = "auto";
+  //     // console.log("cleaned up");
+  //   };
+  // }, []);
 
   return (
     <>

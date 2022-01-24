@@ -71,7 +71,7 @@ const Banner = ({ detail }) => {
 
       {/* background image section */}
       <div className="absolute top-0 left-0 w-full h-full z-0 pointer-events-none">
-        <Image
+        {/* <Image
           unoptimized={true}
           src={
             vod_pic
@@ -83,6 +83,12 @@ const Banner = ({ detail }) => {
           layout="fill"
           referrerPolicy="no-referrer"
           priority
+        /> */}
+        <img
+          src={vod_pic}
+          alt="vod_name"
+          className="object-cover blur-sm relative opacity-20 h-full w-full"
+          referrerPolicy="no-referrer"
         />
       </div>
 
@@ -90,7 +96,7 @@ const Banner = ({ detail }) => {
       <main className="relative w-full h-full flex flex-col-reverse md:flex-row z-10">
         <div className="md:w-1/2 lg:w-3/5 text-white flex items-center md:pr-4 -translate-y-10 md:translate-y-10 z-20">
           <div className="overflow-hidden relative">
-            <div className="relative text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-orange-600 to-red-600 border-b border-red-500">
+            <div className=" pr-28 md:pr-0 relative text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-orange-600 to-red-600 border-b border-red-500">
               <h1>{vod_name && vod_name}</h1>
               <h2 className="text-sm font-light text-red-700/60 line-clamp-1">
                 {vod_sub && vod_sub}
@@ -105,8 +111,8 @@ const Banner = ({ detail }) => {
                 onClick={() => playButtonHandler()}
                 className="absolute animate-bounce right-0 top-2 hover:animate-none text-transparent bg-clip-text bg-gradient-to-br from-orange-600 to-red-600 cursor-pointer flex items-center justify-end"
               >
-                <PlayIcon className="h-8 w-8 text-red-500 " />
-                <a className="text-lg">
+                <PlayIcon className="h-8 w-8 text-orange-500 " />
+                <a className="text-lg text-orange-500 z-10">
                   {detail.mode === "homePage"
                     ? "Details"
                     : url
@@ -147,7 +153,7 @@ const Banner = ({ detail }) => {
         </div>
 
         <div className="w-full min-h-[60vh] md:min-h-full md:w-1/2 lg:w-2/5 md:aspect-[3/4] relative">
-          <Image
+          {/* <Image
             unoptimized={true}
             src={
               vod_pic
@@ -159,6 +165,12 @@ const Banner = ({ detail }) => {
             layout="fill"
             referrerPolicy="no-referrer"
             // priority
+          /> */}
+          <img
+            src={vod_pic}
+            alt="vod_name"
+            className="object-cover z-10 h-full w-full"
+            referrerPolicy="no-referrer"
           />
           {rate && (
             <div className="absolute right-0 top-[4rem] md:top-[90%] bg-black/70 text-sm text-orange-400 pl-2 pr-1 py-[0.125rem] rounded-l-full">
@@ -166,7 +178,7 @@ const Banner = ({ detail }) => {
             </div>
           )}
           <div className="absolute w-full h-1/3 bg-gradient-to-b from-black/40 via-transparent to-transparent"></div>
-          <div className="hidden md:block absolute left-0 w-1/6 h-full bg-gradient-to-r from-black/90 to-transparent"></div>
+          {/* <div className="hidden md:block absolute left-0 z-20 w-1/6 h-full bg-gradient-to-r from-black/90 to-transparent"></div> */}
           <div className="absolute bottom-0 w-full h-1/6 bg-gradient-to-t md:hidden from-black via-black/70 to-transparent"></div>
           {/* <div>123</div> */}
         </div>

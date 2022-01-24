@@ -22,7 +22,13 @@ const VideoItem = ({ name, type, pic, id, remarks, rate }) => {
           onClick={() => router.push(`/detail/${id}`)}
         >
           <div className="w-full aspect-[3/4]">
-            <Image
+            <img
+              src={pic}
+              alt=""
+              className="object-cover h-full w-full"
+              referrerPolicy="no-referrer"
+            />
+            {/* <Image
               unoptimized={true}
               src={
                 pic ||
@@ -33,7 +39,7 @@ const VideoItem = ({ name, type, pic, id, remarks, rate }) => {
               layout="fill"
               referrerPolicy="no-referrer"
               loader={myLoader}
-            />
+            /> */}
           </div>
 
           <div className="absolute bottom-0 left-0 bg-black/75 text-white line-clamp-3 text-xl font-bold">
