@@ -1,14 +1,15 @@
-import Image from "next/image";
+// import Image from "next/image";
 import { PlayIcon } from "@heroicons/react/solid";
 
 import { useState } from "react";
 import { useRouter } from "next/router";
 
-import Player from "./Player";
+// import Player from "./Player";
 import {
   filterHtmlTagsFromString,
   getVideoUrlsFromUrlStr,
 } from "../utils/utils";
+import PlayerWrapper from "./PlayerWrapper";
 
 const Banner = ({ detail }) => {
   // console.log(detail);
@@ -67,7 +68,8 @@ const Banner = ({ detail }) => {
       onClick={() => indexButtonHandler()}
     >
       {/* Player */}
-      {play && <Player url={url} setPlay={setPlay} />}
+      {play && <PlayerWrapper url={url} setPlay={setPlay} />}
+      {/* {play && <Player url={url} setPlay={setPlay} />} */}
 
       {/* background image section */}
       <div className="absolute top-0 left-0 w-full h-full z-0 pointer-events-none">

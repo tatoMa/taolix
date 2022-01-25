@@ -22,8 +22,9 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-intersection-observer": "^8.33.1",
-    "react-player": "^2.9.0",
-    "swiper": "^7.3.2"
+    "swiper": "^7.3.2",
+    "video.js": "^7.17.0",
+    "videojs-contrib-hls.js": "^3.2.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.0",

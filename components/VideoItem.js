@@ -25,7 +25,7 @@ const VideoItem = ({ name, type, pic, id, remarks, rate }) => {
             <img
               src={pic}
               alt=""
-              className="object-cover h-full w-full"
+              className="object-cover h-60 md:h-full w-full"
               referrerPolicy="no-referrer"
             />
             {/* <Image

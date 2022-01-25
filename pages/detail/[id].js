@@ -1,14 +1,14 @@
-import Head from "next/head";
 import Banner from "../../components/Banner";
-import Footer from "../../components/Footer";
-import Header from "../../components/Header";
+// import Head from "next/head";
+// import Footer from "../../components/Footer";
+// import Header from "../../components/Header";
 // import VideoList from "../../components/VideoList";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { PlayIcon } from "@heroicons/react/solid";
 
 import LineBreak from "../../components/LineBreak";
 
-import Player from "../../components/Player";
+import PlayerWrapper from "../../components/PlayerWrapper";
 import NextHeadSeo from "next-head-seo";
 import { getVideoUrlsFromUrlStr } from "../../utils/utils";
 
@@ -21,17 +21,18 @@ function Detail({ detail, id }) {
   const [play, setPlay] = useState(false);
   const [url, setUrl] = useState("");
   const [data, setData] = useState({});
-  const getVideoListFromOtherApi = async () => {
-    try {
-      const res = await fetch(
-        "/api/cors?url=https://m3u8.feisuzyapi.com/vod/?ac=detail"
-      );
-      const data = await res.json();
-      return data;
-    } catch (error) {
-      console.log(error.toString());
-    }
-  };
+
+  // const getVideoListFromOtherApi = async () => {
+  //   try {
+  //     const res = await fetch(
+  //       "/api/cors?url=https://m3u8.feisuzyapi.com/vod/?ac=detail"
+  //     );
+  //     const data = await res.json();
+  //     return data;
+  //   } catch (error) {
+  //     console.log(error.toString());
+  //   }
+  // };
 
   // useEffect(() => {
   //   getVideoListFromOtherApi().then((res) => console.log(res));
@@ -61,8 +62,9 @@ function Detail({ detail, id }) {
           play && "pointer-events-none"
         }`}
       >
+        {play && <PlayerWrapper url={url} setPlay={setPlay} />}
         {/* Player */}
-        {play && <Player url={url} setPlay={setPlay} />}
+        {/* {play && <Player url={url} setPlay={setPlay} />} */}
 
         <Banner detail={detail.list[0]} />
         {videoList ? (
