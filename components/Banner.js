@@ -93,17 +93,20 @@ const Banner = ({ detail }) => {
           referrerPolicy="no-referrer"
         />
       </div>
+      <div className="absolute left-0 w-full h-1/4 -bottom-1 bg-gradient-to-t from-black via-transparent to-transparent"></div>
 
       {/* main section */}
       <main className="relative w-full h-full flex flex-col-reverse md:flex-row z-10">
         <div className="md:w-1/2 lg:w-3/5 text-white flex items-center md:pr-4 -translate-y-10 md:translate-y-10 z-20">
-          <div className="overflow-hidden relative">
-            <div
-              className={`${
-                detail.mode !== "homePage" && "pr-28"
-              } md:pr-0 relative text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-orange-600 to-red-600 border-b border-red-500`}
-            >
-              <h1>{vod_name && vod_name}</h1>
+          <div className="overflow-hidden relative w-full xl:w-[90%]">
+            <div className="md:pr-0 relative text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-orange-600 to-red-600 border-b border-red-500">
+              <h1
+                className={`${
+                  detail.mode !== "homePage" && "w-[calc(100%-6rem)]"
+                }`}
+              >
+                {vod_name && vod_name}
+              </h1>
               <h2 className="text-sm font-light text-red-700/60 line-clamp-1">
                 {vod_sub && vod_sub}
               </h2>
@@ -158,7 +161,7 @@ const Banner = ({ detail }) => {
           </div>
         </div>
 
-        <div className="w-full min-h-[60vh] md:min-h-full md:w-1/2 lg:w-2/5 md:aspect-[3/4] relative">
+        <div className="w-full min-h-[60vh] md:min-h-full md:w-1/2 lg:w-2/5 aspect-[3/4] relative">
           {/* <Image
             unoptimized={true}
             src={
@@ -183,12 +186,11 @@ const Banner = ({ detail }) => {
               {"豆瓣 " + rate + "★"}
             </div>
           )}
-          <div className="absolute w-full h-1/3 bg-gradient-to-b from-black/40 via-transparent to-transparent"></div>
+          {/* <div className="absolute w-full h-1/3 bg-gradient-to-b from-black/40 via-transparent to-transparent"></div> */}
           {/* <div className="hidden md:block absolute left-0 z-20 w-1/6 h-full bg-gradient-to-r from-black/90 to-transparent"></div> */}
-          <div className="absolute bottom-0 w-full h-1/6 bg-gradient-to-t md:hidden from-black via-black/70 to-transparent"></div>
+          <div className="absolute bottom-0 w-full h-1/6 bg-gradient-to-t from-black via-black/70 to-transparent"></div>
           {/* <div>123</div> */}
         </div>
-        {/* <div className="absolute w-full z-20 h-1/4 -bottom-1 bg-gradient-to-t from-black via-transparent to-transparent"></div> */}
       </main>
       {/* <Image
           unoptimized={true}

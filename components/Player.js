@@ -3,11 +3,13 @@ import videojs from "video.js";
 import "video.js/dist/video-js.css";
 
 export const VideoJS = (props) => {
-  const videoRef = useRef(null);
-  const playerRef = useRef(null);
   const { options, onReady } = props;
 
+  const videoRef = useRef(null);
+  const playerRef = useRef(null);
+
   useEffect(() => {
+    // load the audio decoder lib
     require("videojs-contrib-hls.js");
 
     // make sure Video.js player is only initialized once
@@ -15,28 +17,38 @@ export const VideoJS = (props) => {
       const videoElement = videoRef.current;
       if (!videoElement) return;
 
+      // initialize Video.js player
       const player = (playerRef.current = videojs(
         videoElement,
         {
           ...options,
           userActions: {
+            // hot keys for this player
             hotkeys: function (event) {
               // `space` key = pause
               if (event.which === 32) {
                 // this.playing ? this.play() : this.pause();
-                this.paused() ? this.play() : this.pause();
+                player.paused() ? player.play() : player.pause();
               }
               // left arror back forward
               if (event.which === 37) {
-                this.currentTime(this.currentTime() - 10);
+                player.currentTime(player.currentTime() - 10);
               }
               // right arror fast forward
               if (event.which === 39) {
-                this.currentTime(this.currentTime() + 10);
+                player.currentTime(player.currentTime() + 10);
               }
               // m key for mute and unmute
               if (event.which === 77) {
-                this.muted() ? this.muted(false) : this.muted(true);
+                player.muted() ? player.muted(false) : player.muted(true);
+              }
+              // up key for volume up
+              if (event.which === 38) {
+                player.volume(player.volume() + 0.1);
+              }
+              // down key for volume down
+              if (event.which === 40) {
+                player.volume(player.volume() - 0.1);
               }
             },
           },
@@ -46,17 +58,17 @@ export const VideoJS = (props) => {
           onReady && onReady(player);
         }
       ));
+
+      // auto focus on video player
+      if (videoRef.current) {
+        videoRef.current.focus();
+      }
     }
   }, [options, videoRef]);
 
   // Dispose the Video.js player when the functional component unmounts
   useEffect(() => {
     const player = playerRef.current;
-
-    // auto focus on video player
-    if (videoRef.current) {
-      videoRef.current.focus();
-    }
 
     return () => {
       if (player) {
@@ -67,11 +79,11 @@ export const VideoJS = (props) => {
   }, [playerRef]);
 
   return (
-    <div data-vjs-player>
+    <div data-vjs-player style={{ outline: "none" }}>
       <video
         ref={videoRef}
-        style={{ outline: "none" }}
-        className="video-js vjs-big-play-centered !outline-0 focus:outline-0 active:outline-0 hover:outline-0"
+        style={{ outline: "none", maxHeight: "100vh" }}
+        className="video-js vjs-big-play-centered"
       />
     </div>
   );
