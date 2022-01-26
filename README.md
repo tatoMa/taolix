@@ -62,6 +62,8 @@ npm run build
   - [x] Icons for all platform
   - [x] Cache stragary
   - [x] All needs for Lighthouse
+- [x] IOS and Safari optimise
+- [x] New player easier to use on all platform
 - [ ] Adaptive design
 - [ ] History page
 - [ ] Profile manager

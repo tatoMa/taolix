@@ -2,6 +2,8 @@ import React, { useEffect, useRef } from "react";
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
 
+require("@silvermine/videojs-chromecast")(videojs);
+
 export const VideoJS = (props) => {
   const { options, onReady } = props;
 
