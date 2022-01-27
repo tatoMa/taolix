@@ -15,7 +15,9 @@ export default function PlayerWrapper({ url, setPlay }) {
     nativeControlsForTouch: true,
     techOrder: ["chromecast", "html5"], // You may have more Tech, such as Flash or HLS
     plugins: {
-      chromecast: {},
+      chromecast: {
+        buttonPositionIndex: -2,
+      },
     },
     sources: [
       {

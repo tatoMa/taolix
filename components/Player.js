@@ -3,6 +3,7 @@ import videojs from "video.js";
 import "video.js/dist/video-js.css";
 
 require("@silvermine/videojs-chromecast")(videojs);
+require("@silvermine/videojs-chromecast/dist/silvermine-videojs-chromecast.css");
 
 export const VideoJS = (props) => {
   const { options, onReady } = props;
@@ -87,6 +88,13 @@ export const VideoJS = (props) => {
         style={{ outline: "none", maxHeight: "100vh" }}
         className="video-js vjs-big-play-centered"
       />
+      <style global jsx>{`
+        .vjs-chromecast-button .vjs-icon-placeholder {
+          display: block;
+          width: 100%;
+          height: 60%;
+        }
+      `}</style>
     </div>
   );
 };
