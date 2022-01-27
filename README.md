@@ -64,10 +64,11 @@ npm run build
   - [x] All needs for Lighthouse
 - [x] IOS and Safari optimise
 - [x] New player easier to use on all platform
+- [x] Chromecast
+- [x] Airplay
 - [ ] Adaptive design
 - [ ] History page
 - [ ] Profile manager
-- [ ] Chromecast
 - [ ] More source
 - [ ] App
 

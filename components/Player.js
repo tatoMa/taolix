@@ -94,6 +94,9 @@ export const VideoJS = (props) => {
           width: 100%;
           height: 60%;
         }
+        .vjs-chromecast-button.vjs-control.vjs-button.vjs-hidden {
+          display: block !important;
+        }
       `}</style>
     </div>
   );
