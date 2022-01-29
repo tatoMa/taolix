@@ -80,11 +80,7 @@ const HeadTag = () => {
         async
         src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
       ></script>
-      <script
-        type="text/javascript"
-        src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1"
-        defer
-      ></script>
+
       <script
         dangerouslySetInnerHTML={{
           __html: `

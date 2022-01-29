@@ -1,3 +1,4 @@
+import Head from "next/head";
 import React, { useEffect, useRef } from "react";
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
@@ -82,23 +83,31 @@ export const VideoJS = (props) => {
   }, [playerRef]);
 
   return (
-    <div data-vjs-player style={{ outline: "none" }}>
-      <video
-        ref={videoRef}
-        style={{ outline: "none", maxHeight: "100vh" }}
-        className="video-js vjs-big-play-centered"
-      />
-      <style global jsx>{`
-        .vjs-chromecast-button .vjs-icon-placeholder {
-          display: block;
-          width: 100%;
-          height: 60%;
-        }
-        .vjs-chromecast-button.vjs-control.vjs-button.vjs-hidden {
-          display: block !important;
-        }
-      `}</style>
-    </div>
+    <>
+      <Head>
+        <script
+          type="text/javascript"
+          src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1"
+        ></script>
+      </Head>
+      <div data-vjs-player style={{ outline: "none" }}>
+        <video
+          ref={videoRef}
+          style={{ outline: "none", maxHeight: "100vh" }}
+          className="video-js vjs-big-play-centered"
+        />
+        <style global jsx>{`
+          .vjs-chromecast-button .vjs-icon-placeholder {
+            display: block;
+            width: 100%;
+            height: 60%;
+          }
+          .vjs-chromecast-button.vjs-control.vjs-button.vjs-hidden {
+            display: block !important;
+          }
+        `}</style>
+      </div>
+    </>
   );
 };
 
