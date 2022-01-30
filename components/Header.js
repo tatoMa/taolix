@@ -54,22 +54,26 @@ function Header() {
       {/* Loading spinner */}
       <Loading isLoading={isSearching} setIsLoading={setIsSearching} />
 
-      <div className="max-w-screen-2xl flex grow justify-between items-center h-16 px-2 sm:px-6 md:px-10 lg:px-14">
+      <div className="max-w-screen-2xl flex grow justify-between items-center h-16 px-1 sm:px-6 md:px-10 lg:px-14">
         {/* Logo */}
         <div>
           <Link href="/">
-            <img
-              src="/logo.png"
-              alt="logo"
-              className="h-9 object-contain cursor-pointer ml-0 py-[0.4em] px-2"
-            />
+            <a className="block h-9 cursor-pointer hover:scale-110 active:scale-110 duration-100 ml-0 py-[0.4em] px-2">
+              <img
+                src="/logo.png"
+                alt="logo"
+                className="object-cover h-full w-full"
+              />
+            </a>
           </Link>
         </div>
 
         {/* Navigation Links */}
         <div
           className={`absolute lg:relative w-screen lg:w-fit h-screen left-0 top-0 lg:h-6 lg:block flex flex-col transition-all duration-200 bg-black/90 lg:bg-transparent ${
-            menu ? "flex justify-center items-center" : "hidden"
+            menu
+              ? "flex justify-center items-center animate-[animation-fade-in_0.3s_ease-in-out]"
+              : "hidden"
           }`}
         >
           {links.map((link) => (
@@ -156,12 +160,28 @@ function Header() {
             aria-label="toggle menu"
             onClick={() => setMenu(!menu)}
           >
-            <svg viewBox="0 0 24 24" className="w-6 h-6 fill-current">
-              <path
-                fillRule="evenodd"
-                d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"
-              ></path>
-            </svg>
+            {!menu ? (
+              <svg
+                viewBox="0 0 24 24"
+                className="w-6 h-6 fill-current animate-[animation-fade-in2_0.3s_ease-in-out]"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"
+                ></path>
+              </svg>
+            ) : (
+              <svg
+                class="w-6 h-6 fill-current animate-[animation-fade-in_0.3s_ease-in-out]"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M6 18L18 6M6 6L18 18"
+                  stroke="currentColor"
+                  stroke-width="3"
+                />
+              </svg>
+            )}
           </button>
         </div>
       </div>

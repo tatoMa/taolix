@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useInView } from "react-intersection-observer";
 
@@ -17,18 +18,16 @@ const VideoItem = ({ name, type, pic, id, remarks, rate }) => {
   return (
     <div ref={ref}>
       {inView ? (
-        <div
-          className="overflow-hidden relative bg-black cursor-pointer hover:brightness-75"
-          onClick={() => router.push(`/detail/${id}`)}
-        >
-          <div className="w-full aspect-[3/4]">
-            <img
-              src={pic}
-              alt=""
-              className="object-cover h-60 md:h-full w-full"
-              referrerPolicy="no-referrer"
-            />
-            {/* <Image
+        <Link href={`/detail/${id}`}>
+          <a className="block group overflow-hidden relative bg-black cursor-pointer hover:brightness-75">
+            <div className="w-full aspect-[3/4]">
+              <img
+                src={pic}
+                alt=""
+                className="object-cover h-60 md:h-full w-full group-focus:scale-110 group-hover:scale-125 group-active:scale-125 duration-100"
+                referrerPolicy="no-referrer"
+              />
+              {/* <Image
               unoptimized={true}
               src={
                 pic ||
@@ -40,23 +39,24 @@ const VideoItem = ({ name, type, pic, id, remarks, rate }) => {
               referrerPolicy="no-referrer"
               loader={myLoader}
             /> */}
-          </div>
-
-          <div className="absolute bottom-0 left-0 bg-black/75 text-white line-clamp-3 text-xl font-bold">
-            {name}
-            <span className="block text-xs text-gray-400 line-clamp-1">
-              {type}
-            </span>
-          </div>
-          <div className="absolute top-0 right-0 bg-black/75 text-sm text-gray-300 pt-1">
-            {remarks}
-          </div>
-          {rate && (
-            <div className="absolute top-0 left-0 bg-black/75 text-sm text-orange-400 pt-1 pl-1">
-              豆瓣{rate}★
             </div>
-          )}
-        </div>
+
+            <div className="absolute bottom-0 left-0 bg-black/75 text-white line-clamp-3 text-xl font-bold">
+              {name}
+              <span className="block text-xs text-gray-400 line-clamp-1">
+                {type}
+              </span>
+            </div>
+            <div className="absolute top-0 right-0 bg-black/75 text-sm text-gray-300 pt-1">
+              {remarks}
+            </div>
+            {rate && (
+              <div className="absolute top-0 left-0 bg-black/75 text-sm text-orange-400 pt-1 pl-1">
+                豆瓣{rate}★
+              </div>
+            )}
+          </a>
+        </Link>
       ) : (
         <div className="animate-pulse rounded bg-slate-200 w-full aspect-[3/4] p-2"></div>
       )}
