@@ -13,9 +13,15 @@ import NextHeadSeo from "next-head-seo";
 import { getVideoUrlsFromUrlStr } from "../../utils/utils";
 
 import fetch from "isomorphic-unfetch";
+import VideoPlayList from "../../components/VideoPlayList";
 
-function Detail({ detail, id }) {
+function Detail({ detail, id, detail2 }) {
   const videoList = getVideoUrlsFromUrlStr(detail.list[0]?.vod_play_url);
+  let videoList2 = {};
+  console.log(!!detail2);
+  if (Object.keys(detail2).length > 0 && detail2.list.length > 0) {
+    videoList2 = getVideoUrlsFromUrlStr(detail2.list[0]?.vod_play_url);
+  }
 
   // console.log("detail page", videoList);
   const [play, setPlay] = useState(false);
@@ -67,41 +73,31 @@ function Detail({ detail, id }) {
         {/* {play && <Player url={url} setPlay={setPlay} />} */}
 
         <Banner detail={detail.list[0]} />
-        {videoList ? (
-          <div className="-translate-y-12 md:translate-y-0">
-            <LineBreak title="PLAY LIST" />
-            <div className="text-gray-400 text-sm my-3">
-              ALL resources are from 3rd party website.
-            </div>
-            <div className="mt-1">
-              {videoList.map((video) => {
-                const { name, url } = video;
-                return (
-                  <a
-                    key={name}
-                    className="odd:bg-black first:border-t even:bg-gray-800 cursor-pointer overflow-hidden flex items-center py-3 border-b border-gray-400 text-gray-400 hover:text-white hover:border-white"
-                    onClick={() => {
-                      setPlay(true);
-                      setUrl(url);
-                      scroll(0, 0);
-                      document.documentElement.style.overflowY = "hidden";
-                    }}
-                    // onClick={() => {
-                    //   window.location.href = url;
-                    // }}
-                  >
-                    <div>
-                      <PlayIcon className="h-8 w-8 mr-4 text-blue-white" />
-                    </div>
-                    <div>{name}</div>
-                  </a>
-                );
-              })}
-            </div>
-          </div>
-        ) : (
-          <p className="font-bold text-gray-300 text-3xl">No result found</p>
-        )}
+        <LineBreak title="PLAY LIST" />
+        <div className="text-gray-400 text-sm my-3">
+          ALL resources are from 3rd party website.
+        </div>
+        <div className="flex flex-row-reverse">
+          {Object.keys(detail).length > 0 && (
+            <VideoPlayList
+              index={2}
+              videoList={videoList}
+              setPlay={setPlay}
+              setUrl={setUrl}
+              url={url}
+            />
+          )}
+          {Object.keys(detail2).length > 0 && (
+            <VideoPlayList
+              index={1}
+              title={false}
+              videoList={videoList2}
+              setPlay={setPlay}
+              setUrl={setUrl}
+              url={url}
+            />
+          )}
+        </div>
       </main>
     </>
   );
@@ -118,12 +114,28 @@ export async function getServerSideProps({ params }) {
   );
   const detail = await res.json();
 
+  const res2 = await fetch(
+    `${process.env.MOVIE_API_SOURCE_2}/?ac=detail&wd=${encodeURI(
+      detail.list[0].vod_name
+    )}`
+  );
+  const temp2 = await res2.json();
+  let detail2 = {};
+  if (temp2.total >= 1) {
+    detail2.list = [];
+
+    detail2.list[0] = temp2.list?.find(
+      (item) => item.vod_name == detail.list[0].vod_name
+    );
+  }
+  const result2 = JSON.parse(JSON.stringify(detail2));
   // By returning { props: { posts } }, the Blog component
   // will receive `posts` as a prop at build time
   return {
     props: {
       detail,
       id: params.id,
+      detail2: result2,
     },
   };
 }

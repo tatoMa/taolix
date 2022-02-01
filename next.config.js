@@ -32,6 +32,7 @@ module.exports = withPWA({
       "p2.qhimg.com",
       "pic0.iqiyipic.com",
       "p1.ssl.qhimgs1.com",
+      "xk.3v7.net",
     ],
   },
 });

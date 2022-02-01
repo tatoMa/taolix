@@ -38,7 +38,7 @@ export default function PlayerWrapper({ url, setPlay }) {
       className="flex h-full w-full fixed top-0 left-0 items-center bg-black/60 z-50 pointer-events-auto "
       onKeyDown={handleKeyDown}
     >
-      <div className="w-full max-h-[100vh]">
+      <div className="w-full">
         <XIcon
           className="h-20 w-20 max-h-[8vw] max-w-[8vw] text-blue-white absolute right-0 text-white bg-black/40 cursor-pointer pointer-events-auto hover:bg-white hover:text-black animate-fadeIn z-50"
           onClick={() => {

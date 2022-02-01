@@ -172,13 +172,13 @@ function Header() {
               </svg>
             ) : (
               <svg
-                class="w-6 h-6 fill-current animate-[animation-fade-in_0.3s_ease-in-out]"
+                className="w-6 h-6 fill-current animate-[animation-fade-in_0.3s_ease-in-out]"
                 viewBox="0 0 24 24"
               >
                 <path
                   d="M6 18L18 6M6 6L18 18"
                   stroke="currentColor"
-                  stroke-width="3"
+                  strokeWidth="3"
                 />
               </svg>
             )}
