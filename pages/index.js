@@ -54,13 +54,13 @@ export default function Home({
           <GroupSwiper videos={videosNewCnTvShow} />
 
           {/* Line Break  */}
-          <LineBreak title="AMERICAN TV SHOWS" />
+          <LineBreak title="KOREAN TV SHOWS" />
 
           {/* Video List Section */}
           <GroupSwiper videos={videosNewKrTvShow} />
 
           {/* Line Break  */}
-          <LineBreak title="JAPANESE TV SHOWS" />
+          <LineBreak title="AMERICAN TV SHOWS" />
 
           {/* Video List Section */}
           <GroupSwiper videos={videosNewUsTvShow} />
@@ -72,7 +72,7 @@ export default function Home({
           <GroupSwiper videos={videosNewJpAnime} />
 
           {/* Line Break  */}
-          <LineBreak title="ASIAN REALITY TV" />
+          <LineBreak title="CHINESE REALITY TV" />
 
           {/* Video List Section */}
           <GroupSwiper videos={videosNewCnReality} />
