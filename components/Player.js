@@ -1,4 +1,4 @@
-import Head from "next/head";
+import Script from "next/script";
 import React, { useEffect, useRef } from "react";
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
@@ -84,12 +84,12 @@ export const VideoJS = (props) => {
 
   return (
     <>
-      <Head>
-        <script
-          type="text/javascript"
-          src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1"
-        ></script>
-      </Head>
+      <Script
+        type="text/javascript"
+        strategy="afterInteractive"
+        src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1"
+      ></Script>
+
       <div data-vjs-player style={{ outline: "none" }}>
         <video
           ref={videoRef}

@@ -18,7 +18,7 @@ import VideoPlayList from "../../components/VideoPlayList";
 function Detail({ detail, id, detail2 }) {
   const videoList = getVideoUrlsFromUrlStr(detail.list[0]?.vod_play_url);
   let videoList2 = {};
-  console.log(!!detail2);
+
   if (Object.keys(detail2).length > 0 && detail2.list.length > 0) {
     videoList2 = getVideoUrlsFromUrlStr(detail2.list[0]?.vod_play_url);
   }
