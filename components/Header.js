@@ -58,12 +58,8 @@ function Header() {
         {/* Logo */}
         <div>
           <Link href="/">
-            <a className="block h-9 cursor-pointer hover:scale-110 active:scale-110 duration-100 ml-0 py-[0.4em] px-2">
-              <img
-                src="/logo.png"
-                alt="logo"
-                className="object-cover h-full w-full"
-              />
+            <a className="block w-40 cursor-pointer hover:scale-110 active:scale-110 duration-100 ml-0 py-[0.4em] px-2">
+              <img src="/logo.png" alt="logo" className="object-contain" />
             </a>
           </Link>
         </div>
