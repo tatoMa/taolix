@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 
 import Loading from "./Loading";
+import { MAJORS } from "../utils/const";
 
 function Header() {
   const router = useRouter();
@@ -41,7 +42,7 @@ function Header() {
     },
     {
       name: "ANIME",
-      linkUrl: "/list/27/1",
+      linkUrl: "/list/28/1",
     },
   ];
 
@@ -72,8 +73,27 @@ function Header() {
               : "hidden"
           }`}
         >
-          {links.map((link) => (
-            <Link href={link.linkUrl} key={link.name}>
+          <Link href={`/`}>
+            <a
+              onClick={() => setMenu(false)}
+              className={`
+              hover:text-white
+              transition
+              duration-300
+              font-medium
+              p-2
+              xl:p-3
+              mt-6 md:mt-0
+              text-4xl md:text-4xl lg:text-base
+              uppercase
+              ${router.asPath == "/" ? "text-white" : "text-gray-400"}
+            `}
+            >
+              home
+            </a>
+          </Link>
+          {MAJORS.map((link) => (
+            <Link href={`/list/${link.type}/1`} key={link.type}>
               <a
                 onClick={() => setMenu(false)}
                 className={`
@@ -85,10 +105,11 @@ function Header() {
               xl:p-3
               mt-6 md:mt-0
               text-4xl md:text-4xl lg:text-base
-              ${router.asPath == link.linkUrl ? "text-white" : "text-gray-400"}
+              uppercase
+              ${router.query.type == link.type ? "text-white" : "text-gray-400"}
             `}
               >
-                {link.name}
+                {link.classify}
               </a>
             </Link>
           ))}

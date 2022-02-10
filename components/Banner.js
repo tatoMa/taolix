@@ -62,8 +62,7 @@ const Banner = ({ detail }) => {
   return (
     <div
       className={`w-full md:aspect-[3/2] lg:aspect-[16/7] ${
-        detail.mode === "homePage" &&
-        "px-0 md:px-6 lg:px-8 cursor-pointer active:brightness-125 hover:brightness-110"
+        detail.mode === "homePage" && "px-0 md:px-6 lg:px-8 cursor-pointer"
       }`}
       onClick={() => indexButtonHandler()}
     >
@@ -96,7 +95,7 @@ const Banner = ({ detail }) => {
       <div className="absolute left-0 w-full h-1/4 -bottom-1 bg-gradient-to-t from-black via-transparent to-transparent"></div>
 
       {/* main section */}
-      <main className="relative w-full h-full flex flex-col-reverse md:flex-row z-10">
+      <main className="relative w-full h-full flex flex-col-reverse md:flex-row z-10 group">
         <div className="md:w-1/2 lg:w-3/5 text-white flex items-center md:pr-4 -translate-y-10 md:translate-y-10 z-20">
           <div className="overflow-hidden relative w-full xl:w-[90%]">
             <div className="md:pr-0 relative text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-orange-600 to-red-600 border-b border-red-500">
@@ -161,7 +160,7 @@ const Banner = ({ detail }) => {
           </div>
         </div>
 
-        <div className="w-full min-h-[60vh] md:min-h-full md:w-1/2 lg:w-2/5 aspect-[3/4] relative">
+        <div className="w-full min-h-[60vh] md:min-h-full md:w-1/2 lg:w-2/5 aspect-[3/4] relative overflow-hidden">
           {/* <Image
             unoptimized={true}
             src={
@@ -178,7 +177,10 @@ const Banner = ({ detail }) => {
           <img
             src={vod_pic}
             alt="vod_name"
-            className="object-cover z-10 h-full w-full"
+            className={`object-cover z-10 h-full w-full ${
+              detail.mode === "homePage" &&
+              "group-focus:scale-110 group-hover:scale-110 group-active:scale-110 duration-300"
+            }`}
             referrerPolicy="no-referrer"
           />
           {rate && (

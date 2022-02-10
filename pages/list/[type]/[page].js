@@ -3,10 +3,10 @@ import VideoListsSection from "../../../components/VideoListsSection";
 import Pagination from "../../../components/Pagination";
 import GenreList from "../../../components/GenreList";
 import NextHeadSeo from "next-head-seo";
-import { genres } from "../../../utils/utils";
+import { GENRES } from "../../../utils/const";
 
 export default function Home({ videos, page, t }) {
-  const group = genres.find((item) => item.type == t);
+  const group = GENRES.find((item) => item.type == t);
   // console.log(group);
   return (
     <>

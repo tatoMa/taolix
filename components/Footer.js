@@ -1,5 +1,6 @@
 import Link from "next/link";
 import MobileBottomMenu from "./MobileBottomMenu";
+import { MAJORS } from "../utils/const";
 
 const Footer = () => {
   return (
@@ -62,26 +63,29 @@ const Footer = () => {
             <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-3">
               <div>
                 <div className="uppercase text-white">Video</div>
-                <Link href={`/list/2/1`}>
-                  <a className="block mt-2 text-sm text-gray-400 hover:text-white">
-                    Movies
-                  </a>
-                </Link>
-                <Link href={`/list/15/1`}>
+                {MAJORS.map((link) => (
+                  <Link href={`/list/${link.type}/1`} key={link.type}>
+                    <a className="block mt-2 text-sm text-gray-400 hover:text-white uppercase">
+                      {link.classify}
+                    </a>
+                  </Link>
+                ))}
+
+                {/* <Link href={`/list/${tvshowId}/1`}>
                   <a className="block mt-2 text-sm text-gray-400 hover:text-white">
                     TV Shows
                   </a>
                 </Link>
-                <Link href={`/list/22/1`}>
+                <Link href={`/list/${realityId}/1`}>
                   <a className="block mt-2 text-sm text-gray-400 hover:text-white">
                     Reality Shows
                   </a>
                 </Link>
-                <Link href={`/list/27/1`}>
+                <Link href={`/list/${animeId}/1`}>
                   <a className="block mt-2 text-sm text-gray-400 hover:text-white">
                     Anime
                   </a>
-                </Link>
+                </Link> */}
               </div>
 
               <div>
