@@ -21,22 +21,22 @@ const MobileBottomMenu = () => {
     },
     {
       name: "MOVIE",
-      linkUrl: "/list/6/1",
+      linkUrl: "/list/2/1",
       icon: FilmIcon,
     },
     {
       name: "TV SHOW",
-      linkUrl: "/list/13/1",
+      linkUrl: "/list/15/1",
       icon: VideoCameraIcon,
     },
     {
       name: "REALITY",
-      linkUrl: "/list/26/1",
+      linkUrl: "/list/22/1",
       icon: UserGroupIcon,
     },
     {
       name: "ANIME",
-      linkUrl: "/list/31/1",
+      linkUrl: "/list/27/1",
       icon: PhotographIcon,
     },
   ];

@@ -53,34 +53,34 @@ export async function getStaticProps({ params: { type, page } }) {
 export async function getStaticPaths() {
   return {
     paths: [
+      { params: { type: "2", page: "1" } },
+      { params: { type: "3", page: "1" } },
+      { params: { type: "4", page: "1" } },
+      { params: { type: "5", page: "1" } },
       { params: { type: "6", page: "1" } },
       { params: { type: "7", page: "1" } },
       { params: { type: "8", page: "1" } },
       { params: { type: "9", page: "1" } },
       { params: { type: "10", page: "1" } },
       { params: { type: "11", page: "1" } },
-      { params: { type: "20", page: "1" } },
-      { params: { type: "21", page: "1" } },
-      { params: { type: "23", page: "1" } },
-      { params: { type: "34", page: "1" } },
-      { params: { type: "35", page: "1" } },
-      { params: { type: "36", page: "1" } },
-      { params: { type: "37", page: "1" } },
+      { params: { type: "12", page: "1" } },
       { params: { type: "13", page: "1" } },
-      { params: { type: "14", page: "1" } },
+
       { params: { type: "15", page: "1" } },
       { params: { type: "16", page: "1" } },
+      { params: { type: "17", page: "1" } },
+      { params: { type: "18", page: "1" } },
+      { params: { type: "19", page: "1" } },
+      { params: { type: "20", page: "1" } },
+
       { params: { type: "22", page: "1" } },
+      { params: { type: "23", page: "1" } },
       { params: { type: "24", page: "1" } },
       { params: { type: "25", page: "1" } },
-      { params: { type: "26", page: "1" } },
+
       { params: { type: "27", page: "1" } },
       { params: { type: "28", page: "1" } },
       { params: { type: "29", page: "1" } },
-      { params: { type: "31", page: "1" } },
-      { params: { type: "30", page: "1" } },
-      { params: { type: "32", page: "1" } },
-      { params: { type: "33", page: "1" } },
     ],
     fallback: "blocking", // See the "fallback" section below
   };

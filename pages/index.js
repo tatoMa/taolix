@@ -103,27 +103,27 @@ export async function getStaticProps() {
   );
 
   const videosNewAction = await getVideosListFromApi(
-    `${process.env.MOVIE_API}/?ac=detail&t=6`
+    `${process.env.MOVIE_API}/?ac=detail&t=2`
   );
 
   const videosNewCnTvShow = await getVideosListFromApi(
-    `${process.env.MOVIE_API}/?ac=detail&t=13`
-  );
-
-  const videosNewKrTvShow = await getVideosListFromApi(
-    `${process.env.MOVIE_API}/?ac=detail&t=16`
-  );
-
-  const videosNewUsTvShow = await getVideosListFromApi(
     `${process.env.MOVIE_API}/?ac=detail&t=15`
   );
 
+  const videosNewKrTvShow = await getVideosListFromApi(
+    `${process.env.MOVIE_API}/?ac=detail&t=19`
+  );
+
+  const videosNewUsTvShow = await getVideosListFromApi(
+    `${process.env.MOVIE_API}/?ac=detail&t=18`
+  );
+
   const videosNewCnReality = await getVideosListFromApi(
-    `${process.env.MOVIE_API}/?ac=detail&t=26`
+    `${process.env.MOVIE_API}/?ac=detail&t=22`
   );
 
   const videosNewJpAnime = await getVideosListFromApi(
-    `${process.env.MOVIE_API}/?ac=detail&t=31`
+    `${process.env.MOVIE_API}/?ac=detail&t=28`
   );
 
   // const videosNewCnAnime = await getVideosListFromApi(

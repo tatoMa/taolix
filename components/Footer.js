@@ -62,22 +62,22 @@ const Footer = () => {
             <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-3">
               <div>
                 <div className="uppercase text-white">Video</div>
-                <Link href={`/list/6/1`}>
+                <Link href={`/list/2/1`}>
                   <a className="block mt-2 text-sm text-gray-400 hover:text-white">
                     Movies
                   </a>
                 </Link>
-                <Link href={`/list/13/1`}>
+                <Link href={`/list/15/1`}>
                   <a className="block mt-2 text-sm text-gray-400 hover:text-white">
                     TV Shows
                   </a>
                 </Link>
-                <Link href={`/list/26/1`}>
+                <Link href={`/list/22/1`}>
                   <a className="block mt-2 text-sm text-gray-400 hover:text-white">
                     Reality Shows
                   </a>
                 </Link>
-                <Link href={`/list/31/1`}>
+                <Link href={`/list/27/1`}>
                   <a className="block mt-2 text-sm text-gray-400 hover:text-white">
                     Anime
                   </a>
