@@ -3,7 +3,7 @@ import lostPic from "../public/lost.jpg";
 import Link from "next/link";
 import NextHeadSeo from "next-head-seo";
 
-export default function Custom500({}) {
+export default function Custom404({}) {
   return (
     <>
       <NextHeadSeo
@@ -25,7 +25,7 @@ export default function Custom500({}) {
         </div>
         <div className="absolute top-1/3">
           <div className="flex flex-col items-center ">
-            <p className=" text-gray-400 text-md">500 ERROR</p>
+            <p className=" text-gray-400 text-md">404 ERROR</p>
             <p className=" text-2xl md:text-4xl text-white">
               Uh oh! I think you're lost.
             </p>

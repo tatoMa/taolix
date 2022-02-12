@@ -11,7 +11,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   return (
     <SessionProvider session={session}>
       <NextHeadSeo
-        title={"Taolix: Free online movies, tv shows and anime stream service"}
+        title={"TAOLIX: Free Online Movies, TV Shows And Anime Stream Service"}
         canonical={"https://www.taolix.com"}
         description={
           "Taolix is a open source website where users find and play movies, shows and anime from different countries for free."
@@ -36,7 +36,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
         ]}
         og={{
           title:
-            "Taolix: Free online movies, tv shows and anime stream service.",
+            "TAOLIX: Free Online Movies, TV Shows And Anime Stream Service",
           description:
             "Taolix is a open source website where users find and play movies, shows and anime from different countries for free.",
           image: "https://www.taolix.com/logo.png",
