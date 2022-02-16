@@ -1,5 +1,16 @@
 const withPWA = require("next-pwa");
 module.exports = withPWA({
+  redirects() {
+    return [
+      process.env.MAINTENANCE_MODE === "1"
+        ? {
+            source: "/((?!maintenance).*)",
+            destination: "/maintenance.html",
+            permanent: false,
+          }
+        : null,
+    ].filter(Boolean);
+  },
   pwa: {
     dest: "public",
     publicExcludes: [
