@@ -1,6 +1,6 @@
 # TAOLIX
 
-## The open source online video stream service site
+## A open source online video stream service Progressive Web App
 
 [Deployed link](https://www.taolix.com/)
 
@@ -9,17 +9,17 @@ powered by NEXT.js
 
 ## Features
 
+- PWA
+- Lighting fast user experience
 - Modern UI design
 - Top movies and shows list from Netflix
 - Play video stream
-- Auto and manage your profile
-- Play history and favorite list
 
 ## Tech
 
 Taolix uses a number of open source projects to work properly:
 
-- NEXTJS (SSG + SSR)
+- NEXTJS (SSG + ISG + SSR)
 - NEXT-AUTH
 - Axios
 - Videojs
@@ -66,10 +66,10 @@ npm run build
 - [x] New player easier to use on all platform
 - [x] Chromecast
 - [x] Airplay
+- [x] More source
 - [ ] Adaptive design
 - [ ] History page
 - [ ] Profile manager
-- [ ] More source
 - [ ] App
 
 ## License
