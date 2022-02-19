@@ -78,20 +78,20 @@ function Detail({ detail, id, detail2 }) {
           ALL resources are from 3rd party website.
         </div>
         <div className="flex flex-row-reverse">
-          {Object.keys(detail).length > 0 && (
+          {Object.keys(detail2).length > 0 && (
             <VideoPlayList
               index={2}
-              videoList={videoList}
+              title={false}
+              videoList={videoList2}
               setPlay={setPlay}
               setUrl={setUrl}
               url={url}
             />
           )}
-          {Object.keys(detail2).length > 0 && (
+          {Object.keys(detail).length > 0 && (
             <VideoPlayList
               index={1}
-              title={false}
-              videoList={videoList2}
+              videoList={videoList}
               setPlay={setPlay}
               setUrl={setUrl}
               url={url}

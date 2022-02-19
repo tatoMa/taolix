@@ -1,5 +1,4 @@
 import {
-  getVideosListFromApi,
   getVideosListFromDouban,
   shuffle,
   findResourceFromDoubanItem,
@@ -18,8 +17,6 @@ export default function Home({
   videosNewUsTvShow,
   videosNewCnReality,
   videosNewJpAnime,
-  // videosNewCnAnime,
-  // videosNewHorror,
 }) {
   // console.log(selectedVideosForHero);
   return (
@@ -76,18 +73,6 @@ export default function Home({
 
           {/* Video List Section */}
           <GroupSwiper videos={videosNewCnReality} />
-
-          {/* Line Break  */}
-          {/* <LineBreak title="CHINESE ANIME" /> */}
-
-          {/* Video List Section */}
-          {/* <GroupSwiper videos={videosNewCnAnime} /> */}
-
-          {/* Line Break  */}
-          {/* <LineBreak title="HORROR MOVIES" /> */}
-
-          {/* Video List Section */}
-          {/* <GroupSwiper videos={videosNewHorror} /> */}
         </div>
       </div>
     </>
@@ -97,42 +82,66 @@ export default function Home({
 export async function getStaticProps() {
   // Call an external API endpoint to get posts.
   // You can use any data fetching library
+  const api_url =
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:3000"
+      : "${process.env.SITE_URL}";
 
-  const videosNewAll = await getVideosListFromApi(
-    `${process.env.MOVIE_API}/?ac=detail`
-  );
+  let resNewList;
+  try {
+    resNewList = await fetch(`${api_url}/api/list`);
+  } catch (e) {
+    console.error("error: ", e);
+  }
+  const videosNewAll = await resNewList.json();
 
-  const videosNewAction = await getVideosListFromApi(
-    `${process.env.MOVIE_API}/?ac=detail&t=2`
-  );
+  let resNewAction;
+  try {
+    resNewAction = await fetch(`${api_url}/api/list/2/1`);
+  } catch (e) {
+    console.error("error: ", e);
+  }
+  const videosNewAction = await resNewAction.json();
 
-  const videosNewCnTvShow = await getVideosListFromApi(
-    `${process.env.MOVIE_API}/?ac=detail&t=15`
-  );
+  let resNewCnShow;
+  try {
+    resNewCnShow = await fetch(`${api_url}/api/list/15/1`);
+  } catch (e) {
+    console.error("error: ", e);
+  }
+  const videosNewCnTvShow = await resNewCnShow.json();
 
-  const videosNewKrTvShow = await getVideosListFromApi(
-    `${process.env.MOVIE_API}/?ac=detail&t=19`
-  );
+  let resNewKrShow;
+  try {
+    resNewKrShow = await fetch(`${api_url}/api/list/19/1`);
+  } catch (e) {
+    console.error("error: ", e);
+  }
+  const videosNewKrTvShow = await resNewKrShow.json();
 
-  const videosNewUsTvShow = await getVideosListFromApi(
-    `${process.env.MOVIE_API}/?ac=detail&t=18`
-  );
+  let resNewUsShow;
+  try {
+    resNewUsShow = await fetch(`${api_url}/api/list/18/1`);
+  } catch (e) {
+    console.error("error: ", e);
+  }
+  const videosNewUsTvShow = await resNewUsShow.json();
 
-  const videosNewCnReality = await getVideosListFromApi(
-    `${process.env.MOVIE_API}/?ac=detail&t=22`
-  );
+  let resNewCnReality;
+  try {
+    resNewCnReality = await fetch(`${api_url}/api/list/22/1`);
+  } catch (e) {
+    console.error("error: ", e);
+  }
+  const videosNewCnReality = await resNewCnReality.json();
 
-  const videosNewJpAnime = await getVideosListFromApi(
-    `${process.env.MOVIE_API}/?ac=detail&t=28`
-  );
-
-  // const videosNewCnAnime = await getVideosListFromApi(
-  //   `${process.env.MOVIE_API}/?ac=detail&t=30`
-  // );
-
-  // const videosNewHorror = await getVideosListFromApi(
-  //   `${process.env.MOVIE_API}/?ac=detail&t=9`
-  // );
+  let resNewJpAnime;
+  try {
+    resNewJpAnime = await fetch(`${api_url}/api/list/28/1`);
+  } catch (e) {
+    console.error("error: ", e);
+  }
+  const videosNewJpAnime = await resNewJpAnime.json();
 
   // douban APIs
   const videosHotListDouban = await getVideosListFromDouban(
@@ -154,37 +163,8 @@ export async function getStaticProps() {
     ...videosHotListDoubanFiltered.list,
   ]).slice(0, 6);
 
-  // top 250 best videos
-  // const resTop250 = await fetch(
-  //   `https://api.wmdb.tv/api/v1/top?type=Douban&skip=0&limit=200&lang=Cn`
-  // );
-  // const top250 = await resTop250.json();
-
-  // const videosFoundBySearchingTop250List = await Promise.all(
-  //   randomSelect5FromArray(top250).map(
-  //     async (item) => await findMovieFromApiByTitle(item.data[0].name)
-  //   )
-  // );
-
-  // // const found = await findMovieFromApiByTitle("一年一度喜剧大赛");
-  // const selectedVideosForHero = videosFoundBySearchingTop250List.map((item) => {
-  //   if (item) return item.list[0];
-  // });
-
   return {
     props: {
-      // selectedVideosForHero: selectedVideosForHero.filter(Boolean).map((item) => {
-      //   return {
-      //     vod_pic: item.vod_pic,
-      //     vod_name: item.vod_name,
-      //     vod_blurb: item.vod_blurb,
-      //     vod_director: item.vod_director,
-      //     vod_actor: item.vod_actor,
-      //     vod_class: item.vod_class,
-      //     vod_play_url: item.vod_play_url,
-      //     vod_id: item.vod_id,
-      //   };
-      // }),
       selectedVideosForHero,
       videosHotListDoubanFiltered,
       videosNewAll,
@@ -194,8 +174,6 @@ export async function getStaticProps() {
       videosNewUsTvShow,
       videosNewCnReality,
       videosNewJpAnime,
-      // videosNewCnAnime,
-      // videosNewHorror,
     },
     revalidate: 3600,
   };

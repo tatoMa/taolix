@@ -34,13 +34,18 @@ export default function Home({ videos, page, t }) {
 export async function getStaticProps({ params: { type, page } }) {
   // Call an external API endpoint to get posts.
   // You can use any data fetching library
+  const api_url =
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:3000"
+      : "${process.env.SITE_URL}";
   let res;
-  res = await fetch(`${process.env.MOVIE_API}/?ac=detail&t=${type}&pg=${page}`);
-  // }
+  try {
+    res = await fetch(`${api_url}/api/list/${type}/${page}`);
+  } catch (e) {
+    console.error("error: ", e);
+  }
   const videos = await res.json();
 
-  // By returning { props: { posts } }, the Blog component
-  // will receive `posts` as a prop at build time
   return {
     props: {
       videos,
