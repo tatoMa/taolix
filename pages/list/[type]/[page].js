@@ -34,13 +34,9 @@ export default function Home({ videos, page, t }) {
 export async function getStaticProps({ params: { type, page } }) {
   // Call an external API endpoint to get posts.
   // You can use any data fetching library
-  const api_url =
-    process.env.NODE_ENV === "development"
-      ? "http://localhost:3000"
-      : "${process.env.SITE_URL}";
   let res;
   try {
-    res = await fetch(`${api_url}/api/list/${type}/${page}`);
+    res = await fetch(`${process.env.SITE_URL}/api/list/${type}/${page}`);
   } catch (e) {
     console.error("error: ", e);
   }

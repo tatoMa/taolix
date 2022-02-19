@@ -82,14 +82,9 @@ export default function Home({
 export async function getStaticProps() {
   // Call an external API endpoint to get posts.
   // You can use any data fetching library
-  const api_url =
-    process.env.NODE_ENV === "development"
-      ? "http://localhost:3000"
-      : "${process.env.SITE_URL}";
-
   let resNewList;
   try {
-    resNewList = await fetch(`${api_url}/api/list`);
+    resNewList = await fetch(`${process.env.SITE_URL}/api/list`);
   } catch (e) {
     console.error("error: ", e);
   }
@@ -97,7 +92,7 @@ export async function getStaticProps() {
 
   let resNewAction;
   try {
-    resNewAction = await fetch(`${api_url}/api/list/2/1`);
+    resNewAction = await fetch(`${process.env.SITE_URL}/api/list/2/1`);
   } catch (e) {
     console.error("error: ", e);
   }
@@ -105,7 +100,7 @@ export async function getStaticProps() {
 
   let resNewCnShow;
   try {
-    resNewCnShow = await fetch(`${api_url}/api/list/15/1`);
+    resNewCnShow = await fetch(`${process.env.SITE_URL}/api/list/15/1`);
   } catch (e) {
     console.error("error: ", e);
   }
@@ -113,7 +108,7 @@ export async function getStaticProps() {
 
   let resNewKrShow;
   try {
-    resNewKrShow = await fetch(`${api_url}/api/list/19/1`);
+    resNewKrShow = await fetch(`${process.env.SITE_URL}/api/list/19/1`);
   } catch (e) {
     console.error("error: ", e);
   }
@@ -121,7 +116,7 @@ export async function getStaticProps() {
 
   let resNewUsShow;
   try {
-    resNewUsShow = await fetch(`${api_url}/api/list/18/1`);
+    resNewUsShow = await fetch(`${process.env.SITE_URL}/api/list/18/1`);
   } catch (e) {
     console.error("error: ", e);
   }
@@ -129,7 +124,7 @@ export async function getStaticProps() {
 
   let resNewCnReality;
   try {
-    resNewCnReality = await fetch(`${api_url}/api/list/22/1`);
+    resNewCnReality = await fetch(`${process.env.SITE_URL}/api/list/22/1`);
   } catch (e) {
     console.error("error: ", e);
   }
@@ -137,7 +132,7 @@ export async function getStaticProps() {
 
   let resNewJpAnime;
   try {
-    resNewJpAnime = await fetch(`${api_url}/api/list/28/1`);
+    resNewJpAnime = await fetch(`${process.env.SITE_URL}/api/list/28/1`);
   } catch (e) {
     console.error("error: ", e);
   }
