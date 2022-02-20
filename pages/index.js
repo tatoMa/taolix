@@ -83,21 +83,61 @@ export default function Home({
 export async function getStaticProps() {
   // Call an external API endpoint to get posts.
   // You can use any data fetching library
-  // let resNewList;
-  // try {
-  //   resNewList = await fetch(`${process.env.SITE_URL}/api/list`);
-  // } catch (e) {
-  //   console.error("error: ", e);
-  // }
-  // const videosNewAll = await resNewList.json();
+  let videosNewAll = {};
+  try {
+    let response = await fetch(`${process.env.SITE_URL}/api/list`);
+    videosNewAll = await response.json();
+  } catch (e) {
+    console.error("error: ", e);
+  }
 
-  // let resNewAction;
-  // try {
-  //   resNewAction = await fetch(`${process.env.SITE_URL}/api/list/2/1`);
-  // } catch (e) {
-  //   console.error("error: ", e);
-  // }
-  // const videosNewAction = await resNewAction.json();
+  let videosNewAction = {};
+  try {
+    let response = await fetch(`${process.env.SITE_URL}/api/list/2`);
+    videosNewAction = await response.json();
+  } catch (e) {
+    console.error("error: ", e);
+  }
+
+  let videosNewCnTvShow = {};
+  try {
+    let response = await fetch(`${process.env.SITE_URL}/api/list/15`);
+    videosNewCnTvShow = await response.json();
+  } catch (e) {
+    console.error("error: ", e);
+  }
+
+  let videosNewKrTvShow = {};
+  try {
+    let response = await fetch(`${process.env.SITE_URL}/api/list/19`);
+    videosNewKrTvShow = await response.json();
+  } catch (e) {
+    console.error("error: ", e);
+  }
+
+  let videosNewUsTvShow = {};
+  try {
+    let response = await fetch(`${process.env.SITE_URL}/api/list/18`);
+    videosNewUsTvShow = await response.json();
+  } catch (e) {
+    console.error("error: ", e);
+  }
+
+  let videosNewCnReality = {};
+  try {
+    let response = await fetch(`${process.env.SITE_URL}/api/list/22`);
+    videosNewCnReality = await response.json();
+  } catch (e) {
+    console.error("error: ", e);
+  }
+
+  let videosNewJpAnime = {};
+  try {
+    let response = await fetch(`${process.env.SITE_URL}/api/list/28`);
+    videosNewJpAnime = await response.json();
+  } catch (e) {
+    console.error("error: ", e);
+  }
 
   // let resNewCnShow;
   // try {
@@ -139,33 +179,33 @@ export async function getStaticProps() {
   // }
   // const videosNewJpAnime = await resNewJpAnime.json();
 
-  const videosNewAll = await getVideosListFromApi(
-    `${process.env.MOVIE_API}/?ac=detail`
-  );
+  // const videosNewAll = await getVideosListFromApi(
+  //   `${process.env.MOVIE_API}/?ac=detail`
+  // );
 
-  const videosNewAction = await getVideosListFromApi(
-    `${process.env.MOVIE_API}/?ac=detail&t=2`
-  );
+  // const videosNewAction = await getVideosListFromApi(
+  //   `${process.env.MOVIE_API}/?ac=detail&t=2`
+  // );
 
-  const videosNewCnTvShow = await getVideosListFromApi(
-    `${process.env.MOVIE_API}/?ac=detail&t=15`
-  );
+  // const videosNewCnTvShow = await getVideosListFromApi(
+  //   `${process.env.MOVIE_API}/?ac=detail&t=15`
+  // );
 
-  const videosNewKrTvShow = await getVideosListFromApi(
-    `${process.env.MOVIE_API}/?ac=detail&t=19`
-  );
+  // const videosNewKrTvShow = await getVideosListFromApi(
+  //   `${process.env.MOVIE_API}/?ac=detail&t=19`
+  // );
 
-  const videosNewUsTvShow = await getVideosListFromApi(
-    `${process.env.MOVIE_API}/?ac=detail&t=18`
-  );
+  // const videosNewUsTvShow = await getVideosListFromApi(
+  //   `${process.env.MOVIE_API}/?ac=detail&t=18`
+  // );
 
-  const videosNewCnReality = await getVideosListFromApi(
-    `${process.env.MOVIE_API}/?ac=detail&t=22`
-  );
+  // const videosNewCnReality = await getVideosListFromApi(
+  //   `${process.env.MOVIE_API}/?ac=detail&t=22`
+  // );
 
-  const videosNewJpAnime = await getVideosListFromApi(
-    `${process.env.MOVIE_API}/?ac=detail&t=28`
-  );
+  // const videosNewJpAnime = await getVideosListFromApi(
+  //   `${process.env.MOVIE_API}/?ac=detail&t=28`
+  // );
 
   // douban APIs
   const videosHotListDouban = await getVideosListFromDouban(

@@ -5,7 +5,7 @@ export default async function handler(req, res) {
       `${process.env.MOVIE_API}/?ac=detail`
     );
     // const result = response.json();
-    return res.status(200).json(response);
+    return await res.status(200).json(response);
   } catch (error) {
     console.error("error: ", error);
     res.status(500).json({ error: `failed to load from video list api` });
