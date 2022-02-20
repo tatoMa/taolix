@@ -2,6 +2,7 @@ import {
   getVideosListFromDouban,
   shuffle,
   findResourceFromDoubanItem,
+  getVideosListFromApi,
 } from "../utils/utils";
 import HeroSwiper from "../components/HeroSwiper";
 import LineBreak from "../components/LineBreak";
@@ -82,61 +83,89 @@ export default function Home({
 export async function getStaticProps() {
   // Call an external API endpoint to get posts.
   // You can use any data fetching library
-  let resNewList;
-  try {
-    resNewList = await fetch(`${process.env.SITE_URL}/api/list`);
-  } catch (e) {
-    console.error("error: ", e);
-  }
-  const videosNewAll = await resNewList.json();
+  // let resNewList;
+  // try {
+  //   resNewList = await fetch(`${process.env.SITE_URL}/api/list`);
+  // } catch (e) {
+  //   console.error("error: ", e);
+  // }
+  // const videosNewAll = await resNewList.json();
 
-  let resNewAction;
-  try {
-    resNewAction = await fetch(`${process.env.SITE_URL}/api/list/2/1`);
-  } catch (e) {
-    console.error("error: ", e);
-  }
-  const videosNewAction = await resNewAction.json();
+  // let resNewAction;
+  // try {
+  //   resNewAction = await fetch(`${process.env.SITE_URL}/api/list/2/1`);
+  // } catch (e) {
+  //   console.error("error: ", e);
+  // }
+  // const videosNewAction = await resNewAction.json();
 
-  let resNewCnShow;
-  try {
-    resNewCnShow = await fetch(`${process.env.SITE_URL}/api/list/15/1`);
-  } catch (e) {
-    console.error("error: ", e);
-  }
-  const videosNewCnTvShow = await resNewCnShow.json();
+  // let resNewCnShow;
+  // try {
+  //   resNewCnShow = await fetch(`${process.env.SITE_URL}/api/list/15/1`);
+  // } catch (e) {
+  //   console.error("error: ", e);
+  // }
+  // const videosNewCnTvShow = await resNewCnShow.json();
 
-  let resNewKrShow;
-  try {
-    resNewKrShow = await fetch(`${process.env.SITE_URL}/api/list/19/1`);
-  } catch (e) {
-    console.error("error: ", e);
-  }
-  const videosNewKrTvShow = await resNewKrShow.json();
+  // let resNewKrShow;
+  // try {
+  //   resNewKrShow = await fetch(`${process.env.SITE_URL}/api/list/19/1`);
+  // } catch (e) {
+  //   console.error("error: ", e);
+  // }
+  // const videosNewKrTvShow = await resNewKrShow.json();
 
-  let resNewUsShow;
-  try {
-    resNewUsShow = await fetch(`${process.env.SITE_URL}/api/list/18/1`);
-  } catch (e) {
-    console.error("error: ", e);
-  }
-  const videosNewUsTvShow = await resNewUsShow.json();
+  // let resNewUsShow;
+  // try {
+  //   resNewUsShow = await fetch(`${process.env.SITE_URL}/api/list/18/1`);
+  // } catch (e) {
+  //   console.error("error: ", e);
+  // }
+  // const videosNewUsTvShow = await resNewUsShow.json();
 
-  let resNewCnReality;
-  try {
-    resNewCnReality = await fetch(`${process.env.SITE_URL}/api/list/22/1`);
-  } catch (e) {
-    console.error("error: ", e);
-  }
-  const videosNewCnReality = await resNewCnReality.json();
+  // let resNewCnReality;
+  // try {
+  //   resNewCnReality = await fetch(`${process.env.SITE_URL}/api/list/22/1`);
+  // } catch (e) {
+  //   console.error("error: ", e);
+  // }
+  // const videosNewCnReality = await resNewCnReality.json();
 
-  let resNewJpAnime;
-  try {
-    resNewJpAnime = await fetch(`${process.env.SITE_URL}/api/list/28/1`);
-  } catch (e) {
-    console.error("error: ", e);
-  }
-  const videosNewJpAnime = await resNewJpAnime.json();
+  // let resNewJpAnime;
+  // try {
+  //   resNewJpAnime = await fetch(`${process.env.SITE_URL}/api/list/28/1`);
+  // } catch (e) {
+  //   console.error("error: ", e);
+  // }
+  // const videosNewJpAnime = await resNewJpAnime.json();
+
+  const videosNewAll = await getVideosListFromApi(
+    `${process.env.MOVIE_API}/?ac=detail`
+  );
+
+  const videosNewAction = await getVideosListFromApi(
+    `${process.env.MOVIE_API}/?ac=detail&t=2`
+  );
+
+  const videosNewCnTvShow = await getVideosListFromApi(
+    `${process.env.MOVIE_API}/?ac=detail&t=15`
+  );
+
+  const videosNewKrTvShow = await getVideosListFromApi(
+    `${process.env.MOVIE_API}/?ac=detail&t=19`
+  );
+
+  const videosNewUsTvShow = await getVideosListFromApi(
+    `${process.env.MOVIE_API}/?ac=detail&t=18`
+  );
+
+  const videosNewCnReality = await getVideosListFromApi(
+    `${process.env.MOVIE_API}/?ac=detail&t=22`
+  );
+
+  const videosNewJpAnime = await getVideosListFromApi(
+    `${process.env.MOVIE_API}/?ac=detail&t=28`
+  );
 
   // douban APIs
   const videosHotListDouban = await getVideosListFromDouban(
