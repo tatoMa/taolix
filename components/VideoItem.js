@@ -28,11 +28,11 @@ const VideoItem = ({ name, type, pic, id, remarks, rate }) => {
             }}
           >
             {isLoading && (
-              <div className="absolute z-10 top-0 left-0 h-full w-full flex items-center justify-center bg-black/40">
+              <div className="absolute z-10 top-0 left-0 h-full w-full flex items-center justify-center bg-gray-500/60">
                 <svg
-                  viewBox="0 0 38 38"
+                  viewBox="-2 -2 42 42"
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-1/3 w-1/3 mb-14 stroke-red-500"
+                  className="w-1/2 mb-10 aspect-square stroke-red-500"
                 >
                   <g fill="none" fill-rule="evenodd">
                     <g transform="translate(1 1)" stroke-width="5">

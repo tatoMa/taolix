@@ -67,6 +67,8 @@ npm run build
 - [x] Chromecast
 - [x] Airplay
 - [x] More source
+- [x] Microservices and APIs redesign
+- [ ] BFF Microservices pattern
 - [ ] Adaptive design
 - [ ] History page
 - [ ] Profile manager

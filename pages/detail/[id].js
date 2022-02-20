@@ -92,7 +92,8 @@ function Detail({ detail, id, detail2 }) {
 
 export default Detail;
 
-export async function getServerSideProps({ params }) {
+export async function getServerSideProps({ params, req, res }) {
+  res.setHeader("Cache-Control", "public, s-maxage=60");
   let detail = {};
   try {
     let response = await fetch(`${process.env.SITE_URL}/api/id/${params.id}`);
