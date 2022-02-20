@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useState } from "react";
 import { useInView } from "react-intersection-observer";
 
 const myLoader = ({ src, width, quality }) => {
@@ -9,6 +10,7 @@ const myLoader = ({ src, width, quality }) => {
 
 const VideoItem = ({ name, type, pic, id, remarks, rate }) => {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
   const { ref, inView, entry } = useInView({
     /* Optional options */
     threshold: 0,
@@ -19,7 +21,37 @@ const VideoItem = ({ name, type, pic, id, remarks, rate }) => {
     <div ref={ref}>
       {inView ? (
         <Link href={`/detail/${id}`}>
-          <a className="block group overflow-hidden relative bg-black cursor-pointer hover:brightness-75">
+          <a
+            className="block group overflow-hidden relative bg-black cursor-pointer hover:brightness-75"
+            onClick={() => {
+              setIsLoading(true);
+            }}
+          >
+            {isLoading && (
+              <div className="absolute z-10 top-0 left-0 h-full w-full flex items-center justify-center bg-black/40">
+                <svg
+                  viewBox="0 0 38 38"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-1/3 w-1/3 mb-14 stroke-red-500"
+                >
+                  <g fill="none" fill-rule="evenodd">
+                    <g transform="translate(1 1)" stroke-width="5">
+                      <circle stroke-opacity=".4" cx="18" cy="18" r="18" />
+                      <path d="M36 18c0-9.94-8.06-18-18-18">
+                        <animateTransform
+                          attributeName="transform"
+                          type="rotate"
+                          from="0 18 18"
+                          to="360 18 18"
+                          dur="1s"
+                          repeatCount="indefinite"
+                        />
+                      </path>
+                    </g>
+                  </g>
+                </svg>
+              </div>
+            )}
             <div className="w-full aspect-[3/4]">
               <img
                 src={pic}

@@ -2,7 +2,6 @@ import {
   getVideosListFromDouban,
   shuffle,
   findResourceFromDoubanItem,
-  getVideosListFromApi,
 } from "../utils/utils";
 import HeroSwiper from "../components/HeroSwiper";
 import LineBreak from "../components/LineBreak";

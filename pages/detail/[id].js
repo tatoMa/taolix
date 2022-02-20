@@ -12,7 +12,6 @@ import PlayerWrapper from "../../components/PlayerWrapper";
 import NextHeadSeo from "next-head-seo";
 import { getVideoUrlsFromUrlStr } from "../../utils/utils";
 
-import fetch from "isomorphic-unfetch";
 import VideoPlayList from "../../components/VideoPlayList";
 
 function Detail({ detail, id, detail2 }) {
@@ -27,18 +26,6 @@ function Detail({ detail, id, detail2 }) {
   const [play, setPlay] = useState(false);
   const [url, setUrl] = useState("");
   const [data, setData] = useState({});
-
-  // const getVideoListFromOtherApi = async () => {
-  //   try {
-  //     const res = await fetch(
-  //       "/api/cors?url=https://m3u8.feisuzyapi.com/vod/?ac=detail"
-  //     );
-  //     const data = await res.json();
-  //     return data;
-  //   } catch (error) {
-  //     console.log(error.toString());
-  //   }
-  // };
 
   // useEffect(() => {
   //   getVideoListFromOtherApi().then((res) => console.log(res));
@@ -106,13 +93,13 @@ function Detail({ detail, id, detail2 }) {
 export default Detail;
 
 export async function getServerSideProps({ params }) {
-  // console.log(params);
-  // Call an external API endpoint to get posts.
-  // You can use any data fetching library
-  const res = await fetch(
-    `${process.env.MOVIE_API}/?ac=detail&ids=${params.id}`
-  );
-  const detail = await res.json();
+  let detail = {};
+  try {
+    let response = await fetch(`${process.env.SITE_URL}/api/id/${params.id}`);
+    detail = await response.json();
+  } catch (e) {
+    console.error("error: ", e);
+  }
 
   const res2 = await fetch(
     `${process.env.MOVIE_API_SOURCE_2}/?ac=detail&wd=${encodeURI(
@@ -120,6 +107,7 @@ export async function getServerSideProps({ params }) {
     )}`
   );
   const temp2 = await res2.json();
+
   let detail2 = {};
   if (temp2.total >= 1) {
     detail2.list = [];
