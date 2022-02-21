@@ -68,6 +68,7 @@ npm run build
 - [x] Airplay
 - [x] More source
 - [x] Microservices and APIs redesign
+- [x] Webpack Bundle Analyzer
 - [ ] BFF Microservices pattern
 - [ ] Adaptive design
 - [ ] History page
