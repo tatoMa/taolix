@@ -10,7 +10,11 @@
     "start": "next start",
     "analyze": "cross-env ANALYZE=true next build",
     "analyze:server": "cross-env BUNDLE_ANALYZE=server next build",
-    "analyze:browser": "cross-env BUNDLE_ANALYZE=browser next build"
+    "analyze:browser": "cross-env BUNDLE_ANALYZE=browser next build",
+    "cypress:open-only": "cypress open",
+    "cypress:run-only": "cypress run",
+    "cypress:open": "start-server-and-test dev 3000 cypress:open-only",
+    "cypress:run": "start-server-and-test dev 3000 cypress:run-only"
   },
   "dependencies": {
     "@heroicons/react": "^1.0.5",
@@ -30,8 +34,10 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.0",
+    "cypress": "^9.5.0",
     "next-sitemap": "^1.8.4",
     "postcss": "^8.4.4",
+    "start-server-and-test": "^1.14.0",
     "tailwindcss": "^3.0.0"
   }
 }
