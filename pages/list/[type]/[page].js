@@ -1,4 +1,3 @@
-import LineBreak from "../../../components/LineBreak";
 import VideoListsSection from "../../../components/VideoListsSection";
 import Pagination from "../../../components/Pagination";
 import GenreList from "../../../components/GenreList";
@@ -11,42 +10,55 @@ export default function Home({ videos, page, t }) {
   return (
     <>
       <NextHeadSeo
-        title={`All ${group.classify}s free to play - Taolix`}
-        description={`All new ${group.classify}s users can play online for free.`}
+        title={`All ${group ? group.classify : "video"}s free to play - Taolix`}
+        description={`All new ${
+          group ? group.classify : "video"
+        }s users can play online for free.`}
         canonical={`https://www.taolix.com/list/${t}/1`}
       />
       {/* Main section */}
       <div className="w-full h-full md:pb-8 max-w-screen-2xl mx-auto mt-8 pt-6">
-        {/* Line Break  */}
-
-        <GenreList t={t} />
-
-        {/* Video List Section */}
-        <VideoListsSection videos={videos} />
+        {Object.keys(videos).length !== 0 ? (
+          <>
+            <GenreList t={t} />
+            <VideoListsSection videos={videos} />
+          </>
+        ) : (
+          <div className=" text-2xl text-center text-red-500 mt-10">
+            Fetching error. Please use another link or go back. <br />
+            Cannot find page {page} with genre {t}.
+          </div>
+        )}
       </div>
 
       {/* pagination */}
-      <Pagination page={page} t={t} />
+      {Object.keys(videos).length !== 0 && <Pagination page={page} t={t} />}
     </>
   );
 }
 
 export async function getStaticProps({ params: { type, page } }) {
-  // Call an external API endpoint to get posts.
-  // You can use any data fetching library
-  let res;
-  res = await fetch(`${process.env.MOVIE_API}/?ac=detail&t=${type}&pg=${page}`);
-  // }
-  const videos = await res.json();
+  let videos = {};
 
-  // let res;
-  // try {
-  //   res = await fetch(`${process.env.SITE_URL}/api/list/${type}/${page}`);
-  // } catch (e) {
-  //   console.error("error: ", e);
+  if (
+    parseInt(type) > 0 &&
+    parseInt(page) > 0 &&
+    parseInt(type) <= 29 &&
+    parseInt(type) > 0 &&
+    parseInt(type) !== 14 &&
+    parseInt(type) !== 21 &&
+    parseInt(type) !== 26
+  ) {
+    try {
+      let response = await fetch(
+        `${process.env.SITE_URL}/api/list/${type}/${page}`
+      );
+      videos = await response.json();
+    } catch (e) {
+      console.error("error: ", e);
+    }
+  }
 
-  // By returning { props: { posts } }, the Blog component
-  // will receive `posts` as a prop at build time
   return {
     props: {
       videos,
@@ -88,6 +100,6 @@ export async function getStaticPaths() {
       { params: { type: "28", page: "1" } },
       { params: { type: "29", page: "1" } },
     ],
-    fallback: "blocking", // See the "fallback" section below
+    fallback: "blocking",
   };
 }
