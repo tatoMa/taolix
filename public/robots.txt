@@ -7,3 +7,5 @@ Host: https://www.taolix.com/
 
 # Sitemaps
 Sitemap: https://www.taolix.com/sitemap.xml
+
+Disallow: /api/*
