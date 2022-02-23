@@ -98,16 +98,21 @@ export async function getServerSideProps({ params, req, res }) {
   try {
     let response = await fetch(`${process.env.SITE_URL}/api/id/${params.id}`);
     detail = await response.json();
-  } catch (e) {
-    console.error("error: ", e);
+  } catch (error) {
+    console.error("error: ", error);
   }
 
-  const res2 = await fetch(
-    `${process.env.MOVIE_API_SOURCE_2}/?ac=detail&wd=${encodeURI(
-      detail.list[0].vod_name
-    )}`
-  );
-  const temp2 = await res2.json();
+  let temp2 = {};
+  try {
+    const res2 = await fetch(
+      `${process.env.MOVIE_API_SOURCE_2}/?ac=detail&wd=${encodeURI(
+        detail.list[0].vod_name
+      )}`
+    );
+    temp2 = await res2.json();
+  } catch (error) {
+    console.error("error: ", error);
+  }
 
   let detail2 = {};
   if (temp2.total >= 1) {
