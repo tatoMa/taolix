@@ -3,8 +3,10 @@ import { SessionProvider } from "next-auth/react";
 import Layout from "../components/layout";
 import NextHeadSeo from "next-head-seo";
 import { useEffect } from "react";
+// import { AnimateSharedLayout } from "framer-motion";
+import { motion } from "framer-motion";
 
-function MyApp({ Component, pageProps: { session, ...pageProps } }) {
+function MyApp({ Component, pageProps: { session, ...pageProps }, router }) {
   useEffect(() => {
     document.documentElement.lang = "en-us";
   });
@@ -44,9 +46,25 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
           siteName: "Taolix",
         }}
       />
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      {/* <AnimateSharedLayout> */}
+      <motion.div
+        key={router.route}
+        initial="initial"
+        animate="animate"
+        variants={{
+          initial: {
+            opacity: 0,
+          },
+          animate: {
+            opacity: 1,
+          },
+        }}
+      >
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+        {/* </AnimateSharedLayout> */}
+      </motion.div>
     </SessionProvider>
   );
 }
