@@ -47,24 +47,27 @@ function MyApp({ Component, pageProps: { session, ...pageProps }, router }) {
         }}
       />
       {/* <AnimateSharedLayout> */}
-      <motion.div
-        key={router.route}
-        initial="initial"
-        animate="animate"
-        variants={{
-          initial: {
-            opacity: 0,
-          },
-          animate: {
-            opacity: 1,
-          },
-        }}
-      >
-        <Layout>
+      <Layout>
+        <motion.div
+          key={router.asPath}
+          initial="initial"
+          animate="animate"
+          variants={{
+            initial: {
+              opacity: 0,
+              x: -200,
+            },
+            animate: {
+              opacity: 1,
+              x: 0,
+            },
+          }}
+        >
+          {console.log(router)}
           <Component {...pageProps} />
-        </Layout>
-        {/* </AnimateSharedLayout> */}
-      </motion.div>
+          {/* </AnimateSharedLayout> */}
+        </motion.div>
+      </Layout>
     </SessionProvider>
   );
 }
