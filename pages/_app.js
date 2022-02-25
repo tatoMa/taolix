@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { SessionProvider } from "next-auth/react";
-import Layout from "../components/layout";
+import Layout from "../components/Layout/index";
 import GoogleAnalytics from "../components/Layout/GoogleAnalytics";
 import { motion } from "framer-motion";
 import "../styles/globals.css";
