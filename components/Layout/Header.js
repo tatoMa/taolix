@@ -1,11 +1,11 @@
 import Link from "next/link";
 import { useSession, signIn, signOut } from "next-auth/react";
-import useOnScrolled from "../hooks/useOnScrolled";
+import useOnScrolled from "../../hooks/useOnScrolled";
 import { useState } from "react";
 import { useRouter } from "next/router";
 
 import Loading from "./Loading";
-import { MAJORS } from "../utils/const";
+import { MAJORS } from "../../utils/const";
 
 function Header() {
   const router = useRouter();

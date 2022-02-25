@@ -1,6 +1,5 @@
 import Link from "next/link";
-import MobileBottomMenu from "./MobileBottomMenu";
-import { MAJORS } from "../utils/const";
+import { MAJORS } from "../../utils/const";
 
 const Footer = () => {
   return (
@@ -18,8 +17,8 @@ const Footer = () => {
                 </Link>
               </div>
 
-              <p className="max-w-md mt-2 text-gray-400 pr-6">
-                Your favorite movies and shows streaming service
+              <p className="max-w-full lg:max-w-md mt-2 text-gray-400 pr-6">
+                Your Favorite Free Movie, Tv Show and Anime Streaming Service!
               </p>
 
               <div className="flex mt-4 -mx-2">
@@ -70,22 +69,6 @@ const Footer = () => {
                     </a>
                   </Link>
                 ))}
-
-                {/* <Link href={`/list/${tvshowId}/1`}>
-                  <a className="block mt-2 text-sm text-gray-400 hover:text-white">
-                    TV Shows
-                  </a>
-                </Link>
-                <Link href={`/list/${realityId}/1`}>
-                  <a className="block mt-2 text-sm text-gray-400 hover:text-white">
-                    Reality Shows
-                  </a>
-                </Link>
-                <Link href={`/list/${animeId}/1`}>
-                  <a className="block mt-2 text-sm text-gray-400 hover:text-white">
-                    Anime
-                  </a>
-                </Link> */}
               </div>
 
               <div>
@@ -111,7 +94,7 @@ const Footer = () => {
                 <div className="uppercase text-white">About</div>
                 <Link href="/about">
                   <a className="block mt-2 text-sm text-gray-400 hover:text-white mb-4">
-                    About
+                    ABOUT
                   </a>
                 </Link>
 
@@ -124,16 +107,16 @@ const Footer = () => {
           </div>
         </div>
 
-        <hr className="h-px my-6  border-none bg-gray-700" />
+        <hr className="h-px my-4  border-none bg-gray-700" />
 
         <div>
           <p className="text-center text-white">
             © TAOLIX 2021 - All rights reserved
+            <br />
+            Made with all ❤️ &nbsp;by TATO
           </p>
         </div>
       </div>
-      {/* Mobile Bottom Menu */}
-      <MobileBottomMenu />
     </footer>
   );
 };
