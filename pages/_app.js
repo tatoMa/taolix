@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { SessionProvider } from "next-auth/react";
 import Layout from "../components/layout";
-import GoogleAnalytics from "../components/GoogleAnalytics";
+import GoogleAnalytics from "../components/Layout/GoogleAnalytics";
 import { motion } from "framer-motion";
 import "../styles/globals.css";
 
@@ -13,7 +13,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps }, router }) {
     // Auth session component
     <SessionProvider session={session}>
       {/* google analytics component */}
-      <GoogleAnalytics />
+      <GoogleAnalytics Component pageProps />
       {/* layout of app */}
       <Layout>
         {/* global animated transition by changing url. Only for main section. Not including navbar and footer */}

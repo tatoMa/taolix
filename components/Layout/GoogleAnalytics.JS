@@ -1,5 +1,18 @@
+import { useRouter } from "next/router";
 import Script from "next/script";
-const GoogleAnalytics = () => {
+import * as gtag from "../../lib/gtag";
+import { useEffect } from "react";
+const GoogleAnalytics = (Component, pageProps) => {
+  const router = useRouter();
+  useEffect(() => {
+    const handleRouteChange = (url) => {
+      gtag.pageview(url);
+    };
+    router.events.on("routeChangeComplete", handleRouteChange);
+    return () => {
+      router.events.off("routeChangeComplete", handleRouteChange);
+    };
+  }, [router.events]);
   return (
     <>
       {/* <!-- Global site tag (gtag.js) - Google Analytics --> */}
