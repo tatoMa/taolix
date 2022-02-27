@@ -35,12 +35,12 @@ export default function PlayerWrapper({ url, setPlay }) {
 
   return (
     <div
-      className="flex h-full w-full fixed top-0 left-0 items-center bg-black/60 z-50 pointer-events-auto "
+      className="pointer-events-auto fixed top-0 left-0 z-50 flex h-full w-full items-center bg-black/60 "
       onKeyDown={handleKeyDown}
     >
       <div className="w-full">
         <XIcon
-          className="h-20 w-20 max-h-[8vw] max-w-[8vw] text-blue-white absolute right-0 text-white bg-black/40 cursor-pointer pointer-events-auto hover:bg-white hover:text-black animate-fadeIn z-50"
+          className="text-blue-white pointer-events-auto absolute right-0 z-50 h-20 max-h-[8vw] w-20 max-w-[8vw] animate-fadeIn cursor-pointer bg-black/40 text-white hover:bg-white hover:text-black"
           onClick={() => {
             setPlay(false);
             document.documentElement.style.overflowY = "auto";

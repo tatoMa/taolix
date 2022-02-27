@@ -16,7 +16,10 @@ const Loading = ({ isLoading, setIsLoading }) => {
         !isLoading && "hidden"
       }`}
     >
-      <RefreshIcon className="w-[25vw] animate-spin text-white lg:w-[15vw]" />
+      <RefreshIcon
+        className="w-[25vw] animate-spin text-white lg:w-[15vw]"
+        style={{ animationDirection: "reverse" }}
+      />
     </div>
   );
 };

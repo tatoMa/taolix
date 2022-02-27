@@ -8,7 +8,7 @@ import { PlayIcon } from "@heroicons/react/solid";
 
 import LineBreak from "../../components/LineBreak";
 
-import PlayerWrapper from "../../components/PlayerWrapper";
+import PlayerWrapper from "../../components/Player/PlayerWrapper";
 import NextHeadSeo from "next-head-seo";
 import { getVideoUrlsFromUrlStr } from "../../utils/utils";
 

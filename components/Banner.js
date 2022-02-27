@@ -9,7 +9,7 @@ import {
   filterHtmlTagsFromString,
   getVideoUrlsFromUrlStr,
 } from "../utils/utils";
-import PlayerWrapper from "./PlayerWrapper";
+import PlayerWrapper from "./Player/PlayerWrapper";
 
 const Banner = ({ detail }) => {
   // console.log(detail);
@@ -62,7 +62,7 @@ const Banner = ({ detail }) => {
   return (
     <div
       className={`w-full md:aspect-[3/2] lg:aspect-[16/7] ${
-        detail.mode === "homePage" && "px-0 md:px-6 lg:px-8 cursor-pointer"
+        detail.mode === "homePage" && "cursor-pointer px-0 md:px-6 lg:px-8"
       }`}
       onClick={() => indexButtonHandler()}
     >
@@ -71,7 +71,7 @@ const Banner = ({ detail }) => {
       {/* {play && <Player url={url} setPlay={setPlay} />} */}
 
       {/* background image section */}
-      <div className="absolute top-0 left-0 w-full h-full z-0 pointer-events-none">
+      <div className="pointer-events-none absolute top-0 left-0 z-0 h-full w-full">
         {/* <Image
           unoptimized={true}
           src={
@@ -88,17 +88,17 @@ const Banner = ({ detail }) => {
         <img
           src={vod_pic}
           alt="vod_name"
-          className="object-cover blur-sm relative opacity-20 h-full w-full"
+          className="relative h-full w-full object-cover opacity-20 blur-sm"
           referrerPolicy="no-referrer"
         />
       </div>
-      <div className="absolute left-0 w-full h-1/4 -bottom-1 bg-gradient-to-t from-black via-transparent to-transparent"></div>
+      <div className="absolute left-0 -bottom-1 h-1/4 w-full bg-gradient-to-t from-black via-transparent to-transparent"></div>
 
       {/* main section */}
-      <main className="relative w-full h-full flex flex-col-reverse md:flex-row z-10 group">
-        <div className="md:w-1/2 lg:w-3/5 text-white flex items-center md:pr-4 -translate-y-10 md:translate-y-10 z-20">
-          <div className="overflow-hidden relative w-full xl:w-[90%]">
-            <div className="md:pr-0 relative text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-orange-600 to-red-600 border-b border-red-500">
+      <main className="group relative z-10 flex h-full w-full flex-col-reverse md:flex-row">
+        <div className="z-20 flex -translate-y-10 items-center text-white md:w-1/2 md:translate-y-10 md:pr-4 lg:w-3/5">
+          <div className="relative w-full overflow-hidden xl:w-[90%]">
+            <div className="relative border-b border-red-500 bg-gradient-to-br from-orange-600 to-red-600 bg-clip-text text-4xl font-extrabold text-transparent md:pr-0">
               <h1
                 className={`${
                   detail.mode !== "homePage" && "w-[calc(100%-6rem)]"
@@ -110,17 +110,17 @@ const Banner = ({ detail }) => {
                 {vod_sub && vod_sub}
               </h2>
             </div>
-            <div className="absolute right-0 top-6 text-sm mt-4 text-gray-200/75">
+            <div className="absolute right-0 top-6 mt-4 text-sm text-gray-200/75">
               {vod_lang && vod_lang}
             </div>
 
             {detail.mode !== "homePage" && (
               <button
                 onClick={() => playButtonHandler()}
-                className="absolute animate-bounce right-0 top-2 hover:animate-none text-transparent bg-clip-text bg-gradient-to-br from-orange-600 to-red-600 cursor-pointer flex items-center justify-end"
+                className="absolute right-0 top-2 flex animate-bounce cursor-pointer items-center justify-end bg-gradient-to-br from-orange-600 to-red-600 bg-clip-text text-transparent hover:animate-none"
               >
                 <PlayIcon className="h-8 w-8 text-orange-500 " />
-                <a className="text-lg text-orange-500 z-10">
+                <a className="z-10 text-lg text-orange-500">
                   {detail.mode === "homePage"
                     ? "Details"
                     : url
@@ -130,37 +130,37 @@ const Banner = ({ detail }) => {
               </button>
             )}
 
-            <div className="flex text-gray-400 text-sm mt-7">
+            <div className="mt-7 flex text-sm text-gray-400">
               <div className="flex-1">{vod_remarks}</div>
               <div>{vod_time && vod_time.split(" ")[0]}</div>
             </div>
 
-            <div className="flex mt-3 flex-nowrap">
+            <div className="mt-3 flex flex-nowrap">
               {vod_tag &&
                 vod_tag.split(",").map((i) => (
                   <div
                     key={i}
-                    className=" bg-red-600 text-white text-xs px-2 py-[0.12rem] mr-2 rounded-full inline-block whitespace-nowrap"
+                    className=" mr-2 inline-block whitespace-nowrap rounded-full bg-red-600 px-2 py-[0.12rem] text-xs text-white"
                   >
                     {i}
                   </div>
                 ))}
             </div>
 
-            <h2 className="text-sm mt-4 text-gray-200/90 line-clamp-1">
+            <h2 className="mt-4 text-sm text-gray-200/90 line-clamp-1">
               {vod_director && "Direct: " + vod_director}
             </h2>
-            <h2 className="text-sm mt-1 text-gray-200/90 line-clamp-1">
+            <h2 className="mt-1 text-sm text-gray-200/90 line-clamp-1">
               {vod_actor && "Actor: " + vod_actor}
             </h2>
 
-            <p className="text-sm mt-3 opacity-90 text-gray-400 line-clamp-4 md:line-clamp-3 lg:line-clamp-5">
+            <p className="mt-3 text-sm text-gray-400 opacity-90 line-clamp-4 md:line-clamp-3 lg:line-clamp-5">
               {vod_blurb ? vod_blurb : filterHtmlTagsFromString(vod_content)}
             </p>
           </div>
         </div>
 
-        <div className="w-full min-h-[60vh] md:min-h-full md:w-1/2 lg:w-2/5 aspect-[3/4] relative overflow-hidden">
+        <div className="relative aspect-[3/4] min-h-[60vh] w-full overflow-hidden md:min-h-full md:w-1/2 lg:w-2/5">
           {/* <Image
             unoptimized={true}
             src={
@@ -177,20 +177,20 @@ const Banner = ({ detail }) => {
           <img
             src={vod_pic}
             alt="vod_name"
-            className={`object-cover z-10 h-full w-full ${
+            className={`z-10 h-full w-full object-cover ${
               detail.mode === "homePage" &&
-              "group-focus:scale-110 group-hover:scale-110 group-active:scale-110 duration-300"
+              "duration-300 group-hover:scale-110 group-focus:scale-110 group-active:scale-110"
             }`}
             referrerPolicy="no-referrer"
           />
           {rate && (
-            <div className="absolute right-0 top-[4rem] md:top-[90%] bg-black/70 text-sm text-orange-400 pl-2 pr-1 py-[0.125rem] rounded-l-full">
+            <div className="absolute right-0 top-[4rem] rounded-l-full bg-black/70 py-[0.125rem] pl-2 pr-1 text-sm text-orange-400 md:top-[90%]">
               {"豆瓣 " + rate + "★"}
             </div>
           )}
           {/* <div className="absolute w-full h-1/3 bg-gradient-to-b from-black/40 via-transparent to-transparent"></div> */}
           {/* <div className="hidden md:block absolute left-0 z-20 w-1/6 h-full bg-gradient-to-r from-black/90 to-transparent"></div> */}
-          <div className="absolute bottom-0 w-full h-1/6 bg-gradient-to-t from-black via-black/70 to-transparent"></div>
+          <div className="absolute bottom-0 h-1/6 w-full bg-gradient-to-t from-black via-black/70 to-transparent"></div>
           {/* <div>123</div> */}
         </div>
       </main>
