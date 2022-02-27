@@ -48,18 +48,18 @@ function Header() {
 
   return (
     <div
-      className={`flex justify-center top-0 fixed w-full h-16 z-30 bg-gradient-to-b from-black to-transparent transition duration-1000 ${
+      className={`fixed top-0 z-30 flex h-16 w-full justify-center bg-gradient-to-b from-black to-transparent transition duration-1000 ${
         scrolled ? "bg-black" : ""
       }`}
     >
       {/* Loading spinner */}
       <Loading isLoading={isSearching} setIsLoading={setIsSearching} />
 
-      <div className="max-w-screen-2xl flex grow justify-between items-center h-16 px-1 sm:px-6 md:px-10 lg:px-14">
+      <div className="flex h-16 max-w-screen-2xl grow items-center justify-between px-1 sm:px-6 md:px-10 lg:px-14">
         {/* Logo */}
         <div className="z-30">
           <Link href="/">
-            <a className="block w-32 lg:w-40 cursor-pointer hover:scale-110 active:scale-110 duration-100 ml-0 py-[0.4em] px-2">
+            <a className="ml-0 block w-32 cursor-pointer py-[0.4em] px-2 duration-100 hover:scale-110 active:scale-110 lg:w-40">
               <img src="/logo.png" alt="logo" className="object-contain" />
             </a>
           </Link>
@@ -67,9 +67,9 @@ function Header() {
 
         {/* Navigation Links */}
         <div
-          className={`absolute lg:relative w-screen lg:w-fit h-screen left-0 top-0 lg:h-6 lg:block flex flex-col transition-all duration-200 bg-black/90 lg:bg-transparent ${
+          className={`absolute left-0 top-0 flex h-screen w-screen flex-col bg-black/90 transition-all duration-200 lg:relative lg:block lg:h-6 lg:w-fit lg:bg-transparent ${
             menu
-              ? "flex justify-center items-center animate-[animation-fade-in_0.3s_ease-in-out]"
+              ? "flex animate-[animation-fade-in_0.3s_ease-in-out] items-center justify-center"
               : "hidden"
           }`}
         >
@@ -77,15 +77,15 @@ function Header() {
             <a
               onClick={() => setMenu(false)}
               className={`
-              hover:text-white
-              transition
-              duration-300
-              font-medium
+              mt-6
               p-2
-              xl:p-3
-              mt-6 md:mt-0
-              text-4xl md:text-4xl lg:text-base
+              text-4xl
+              font-medium
               uppercase
+              transition
+              duration-300 hover:text-white
+              md:mt-0 md:text-4xl lg:text-base
+              xl:p-3
               ${router.asPath == "/" ? "text-white" : "text-gray-400"}
             `}
             >
@@ -97,15 +97,15 @@ function Header() {
               <a
                 onClick={() => setMenu(false)}
                 className={`
-              hover:text-white
-              transition
-              duration-300
-              font-medium
+              mt-6
               p-2
-              xl:p-3
-              mt-6 md:mt-0
-              text-4xl md:text-4xl lg:text-base
+              text-4xl
+              font-medium
               uppercase
+              transition
+              duration-300 hover:text-white
+              md:mt-0 md:text-4xl lg:text-base
+              xl:p-3
               ${router.query.type == link.type ? "text-white" : "text-gray-400"}
             `}
               >
@@ -116,11 +116,11 @@ function Header() {
         </div>
 
         {/* <!-- Search input on desktop screen --> */}
-        <div className={`mr-2 ml-4 lg:mx-0 md:block md:translate-x-6 `}>
+        <div className={`mr-2 ml-4 md:block md:translate-x-6 lg:mx-0 `}>
           <div className="relative flex">
             <span className="absolute inset-y-0 left-0 flex items-center pl-3">
               <svg
-                className="w-5 h-5 text-gray-400"
+                className="h-5 w-5 text-gray-400"
                 viewBox="0 0 24 24"
                 fill="none"
               >
@@ -136,7 +136,7 @@ function Header() {
 
             <input
               type="text"
-              className="sm:mr-[11vw] lg:mr-0 w-full lg:w-40 xl:w-60 py-1 pl-10 text-white bg-black border border-white focus:border-red-500 dark:focus:border-red-500 focus:outline-none focus:ring-red"
+              className="focus:ring-red w-full border border-white bg-black py-1 pl-10 text-white focus:border-red-500 focus:outline-none dark:focus:border-red-500 sm:mr-[11vw] lg:mr-0 lg:w-40 xl:w-60"
               placeholder="Search"
               onKeyDown={handleKeyDown}
             />
@@ -146,7 +146,7 @@ function Header() {
         {/* Auth components */}
         <div className="hidden lg:block">
           {session ? (
-            <div className="flex gap-2 items-center">
+            <div className="flex items-center gap-2">
               <img
                 onClick={() => signOut()}
                 className="inline-block h-10 w-10 rounded-full"
@@ -158,7 +158,7 @@ function Header() {
           ) : (
             <button
               onClick={() => signIn()}
-              className="text-black border border-white px-4 py-1 bg-white transition-colors duration-200 hover:bg-black hover:text-white "
+              className="border border-white bg-white px-4 py-1 text-black transition-colors duration-200 hover:bg-black hover:text-white "
             >
               Sign in
             </button>
@@ -169,14 +169,14 @@ function Header() {
         <div className="flex lg:hidden">
           <button
             type="button"
-            className="text-white p-4 hover:text-gray-600 focus:outline-none focus:text-white z-20"
+            className="z-20 p-4 text-white hover:text-gray-600 focus:text-white focus:outline-none"
             aria-label="toggle menu"
             onClick={() => setMenu(!menu)}
           >
             {!menu ? (
               <svg
                 viewBox="0 0 24 24"
-                className="w-6 h-6 fill-current animate-[animation-fade-in2_0.3s_ease-in-out] z-30"
+                className="z-30 h-6 w-6 animate-[animation-fade-in2_0.3s_ease-in-out] fill-current"
               >
                 <path
                   fillRule="evenodd"
@@ -185,7 +185,7 @@ function Header() {
               </svg>
             ) : (
               <svg
-                className="w-6 h-6 fill-current animate-[animation-fade-in_0.3s_ease-in-out] z-30"
+                className="z-30 h-6 w-6 animate-[animation-fade-in_0.3s_ease-in-out] fill-current"
                 viewBox="0 0 24 24"
               >
                 <path

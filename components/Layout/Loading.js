@@ -12,11 +12,11 @@ const Loading = ({ isLoading, setIsLoading }) => {
   }, [router.asPath]);
   return (
     <div
-      className={`fixed w-screen h-screen bg-gray-500/75 pointer-events-none flex justify-center items-center z-50 ${
+      className={`pointer-events-none fixed z-50 flex h-screen w-screen items-center justify-center bg-gray-500/75 ${
         !isLoading && "hidden"
       }`}
     >
-      <RefreshIcon className="text-white animate-spin w-[25vw] lg:w-[15vw]" />
+      <RefreshIcon className="w-[25vw] animate-spin text-white lg:w-[15vw]" />
     </div>
   );
 };

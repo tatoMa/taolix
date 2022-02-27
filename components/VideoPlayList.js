@@ -12,15 +12,15 @@ const VideoPlayList = ({
   return (
     <>
       {videoList && (
-        <div className="md:translate-y-0 flex-1 first:ml-3 last:mr-3">
-          <div className="text-gray-500 text-sm my-3">Source {index}.</div>
+        <div className="m-2 flex-1 first:ml-0 last:mr-0 md:translate-y-0">
+          <div className="my-3 mt-6 text-sm text-gray-500">Source {index}.</div>
           <div className="mt-1">
             {videoList.map((video) => {
               const { name, url } = video;
               return (
                 <a
                   key={name}
-                  className="odd:bg-black first:border-t even:bg-gray-800 cursor-pointer overflow-hidden flex items-center py-3 border-b border-gray-400 text-gray-400 hover:text-white hover:border-white"
+                  className="flex cursor-pointer items-center overflow-hidden border-b border-gray-400 py-3 text-gray-400 first:border-t odd:bg-black even:bg-gray-800 hover:border-white hover:text-white"
                   onClick={() => {
                     setPlay(true);
                     setUrl(url);
@@ -32,7 +32,7 @@ const VideoPlayList = ({
                   // }}
                 >
                   <div>
-                    <PlayIcon className="h-8 w-8 mr-4 text-blue-white" />
+                    <PlayIcon className="text-blue-white mr-4 h-8 w-8" />
                   </div>
                   <div>{name}</div>
                 </a>

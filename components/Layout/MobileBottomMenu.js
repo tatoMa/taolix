@@ -43,7 +43,7 @@ const MobileBottomMenu = () => {
   return (
     <div
       id="bottom-navigation"
-      className="block lg:hidden fixed inset-x-0 bottom-0 z-10 bg-black text-gray-300 shadow"
+      className="fixed inset-x-0 bottom-0 z-10 block bg-black text-gray-300 shadow lg:hidden"
     >
       <div id="tabs" className="flex justify-between">
         {links.map((link) => {
@@ -52,12 +52,12 @@ const MobileBottomMenu = () => {
           return (
             <Link href={link.linkUrl} key={link.name}>
               <a
-                className={`transition ease-in-out delay-150 w-full focus:text-red-500 hover:text-gray-500 justify-center inline-block text-center pt-2 pb-1 ${
+                className={`inline-block w-full justify-center pt-2 pb-1 text-center transition delay-150 ease-in-out hover:text-gray-500 focus:text-red-500 ${
                   router.asPath == link.linkUrl &&
                   " border-t-2 border-red-500 text-red-500"
                 }`}
               >
-                <Icon className="h-6 w-6 inline-block mb-1" />
+                <Icon className="mb-1 inline-block h-6 w-6" />
                 <span className="tab tab-home block text-xs">{link.name}</span>
               </a>
             </Link>
