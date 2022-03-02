@@ -22,21 +22,21 @@ const VideoItem = ({ name, type, pic, id, remarks, rate }) => {
       {inView ? (
         <Link href={`/detail/${id}`}>
           <a
-            className="block group overflow-hidden relative bg-black cursor-pointer hover:brightness-75"
+            className="group relative block cursor-pointer overflow-hidden bg-black hover:brightness-75"
             onClick={() => {
               setIsLoading(true);
             }}
           >
             {isLoading && (
-              <div className="absolute z-10 top-0 left-0 h-full w-full flex items-center justify-center bg-gray-500/60">
+              <div className="absolute top-0 left-0 z-10 flex h-full w-full items-center justify-center bg-gray-500/60">
                 <svg
                   viewBox="-2 -2 42 42"
                   xmlns="http://www.w3.org/2000/svg"
-                  className="w-1/2 mb-10 aspect-square stroke-red-500"
+                  className="mb-10 aspect-square w-1/2 stroke-red-500"
                 >
                   <g fill="none" fill-rule="evenodd">
                     <g transform="translate(1 1)" stroke-width="5">
-                      <circle stroke-opacity=".4" cx="18" cy="18" r="18" />
+                      <circle strokeOpacity=".4" cx="18" cy="18" r="18" />
                       <path d="M36 18c0-9.94-8.06-18-18-18">
                         <animateTransform
                           attributeName="transform"
@@ -52,11 +52,11 @@ const VideoItem = ({ name, type, pic, id, remarks, rate }) => {
                 </svg>
               </div>
             )}
-            <div className="w-full aspect-[3/4]">
+            <div className="relative aspect-[3/4] w-full">
               <img
                 src={pic}
                 alt=""
-                className="object-cover h-60 md:h-full w-full group-focus:scale-110 group-hover:scale-110 group-active:scale-110 duration-300"
+                className="h-full w-full object-cover duration-300 group-hover:scale-110 group-focus:scale-110 group-active:scale-110 md:h-full"
                 referrerPolicy="no-referrer"
               />
               {/* <Image
@@ -73,24 +73,24 @@ const VideoItem = ({ name, type, pic, id, remarks, rate }) => {
             /> */}
             </div>
 
-            <div className="absolute bottom-0 left-0 bg-black/75 text-white line-clamp-3 text-xl font-bold">
+            <div className="absolute bottom-0 left-0 bg-black/75 text-xl font-bold text-white line-clamp-3">
               {name}
               <span className="block text-xs text-gray-400 line-clamp-1">
                 {type}
               </span>
             </div>
-            <div className="absolute top-0 right-0 bg-black/75 text-sm text-gray-300 pt-1">
+            <div className="absolute top-0 right-0 bg-black/75 pt-1 text-sm text-gray-300">
               {remarks}
             </div>
             {rate && (
-              <div className="absolute top-0 left-0 bg-black/75 text-sm text-orange-400 pt-1 pl-1">
+              <div className="absolute top-0 left-0 bg-black/75 pt-1 pl-1 text-sm text-orange-400">
                 豆瓣{rate}★
               </div>
             )}
           </a>
         </Link>
       ) : (
-        <div className="animate-pulse rounded bg-slate-200 w-full aspect-[3/4] p-2"></div>
+        <div className="aspect-[3/4] w-full animate-pulse rounded bg-slate-200 p-2"></div>
       )}
     </div>
   );

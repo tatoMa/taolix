@@ -11,7 +11,7 @@ import {
 } from "../utils/utils";
 import PlayerWrapper from "./Player/PlayerWrapper";
 
-const Banner = ({ detail }) => {
+const Banner = ({ detail, index = 1 }) => {
   // console.log(detail);
   let {
     vod_id,
@@ -90,6 +90,7 @@ const Banner = ({ detail }) => {
           alt="vod_name"
           className="relative h-full w-full object-cover opacity-20 blur-sm"
           referrerPolicy="no-referrer"
+          priority={`${index === 0}`}
         />
       </div>
       <div className="absolute left-0 -bottom-1 h-1/4 w-full bg-gradient-to-t from-black via-transparent to-transparent"></div>
@@ -182,6 +183,7 @@ const Banner = ({ detail }) => {
               "duration-300 group-hover:scale-110 group-focus:scale-110 group-active:scale-110"
             }`}
             referrerPolicy="no-referrer"
+            priority={`${index === 0}`}
           />
           {rate && (
             <div className="absolute right-0 top-[4rem] rounded-l-full bg-black/70 py-[0.125rem] pl-2 pr-1 text-sm text-orange-400 md:top-[90%]">

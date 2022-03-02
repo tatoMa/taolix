@@ -12,8 +12,8 @@ export default function Custom500({}) {
         canonical={`https://www.taolix.com/500`}
       />
       {/* Main section */}
-      <div className="w-full h-[70vh] max-w-screen-2xl mx-auto flex justify-center mt-8 md:mt-0 mb-2">
-        <div className="relative w-full h-full">
+      <div className="mx-auto mt-8 mb-2 flex h-[70vh] w-full max-w-screen-2xl justify-center md:mt-0">
+        <div className="relative h-full w-full">
           <Image
             unoptimized={true}
             src={lostPic}
@@ -25,15 +25,15 @@ export default function Custom500({}) {
         </div>
         <div className="absolute top-1/3">
           <div className="flex flex-col items-center ">
-            <p className=" text-gray-400 text-md">500 ERROR</p>
-            <p className=" text-2xl md:text-4xl text-white">
+            <p className=" text-md text-gray-400">500 ERROR</p>
+            <p className=" text-2xl text-white md:text-4xl">
               Uh oh! I think you're lost.
             </p>
-            <p className=" text-gray-400 text-sm md:text-md mt-1">
+            <p className=" md:text-md mt-1 text-sm text-gray-400">
               It looks like the page you are looking for doesn't exist.
             </p>
             <Link href="/">
-              <a className="text-xl font-bold text-white border py-1 px-6 mt-4 bg-white/30 hover:bg-white/10 hover:text-gray-300">
+              <a className="mt-4 border bg-white/30 py-1 px-6 text-xl font-bold text-white hover:bg-white/10 hover:text-gray-300">
                 Go back home
               </a>
             </Link>

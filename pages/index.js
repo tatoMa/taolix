@@ -22,7 +22,7 @@ export default function Home({
   return (
     <>
       {/* Main section */}
-      <div className="w-full h-full max-w-screen-2xl mx-auto ">
+      <div className="mx-auto h-full w-full max-w-screen-2xl ">
         {/* Swiper section */}
         <HeroSwiper top5={selectedVideosForHero} />
         <div className="-translate-y-9">
@@ -138,21 +138,36 @@ export async function getStaticProps() {
     console.error("error: ", e);
   }
 
-  // douban APIs
-  const videosHotListDouban = await getVideosListFromDouban(
-    `${process.env.DOUBAN_URL}${encodeURI(
-      "/j/search_subjects?type=tv&tag=热门&sort=recommend&page_limit=50&page_start=0"
-    )}`
-  );
-  const videosHotListDoubanFindResource = await Promise.all(
-    videosHotListDouban.map(
-      async (item) => await findResourceFromDoubanItem(item)
-    )
+  // get hot movie list from douban API
+  let videosHotListDouban = {};
+  try {
+    videosHotListDouban = await getVideosListFromDouban(
+      `${process.env.DOUBAN_URL}${encodeURI(
+        "/j/search_subjects?type=tv&tag=热门&sort=recommend&page_limit=50&page_start=0"
+      )}`
+    );
+  } catch (e) {
+    console.error("error: ", e);
+  }
+
+  // using Douban ranking video list fetch all individual resource from API
+  let videosHotListDoubanFindResource = await Promise.allSettled(
+    videosHotListDouban.map(async (item) => {
+      try {
+        const res = await findResourceFromDoubanItem(item);
+        return res;
+      } catch (e) {
+        console.error("error: ", e);
+      }
+    })
   );
 
+  // filter unnecessary items
   const videosHotListDoubanFiltered = {};
-  videosHotListDoubanFiltered.list =
-    videosHotListDoubanFindResource.filter(Boolean);
+  videosHotListDoubanFiltered.list = videosHotListDoubanFindResource
+    .filter(Boolean)
+    .filter((item) => item.status === "fulfilled" && item.value !== undefined)
+    .map((item) => item.value);
 
   const selectedVideosForHero = shuffle([
     ...videosHotListDoubanFiltered.list,

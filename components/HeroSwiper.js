@@ -45,13 +45,14 @@ const HeroSwiper = ({ top5 }) => {
       // onSwiper={(swiper) => console.log()}
       // onSlideChange={() => console.log("slide change")}
     >
-      {top5.map((movie) => (
+      {top5.map((movie, index) => (
         <SwiperSlide key={movie.vod_id}>
           <Banner
             detail={{
               ...movie,
               mode: "homePage",
             }}
+            index={index}
           />
         </SwiperSlide>
       ))}
