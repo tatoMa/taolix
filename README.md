@@ -1,6 +1,6 @@
 <div align="center">
-<a href="http://www.taolix.com">
-  <img src="public/logo.png" alt="Taolix Logo" width="332">
+<a href="http://www.taolix.com" style="background:black;">
+  <img src="public/logo.png" alt="Taolix Logo" width="332" >
 </a>
   <h1>Welcome to Taolix repository</h1>
   <strong>A open source video streaming service☕️</strong>
@@ -15,7 +15,7 @@
 It collects videos, movies, shows and anime from 3rd party website and system for you to play.
 
 <div align="center">
-  <img src="screenshot.png" alt="Taolix " width="332">
+  <img src="screenshot.png" alt="Taolix " width="100%">
 </div>
 
 #### At Taolix we care about:
@@ -65,7 +65,7 @@ Below is a list of technologies we use at daily.dev.
 - Top movies and shows list
 - Play video stream
 
-## 🚀 Running daily.dev Locally
+## 🚀 Running
 
 Dev:
 
