@@ -1,6 +1,6 @@
 <div align="center">
 <a href="http://www.taolix.com" style="background:black;">
-  <img src="public/logo.png" alt="Taolix Logo" width="332" >
+  <img src="public/apple-touch-icon.png" alt="Taolix Logo" width="64" >
 </a>
   <h1>Welcome to Taolix repository</h1>
   <strong>A open source video streaming service☕️</strong>
