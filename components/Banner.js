@@ -120,8 +120,8 @@ const Banner = ({ detail, index = 1 }) => {
                 onClick={() => playButtonHandler()}
                 className="absolute right-0 top-2 flex animate-bounce cursor-pointer items-center justify-end bg-gradient-to-br from-orange-600 to-red-600 bg-clip-text text-transparent hover:animate-none"
               >
-                <PlayIcon className="h-8 w-8 text-orange-500 " />
-                <a className="z-10 text-lg text-orange-500">
+                <PlayIcon className="h-6 w-6 text-orange-500 " />
+                <a className="text-md max-w-28 z-10 truncate text-orange-500">
                   {detail.mode === "homePage"
                     ? "Details"
                     : url
