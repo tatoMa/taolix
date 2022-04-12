@@ -1,9 +1,9 @@
-import {
+import SwiperCore, {
   Navigation,
   Pagination,
   Scrollbar,
-  A11y,
   Autoplay,
+  Virtual,
   // EffectCoverflow,
 } from "swiper";
 
@@ -16,20 +16,18 @@ import "swiper/css/autoplay";
 // import "swiper/css/effect-coverflow";
 
 import Banner from "./Banner";
+SwiperCore.use([Navigation, Pagination, Scrollbar, Autoplay, Virtual]);
 
 const HeroSwiper = ({ top5 }) => {
   // console.log("top5", top5);
   return (
     <Swiper
-      // install Swiper modules
-      modules={[
-        Navigation,
-        Pagination,
-        Scrollbar,
-        A11y,
-        Autoplay,
-        // EffectCoverflow,
-      ]}
+      virtual={{
+        addSlidesAfter: 2,
+        cache: true,
+        // addSlidesBefore: 8,
+        // slides: [1, 2, 3, 4, 5, 6, 7, 8],
+      }}
       autoplay={{
         delay: 8000,
         disableOnInteraction: true,
