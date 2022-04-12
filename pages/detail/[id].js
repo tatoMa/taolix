@@ -68,7 +68,7 @@ function Detail({ detail, id, detail2, detail3 }) {
         <div className="my-3 text-sm text-gray-400">
           ALL resources are from 3rd party website.
         </div>
-        <div className="flex flex-row">
+        <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
           {Object.keys(detail).length > 0 && (
             <VideoPlayList
               index={1}
