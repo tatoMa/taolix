@@ -22,18 +22,18 @@ const HeroSwiper = ({ top5 }) => {
   // console.log("top5", top5);
   return (
     <Swiper
-      virtual={{
-        addSlidesAfter: 2,
-        cache: true,
-        // addSlidesBefore: 8,
-        // slides: [1, 2, 3, 4, 5, 6, 7, 8],
-      }}
+      // virtual={{
+      //   addSlidesAfter: 2,
+      //   cache: true,
+      //   // addSlidesBefore: 8,
+      //   // slides: [1, 2, 3, 4, 5, 6, 7, 8],
+      // }}
       autoplay={{
         delay: 8000,
         disableOnInteraction: true,
       }}
       // effect="coverflow"
-      // loop
+      loop
       spaceBetween={50}
       slidesPerView={1}
       navigation
