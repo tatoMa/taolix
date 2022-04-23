@@ -37,7 +37,6 @@ const HeroSwiper = ({ top5 }) => {
       spaceBetween={50}
       slidesPerView={1}
       navigation
-      lazy={true}
       pagination={{ clickable: true }}
       scrollbar={{ draggable: true }}
       // onSwiper={(swiper) => console.log()}
