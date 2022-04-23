@@ -19,6 +19,9 @@ export default function PlayerWrapper({ url, setPlay }) {
         buttonPositionIndex: -2,
       },
     },
+    controlBar: {
+      pictureInPictureToggle: true,
+    },
     sources: [
       {
         src: url,
