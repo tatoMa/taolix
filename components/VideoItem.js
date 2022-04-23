@@ -20,7 +20,7 @@ const VideoItem = ({ name, type, pic, id, remarks, rate }) => {
   return (
     <div ref={ref}>
       {inView ? (
-        <Link href={`/detail/${id}`}>
+        <Link href={`/detail/${id}`} prefetch={false}>
           <a
             className="group relative block cursor-pointer overflow-hidden bg-black hover:brightness-75"
             onClick={() => {
