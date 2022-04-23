@@ -8,6 +8,7 @@ export default function PlayerWrapper({ url, setPlay }) {
   // console.log(url);
   const videoJsOptions = {
     // lookup the options in the docs for more options
+    playbackRates: [0.5, 1, 1.5, 2, 3],
     autoplay: true,
     controls: true,
     responsive: true,
