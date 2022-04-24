@@ -111,6 +111,7 @@ npm run build
 - [x] Microservices and APIs redesign
 - [x] Webpack Bundle Analyzer
 - [x] BFF Microservices pattern
+- [x] Player playback speed control
 - [ ] Adaptive design
 - [ ] History page
 - [ ] Profile manager
