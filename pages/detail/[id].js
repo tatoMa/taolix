@@ -1,10 +1,5 @@
 import Banner from "../../components/Banner";
-// import Head from "next/head";
-// import Footer from "../../components/Footer";
-// import Header from "../../components/Header";
-// import VideoList from "../../components/VideoList";
 import { useState } from "react";
-import { PlayIcon } from "@heroicons/react/solid";
 
 import LineBreak from "../../components/LineBreak";
 
@@ -14,30 +9,25 @@ import { getVideoUrlsFromUrlStr } from "../../utils/utils";
 
 import VideoPlayList from "../../components/VideoPlayList";
 
-function Detail({ detail, id, detail2, detail3 }) {
+function Detail({ detail, id, detail2, detail3, detail4 }) {
   const videoList = getVideoUrlsFromUrlStr(detail.list[0]?.vod_play_url);
   let videoList2 = {};
   let videoList3 = {};
+  let videoList4 = {};
 
   if (Object.keys(detail2).length > 0 && detail2.list.length > 0) {
-    videoList2 = getVideoUrlsFromUrlStr(detail2.list[0]?.vod_play_url);
+    videoList2 = getVideoUrlsFromUrlStr(detail2?.list[0]?.vod_play_url);
   }
   if (Object.keys(detail3).length > 0 && detail3.list.length > 0) {
-    videoList3 = getVideoUrlsFromUrlStr(detail3.list[0]?.vod_play_url);
+    videoList3 = getVideoUrlsFromUrlStr(detail3?.list[0]?.vod_play_url);
+  }
+  if (Object.keys(detail4).length > 0 && detail4.list.length > 0) {
+    videoList4 = getVideoUrlsFromUrlStr(detail4?.list[0]?.vod_play_url);
   }
 
-  // console.log("detail page", videoList);
   const [play, setPlay] = useState(false);
   const [url, setUrl] = useState("");
   const [data, setData] = useState({});
-
-  // useEffect(() => {
-  //   getVideoListFromOtherApi().then((res) => console.log(res));
-  //   return () => {
-  //     document.documentElement.style.overflowY = "auto";
-  //     // console.log("cleaned up");
-  //   };
-  // }, []);
 
   return (
     <>
@@ -68,8 +58,8 @@ function Detail({ detail, id, detail2, detail3 }) {
         <div className="my-3 text-sm text-gray-400">
           ALL resources are from 3rd party website.
         </div>
-        <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3">
-          {Object.keys(detail).length > 0 && (
+        <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-4">
+          {detail.list.length > 0 && (
             <VideoPlayList
               index={1}
               videoList={videoList}
@@ -78,7 +68,7 @@ function Detail({ detail, id, detail2, detail3 }) {
               url={url}
             />
           )}
-          {Object.keys(detail2).length > 0 && (
+          {detail2.list.length > 0 > 0 && (
             <VideoPlayList
               index={2}
               title={false}
@@ -88,11 +78,21 @@ function Detail({ detail, id, detail2, detail3 }) {
               url={url}
             />
           )}
-          {Object.keys(detail3).length > 0 && (
+          {detail3.list.length > 0 > 0 && (
             <VideoPlayList
               index={3}
               title={false}
               videoList={videoList3}
+              setPlay={setPlay}
+              setUrl={setUrl}
+              url={url}
+            />
+          )}
+          {detail4.list.length > 0 > 0 && (
+            <VideoPlayList
+              index={4}
+              title={false}
+              videoList={videoList4}
               setPlay={setPlay}
               setUrl={setUrl}
               url={url}
@@ -107,6 +107,7 @@ function Detail({ detail, id, detail2, detail3 }) {
 export default Detail;
 
 export async function getServerSideProps({ params, req, res }) {
+  // fetch the primary data
   res.setHeader("Cache-Control", "public, s-maxage=60");
   let detail = {};
   try {
@@ -116,57 +117,63 @@ export async function getServerSideProps({ params, req, res }) {
     console.error("error: ", error);
   }
 
-  let temp2 = {};
-  try {
-    const res2 = await fetch(
-      `${process.env.MOVIE_API_SOURCE_2}/?ac=detail&wd=${encodeURI(
-        detail.list[0].vod_name
-      )}`
-    );
-    temp2 = await res2.json();
-  } catch (error) {
-    console.error("error: ", error);
-  }
-
+  // fetch the secondary data
   let detail2 = {};
-  if (temp2.total >= 1) {
-    detail2.list = [];
-
-    detail2.list[0] = temp2.list?.find(
-      (item) => item.vod_name == detail.list[0].vod_name
-    );
-  }
-  const result2 = JSON.parse(JSON.stringify(detail2));
-
-  let temp3 = {};
-  try {
-    const res3 = await fetch(
-      `${process.env.MOVIE_API_SOURCE_3}/?ac=detail&wd=${encodeURI(
-        detail.list[0].vod_name
-      )}`
-    );
-    temp3 = await res3.json();
-  } catch (error) {
-    console.error("error: ", error);
-  }
-
   let detail3 = {};
-  if (temp3.total >= 1) {
-    detail3.list = [];
+  let detail4 = {};
 
-    detail3.list[0] = temp3.list?.find(
-      (item) => item.vod_name == detail.list[0].vod_name
-    );
+  let resultsPromiseAll;
+
+  try {
+    resultsPromiseAll = await Promise.allSettled([
+      fetch(
+        `${process.env.MOVIE_API_SOURCE_2}/?ac=detail&wd=${encodeURI(
+          detail.list[0].vod_name
+        )}`
+      ).then((res) => res.json()),
+      fetch(
+        `${process.env.MOVIE_API_SOURCE_3}/?ac=detail&wd=${encodeURI(
+          detail.list[0].vod_name
+        )}`
+      ).then((res) => res.json()),
+      fetch(
+        `${process.env.MOVIE_API_SOURCE_4}/?ac=detail&wd=${encodeURI(
+          detail.list[0].vod_name
+        )}`
+      ).then((res) => res.json()),
+    ]);
+  } catch (error) {
+    console.error(error);
   }
-  const result3 = JSON.parse(JSON.stringify(detail3));
-  // By returning { props: { posts } }, the Blog component
-  // will receive `posts` as a prop at build time
+
+  // handle promise allSettled returns successes and failures
+  const successes = resultsPromiseAll
+    .filter((x) => x.status === "fulfilled")
+    .map((x) => x.value);
+
+  const failures = resultsPromiseAll
+    .filter((x) => x.status === "rejected")
+    .map((x) => x.reason);
+
+  // map and filter results for return needed
+  const filteredByName = successes.map((item) => {
+    let temp = [];
+    temp[0] = item.list.find(
+      (item) => item.vod_name === detail.list[0].vod_name
+    );
+    return { ...item, list: temp[0] !== undefined ? temp : [] };
+  });
+
+  // asign all return needed data
+  [detail2, detail3, detail4] = filteredByName;
+
   return {
     props: {
       detail,
       id: params.id,
-      detail2: result2,
-      detail3: result3,
+      detail2,
+      detail3,
+      detail4,
     },
   };
 }

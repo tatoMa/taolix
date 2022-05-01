@@ -13,8 +13,10 @@ const VideoPlayList = ({
     <>
       {videoList && (
         <div className="z-10">
-          <div className="my-3 mt-6 text-sm text-red-500">Source {index}.</div>
-          <div className="mt-1 grid grid-cols-2 gap-y-2 md:grid-cols-1 md:gap-y-0">
+          <div className="my-2 mt-4 inline-block rounded-full bg-red-500 px-6 py-1 text-sm text-white">
+            Source {index}
+          </div>
+          <div className="mt-1 grid grid-cols-2 gap-x-2 gap-y-1 md:grid-cols-1 md:gap-y-0">
             {videoList.map((video) => {
               const { name, url } = video;
               return (

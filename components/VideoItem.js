@@ -8,7 +8,7 @@ const myLoader = ({ src, width, quality }) => {
   return `https://example.com/${src}?w=${width}&q=${quality || 75}`;
 };
 
-const VideoItem = ({ name, type, pic, id, remarks, rate }) => {
+const VideoItem = ({ name, type, pic, id, remarks, rate, hd = false }) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const { ref, inView, entry } = useInView({
@@ -20,7 +20,7 @@ const VideoItem = ({ name, type, pic, id, remarks, rate }) => {
   return (
     <div ref={ref}>
       {inView ? (
-        <Link href={`/detail/${id}`} prefetch={false}>
+        <Link href={hd ? `/detail/${id}/hd` : `/detail/${id}`} prefetch={false}>
           <a
             className="group relative block cursor-pointer overflow-hidden bg-black hover:brightness-75"
             onClick={() => {
