@@ -13,7 +13,9 @@ const VideoListsSection = ({ videos }) => {
           remarks={movie.vod_remarks}
           key={movie.vod_id}
           rate={
-            movie.rate || movie.vod_douban_score != 0
+            movie.rate
+              ? movie.rate
+              : movie.vod_douban_score != 0
               ? movie.vod_douban_score
               : ""
           }
