@@ -1,8 +1,6 @@
 import Banner from "../../components/Banner";
 import { useState } from "react";
-
 import LineBreak from "../../components/LineBreak";
-
 import PlayerWrapper from "../../components/Player/PlayerWrapper";
 import NextHeadSeo from "next-head-seo";
 import {
@@ -13,24 +11,20 @@ import {
 import VideoPlayList from "../../components/VideoPlayList";
 
 function Detail({ detail, id, detail2, detail3, detail4, detailHD }) {
+  // get primary video info
   const videoList = getVideoUrlsFromUrlStr(detail.list[0]?.vod_play_url);
-  let videoList2 = {};
-  let videoList3 = {};
-  let videoList4 = {};
-  let videoListHD = {};
 
-  if (Object.keys(detail2).length > 0 && detail2.list.length > 0) {
-    videoList2 = getVideoUrlsFromUrlStr(detail2?.list[0]?.vod_play_url);
-  }
-  if (Object.keys(detail3).length > 0 && detail3.list.length > 0) {
-    videoList3 = getVideoUrlsFromUrlStr(detail3?.list[0]?.vod_play_url);
-  }
-  if (Object.keys(detail4).length > 0 && detail4.list.length > 0) {
-    videoList4 = getVideoUrlsFromUrlStr(detail4?.list[0]?.vod_play_url);
-  }
-  if (Object.keys(detailHD).length > 0 && detailHD.list.length > 0) {
-    videoListHD = getVideoUrlsFromUrlStr(detailHD?.list[0]?.vod_play_url);
-  }
+  // get additional video play list
+  const getPlayList = (source) => {
+    if (Object.keys(source).length > 0 && source.list.length > 0) {
+      return getVideoUrlsFromUrlStr(source?.list[0]?.vod_play_url);
+    }
+  };
+
+  let videoList2 = getPlayList(detail2) || {};
+  let videoList3 = getPlayList(detail3) || {};
+  let videoList4 = getPlayList(detail4) || {};
+  let videoListHD = getPlayList(detailHD) || {};
 
   // modified original pic url with hi-res pic if there is one
   if (detailHD?.list[0]?.vod_pic)
@@ -38,7 +32,6 @@ function Detail({ detail, id, detail2, detail3, detail4, detailHD }) {
 
   const [play, setPlay] = useState(false);
   const [url, setUrl] = useState("");
-  const [data, setData] = useState({});
 
   return (
     <>

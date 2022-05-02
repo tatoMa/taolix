@@ -34,8 +34,8 @@ const VideoItem = ({ name, type, pic, id, remarks, rate, hd = false }) => {
                   xmlns="http://www.w3.org/2000/svg"
                   className="mb-10 aspect-square w-1/2 stroke-red-500"
                 >
-                  <g fill="none" fill-rule="evenodd">
-                    <g transform="translate(1 1)" stroke-width="5">
+                  <g fill="none" fillRule="evenodd">
+                    <g transform="translate(1 1)" strokeWidth="5">
                       <circle strokeOpacity=".4" cx="18" cy="18" r="18" />
                       <path d="M36 18c0-9.94-8.06-18-18-18">
                         <animateTransform

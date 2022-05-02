@@ -10,17 +10,21 @@ export default function Home({ videos, page, t }) {
   return (
     <>
       <NextHeadSeo
-        title={`All ${group ? group.classify : "video"}s free to play - Taolix`}
+        title={`All ${group ? group.classify : "video"}s free to play - Taolix${
+          page ? ` - page${page}` : ""
+        }`}
         description={`All new ${
           group ? group.classify : "video"
-        }s users can play online for free.`}
+        }s users can play online for free. ${group ? group.classify : "video"}${
+          page ? ` - page${page}` : ""
+        }`}
         canonical={`https://www.taolix.com/list/${t}/1`}
       />
       {/* Main section */}
       <div className="mx-auto mt-8 h-full w-full max-w-screen-2xl pt-6 md:pb-8">
         {Object.keys(videos).length !== 0 ? (
           <>
-            <GenreList t={t} />
+            <GenreList t={t} page={page} />
             <VideoListsSection videos={videos} />
           </>
         ) : (
