@@ -203,3 +203,10 @@ export async function findMovieFromApiByTitle(title, api) {
     console.log(error);
   }
 }
+
+export function removeAllSpecialCharactersFromString(str) {
+  return str.replace(
+    /[`:_.~!@#$%^&amp;*() \+ =&lt;&gt;?"{}|, \/ ;' \\ [ \] ·~！@#￥%……&amp;*（）—— \+ ={}|《》？：“”【】、；‘’，。、-]/g,
+    ""
+  );
+}
