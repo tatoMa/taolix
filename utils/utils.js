@@ -90,15 +90,33 @@ export const getInfoFromApiToDetail = (info) => {
 };
 
 export const filterNeededVideoInfo = (
-  { vod_id, vod_name, vod_class, vod_pic, vod_remarks } = {
+  {
+    vod_id,
+    vod_name,
+    vod_class,
+    vod_pic,
+    vod_remarks,
+    vod_douban_score,
+    vod_score,
+  } = {
     vod_id: 0,
     vod_name: "",
     vod_class: "",
     vod_pic: "",
     vod_remarks: "",
+    vod_douban_score: 0,
+    vod_score: 0,
   }
 ) => {
-  return { vod_id, vod_name, vod_class, vod_pic, vod_remarks };
+  return {
+    vod_id,
+    vod_name,
+    vod_class,
+    vod_pic,
+    vod_remarks,
+    vod_douban_score,
+    vod_score,
+  };
 };
 
 export const filterNeededVideoInfoForHero = (
@@ -165,6 +183,7 @@ export async function getVideosListFromApi(url) {
   try {
     const res = await fetch(url);
     const result = await res.json();
+    // console.log(result);
     result.list = result.list.map((i) => filterNeededVideoInfo(i));
     return result;
   } catch (error) {

@@ -46,7 +46,7 @@ const GroupSwiper = ({ videos }) => {
         slidesPerView={2.25}
         slidesPerGroup={2}
         spaceBetween={6}
-        className="h-full mx-10 mb-4 mt-4"
+        className="mx-10 mb-4 mt-4 h-full"
         lazy={true}
         breakpoints={{
           630: { slidesPerView: 7.25, slidesPerGroup: 2, spaceBetween: 6 },
@@ -85,7 +85,13 @@ const GroupSwiper = ({ videos }) => {
               pic={movie.vod_pic}
               remarks={movie.vod_remarks}
               id={movie.vod_id}
-              rate={movie.rate || ""}
+              rate={
+                movie.rate || movie.vod_douban_score != 0
+                  ? movie.vod_douban_score
+                  : movie.vod_score != 0
+                  ? movie.vod_score
+                  : ""
+              }
             />
           </SwiperSlide>
         ))}

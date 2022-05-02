@@ -22,7 +22,7 @@ const VideoItem = ({ name, type, pic, id, remarks, rate, hd = false }) => {
       {inView ? (
         <Link href={hd ? `/detail/${id}/hd` : `/detail/${id}`} prefetch={false}>
           <a
-            className="group relative block cursor-pointer overflow-hidden bg-black hover:brightness-75"
+            className="group relative block cursor-pointer overflow-hidden bg-black transition duration-500 hover:saturate-150"
             onClick={() => {
               setIsLoading(true);
             }}
@@ -56,7 +56,7 @@ const VideoItem = ({ name, type, pic, id, remarks, rate, hd = false }) => {
               <img
                 src={pic}
                 alt=""
-                className="h-full w-full object-cover duration-300 group-hover:scale-110 group-focus:scale-110 group-active:scale-110 md:h-full"
+                className="h-full w-full object-cover duration-300 group-hover:scale-125 group-focus:scale-110 group-active:scale-110 md:h-full"
                 referrerPolicy="no-referrer"
               />
               {/* <Image
@@ -79,11 +79,21 @@ const VideoItem = ({ name, type, pic, id, remarks, rate, hd = false }) => {
                 {type}
               </span>
             </div>
-            <div className="absolute top-0 right-0 bg-black/75 pt-1 text-sm text-gray-300">
+            <div className="absolute top-0 right-0 bg-black/80 pt-1 text-sm text-gray-300">
               {remarks}
             </div>
             {rate && (
-              <div className="absolute top-0 left-0 bg-black/75 pt-1 pl-1 text-sm text-orange-400">
+              <div
+                className={`absolute top-0 left-0 bg-black/80 pt-1 pl-1 text-sm  ${
+                  rate > 9
+                    ? "text-red-500"
+                    : rate > 7
+                    ? "text-orange-400"
+                    : rate > 5
+                    ? "text-yellow-400"
+                    : "text-yellow-300/75"
+                }`}
+              >
                 豆瓣{rate}★
               </div>
             )}

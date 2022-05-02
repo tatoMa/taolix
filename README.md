@@ -112,6 +112,8 @@ npm run build
 - [x] Webpack Bundle Analyzer
 - [x] BFF Microservices pattern
 - [x] Player playback speed control
+- [x] Added 1080P video source
+- [x] Translation text for search purpose
 - [ ] Adaptive design
 - [ ] History page
 - [ ] Profile manager

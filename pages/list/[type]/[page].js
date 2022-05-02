@@ -6,7 +6,7 @@ import { GENRES } from "../../../utils/const";
 
 export default function Home({ videos, page, t }) {
   const group = GENRES.find((item) => item.type == t);
-  // console.log(group);
+  // console.log(videos);
   return (
     <>
       <NextHeadSeo
@@ -17,14 +17,14 @@ export default function Home({ videos, page, t }) {
         canonical={`https://www.taolix.com/list/${t}/1`}
       />
       {/* Main section */}
-      <div className="w-full h-full md:pb-8 max-w-screen-2xl mx-auto mt-8 pt-6">
+      <div className="mx-auto mt-8 h-full w-full max-w-screen-2xl pt-6 md:pb-8">
         {Object.keys(videos).length !== 0 ? (
           <>
             <GenreList t={t} />
             <VideoListsSection videos={videos} />
           </>
         ) : (
-          <div className=" text-2xl text-center text-red-500 mt-10">
+          <div className=" mt-10 text-center text-2xl text-red-500">
             Fetching error. Please use another link or go back. <br />
             Cannot find page {page} with genre {t}.
           </div>
