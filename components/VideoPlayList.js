@@ -8,11 +8,12 @@ const VideoPlayList = ({
   setUrl,
   title = true,
   index,
+  bannedIp,
 }) => {
   return (
     <>
       {videoList && (
-        <div className="z-10">
+        <div className={`z-10 ${bannedIp && "order-last"} `}>
           <div
             className={`my-2 mt-4 inline-block rounded-full  px-6 py-1 text-sm  ${
               index === "HD"

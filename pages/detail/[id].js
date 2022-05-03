@@ -1,5 +1,5 @@
 import Banner from "../../components/Banner";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LineBreak from "../../components/LineBreak";
 import PlayerWrapper from "../../components/Player/PlayerWrapper";
 import NextHeadSeo from "next-head-seo";
@@ -32,6 +32,14 @@ function Detail({ detail, id, detail2, detail3, detail4, detailHD }) {
 
   const [play, setPlay] = useState(false);
   const [url, setUrl] = useState("");
+  const [country, setCountry] = useState("");
+
+  useEffect(async () => {
+    // check if the ip is from China
+    const response = await fetch(`http://localhost:3000/api/ipchecker`);
+    const res = await response.json();
+    setCountry(res.country);
+  }, []);
 
   return (
     <>
@@ -72,6 +80,7 @@ function Detail({ detail, id, detail2, detail3, detail4, detailHD }) {
               setPlay={setPlay}
               setUrl={setUrl}
               url={url}
+              bannedIp={country !== "Australia"}
             />
           )}
           {detail.list.length > 0 && (
