@@ -131,7 +131,10 @@ export default Detail;
 
 export async function getServerSideProps({ params, req, res }) {
   // fetch the primary data
-  res.setHeader("Cache-Control", "public, s-maxage=60");
+  res.setHeader(
+    "Cache-Control",
+    "public, s-maxage=600, stale-while-revalidate=3600"
+  );
   let detail = {};
   try {
     let response = await fetch(`${process.env.SITE_URL}/api/id/${params.id}`);

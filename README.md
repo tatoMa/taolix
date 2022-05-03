@@ -114,6 +114,7 @@ npm run build
 - [x] Player playback speed control
 - [x] Added 1080P video source
 - [x] Translation text for search purpose
+- [ ] i18n
 - [ ] Adaptive design
 - [ ] History page
 - [ ] Profile manager
