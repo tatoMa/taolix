@@ -32,14 +32,14 @@ function Detail({ detail, id, detail2, detail3, detail4, detailHD }) {
 
   const [play, setPlay] = useState(false);
   const [url, setUrl] = useState("");
-  const [country, setCountry] = useState("");
+  // const [country, setCountry] = useState("");
 
-  useEffect(async () => {
-    // check if the ip is from China
-    const response = await fetch("http://ipwho.is/");
-    const res = await response.json();
-    setCountry(res.country);
-  }, []);
+  // useEffect(async () => {
+  //   // check if the ip is from China
+  //   const response = await fetch("http://ipwho.is/");
+  //   const res = await response.json();
+  //   setCountry(res.country);
+  // }, []);
 
   return (
     <>
@@ -80,7 +80,6 @@ function Detail({ detail, id, detail2, detail3, detail4, detailHD }) {
               setPlay={setPlay}
               setUrl={setUrl}
               url={url}
-              bannedIp={country !== "Australia"}
             />
           )}
           {detail.list.length > 0 && (
