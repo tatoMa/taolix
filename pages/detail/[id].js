@@ -36,7 +36,7 @@ function Detail({ detail, id, detail2, detail3, detail4, detailHD }) {
 
   useEffect(async () => {
     // check if the ip is from China
-    const response = await fetch(`${process.env.SITE_URL}/api/ipchecker`);
+    const response = await fetch("http://ipwho.is/");
     const res = await response.json();
     setCountry(res.country);
   }, []);
