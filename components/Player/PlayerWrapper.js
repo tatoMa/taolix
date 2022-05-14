@@ -42,7 +42,13 @@ export default function PlayerWrapper({ url, setPlay }) {
       className="pointer-events-auto fixed top-0 left-0 z-50 flex h-full w-full items-center bg-black/60 "
       onKeyDown={handleKeyDown}
     >
-      <div className="w-full">
+      <div
+        style={{
+          width: "min(100%,calc(100vh/9*16))",
+          position: "relative",
+          margin: "auto",
+        }}
+      >
         <XIcon
           className="text-blue-white pointer-events-auto absolute right-0 z-50 h-20 max-h-[8vw] w-20 max-w-[8vw] animate-fadeIn cursor-pointer bg-black/40 text-white hover:bg-white hover:text-black"
           onClick={() => {
