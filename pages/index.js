@@ -39,7 +39,7 @@ export default function Home({
           <GroupSwiper videos={doubanHotTvList} />
 
           {/* Line Break  */}
-          <LineBreak title="NEW MOVIES" />
+          {/* <LineBreak title="NEW MOVIES" /> */}
 
           {/* Video List Section */}
           {/* <GroupSwiper videos={doubanNewMovieList} /> */}
