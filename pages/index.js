@@ -11,7 +11,7 @@ export default function Home({
   selectedVideosForHero,
   doubanHotTvList,
   doubanHotMovieList,
-  doubanNewMovieList,
+  // doubanNewMovieList,
   videosNewCnTvShow,
   videosNewKrTvShow,
   videosNewUsTvShow,
@@ -42,7 +42,7 @@ export default function Home({
           <LineBreak title="NEW MOVIES" />
 
           {/* Video List Section */}
-          <GroupSwiper videos={doubanNewMovieList} />
+          {/* <GroupSwiper videos={doubanNewMovieList} /> */}
 
           {/* Line Break  */}
           <LineBreak title="CHINESE TV SHOWS" />
@@ -220,9 +220,9 @@ export async function getStaticProps() {
     "/j/search_subjects?type=movie&tag=热门&sort=recommend&page_limit=50&page_start=0"
   );
 
-  const doubanNewMovieList = await gerVideoListFromDoubanApiHotList(
-    "/j/search_subjects?type=movie&tag=最新&sort=recommend&page_limit=50&page_start=0"
-  );
+  // const doubanNewMovieList = await gerVideoListFromDoubanApiHotList(
+  //   "/j/search_subjects?type=movie&tag=最新&sort=recommend&page_limit=50&page_start=0"
+  // );
 
   const selectedVideosForHero = shuffle([
     ...doubanHotTvList.list,
@@ -234,7 +234,7 @@ export async function getStaticProps() {
       selectedVideosForHero,
       doubanHotTvList,
       doubanHotMovieList,
-      doubanNewMovieList,
+      // doubanNewMovieList,
       videosNewCnTvShow,
       videosNewKrTvShow,
       videosNewUsTvShow,
