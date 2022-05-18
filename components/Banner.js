@@ -186,7 +186,17 @@ const Banner = ({ detail, index = 1 }) => {
             priority={`${index === 0}`}
           />
           {rate && (
-            <div className="absolute right-0 top-[4rem] rounded-l-full bg-black/70 py-[0.125rem] pl-2 pr-1 text-sm text-orange-400 md:top-[90%]">
+            <div
+              className={`absolute right-0 top-[4.1rem] z-10 rounded-l-full bg-black/70 py-[0.125rem] pl-2 pr-1 text-sm text-orange-400 md:top-[85%] md:right-3 md:scale-125 ${
+                rate > 9
+                  ? "text-red-500"
+                  : rate > 7
+                  ? "text-orange-400"
+                  : rate > 5
+                  ? "text-yellow-400"
+                  : "text-yellow-300/75"
+              }`}
+            >
               {"豆瓣 " + rate + "★"}
             </div>
           )}
