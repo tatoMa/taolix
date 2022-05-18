@@ -72,7 +72,7 @@ function Detail({ detail, id, detail2, detail3, detail4, detailHD }) {
           video resources.
         </div>
         <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-6">
-          {detailHD.list.length > 0 > 0 && (
+          {detailHD?.list?.length > 0 && (
             <VideoPlayList
               index={"HD"}
               title={false}
@@ -82,7 +82,7 @@ function Detail({ detail, id, detail2, detail3, detail4, detailHD }) {
               url={url}
             />
           )}
-          {detail2.list.length > 0 && (
+          {detail2?.list?.length > 0 && (
             <VideoPlayList
               index={1}
               videoList={videoList}
@@ -91,7 +91,7 @@ function Detail({ detail, id, detail2, detail3, detail4, detailHD }) {
               url={url}
             />
           )}
-          {detail3.list.length > 0 > 0 && (
+          {detail3?.list?.length > 0 && (
             <VideoPlayList
               index={2}
               title={false}
@@ -101,7 +101,7 @@ function Detail({ detail, id, detail2, detail3, detail4, detailHD }) {
               url={url}
             />
           )}
-          {detail4.list.length > 0 > 0 && (
+          {detail4?.list?.length > 0 && (
             <VideoPlayList
               index={3}
               title={false}
@@ -111,7 +111,7 @@ function Detail({ detail, id, detail2, detail3, detail4, detailHD }) {
               url={url}
             />
           )}
-          {detail.list.length > 0 > 0 && (
+          {detail?.list?.length > 0 && (
             <VideoPlayList
               index={4}
               title={false}
