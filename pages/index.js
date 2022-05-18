@@ -9,8 +9,8 @@ import GroupSwiper from "../components/GroupSwiper";
 
 export default function Home({
   selectedVideosForHero,
-  doubanHotTvList,
-  doubanHotMovieList,
+  // doubanHotTvList,
+  // doubanHotMovieList,
   // doubanNewMovieList,
   videosNewCnTvShow,
   videosNewKrTvShow,
@@ -24,19 +24,19 @@ export default function Home({
       {/* Main section */}
       <div className="mx-auto h-full w-full max-w-screen-2xl ">
         {/* Swiper section */}
-        <HeroSwiper top5={selectedVideosForHero} />
+        {/* <HeroSwiper top5={selectedVideosForHero} /> */}
         <div className="-translate-y-9">
           {/* Line Break  */}
-          <LineBreak title="WHATS ON MOVIES" />
+          {/* <LineBreak title="WHATS ON MOVIES" /> */}
 
           {/* Video List Section */}
-          <GroupSwiper videos={doubanHotMovieList} />
+          {/* <GroupSwiper videos={doubanHotMovieList} /> */}
 
           {/* Line Break  */}
-          <LineBreak title="WHATS ON TV" />
+          {/* <LineBreak title="WHATS ON TV" /> */}
 
           {/* Video List Section */}
-          <GroupSwiper videos={doubanHotTvList} />
+          {/* <GroupSwiper videos={doubanHotTvList} /> */}
 
           {/* Line Break  */}
           {/* <LineBreak title="NEW MOVIES" /> */}
@@ -181,59 +181,60 @@ export async function getStaticProps() {
   // }
 
   // get hot movie list from douban API
-  let videosHotListDouban = {};
+  // let videosHotListDouban = {};
 
-  const gerVideoListFromDoubanApiHotList = async (url) => {
-    try {
-      videosHotListDouban = await getVideosListFromDouban(
-        `${process.env.DOUBAN_URL}${encodeURI(url)}`
-      );
-    } catch (e) {
-      console.error("error: ", e);
-    }
+  // const gerVideoListFromDoubanApiHotList = async (url) => {
+  //   try {
+  //     videosHotListDouban = await getVideosListFromDouban(
+  //       `${process.env.DOUBAN_URL}${encodeURI(url)}`
+  //     );
+  //   } catch (e) {
+  //     console.error("error: ", e);
+  //   }
 
-    // using Douban ranking video list fetch all individual resource from API
-    let videosHotListDoubanFindResource = await Promise.allSettled(
-      videosHotListDouban.map(async (item) => {
-        try {
-          const res = await findResourceFromDoubanItem(item);
-          return res;
-        } catch (e) {
-          console.error("error: ", e);
-        }
-      })
-    );
+  //   // using Douban ranking video list fetch all individual resource from API
+  //   let videosHotListDoubanFindResource = await Promise.allSettled(
+  //     videosHotListDouban.map(async (item) => {
+  //       try {
+  //         const res = await findResourceFromDoubanItem(item);
+  //         return res;
+  //       } catch (e) {
+  //         console.error("error: ", e);
+  //       }
+  //     })
+  //   );
 
-    // filter unnecessary items
-    const videosHotListDoubanFiltered = {};
-    videosHotListDoubanFiltered.list = videosHotListDoubanFindResource
-      .filter(Boolean)
-      .filter((item) => item.status === "fulfilled" && item.value !== undefined)
-      .map((item) => item.value);
-    return videosHotListDoubanFiltered;
-  };
+  //   // filter unnecessary items
+  //   const videosHotListDoubanFiltered = {};
+  //   videosHotListDoubanFiltered.list = videosHotListDoubanFindResource
+  //     .filter(Boolean)
+  //     .filter((item) => item.status === "fulfilled" && item.value !== undefined)
+  //     .map((item) => item.value);
+  //   return videosHotListDoubanFiltered;
+  // };
 
-  const doubanHotTvList = await gerVideoListFromDoubanApiHotList(
-    "/j/search_subjects?type=tv&tag=热门&sort=recommend&page_limit=50&page_start=0"
-  );
-  const doubanHotMovieList = await gerVideoListFromDoubanApiHotList(
-    "/j/search_subjects?type=movie&tag=热门&sort=recommend&page_limit=50&page_start=0"
-  );
+  // const doubanHotTvList = await gerVideoListFromDoubanApiHotList(
+  //   "/j/search_subjects?type=tv&tag=热门&sort=recommend&page_limit=50&page_start=0"
+  // );
+  // const doubanHotMovieList = await gerVideoListFromDoubanApiHotList(
+  //   "/j/search_subjects?type=movie&tag=热门&sort=recommend&page_limit=50&page_start=0"
+  // );
 
   // const doubanNewMovieList = await gerVideoListFromDoubanApiHotList(
   //   "/j/search_subjects?type=movie&tag=最新&sort=recommend&page_limit=50&page_start=0"
   // );
 
   const selectedVideosForHero = shuffle([
-    ...doubanHotTvList.list,
-    ...doubanHotMovieList.list,
+    // ...doubanHotTvList.list,
+    // ...doubanHotMovieList.list,
+    ...videosNewCnTvShow.list,
   ]).slice(0, 6);
 
   return {
     props: {
       selectedVideosForHero,
-      doubanHotTvList,
-      doubanHotMovieList,
+      // doubanHotTvList,
+      // doubanHotMovieList,
       // doubanNewMovieList,
       videosNewCnTvShow,
       videosNewKrTvShow,
