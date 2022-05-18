@@ -72,7 +72,7 @@ function Detail({ id, detail, detail2, detail3, detail4, detailHD }) {
           video resources.
         </div>
         <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-6">
-          {detailHD?.total > 0 && (
+          {detailHD?.list?.length > 0 && (
             <VideoPlayList
               index={"HD"}
               title={false}
@@ -215,7 +215,6 @@ export async function getServerSideProps({ params, req, res }) {
 
   // asign all return needed data
   [detail2, detail3, detail4, detailHD] = filteredByName;
-  console.log(detail);
   return {
     props: {
       detail,
