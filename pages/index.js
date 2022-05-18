@@ -83,8 +83,6 @@ export async function getStaticProps() {
   let resultsPromiseAll;
   try {
     resultsPromiseAll = await Promise.allSettled([
-      // fetch(`${process.env.SITE_URL}/api/list`).then((res) => res.json()),
-      // fetch(`${process.env.SITE_URL}/api/list/2`).then((res) => res.json()),
       fetch(`${process.env.MOVIE_API}/?ac=detail&t=33`).then((res) =>
         res.json()
       ),
@@ -112,6 +110,7 @@ export async function getStaticProps() {
   const failures = resultsPromiseAll
     .filter((x) => x.status === "rejected")
     .map((x) => x.reason);
+  if (failures) console.error(failures);
 
   // map and filter results for return needed
   // const filteredByName = successes.map((item) => {
@@ -131,64 +130,6 @@ export async function getStaticProps() {
     videosNewCnReality = {},
     videosNewJpAnime = {},
   ] = successes;
-
-  // Call an external API endpoint to get posts.
-  // You can use any data fetching library
-  // let videosNewAll = {};
-  // try {
-  //   let response = await fetch(`${process.env.SITE_URL}/api/list`);
-  //   videosNewAll = await response.json();
-  // } catch (e) {
-  //   console.error("error: ", e);
-  // }
-
-  // let videosNewAction = {};
-  // try {
-  //   let response = await fetch(`${process.env.SITE_URL}/api/list/2`);
-  //   videosNewAction = await response.json();
-  // } catch (e) {
-  //   console.error("error: ", e);
-  // }
-
-  // let videosNewCnTvShow = {};
-  // try {
-  //   let response = await fetch(`${process.env.SITE_URL}/api/list/15`);
-  //   videosNewCnTvShow = await response.json();
-  // } catch (e) {
-  //   console.error("error: ", e);
-  // }
-
-  // let videosNewKrTvShow = {};
-  // try {
-  //   let response = await fetch(`${process.env.SITE_URL}/api/list/19`);
-  //   videosNewKrTvShow = await response.json();
-  // } catch (e) {
-  //   console.error("error: ", e);
-  // }
-
-  // let videosNewUsTvShow = {};
-  // try {
-  //   let response = await fetch(`${process.env.SITE_URL}/api/list/18`);
-  //   videosNewUsTvShow = await response.json();
-  // } catch (e) {
-  //   console.error("error: ", e);
-  // }
-
-  // let videosNewCnReality = {};
-  // try {
-  //   let response = await fetch(`${process.env.SITE_URL}/api/list/22`);
-  //   videosNewCnReality = await response.json();
-  // } catch (e) {
-  //   console.error("error: ", e);
-  // }
-
-  // let videosNewJpAnime = {};
-  // try {
-  //   let response = await fetch(`${process.env.SITE_URL}/api/list/28`);
-  //   videosNewJpAnime = await response.json();
-  // } catch (e) {
-  //   console.error("error: ", e);
-  // }
 
   // get hot movie list from douban API
   let videosHotListDouban = {};
