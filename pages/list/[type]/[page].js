@@ -41,18 +41,10 @@ export default function Home({ videos, page, t }) {
   );
 }
 
-export async function getServerSideProps({ params: { type, page } }) {
+export async function getStaticProps({ params: { type, page } }) {
   let videos = {};
 
-  if (
-    parseInt(type) > 0 &&
-    parseInt(page) > 0 &&
-    parseInt(type) <= 29 &&
-    parseInt(type) > 0 &&
-    parseInt(type) !== 14 &&
-    parseInt(type) !== 21 &&
-    parseInt(type) !== 26
-  ) {
+  if (parseInt(type) > 0 && parseInt(page) < 49) {
     try {
       let response = await fetch(
         `${process.env.SITE_URL}/api/list/${type}/${page}`
@@ -69,41 +61,40 @@ export async function getServerSideProps({ params: { type, page } }) {
       page,
       t: type,
     },
-    // revalidate: 7200,
+    revalidate: 7200,
   };
 }
-// export async function getStaticPaths() {
-//   return {
-//     paths: [
-//       { params: { type: "2", page: "1" } },
-//       { params: { type: "3", page: "1" } },
-//       { params: { type: "4", page: "1" } },
-//       { params: { type: "5", page: "1" } },
-//       { params: { type: "6", page: "1" } },
-//       { params: { type: "7", page: "1" } },
-//       { params: { type: "8", page: "1" } },
-//       { params: { type: "9", page: "1" } },
-//       { params: { type: "10", page: "1" } },
-//       { params: { type: "11", page: "1" } },
-//       { params: { type: "12", page: "1" } },
-//       { params: { type: "13", page: "1" } },
+export async function getStaticPaths() {
+  return {
+    paths: [
+      { params: { type: "1", page: "1" } },
+      { params: { type: "2", page: "1" } },
+      { params: { type: "3", page: "1" } },
+      { params: { type: "4", page: "1" } },
+      { params: { type: "5", page: "1" } },
+      { params: { type: "6", page: "1" } },
+      { params: { type: "7", page: "1" } },
+      { params: { type: "8", page: "1" } },
+      { params: { type: "9", page: "1" } },
+      { params: { type: "10", page: "1" } },
 
-//       { params: { type: "15", page: "1" } },
-//       { params: { type: "16", page: "1" } },
-//       { params: { type: "17", page: "1" } },
-//       { params: { type: "18", page: "1" } },
-//       { params: { type: "19", page: "1" } },
-//       { params: { type: "20", page: "1" } },
+      { params: { type: "33", page: "1" } },
+      { params: { type: "34", page: "1" } },
+      { params: { type: "35", page: "1" } },
+      { params: { type: "36", page: "1" } },
+      { params: { type: "37", page: "1" } },
+      { params: { type: "38", page: "1" } },
 
-//       { params: { type: "22", page: "1" } },
-//       { params: { type: "23", page: "1" } },
-//       { params: { type: "24", page: "1" } },
-//       { params: { type: "25", page: "1" } },
+      { params: { type: "41", page: "1" } },
+      { params: { type: "40", page: "1" } },
+      { params: { type: "42", page: "1" } },
+      { params: { type: "43", page: "1" } },
 
-//       { params: { type: "27", page: "1" } },
-//       { params: { type: "28", page: "1" } },
-//       { params: { type: "29", page: "1" } },
-//     ],
-//     fallback: "blocking",
-//   };
-// }
+      { params: { type: "46", page: "1" } },
+      { params: { type: "45", page: "1" } },
+      { params: { type: "47", page: "1" } },
+      { params: { type: "48", page: "1" } },
+    ],
+    fallback: "blocking",
+  };
+}

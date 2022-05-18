@@ -23,29 +23,6 @@ function Header() {
     }
   };
 
-  const links = [
-    {
-      name: "HOME",
-      linkUrl: "/",
-    },
-    {
-      name: "MOVIE",
-      linkUrl: "/list/2/1",
-    },
-    {
-      name: "TV SHOW",
-      linkUrl: "/list/15/1",
-    },
-    {
-      name: "REALITY SHOW",
-      linkUrl: "/list/22/1",
-    },
-    {
-      name: "ANIME",
-      linkUrl: "/list/28/1",
-    },
-  ];
-
   return (
     <div
       className={`fixed top-0 z-30 flex h-16 w-full justify-center bg-gradient-to-b from-black to-transparent transition duration-1000 ${
