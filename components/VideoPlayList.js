@@ -25,7 +25,7 @@ const VideoPlayList = ({
             {index === "HD" && <span className=" text-red-600">🚫 PRC IP</span>}
           </div>
           <div className="mt-1 flex flex-col-reverse gap-x-2 gap-y-0">
-            {videoList.map((video) => {
+            {videoList?.map((video) => {
               const { name, url } = video;
               return (
                 <a

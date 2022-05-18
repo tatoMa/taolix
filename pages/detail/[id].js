@@ -10,7 +10,7 @@ import {
 
 import VideoPlayList from "../../components/VideoPlayList";
 
-function Detail({ detail, id, detail2, detail3, detail4, detailHD }) {
+function Detail({ id, detail, detail2, detail3, detail4, detailHD }) {
   // get primary video info
   const videoList = getVideoUrlsFromUrlStr(detail.list[0]?.vod_play_url);
 
@@ -72,7 +72,7 @@ function Detail({ detail, id, detail2, detail3, detail4, detailHD }) {
           video resources.
         </div>
         <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-6">
-          {detailHD?.list?.length > 0 && (
+          {detailHD?.total > 0 && (
             <VideoPlayList
               index={"HD"}
               title={false}
@@ -85,7 +85,8 @@ function Detail({ detail, id, detail2, detail3, detail4, detailHD }) {
           {detail2?.list?.length > 0 && (
             <VideoPlayList
               index={1}
-              videoList={videoList}
+              title={false}
+              videoList={videoList2}
               setPlay={setPlay}
               setUrl={setUrl}
               url={url}
@@ -95,17 +96,17 @@ function Detail({ detail, id, detail2, detail3, detail4, detailHD }) {
             <VideoPlayList
               index={2}
               title={false}
-              videoList={videoList2}
+              videoList={videoList3}
               setPlay={setPlay}
               setUrl={setUrl}
               url={url}
             />
           )}
-          {detail4?.list?.length > 0 && (
+          {detail4?.total > 0 && (
             <VideoPlayList
               index={3}
               title={false}
-              videoList={videoList3}
+              videoList={videoList4}
               setPlay={setPlay}
               setUrl={setUrl}
               url={url}
@@ -114,8 +115,7 @@ function Detail({ detail, id, detail2, detail3, detail4, detailHD }) {
           {detail?.list?.length > 0 && (
             <VideoPlayList
               index={4}
-              title={false}
-              videoList={videoList4}
+              videoList={videoList}
               setPlay={setPlay}
               setUrl={setUrl}
               url={url}
@@ -137,7 +137,9 @@ export async function getServerSideProps({ params, req, res }) {
   );
   let detail = {};
   try {
-    let response = await fetch(`${process.env.MOVIE_API}/api/id/${params.id}`);
+    let response = await fetch(
+      `${process.env.MOVIE_API}/?ac=detail&ids=${params.id}`
+    );
     detail = await response.json();
   } catch (error) {
     console.error("error: ", error);
@@ -211,10 +213,9 @@ export async function getServerSideProps({ params, req, res }) {
     return { ...item, list: temp[0] !== undefined ? temp : [] };
   });
 
-  let tessss;
-
   // asign all return needed data
   [detail2, detail3, detail4, detailHD] = filteredByName;
+  console.log(detail);
   return {
     props: {
       detail,
