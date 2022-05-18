@@ -137,7 +137,7 @@ export async function getServerSideProps({ params, req, res }) {
   );
   let detail = {};
   try {
-    let response = await fetch(`${process.env.SITE_URL}/api/id/${params.id}`);
+    let response = await fetch(`${process.env.MOVIE_API}/api/id/${params.id}`);
     detail = await response.json();
   } catch (error) {
     console.error("error: ", error);
