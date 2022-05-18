@@ -8,7 +8,7 @@ import LineBreak from "../components/LineBreak";
 import GroupSwiper from "../components/GroupSwiper";
 
 export default function Home({
-  selectedVideosForHero,
+  // selectedVideosForHero,
   // doubanHotTvList,
   // doubanHotMovieList,
   // doubanNewMovieList,
@@ -224,15 +224,15 @@ export async function getStaticProps() {
   //   "/j/search_subjects?type=movie&tag=最新&sort=recommend&page_limit=50&page_start=0"
   // );
 
-  const selectedVideosForHero = shuffle([
-    // ...doubanHotTvList.list,
-    // ...doubanHotMovieList.list,
-    ...videosNewCnTvShow.list,
-  ]).slice(0, 6);
+  // const selectedVideosForHero = shuffle([
+  //   // ...doubanHotTvList.list,
+  //   // ...doubanHotMovieList.list,
+  //   ...videosNewCnTvShow.list,
+  // ]).slice(0, 6);
 
   return {
     props: {
-      selectedVideosForHero,
+      // selectedVideosForHero,
       // doubanHotTvList,
       // doubanHotMovieList,
       // doubanNewMovieList,
