@@ -85,11 +85,11 @@ export async function getStaticProps() {
     resultsPromiseAll = await Promise.allSettled([
       // fetch(`${process.env.SITE_URL}/api/list`).then((res) => res.json()),
       // fetch(`${process.env.SITE_URL}/api/list/2`).then((res) => res.json()),
-      fetch(`${process.env.SITE_URL}/api/list/15`).then((res) => res.json()),
-      fetch(`${process.env.SITE_URL}/api/list/19`).then((res) => res.json()),
-      fetch(`${process.env.SITE_URL}/api/list/18`).then((res) => res.json()),
-      fetch(`${process.env.SITE_URL}/api/list/22`).then((res) => res.json()),
-      fetch(`${process.env.SITE_URL}/api/list/28`).then((res) => res.json()),
+      fetch(`${process.env.SITE_URL}/api/list/33`).then((res) => res.json()),
+      fetch(`${process.env.SITE_URL}/api/list/34`).then((res) => res.json()),
+      fetch(`${process.env.SITE_URL}/api/list/36`).then((res) => res.json()),
+      fetch(`${process.env.SITE_URL}/api/list/41`).then((res) => res.json()),
+      fetch(`${process.env.SITE_URL}/api/list/46`).then((res) => res.json()),
     ]);
   } catch (error) {
     console.error(error);
