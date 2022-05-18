@@ -110,7 +110,7 @@ export async function getStaticProps() {
   const failures = resultsPromiseAll
     .filter((x) => x.status === "rejected")
     .map((x) => x.reason);
-  if (failures || failures?.length === 0)
+  if (!failures || failures?.length !== 0)
     console.error("index page fetching error", failures);
 
   // map and filter results for return needed
