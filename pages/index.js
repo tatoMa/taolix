@@ -85,11 +85,21 @@ export async function getStaticProps() {
     resultsPromiseAll = await Promise.allSettled([
       // fetch(`${process.env.SITE_URL}/api/list`).then((res) => res.json()),
       // fetch(`${process.env.SITE_URL}/api/list/2`).then((res) => res.json()),
-      fetch(`${process.env.SITE_URL}/api/list/33`).then((res) => res.json()),
-      fetch(`${process.env.SITE_URL}/api/list/34`).then((res) => res.json()),
-      fetch(`${process.env.SITE_URL}/api/list/36`).then((res) => res.json()),
-      fetch(`${process.env.SITE_URL}/api/list/41`).then((res) => res.json()),
-      fetch(`${process.env.SITE_URL}/api/list/46`).then((res) => res.json()),
+      fetch(`${process.env.MOVIE_API}/?ac=detail&t=33`).then((res) =>
+        res.json()
+      ),
+      fetch(`${process.env.MOVIE_API}/?ac=detail&t=34`).then((res) =>
+        res.json()
+      ),
+      fetch(`${process.env.MOVIE_API}/?ac=detail&t=36`).then((res) =>
+        res.json()
+      ),
+      fetch(`${process.env.MOVIE_API}/?ac=detail&t=41`).then((res) =>
+        res.json()
+      ),
+      fetch(`${process.env.MOVIE_API}/?ac=detail&t=46`).then((res) =>
+        res.json()
+      ),
     ]);
   } catch (error) {
     console.error(error);
@@ -115,11 +125,11 @@ export async function getStaticProps() {
 
   // asign all return needed data
   const [
-    videosNewCnTvShow,
-    videosNewKrTvShow,
-    videosNewUsTvShow,
-    videosNewCnReality,
-    videosNewJpAnime,
+    videosNewCnTvShow = {},
+    videosNewKrTvShow = {},
+    videosNewUsTvShow = {},
+    videosNewCnReality = {},
+    videosNewJpAnime = {},
   ] = successes;
 
   // Call an external API endpoint to get posts.
