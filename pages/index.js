@@ -193,6 +193,6 @@ export async function getStaticProps() {
       videosNewCnReality,
       videosNewJpAnime,
     },
-    revalidate: 3600,
+    revalidate: 3500,
   };
 }
