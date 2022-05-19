@@ -102,7 +102,7 @@ function Detail({ id, detail, detail2, detail3, detail4, detailHD }) {
               url={url}
             />
           )}
-          {detail4?.total > 0 && (
+          {detail4?.list?.length > 0 && (
             <VideoPlayList
               index={3}
               title={false}
