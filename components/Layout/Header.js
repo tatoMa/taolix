@@ -11,16 +11,20 @@ function Header() {
   const router = useRouter();
   const scrolled = useOnScrolled();
   const [menu, setMenu] = useState(false);
+  const [searchText, setSearchText] = useState("");
   const { data: session } = useSession();
   const [isSearching, setIsSearching] = useState(false);
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter" && e.target.value && !isSearching) {
-      setIsSearching(true);
-      setMenu(false);
-      router.push("/search/" + e.target.value);
+      handleSearching(e.target.value);
       e.target.value = "";
     }
+  };
+  const handleSearching = (text) => {
+    setIsSearching(true);
+    setMenu(false);
+    router.push("/search/" + text);
   };
 
   return (
@@ -93,7 +97,7 @@ function Header() {
         </div>
 
         {/* <!-- Search input on desktop screen --> */}
-        <div className={`mr-2 ml-4 md:block md:translate-x-6 lg:mx-0 `}>
+        <div className={`mr-2 ml-4  md:block md:translate-x-6 lg:mx-0 `}>
           <div className="relative flex">
             <span className="absolute inset-y-0 left-0 flex items-center pl-3">
               <svg
@@ -116,7 +120,17 @@ function Header() {
               className="focus:ring-red w-full border border-white bg-black py-1 pl-10 text-white focus:border-red-500 focus:outline-none dark:focus:border-red-500 sm:mr-[11vw] lg:mr-0 lg:w-40 xl:w-60"
               placeholder="Search"
               onKeyDown={handleKeyDown}
+              onChange={(e) => setSearchText(e.target.value)}
             />
+            {searchText && (
+              <a
+                className="absolute right-2 hidden p-1 lg:block"
+                onClick={() => handleSearching(searchText)}
+                href=""
+              >
+                ↩
+              </a>
+            )}
           </div>
         </div>
 
