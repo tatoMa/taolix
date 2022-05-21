@@ -37,6 +37,9 @@ const VideoItem = ({
             className="group relative block cursor-pointer overflow-hidden bg-black transition duration-500 hover:saturate-150"
             onClick={() => {
               setIsLoading(true);
+              setTimeout(() => {
+                setIsLoading(false);
+              }, 10000);
             }}
           >
             {isLoading && (

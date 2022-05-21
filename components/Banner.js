@@ -35,6 +35,7 @@ const Banner = ({ detail, index = 1 }) => {
   } = detail;
   const router = useRouter();
   const [play, setPlay] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   // find the latest episode of this video series
   const getLatestVideoUrlAndName = () => {
@@ -56,19 +57,50 @@ const Banner = ({ detail, index = 1 }) => {
     document.documentElement.style.overflowY = "hidden";
   };
   const indexButtonHandler = (e) => {
-    if (detail.mode === "homePage") router.push(`/detail/${detail.vod_id}`);
+    if (detail.mode === "homePage") {
+      setIsLoading(true);
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 10000);
+      router.push(`/detail/${detail.vod_id}`);
+    }
   };
 
   return (
     <div
-      className={`w-full md:aspect-[3/2] lg:aspect-[16/7] ${
+      className={`relative w-full md:aspect-[3/2] lg:aspect-[16/7] ${
         detail.mode === "homePage" && "cursor-pointer px-0 md:px-6 lg:px-8"
       }`}
       onClick={() => indexButtonHandler()}
     >
+      {isLoading && (
+        <div className="absolute top-0 left-0 z-50 flex h-full w-full items-center justify-center bg-gray-500/60 p-4 lg:p-64 ">
+          <svg
+            viewBox="-2 -2 42 42"
+            xmlns="http://www.w3.org/2000/svg"
+            className="mb-10 aspect-square w-1/2 stroke-red-500"
+          >
+            <g fill="none" fillRule="evenodd">
+              <g transform="translate(1 1)" strokeWidth="5">
+                <circle strokeOpacity=".4" cx="18" cy="18" r="18" />
+                <path d="M36 18c0-9.94-8.06-18-18-18">
+                  <animateTransform
+                    attributeName="transform"
+                    type="rotate"
+                    from="0 18 18"
+                    to="360 18 18"
+                    dur="1s"
+                    repeatCount="indefinite"
+                  />
+                </path>
+              </g>
+            </g>
+          </svg>
+        </div>
+      )}
+
       {/* Player */}
       {play && <PlayerWrapper url={url} setPlay={setPlay} />}
-      {/* {play && <Player url={url} setPlay={setPlay} />} */}
 
       {/* background image section */}
       <div className="pointer-events-none absolute top-0 left-0 z-0 h-full w-full">
