@@ -10,7 +10,7 @@ import {
 
 import VideoPlayList from "../../components/VideoPlayList";
 
-function Detail({ id, detail, detail2, detail3, detail4, detailHD }) {
+function Detail({ id, detail, detail1, detail2, detail3, detail4, detailHD }) {
   // get primary video info
   const videoList = getVideoUrlsFromUrlStr(detail.list[0]?.vod_play_url);
 
@@ -21,6 +21,7 @@ function Detail({ id, detail, detail2, detail3, detail4, detailHD }) {
     }
   };
 
+  let videoList1 = getPlayList(detail1) || {};
   let videoList2 = getPlayList(detail2) || {};
   let videoList3 = getPlayList(detail3) || {};
   let videoList4 = getPlayList(detail4) || {};
@@ -82,9 +83,28 @@ function Detail({ id, detail, detail2, detail3, detail4, detailHD }) {
               url={url}
             />
           )}
-          {detail2?.list?.length > 0 && (
+          {detail?.list?.length > 0 && (
             <VideoPlayList
               index={1}
+              videoList={videoList}
+              setPlay={setPlay}
+              setUrl={setUrl}
+              url={url}
+            />
+          )}
+          {detail1?.list?.length > 0 && (
+            <VideoPlayList
+              index={2}
+              title={false}
+              videoList={videoList1}
+              setPlay={setPlay}
+              setUrl={setUrl}
+              url={url}
+            />
+          )}
+          {detail2?.list?.length > 0 && (
+            <VideoPlayList
+              index={3}
               title={false}
               videoList={videoList2}
               setPlay={setPlay}
@@ -94,7 +114,7 @@ function Detail({ id, detail, detail2, detail3, detail4, detailHD }) {
           )}
           {detail3?.list?.length > 0 && (
             <VideoPlayList
-              index={2}
+              index={4}
               title={false}
               videoList={videoList3}
               setPlay={setPlay}
@@ -104,18 +124,9 @@ function Detail({ id, detail, detail2, detail3, detail4, detailHD }) {
           )}
           {detail4?.list?.length > 0 && (
             <VideoPlayList
-              index={3}
+              index={5}
               title={false}
               videoList={videoList4}
-              setPlay={setPlay}
-              setUrl={setUrl}
-              url={url}
-            />
-          )}
-          {detail?.list?.length > 0 && (
-            <VideoPlayList
-              index={4}
-              videoList={videoList}
               setPlay={setPlay}
               setUrl={setUrl}
               url={url}
@@ -129,16 +140,28 @@ function Detail({ id, detail, detail2, detail3, detail4, detailHD }) {
 
 export default Detail;
 
-export async function getServerSideProps({ params, req, res }) {
+export async function getServerSideProps({ params, req, res, query }) {
   // fetch the primary data
+  let resourceId = 0;
+  if (query.resource) resourceId = query.resource;
   res.setHeader(
     "Cache-Control",
     "public, s-maxage=600, stale-while-revalidate=3600"
   );
+  const API_LIST = [
+    process.env.MOVIE_API,
+    process.env.MOVIE_API_SOURCE_2,
+    process.env.MOVIE_API_SOURCE_3,
+    process.env.MOVIE_API_SOURCE_4,
+    process.env.MOVIE_API_SOURCE_HD,
+  ];
+
+  const API_LIST_SECONDARY = API_LIST.filter((_, index) => index != resourceId);
+
   let detail = {};
   try {
     let response = await fetch(
-      `${process.env.MOVIE_API}/?ac=detail&ids=${params.id}`
+      `${API_LIST[resourceId]}/?ac=detail&ids=${params.id}`
     );
     detail = await response.json();
   } catch (error) {
@@ -149,6 +172,7 @@ export async function getServerSideProps({ params, req, res }) {
   const videoName = removeAllSpecialCharactersFromString(
     detail.list[0].vod_name
   );
+  let detail1 = {};
   let detail2 = {};
   let detail3 = {};
   let detail4 = {};
@@ -159,6 +183,9 @@ export async function getServerSideProps({ params, req, res }) {
 
   try {
     resultsPromiseAll = await Promise.allSettled([
+      fetch(
+        `${process.env.MOVIE_API}/?ac=detail&wd=${encodeURI(videoName)}`
+      ).then((res) => res.json()),
       fetch(
         `${process.env.MOVIE_API_SOURCE_2}/?ac=detail&wd=${encodeURI(
           videoName
@@ -188,7 +215,6 @@ export async function getServerSideProps({ params, req, res }) {
   } catch (error) {
     console.error(error);
   }
-  // console.log(resultsPromiseAll);
   // handle promise allSettled returns successes and failures
   const successes = resultsPromiseAll
     .filter((x) => x.status === "fulfilled")
@@ -197,7 +223,6 @@ export async function getServerSideProps({ params, req, res }) {
   const failures = resultsPromiseAll
     .filter((x) => x.status === "rejected")
     .map((x) => x.reason);
-  // console.log(successes);
 
   // map and filter results for return needed
   const filteredByName = successes.map((item) => {
@@ -214,11 +239,12 @@ export async function getServerSideProps({ params, req, res }) {
   });
 
   // asign all return needed data
-  [detail2, detail3, detail4, detailHD] = filteredByName;
+  [detail1, detail2, detail3, detail4, detailHD] = filteredByName;
   return {
     props: {
-      detail,
       id: params.id,
+      detail,
+      detail1: detail1 !== undefined ? detail1 : emptyReturnData,
       detail2: detail2 !== undefined ? detail2 : emptyReturnData,
       detail3: detail3 !== undefined ? detail3 : emptyReturnData,
       detail4: detail4 !== undefined ? detail4 : emptyReturnData,

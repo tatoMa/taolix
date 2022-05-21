@@ -4,10 +4,14 @@ import { useEffect } from "react";
 import dynamic from "next/dynamic";
 const translate = require("@vitalets/google-translate-api");
 
-function Detail({ detail, searchKey }) {
-  useEffect(() => {
-    console.log("useeffect");
-  }, []);
+function Detail({ 
+  searchResultsFromApi0,
+  searchResultsFromApi1,
+  searchResultsFromApi2,
+  searchResultsFromApi3,
+  uniqueMovieList,
+  searchKey })
+  {
   return (
     <>
       <NextHeadSeo
@@ -22,8 +26,8 @@ function Detail({ detail, searchKey }) {
         </h1>
 
         <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-4 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8">
-          {detail.list[0] ? (
-            detail.list.map((movie) => (
+          {uniqueMovieList?.length > 0 && (
+            uniqueMovieList?.map((movie) => (
               <VideoItem
                 name={movie.vod_name}
                 type={movie.vod_class}
@@ -33,9 +37,17 @@ function Detail({ detail, searchKey }) {
                 //   .substring(movie.vod_play_url.split("$$$")[1].indexOf("h"))}
                 id={movie.vod_id}
                 key={movie.vod_id}
+                resource={movie.resource}
               />
             ))
-          ) : (
+          )} 
+          
+          {/* If no video found */}
+          {searchResultsFromApi0?.list?.length === 0 &&
+            searchResultsFromApi1?.list?.length === 0 &&
+            searchResultsFromApi2?.list?.length === 0 &&
+            searchResultsFromApi3?.list?.length === 0 &&
+          (
             <div className="mt-12 text-2xl text-gray-400">
               Can't find this video
             </div>
@@ -64,21 +76,69 @@ export async function getServerSideProps({ params }) {
     }
   }
 
-  // fetch search results from API
-  let res = {};
+  let resultsPromiseAll;
   try {
-    res = await fetch(
-      `${process.env.MOVIE_API}/?ac=detail&wd=${encodeURI(params.key)}`
-    );
+    resultsPromiseAll = await Promise.allSettled([
+      fetch(
+        `${process.env.MOVIE_API}/?ac=detail&wd=${encodeURI(params.key)}`
+      ).then((res) => res.json()),
+      fetch(
+        `${process.env.MOVIE_API_SOURCE_2}/?ac=detail&wd=${encodeURI(
+          params.key
+        )}`
+      ).then((res) => res.json()),
+      fetch(
+        `${process.env.MOVIE_API_SOURCE_3}/?ac=detail&wd=${encodeURI(
+          params.key
+        )}`
+      ).then((res) => res.json()),
+      fetch(
+        `${process.env.MOVIE_API_SOURCE_4}/?ac=detail&wd=${encodeURI(
+          params.key
+        )}`
+      ).then((res) => res.json())
+    ]);
   } catch (error) {
     console.error(error);
   }
+  resultsPromiseAll = resultsPromiseAll.map((res, index) => {
+    res?.value?.resource = index;
+    return res;
+  });
+  const successes = resultsPromiseAll
+    .filter((x) => x.status === "fulfilled")
+    .map((x) => x.value);
 
-  const detail = await res.json();
+  const failures = resultsPromiseAll
+    .filter((x) => x.status === "rejected")
+    .map((x) => x.reason);
+  if (!failures || failures?.length !== 0)
+    console.error("search page fetching error", failures);
+
+  const [
+    searchResultsFromApi0 = {},
+    searchResultsFromApi1 = {},
+    searchResultsFromApi2 = {},
+    searchResultsFromApi3 = {},
+  ] = successes;
+  const movieList = [...searchResultsFromApi0?.list?.map(item=>{return {...item,resource:0}}),
+    ...searchResultsFromApi1?.list?.map(item=>{return {...item,resource:1}}),
+    ...searchResultsFromApi2?.list?.map(item=>{return {...item,resource:2}}),
+    ...searchResultsFromApi3?.list?.map(item=>{return {...item,resource:3}}),]
+  const uniqueMovieList = movieList.reduce((unique, o) => {
+    if(!unique.some(obj => obj.vod_name === o.vod_name)) {
+      unique.push(o);
+    }
+    return unique;
+},[]);
 
   return {
     props: {
-      detail,
+      searchResultsFromApi0,
+      searchResultsFromApi1,
+      searchResultsFromApi2,
+      searchResultsFromApi3,
+      uniqueMovieList,
       // detailHd,
       searchKey: params.key,
     },
