@@ -13,7 +13,7 @@ import VideoPlayList from "../../components/VideoPlayList";
 function Detail({ id, detail, detail1, detail2, detail3, detail4, detailHD }) {
   // get primary video info
   const videoList = getVideoUrlsFromUrlStr(detail.list[0]?.vod_play_url);
-
+  console.log(detail, detail1, detail2, detail3, detail4, detailHD);
   // get additional video play list
   const getPlayList = (source) => {
     if (Object.keys(source).length > 0 && source.list.length > 0) {
@@ -28,20 +28,14 @@ function Detail({ id, detail, detail1, detail2, detail3, detail4, detailHD }) {
   let videoListHD = getPlayList(detailHD) || {};
 
   // modified original pic url with hi-res pic if there is one
-  if (detailHD?.list[0]?.vod_pic)
-    detail.list[0].vod_pic = detailHD?.list[0]?.vod_pic;
+  if (detailHD?.list[0]?.vod_pic || detail4?.list[0]?.vod_pic || detail3?.list[0]?.vod_pic)
+    detail.list[0].vod_pic = detailHD?.list[0]?.vod_pic || detail4?.list[0]?.vod_pic || detail3?.list[0]?.vod_pic;
 
   const [play, setPlay] = useState(false);
   const [url, setUrl] = useState("");
-  // const [country, setCountry] = useState("");
 
-  // useEffect(async () => {
-  //   // check if the ip is from China
-  //   const response = await fetch("http://ipwho.is/");
-  //   const res = await response.json();
-  //   setCountry(res.country);
-  // }, []);
-
+const allVideoLists = [videoList1?.list?.length!==0&&videoList1,videoList2?.list?.length!==0&&videoList2,videoList3?.list?.length!==0&&videoList3,videoList4?.list?.length!==0&&videoList4,videoListHD?.list?.length!==0&&videoListHD]
+console.log(allVideoLists.length)
   return (
     <>
       <NextHeadSeo
@@ -75,7 +69,7 @@ function Detail({ id, detail, detail1, detail2, detail3, detail4, detailHD }) {
         <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-6">
           {detailHD?.list?.length > 0 && (
             <VideoPlayList
-              index={"HD"}
+              index={detailHD?.resource===5?"HD":detailHD?.resource}
               title={false}
               videoList={videoListHD}
               setPlay={setPlay}
@@ -83,48 +77,9 @@ function Detail({ id, detail, detail1, detail2, detail3, detail4, detailHD }) {
               url={url}
             />
           )}
-          {detail?.list?.length > 0 && (
-            <VideoPlayList
-              index={1}
-              videoList={videoList}
-              setPlay={setPlay}
-              setUrl={setUrl}
-              url={url}
-            />
-          )}
-          {detail1?.list?.length > 0 && (
-            <VideoPlayList
-              index={2}
-              title={false}
-              videoList={videoList1}
-              setPlay={setPlay}
-              setUrl={setUrl}
-              url={url}
-            />
-          )}
-          {detail2?.list?.length > 0 && (
-            <VideoPlayList
-              index={3}
-              title={false}
-              videoList={videoList2}
-              setPlay={setPlay}
-              setUrl={setUrl}
-              url={url}
-            />
-          )}
-          {detail3?.list?.length > 0 && (
-            <VideoPlayList
-              index={4}
-              title={false}
-              videoList={videoList3}
-              setPlay={setPlay}
-              setUrl={setUrl}
-              url={url}
-            />
-          )}
           {detail4?.list?.length > 0 && (
             <VideoPlayList
-              index={5}
+              index={detail4?.resource===5?"HD":5-detail4?.resource}
               title={false}
               videoList={videoList4}
               setPlay={setPlay}
@@ -132,6 +87,48 @@ function Detail({ id, detail, detail1, detail2, detail3, detail4, detailHD }) {
               url={url}
             />
           )}
+          {detail3?.list?.length > 0 && (
+            <VideoPlayList
+              index={detail3?.resource===5?"HD":5-detail3?.resource}
+              title={false}
+              videoList={videoList3}
+              setPlay={setPlay}
+              setUrl={setUrl}
+              url={url}
+            />
+          )}
+          {detail2?.list?.length > 0 && (
+            <VideoPlayList
+              index={detail2?.resource===5?"HD":5-detail2?.resource}
+              title={false}
+              videoList={videoList2}
+              setPlay={setPlay}
+              setUrl={setUrl}
+              url={url}
+            />
+          )}
+          {detail1?.list?.length > 0 && (
+            <VideoPlayList
+              index={detail1?.resource===5?"HD":5-detail1?.resource}
+              title={false}
+              videoList={videoList1}
+              setPlay={setPlay}
+              setUrl={setUrl}
+              url={url}
+            />
+          )}
+          {detail?.list?.length > 0 && (
+            <VideoPlayList
+              index={detail?.resource===5?"HD":5-detail?.resource}
+              title={false}
+              videoList={videoList}
+              setPlay={setPlay}
+              setUrl={setUrl}
+              url={url}
+            />
+          )}
+          
+
         </div>
       </main>
     </>
@@ -167,6 +164,7 @@ export async function getServerSideProps({ params, req, res, query }) {
   } catch (error) {
     console.error("error: ", error);
   }
+  detail?.resource = 0
 
   // fetch the secondary data
   const videoName = removeAllSpecialCharactersFromString(
@@ -215,6 +213,13 @@ export async function getServerSideProps({ params, req, res, query }) {
   } catch (error) {
     console.error(error);
   }
+
+  // add resource id into result array
+  resultsPromiseAll.map((item, index) => {
+    let temp = item;
+    temp?.value?.resource = index+1;
+    return temp;
+  });
   // handle promise allSettled returns successes and failures
   const successes = resultsPromiseAll
     .filter((x) => x.status === "fulfilled")
