@@ -1,8 +1,4 @@
-import {
-  getVideosListFromDouban,
-  shuffle,
-  findResourceFromDoubanItem,
-} from "../utils/utils";
+import { shuffle, gerVideoListFromDoubanApiHotList } from "../utils/utils";
 import HeroSwiper from "../components/HeroSwiper";
 import LineBreak from "../components/LineBreak";
 import GroupSwiper from "../components/GroupSwiper";
@@ -113,16 +109,6 @@ export async function getStaticProps() {
   if (!failures || failures?.length !== 0)
     console.error("index page fetching error", failures);
 
-  // map and filter results for return needed
-  // const filteredByName = successes.map((item) => {
-  //   let temp = [];
-  //   temp[0] = item.list.find(
-  //     (item) =>
-  //       removeAllSpecialCharactersFromString(item.vod_name) === videoName
-  //   );
-  //   return { ...item, list: temp[0] !== undefined ? temp : [] };
-  // });
-
   // asign all return needed data
   const [
     videosNewCnTvShow = {},
@@ -133,38 +119,6 @@ export async function getStaticProps() {
   ] = successes;
 
   // get hot movie list from douban API
-  let videosHotListDouban = {};
-
-  const gerVideoListFromDoubanApiHotList = async (url) => {
-    try {
-      videosHotListDouban = await getVideosListFromDouban(
-        `${process.env.DOUBAN_URL}${encodeURI(url)}`
-      );
-    } catch (e) {
-      console.error("error: ", e);
-    }
-
-    // using Douban ranking video list fetch all individual resource from API
-    let videosHotListDoubanFindResource = await Promise.allSettled(
-      videosHotListDouban.map(async (item) => {
-        try {
-          const res = await findResourceFromDoubanItem(item);
-          return res;
-        } catch (e) {
-          console.error("error: ", e);
-        }
-      })
-    );
-
-    // filter unnecessary items
-    const videosHotListDoubanFiltered = {};
-    videosHotListDoubanFiltered.list = videosHotListDoubanFindResource
-      .filter(Boolean)
-      .filter((item) => item.status === "fulfilled" && item.value !== undefined)
-      .map((item) => item.value);
-    return videosHotListDoubanFiltered;
-  };
-
   const doubanHotTvList = await gerVideoListFromDoubanApiHotList(
     "/j/search_subjects?type=tv&tag=热门&sort=recommend&page_limit=50&page_start=0"
   );

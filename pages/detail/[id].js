@@ -13,7 +13,6 @@ import VideoPlayList from "../../components/VideoPlayList";
 function Detail({ id, detail, detail1, detail2, detail3, detail4, detailHD }) {
   // get primary video info
   const videoList = getVideoUrlsFromUrlStr(detail.list[0]?.vod_play_url);
-  console.log(detail, detail1, detail2, detail3, detail4, detailHD);
   // get additional video play list
   const getPlayList = (source) => {
     if (Object.keys(source).length > 0 && source.list.length > 0) {
@@ -34,8 +33,7 @@ function Detail({ id, detail, detail1, detail2, detail3, detail4, detailHD }) {
   const [play, setPlay] = useState(false);
   const [url, setUrl] = useState("");
 
-const allVideoLists = [videoList1?.list?.length!==0&&videoList1,videoList2?.list?.length!==0&&videoList2,videoList3?.list?.length!==0&&videoList3,videoList4?.list?.length!==0&&videoList4,videoListHD?.list?.length!==0&&videoListHD]
-console.log(allVideoLists.length)
+// const allVideoLists = [videoList1?.list?.length!==0&&videoList1,videoList2?.list?.length!==0&&videoList2,videoList3?.list?.length!==0&&videoList3,videoList4?.list?.length!==0&&videoList4,videoListHD?.list?.length!==0&&videoListHD]
   return (
     <>
       <NextHeadSeo
