@@ -44,7 +44,12 @@ export default function Home({ videos, page, t }) {
 export async function getStaticProps({ params: { type, page } }) {
   let videos = {};
 
-  if (parseInt(type) > 0 && parseInt(page) < 49) {
+  if (
+    (parseInt(type) > 0 && parseInt(type) < 11) ||
+    (parseInt(type) > 32 && parseInt(type) < 39) ||
+    (parseInt(type) > 40 && parseInt(type) < 44) ||
+    (parseInt(type) > 44 && parseInt(type) < 49)
+  ) {
     try {
       let response = await fetch(
         `${process.env.SITE_URL}/api/list/${type}/${page}`

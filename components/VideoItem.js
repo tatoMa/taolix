@@ -30,7 +30,9 @@ const VideoItem = ({
     <div ref={ref}>
       {inView ? (
         <Link
-          href={`/detail/${id}${resource ? `?resource=${resource}` : ""}`}
+          href={`/detail/${id}${
+            resource ? `?resource=${resource}${name && "&name=" + name}` : ""
+          }`}
           prefetch
         >
           <a

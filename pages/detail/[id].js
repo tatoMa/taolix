@@ -140,7 +140,11 @@ export default Detail;
 export async function getServerSideProps({ params, req, res, query }) {
   // fetch the primary data
   let resourceId = 0;
-  if (query.resource) resourceId = query.resource;
+  let resourceName = "";
+  if (query.resource) {
+    resourceId = query.resource;
+    resourceName = query.name;
+  }
   res.setHeader(
     "Cache-Control",
     "public, s-maxage=600, stale-while-revalidate=3600"
@@ -168,8 +172,8 @@ export async function getServerSideProps({ params, req, res, query }) {
 
   // fetch the secondary data
   const videoName = removeAllSpecialCharactersFromString(
-    detail.list[0].vod_name
-  );
+    detail?.list[0]?.vod_name
+  ) || resourceName;
   let detail1 = {};
   let detail2 = {};
   let detail3 = {};
