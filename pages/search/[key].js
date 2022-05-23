@@ -1,14 +1,8 @@
 import VideoItem from "../../components/VideoItem";
 import NextHeadSeo from "next-head-seo";
-import { useEffect } from "react";
-import dynamic from "next/dynamic";
 const translate = require("@vitalets/google-translate-api");
 
 function Detail({ 
-  searchResultsFromApi0,
-  searchResultsFromApi1,
-  searchResultsFromApi2,
-  searchResultsFromApi3,
   uniqueMovieList,
   searchKey })
   {
@@ -26,15 +20,13 @@ function Detail({
         </h1>
 
         <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-4 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8">
+          
           {uniqueMovieList?.length > 0 && (
             uniqueMovieList?.map((movie) => (
               <VideoItem
                 name={movie.vod_name}
                 type={movie.vod_class}
                 pic={movie.vod_pic}
-                // url={movie.vod_play_url
-                //   .split("$$$")[1]
-                //   .substring(movie.vod_play_url.split("$$$")[1].indexOf("h"))}
                 id={movie.vod_id}
                 key={movie.vod_id}
                 resource={movie.resource}
@@ -43,11 +35,7 @@ function Detail({
           )} 
           
           {/* If no video found */}
-          {searchResultsFromApi0?.list?.length === 0 &&
-            searchResultsFromApi1?.list?.length === 0 &&
-            searchResultsFromApi2?.list?.length === 0 &&
-            searchResultsFromApi3?.list?.length === 0 &&
-          (
+          {uniqueMovieList?.length === 0 && (
             <div className="mt-12 text-2xl text-gray-400">
               Can't find this video
             </div>
@@ -76,6 +64,7 @@ export async function getServerSideProps({ params }) {
     }
   }
 
+  // fetch all search results from APIs
   let resultsPromiseAll;
   try {
     resultsPromiseAll = await Promise.allSettled([
@@ -114,17 +103,19 @@ export async function getServerSideProps({ params }) {
     .map((x) => x.reason);
   if (!failures || failures?.length !== 0)
     console.error("search page fetching error", failures);
-
+    
   const [
-    searchResultsFromApi0 = {},
-    searchResultsFromApi1 = {},
-    searchResultsFromApi2 = {},
-    searchResultsFromApi3 = {},
+    searchResultsFromApi0,
+    searchResultsFromApi1,
+    searchResultsFromApi2,
+    searchResultsFromApi3,
   ] = successes;
-  const movieList = [...searchResultsFromApi0?.list?.map(item=>{return {...item,resource:0}}),
-    ...searchResultsFromApi1?.list?.map(item=>{return {...item,resource:1}}),
-    ...searchResultsFromApi2?.list?.map(item=>{return {...item,resource:2}}),
-    ...searchResultsFromApi3?.list?.map(item=>{return {...item,resource:3}}),]
+  
+  // filter all results into one unique array of items
+  const movieList = [...(searchResultsFromApi0?.list?.map(item=>{return {...item,resource:0}}) || []),
+    ...(searchResultsFromApi1?.list?.map(item=>{return {...item,resource:1}}) || []),
+    ...(searchResultsFromApi2?.list?.map(item=>{return {...item,resource:2}}) || []),
+    ...(searchResultsFromApi3?.list?.map(item=>{return {...item,resource:3}}) || []),]
   const uniqueMovieList = movieList.reduce((unique, o) => {
     if(!unique.some(obj => obj.vod_name === o.vod_name)) {
       unique.push(o);
@@ -134,12 +125,7 @@ export async function getServerSideProps({ params }) {
 
   return {
     props: {
-      searchResultsFromApi0,
-      searchResultsFromApi1,
-      searchResultsFromApi2,
-      searchResultsFromApi3,
       uniqueMovieList,
-      // detailHd,
       searchKey: params.key,
     },
   };
