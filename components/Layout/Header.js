@@ -17,14 +17,15 @@ function Header() {
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter" && e.target.value && !isSearching) {
-      handleSearching(e.target.value);
+      handleSearching(e);
       e.target.value = "";
     }
   };
-  const handleSearching = (text) => {
+  const handleSearching = (e) => {
+    e.preventDefault();
     setIsSearching(true);
     setMenu(false);
-    router.push("/search/" + text);
+    router.push("/search/" + searchText);
   };
 
   return (
@@ -116,21 +117,21 @@ function Header() {
             </span>
 
             <input
-              type="text"
+              type="search"
               className="focus:ring-red w-full border border-white bg-black py-1 pl-10 text-white focus:border-red-500 focus:outline-none dark:focus:border-red-500 sm:mr-[11vw] lg:mr-0 lg:w-40 xl:w-60"
               placeholder="Search"
               onKeyDown={handleKeyDown}
               onChange={(e) => setSearchText(e.target.value)}
             />
-            {searchText && (
+            {/* {searchText && (
               <a
                 className="absolute right-2 hidden p-1 lg:block"
-                onClick={() => handleSearching(searchText)}
+                onClick={() => handleSearching(e)}
                 href=""
               >
                 ↩
               </a>
-            )}
+            )} */}
           </div>
         </div>
 
