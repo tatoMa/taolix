@@ -50,7 +50,7 @@ export default function PlayerWrapper({ url, setPlay }) {
         }}
       >
         <XIcon
-          className="text-blue-white pointer-events-auto absolute right-0 z-50 h-20 max-h-[8vw] w-20 max-w-[8vw] animate-fadeIn cursor-pointer bg-black/40 text-white hover:bg-white hover:text-black"
+          className="pointer-events-auto absolute right-0 z-50 h-20 max-h-[8vw] w-20 max-w-[8vw] animate-fadeIn cursor-pointer bg-black/20 text-white/50 duration-1000 hover:bg-white hover:text-black"
           onClick={() => {
             setPlay(false);
             document.documentElement.style.overflowY = "auto";

@@ -45,7 +45,7 @@ export async function getStaticProps({ params: { type, page } }) {
   let videos = {};
 
   if (
-    (parseInt(type) > 0 && parseInt(type) < 11) ||
+    (parseInt(page) > 0 && parseInt(type) > 0 && parseInt(type) < 11) ||
     (parseInt(type) > 32 && parseInt(type) < 39) ||
     (parseInt(type) > 40 && parseInt(type) < 44) ||
     (parseInt(type) > 44 && parseInt(type) < 49)
