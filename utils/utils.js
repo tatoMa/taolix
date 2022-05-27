@@ -12,7 +12,7 @@ export const findResourceFromDoubanItem = async (item) => {
 };
 
 export const filterHtmlTagsFromString = (str) => {
-  return str.replace(/<\/?[^>]+(>|$)/g, "");
+  return str?.replace(/<\/?[^>]+(>|$)/g, "");
 };
 export const shuffle = (array) => {
   let currentIndex = array.length,
@@ -224,7 +224,7 @@ export async function findMovieFromApiByTitle(title, api) {
 }
 
 export function removeAllSpecialCharactersFromString(str) {
-  return str.replace(
+  return str?.replace(
     /[`:_.~!@#$%^&amp;*() \+ =&lt;&gt;?"{}|, \/ ;' \\ [ \] ·~！@#￥%……&amp;*（）—— \+ ={}|《》？：“”【】、；‘’，。、-]/g,
     ""
   );
