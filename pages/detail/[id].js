@@ -240,7 +240,7 @@ export async function getServerSideProps({ params, req, res, query }) {
     let temp = [];
     temp[0] = item.list.find(
       (item) =>
-        removeAllSpecialCharactersFromString(item.vod_name) === videoName
+        removeAllSpecialCharactersFromString(item?.vod_name) === videoName
     );
     return { ...item, list: temp[0] !== undefined ? temp : [] };
   });

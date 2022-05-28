@@ -117,7 +117,7 @@ export async function getServerSideProps({ params }) {
     ...(searchResultsFromApi2?.list?.map(item=>{return {...item,resource:2}}) || []),
     ...(searchResultsFromApi3?.list?.map(item=>{return {...item,resource:3}}) || []),]
   const uniqueMovieList = movieList.reduce((unique, o) => {
-    if(!unique.some(obj => obj.vod_name === o.vod_name)) {
+    if(!unique.some(obj => obj?.vod_name === o?.vod_name)) {
       unique.push(o);
     }
     return unique;
