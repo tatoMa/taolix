@@ -76,6 +76,7 @@ export const VideoJS = (props) => {
 
     return () => {
       if (player) {
+        document.documentElement.style.overflowY = "auto";
         player.dispose();
         playerRef.current = null;
       }
