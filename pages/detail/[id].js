@@ -37,12 +37,12 @@ function Detail({ id, detail, detail1, detail2, detail3, detail4, detailHD }) {
   return (
     <>
       <NextHeadSeo
-        title={`${detail.list[0].vod_name} free to play - Taolix`}
-        description={`${detail.list[0].vod_name} video users can play online for free.`}
+        title={`${detail.list[0]?.vod_name} free to play - Taolix`}
+        description={`${detail.list[0]?.vod_name} video users can play online for free.`}
         canonical={`https://www.taolix.com/detail/${id}}`}
         og={{
-          title: `${detail.list[0].vod_name} free to play - Taolix`,
-          description: `${detail.list[0].vod_name} video users can play online for free.`,
+          title: `${detail.list[0]?.vod_name} free to play - Taolix`,
+          description: `${detail.list[0]?.vod_name} video users can play online for free.`,
           image: detail.list[0].vod_pic,
           type: "video.movie",
           siteName: "Taolix",
