@@ -7,6 +7,7 @@ import {
   getVideoUrlsFromUrlStr,
   removeAllSpecialCharactersFromString,
 } from "../../utils/utils";
+import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/outline'
 
 import VideoPlayList from "../../components/VideoPlayList";
 
@@ -31,7 +32,22 @@ function Detail({ id, detail, detail1, detail2, detail3, detail4, detailHD }) {
     detail.list[0].vod_pic = detailHD?.list[0]?.vod_pic || detail4?.list[0]?.vod_pic || detail3?.list[0]?.vod_pic;
 
   const [play, setPlay] = useState(false);
+  const [listOrderAsc, setListOrderAsc] = useState(false);
+  const [loadingStorage, setLoadingStorage] = useState(true);
   const [url, setUrl] = useState("");
+
+  const handleButtonChangeOrder = () => { 
+    localStorage.setItem('listOrderAsc', JSON.stringify(!listOrderAsc));
+    setListOrderAsc(!listOrderAsc);
+  }
+
+  useEffect(() => {
+    const items = JSON.parse(localStorage.getItem('listOrderAsc'));
+    if (items) {
+      setListOrderAsc(items);
+    }
+    setLoadingStorage(false);
+  }, []);
 
 // const allVideoLists = [videoList1?.list?.length!==0&&videoList1,videoList2?.list?.length!==0&&videoList2,videoList3?.list?.length!==0&&videoList3,videoList4?.list?.length!==0&&videoList4,videoListHD?.list?.length!==0&&videoListHD]
   return (
@@ -60,74 +76,93 @@ function Detail({ id, detail, detail1, detail2, detail3, detail4, detailHD }) {
 
         <Banner detail={detail.list[0]} />
         <LineBreak title="PLAY LIST" />
-        <div className="my-3 text-sm text-gray-400">
-          ALL resources are from 3rd party sources. We do NOT store or save any
-          video resources.
-        </div>
-        <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-6">
-          {detailHD?.list?.length > 0 && (
-            <VideoPlayList
-              index={detailHD?.resource===5?"HD":detailHD?.resource}
-              title={false}
-              videoList={videoListHD}
-              setPlay={setPlay}
-              setUrl={setUrl}
-              url={url}
-            />
-          )}
-          {detail4?.list?.length > 0 && (
-            <VideoPlayList
-              index={detail4?.resource===5?"HD":5-detail4?.resource}
-              title={false}
-              videoList={videoList4}
-              setPlay={setPlay}
-              setUrl={setUrl}
-              url={url}
-            />
-          )}
-          {detail3?.list?.length > 0 && (
-            <VideoPlayList
-              index={detail3?.resource===5?"HD":5-detail3?.resource}
-              title={false}
-              videoList={videoList3}
-              setPlay={setPlay}
-              setUrl={setUrl}
-              url={url}
-            />
-          )}
-          {detail2?.list?.length > 0 && (
-            <VideoPlayList
-              index={detail2?.resource===5?"HD":5-detail2?.resource}
-              title={false}
-              videoList={videoList2}
-              setPlay={setPlay}
-              setUrl={setUrl}
-              url={url}
-            />
-          )}
-          {detail1?.list?.length > 0 && (
-            <VideoPlayList
-              index={detail1?.resource===5?"HD":5-detail1?.resource}
-              title={false}
-              videoList={videoList1}
-              setPlay={setPlay}
-              setUrl={setUrl}
-              url={url}
-            />
-          )}
-          {detail?.list?.length > 0 && (
-            <VideoPlayList
-              index={detail?.resource===5?"HD":5-detail?.resource}
-              title={false}
-              videoList={videoList}
-              setPlay={setPlay}
-              setUrl={setUrl}
-              url={url}
-            />
-          )}
-          
+        <div className="flex justify-between items-center">
+          <p className="my-3 text-sm text-gray-400 flex-1">
+            ALL resources are from 3rd party sources. We do NOT store or save any
+            video resources.
+          </p>
+          <button className="ml-4 pl-5 pr-3 py-1 text-gray-300 hover:bg-gray-500/50 duration-200 border border-gray-400/75" onClick={handleButtonChangeOrder}>
+            Order: {" "}
+            {
+              listOrderAsc 
+              ? <ChevronUpIcon className="inline-block h-5 w-5 " /> 
+              : <ChevronDownIcon className="inline-block h-5 w-5 " />
+            }
 
+          </button>
         </div>
+        {!loadingStorage && 
+          <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-6">
+            {detailHD?.list?.length > 0 && (
+              <VideoPlayList
+                index={detailHD?.resource===5?"HD":detailHD?.resource}
+                title={false}
+                videoList={videoListHD}
+                setPlay={setPlay}
+                setUrl={setUrl}
+                url={url}
+                listOrderAsc={listOrderAsc}
+              />
+            )}
+            {detail4?.list?.length > 0 && (
+              <VideoPlayList
+                index={detail4?.resource===5?"HD":5-detail4?.resource}
+                title={false}
+                videoList={videoList4}
+                setPlay={setPlay}
+                setUrl={setUrl}
+                url={url}
+                listOrderAsc={listOrderAsc}
+              />
+            )}
+            {detail3?.list?.length > 0 && (
+              <VideoPlayList
+                index={detail3?.resource===5?"HD":5-detail3?.resource}
+                title={false}
+                videoList={videoList3}
+                setPlay={setPlay}
+                setUrl={setUrl}
+                url={url}
+                listOrderAsc={listOrderAsc}
+              />
+            )}
+            {detail2?.list?.length > 0 && (
+              <VideoPlayList
+                index={detail2?.resource===5?"HD":5-detail2?.resource}
+                title={false}
+                videoList={videoList2}
+                setPlay={setPlay}
+                setUrl={setUrl}
+                url={url}
+                listOrderAsc={listOrderAsc}
+              />
+            )}
+            {detail1?.list?.length > 0 && (
+              <VideoPlayList
+                index={detail1?.resource===5?"HD":5-detail1?.resource}
+                title={false}
+                videoList={videoList1}
+                setPlay={setPlay}
+                setUrl={setUrl}
+                url={url}
+                listOrderAsc={listOrderAsc}
+              />
+            )}
+            {detail?.list?.length > 0 && (
+              <VideoPlayList
+                index={detail?.resource===5?"HD":5-detail?.resource}
+                title={false}
+                videoList={videoList}
+                setPlay={setPlay}
+                setUrl={setUrl}
+                url={url}
+                listOrderAsc={listOrderAsc}
+              />
+            )}
+            
+
+          </div>
+        }
       </main>
     </>
   );
@@ -154,8 +189,6 @@ export async function getServerSideProps({ params, req, res, query }) {
     process.env.MOVIE_API_SOURCE_4,
     process.env.MOVIE_API_SOURCE_HD,
   ];
-
-  const API_LIST_SECONDARY = API_LIST.filter((_, index) => index != resourceId);
 
   let detail = {};
   try {

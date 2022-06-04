@@ -2,6 +2,7 @@ import { PlayIcon } from "@heroicons/react/solid";
 import LineBreak from "./LineBreak";
 
 const VideoPlayList = ({
+  listOrderAsc,
   videoList,
   url,
   setPlay,
@@ -24,7 +25,11 @@ const VideoPlayList = ({
             {index === "HD" ? "1080P " : `Source ${index}`}
             {index === "HD" && <span className=" text-red-600">🚫 PRC IP</span>}
           </div>
-          <div className="mt-1 flex flex-col-reverse gap-x-2 gap-y-0">
+          <div
+            className={`mt-1 flex gap-x-2 gap-y-0 ${
+              listOrderAsc ? "flex-col" : "flex-col-reverse"
+            }`}
+          >
             {videoList?.map((video) => {
               const { name, url } = video;
               return (
