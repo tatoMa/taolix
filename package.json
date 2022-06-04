@@ -27,6 +27,7 @@
     "next-head-seo": "^0.1.3",
     "next-pwa": "^5.4.4",
     "react": "^17.0.2",
+    "react-device-detect": "^2.2.2",
     "react-dom": "^17.0.2",
     "react-intersection-observer": "^8.33.1",
     "swiper": "^7.3.2",
