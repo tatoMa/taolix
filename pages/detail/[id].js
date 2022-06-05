@@ -7,7 +7,7 @@ import {
   getVideoUrlsFromUrlStr,
   removeAllSpecialCharactersFromString,
 } from "../../utils/utils";
-import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/outline'
+import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/outline";
 
 import VideoPlayList from "../../components/VideoPlayList";
 
@@ -28,28 +28,34 @@ function Detail({ id, detail, detail1, detail2, detail3, detail4, detailHD }) {
   let videoListHD = getPlayList(detailHD) || {};
 
   // modified original pic url with hi-res pic if there is one
-  if (detailHD?.list[0]?.vod_pic || detail4?.list[0]?.vod_pic || detail3?.list[0]?.vod_pic)
-    detail.list[0].vod_pic = detailHD?.list[0]?.vod_pic || detail4?.list[0]?.vod_pic || detail3?.list[0]?.vod_pic;
+  if (
+    detailHD?.list[0]?.vod_pic ||
+    detail4?.list[0]?.vod_pic ||
+    detail3?.list[0]?.vod_pic
+  )
+    detail.list[0].vod_pic =
+      detailHD?.list[0]?.vod_pic ||
+      detail4?.list[0]?.vod_pic ||
+      detail3?.list[0]?.vod_pic;
 
   const [play, setPlay] = useState(false);
   const [listOrderAsc, setListOrderAsc] = useState(false);
   const [loadingStorage, setLoadingStorage] = useState(true);
   const [url, setUrl] = useState("");
 
-  const handleButtonChangeOrder = () => { 
-    localStorage.setItem('listOrderAsc', JSON.stringify(!listOrderAsc));
+  const handleButtonChangeOrder = () => {
+    localStorage.setItem("listOrderAsc", JSON.stringify(!listOrderAsc));
     setListOrderAsc(!listOrderAsc);
-  }
+  };
 
   useEffect(() => {
-    const items = JSON.parse(localStorage.getItem('listOrderAsc'));
+    const items = JSON.parse(localStorage.getItem("listOrderAsc"));
     if (items) {
       setListOrderAsc(items);
     }
     setLoadingStorage(false);
   }, []);
 
-// const allVideoLists = [videoList1?.list?.length!==0&&videoList1,videoList2?.list?.length!==0&&videoList2,videoList3?.list?.length!==0&&videoList3,videoList4?.list?.length!==0&&videoList4,videoListHD?.list?.length!==0&&videoListHD]
   return (
     <>
       <NextHeadSeo
@@ -59,43 +65,45 @@ function Detail({ id, detail, detail1, detail2, detail3, detail4, detailHD }) {
         og={{
           title: `${detail.list[0]?.vod_name} free to play - Taolix`,
           description: `${detail.list[0]?.vod_name} video users can play online for free.`,
-          image: detail.list[0].vod_pic,
+          image: detail.list[0]?.vod_pic,
           type: "video.movie",
           siteName: "Taolix",
         }}
       />
+
       {/* Main section */}
       <main
         className={`mx-auto h-full w-full max-w-screen-2xl md:pb-8 ${
           play && "pointer-events-none"
         }`}
       >
-        {play && <PlayerWrapper url={url} setPlay={setPlay} />}
         {/* Player */}
-        {/* {play && <Player url={url} setPlay={setPlay} />} */}
+        {play && <PlayerWrapper url={url} setPlay={setPlay} />}
 
         <Banner detail={detail.list[0]} />
         <LineBreak title="PLAY LIST" />
-        <div className="flex justify-between items-center">
-          <p className="my-3 text-sm text-gray-400 flex-1">
-            ALL resources are from 3rd party sources. We do NOT store or save any
-            video resources.
+        <div className="flex items-center justify-between">
+          <p className="my-3 flex-1 text-sm text-gray-400">
+            ALL resources are from 3rd party sources. We do NOT store or save
+            any video resources.
           </p>
-          <button className="ml-4 pl-5 pr-3 py-1 text-gray-300 hover:bg-gray-500/50 duration-200 border border-gray-400/75" onClick={handleButtonChangeOrder}>
-            Order: {" "}
-            {
-              listOrderAsc 
-              ? <ChevronUpIcon className="inline-block h-5 w-5 " /> 
-              : <ChevronDownIcon className="inline-block h-5 w-5 " />
-            }
-
+          <button
+            className="ml-4 border border-gray-400/75 py-1 pl-5 pr-3 text-gray-300 duration-200 hover:bg-gray-500/50"
+            onClick={handleButtonChangeOrder}
+          >
+            Order:{" "}
+            {listOrderAsc ? (
+              <ChevronUpIcon className="inline-block h-5 w-5 " />
+            ) : (
+              <ChevronDownIcon className="inline-block h-5 w-5 " />
+            )}
           </button>
         </div>
-        {!loadingStorage && 
+        {!loadingStorage && (
           <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-6">
             {detailHD?.list?.length > 0 && (
               <VideoPlayList
-                index={detailHD?.resource===5?"HD":detailHD?.resource}
+                index={detailHD?.resource === 5 ? "HD" : detailHD?.resource}
                 title={false}
                 videoList={videoListHD}
                 setPlay={setPlay}
@@ -106,7 +114,7 @@ function Detail({ id, detail, detail1, detail2, detail3, detail4, detailHD }) {
             )}
             {detail4?.list?.length > 0 && (
               <VideoPlayList
-                index={detail4?.resource===5?"HD":5-detail4?.resource}
+                index={detail4?.resource === 5 ? "HD" : 5 - detail4?.resource}
                 title={false}
                 videoList={videoList4}
                 setPlay={setPlay}
@@ -117,7 +125,7 @@ function Detail({ id, detail, detail1, detail2, detail3, detail4, detailHD }) {
             )}
             {detail3?.list?.length > 0 && (
               <VideoPlayList
-                index={detail3?.resource===5?"HD":5-detail3?.resource}
+                index={detail3?.resource === 5 ? "HD" : 5 - detail3?.resource}
                 title={false}
                 videoList={videoList3}
                 setPlay={setPlay}
@@ -128,7 +136,7 @@ function Detail({ id, detail, detail1, detail2, detail3, detail4, detailHD }) {
             )}
             {detail2?.list?.length > 0 && (
               <VideoPlayList
-                index={detail2?.resource===5?"HD":5-detail2?.resource}
+                index={detail2?.resource === 5 ? "HD" : 5 - detail2?.resource}
                 title={false}
                 videoList={videoList2}
                 setPlay={setPlay}
@@ -139,7 +147,7 @@ function Detail({ id, detail, detail1, detail2, detail3, detail4, detailHD }) {
             )}
             {detail1?.list?.length > 0 && (
               <VideoPlayList
-                index={detail1?.resource===5?"HD":5-detail1?.resource}
+                index={detail1?.resource === 5 ? "HD" : 5 - detail1?.resource}
                 title={false}
                 videoList={videoList1}
                 setPlay={setPlay}
@@ -150,7 +158,7 @@ function Detail({ id, detail, detail1, detail2, detail3, detail4, detailHD }) {
             )}
             {detail?.list?.length > 0 && (
               <VideoPlayList
-                index={detail?.resource===5?"HD":5-detail?.resource}
+                index={detail?.resource === 5 ? "HD" : 5 - detail?.resource}
                 title={false}
                 videoList={videoList}
                 setPlay={setPlay}
@@ -159,10 +167,8 @@ function Detail({ id, detail, detail1, detail2, detail3, detail4, detailHD }) {
                 listOrderAsc={listOrderAsc}
               />
             )}
-            
-
           </div>
-        }
+        )}
       </main>
     </>
   );
@@ -191,20 +197,22 @@ export async function getServerSideProps({ params, req, res, query }) {
   ];
 
   let detail = {};
-  try {
-    let response = await fetch(
-      `${API_LIST[resourceId]}/?ac=detail&ids=${params.id}`
-    );
-    detail = await response.json();
-  } catch (error) {
-    console.error("error: ", error);
+  let videoName = "";
+
+  if (!resourceId) {
+    try {
+      let response = await fetch(
+        `${API_LIST[resourceId]}/?ac=detail&ids=${params.id}`
+      );
+      detail = await response.json();
+    } catch (error) {
+      console.error("error: ", error);
+    }
+    detail.resource = 0;
+    videoName = removeAllSpecialCharactersFromString(detail?.list[0]?.vod_name);
   }
-  detail?.resource = 0
 
   // fetch the secondary data
-  const videoName = removeAllSpecialCharactersFromString(
-    detail?.list[0]?.vod_name
-  ) || resourceName;
   let detail1 = {};
   let detail2 = {};
   let detail3 = {};
@@ -217,25 +225,29 @@ export async function getServerSideProps({ params, req, res, query }) {
   try {
     resultsPromiseAll = await Promise.allSettled([
       fetch(
-        `${process.env.MOVIE_API}/?ac=detail&wd=${encodeURI(videoName)}`
+        `${process.env.MOVIE_API}/?ac=detail&wd=${encodeURI(
+          resourceName || videoName
+        )}`
       ).then((res) => res.json()),
       fetch(
         `${process.env.MOVIE_API_SOURCE_2}/?ac=detail&wd=${encodeURI(
-          videoName
+          resourceName || videoName
         )}`
       ).then((res) => res.json()),
       fetch(
         `${process.env.MOVIE_API_SOURCE_3}/?ac=detail&wd=${encodeURI(
-          videoName
+          resourceName || videoName
         )}`
       ).then((res) => res.json()),
       fetch(
         `${process.env.MOVIE_API_SOURCE_4}/?ac=detail&wd=${encodeURI(
-          videoName
+          resourceName || videoName
         )}`
       ).then((res) => res.json()),
       fetch(
-        `${process.env.MOVIE_API_SOURCE_HD}?ac=list&wd=${encodeURI(videoName)}`
+        `${process.env.MOVIE_API_SOURCE_HD}?ac=list&wd=${encodeURI(
+          resourceName || videoName
+        )}`
       )
         .then((res) => res.json())
         .then((res) => {
@@ -252,7 +264,7 @@ export async function getServerSideProps({ params, req, res, query }) {
   // add resource id into result array
   resultsPromiseAll.map((item, index) => {
     let temp = item;
-    temp?.value?.resource = index+1;
+    temp.value.resource = index + 1;
     return temp;
   });
   // handle promise allSettled returns successes and failures
@@ -265,20 +277,29 @@ export async function getServerSideProps({ params, req, res, query }) {
     .map((x) => x.reason);
 
   // map and filter results for return needed
-  const filteredByName = successes.map((item) => {
-    // if (item === undefined)
-    //   return {
-    //     list: [],
-    //   };
+  let filteredByName = successes.map((item) => {
     let temp = [];
     temp[0] = item.list.find(
       (item) =>
-        removeAllSpecialCharactersFromString(item?.vod_name) === videoName
+        removeAllSpecialCharactersFromString(item?.vod_name) ===
+          removeAllSpecialCharactersFromString(videoName) ||
+        removeAllSpecialCharactersFromString(item?.vod_name) ===
+          removeAllSpecialCharactersFromString(resourceName)
     );
     return { ...item, list: temp[0] !== undefined ? temp : [] };
   });
 
-  // asign all return needed data
+  // making the first matched resource as the primary data if source id provided
+  if (resourceId) {
+    const firstResultMatchedMovieName = filteredByName.find(
+      (item) => item?.list?.length > 0
+    );
+    detail = firstResultMatchedMovieName;
+    filteredByName = filteredByName.filter(
+      (item) => item?.resource !== detail?.resource
+    );
+  }
+
   [detail1, detail2, detail3, detail4, detailHD] = filteredByName;
   return {
     props: {
