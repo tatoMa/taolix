@@ -284,7 +284,9 @@ export async function getServerSideProps({ params, req, res, query }) {
         removeAllSpecialCharactersFromString(item?.vod_name) ===
           removeAllSpecialCharactersFromString(videoName) ||
         removeAllSpecialCharactersFromString(item?.vod_name) ===
-          removeAllSpecialCharactersFromString(resourceName)
+          removeAllSpecialCharactersFromString(resourceName) ||
+        item?.vod_name === videoName ||
+        item?.vod_name === resourceName
     );
     return { ...item, list: temp[0] !== undefined ? temp : [] };
   });
