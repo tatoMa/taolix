@@ -11,7 +11,17 @@ import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/outline";
 
 import VideoPlayList from "../../components/VideoPlayList";
 
-function Detail({ id, detail, detail1, detail2, detail3, detail4, detailHD }) {
+function Detail({
+  id,
+  detail,
+  detail1,
+  detail2,
+  detail3,
+  detail4,
+  detail5,
+  detail6,
+  detailHD,
+}) {
   // get primary video info
   const videoList = getVideoUrlsFromUrlStr(detail.list[0]?.vod_play_url);
   // get additional video play list
@@ -25,18 +35,28 @@ function Detail({ id, detail, detail1, detail2, detail3, detail4, detailHD }) {
   let videoList2 = getPlayList(detail2) || {};
   let videoList3 = getPlayList(detail3) || {};
   let videoList4 = getPlayList(detail4) || {};
+  let videoList5 = getPlayList(detail5) || {};
+  let videoList6 = getPlayList(detail6) || {};
   let videoListHD = getPlayList(detailHD) || {};
 
   // modified original pic url with hi-res pic if there is one
   if (
     detailHD?.list[0]?.vod_pic ||
+    detail6?.list[0]?.vod_pic ||
+    detail5?.list[0]?.vod_pic ||
     detail4?.list[0]?.vod_pic ||
-    detail3?.list[0]?.vod_pic
+    detail3?.list[0]?.vod_pic ||
+    detail2?.list[0]?.vod_pic ||
+    detail?.list[0]?.vod_pic
   )
     detail.list[0].vod_pic =
       detailHD?.list[0]?.vod_pic ||
+      detail6?.list[0]?.vod_pic ||
+      detail5?.list[0]?.vod_pic ||
       detail4?.list[0]?.vod_pic ||
-      detail3?.list[0]?.vod_pic;
+      detail3?.list[0]?.vod_pic ||
+      detail2?.list[0]?.vod_pic ||
+      detail?.list[0]?.vod_pic;
 
   const [play, setPlay] = useState(false);
   const [listOrderAsc, setListOrderAsc] = useState(false);
@@ -103,7 +123,7 @@ function Detail({ id, detail, detail1, detail2, detail3, detail4, detailHD }) {
           <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-6">
             {detailHD?.list?.length > 0 && (
               <VideoPlayList
-                index={detailHD?.resource === 5 ? "HD" : detailHD?.resource}
+                index={detailHD?.resource === 7 ? "HD" : 7 - detailHD?.resource}
                 title={false}
                 videoList={videoListHD}
                 setPlay={setPlay}
@@ -112,9 +132,31 @@ function Detail({ id, detail, detail1, detail2, detail3, detail4, detailHD }) {
                 listOrderAsc={listOrderAsc}
               />
             )}
+            {detail6?.list?.length > 0 && (
+              <VideoPlayList
+                index={detailHD?.resource === 7 ? "HD" : 7 - detailHD?.resource}
+                title={false}
+                videoList={videoList6}
+                setPlay={setPlay}
+                setUrl={setUrl}
+                url={url}
+                listOrderAsc={listOrderAsc}
+              />
+            )}
+            {detail5?.list?.length > 0 && (
+              <VideoPlayList
+                index={detailHD?.resource === 7 ? "HD" : 7 - detailHD?.resource}
+                title={false}
+                videoList={videoList5}
+                setPlay={setPlay}
+                setUrl={setUrl}
+                url={url}
+                listOrderAsc={listOrderAsc}
+              />
+            )}
             {detail4?.list?.length > 0 && (
               <VideoPlayList
-                index={detail4?.resource === 5 ? "HD" : 5 - detail4?.resource}
+                index={detailHD?.resource === 7 ? "HD" : 7 - detailHD?.resource}
                 title={false}
                 videoList={videoList4}
                 setPlay={setPlay}
@@ -125,7 +167,7 @@ function Detail({ id, detail, detail1, detail2, detail3, detail4, detailHD }) {
             )}
             {detail3?.list?.length > 0 && (
               <VideoPlayList
-                index={detail3?.resource === 5 ? "HD" : 5 - detail3?.resource}
+                index={detailHD?.resource === 7 ? "HD" : 7 - detailHD?.resource}
                 title={false}
                 videoList={videoList3}
                 setPlay={setPlay}
@@ -136,7 +178,7 @@ function Detail({ id, detail, detail1, detail2, detail3, detail4, detailHD }) {
             )}
             {detail2?.list?.length > 0 && (
               <VideoPlayList
-                index={detail2?.resource === 5 ? "HD" : 5 - detail2?.resource}
+                index={detailHD?.resource === 7 ? "HD" : 7 - detailHD?.resource}
                 title={false}
                 videoList={videoList2}
                 setPlay={setPlay}
@@ -147,7 +189,7 @@ function Detail({ id, detail, detail1, detail2, detail3, detail4, detailHD }) {
             )}
             {detail1?.list?.length > 0 && (
               <VideoPlayList
-                index={detail1?.resource === 5 ? "HD" : 5 - detail1?.resource}
+                index={detailHD?.resource === 7 ? "HD" : 7 - detailHD?.resource}
                 title={false}
                 videoList={videoList1}
                 setPlay={setPlay}
@@ -158,7 +200,7 @@ function Detail({ id, detail, detail1, detail2, detail3, detail4, detailHD }) {
             )}
             {detail?.list?.length > 0 && (
               <VideoPlayList
-                index={detail?.resource === 5 ? "HD" : 5 - detail?.resource}
+                index={detailHD?.resource === 7 ? "HD" : 7 - detailHD?.resource}
                 title={false}
                 videoList={videoList}
                 setPlay={setPlay}
@@ -193,6 +235,8 @@ export async function getServerSideProps({ params, req, res, query }) {
     process.env.MOVIE_API_SOURCE_2,
     process.env.MOVIE_API_SOURCE_3,
     process.env.MOVIE_API_SOURCE_4,
+    process.env.MOVIE_API_SOURCE_5,
+    process.env.MOVIE_API_SOURCE_6,
     process.env.MOVIE_API_SOURCE_HD,
   ];
 
@@ -217,6 +261,8 @@ export async function getServerSideProps({ params, req, res, query }) {
   let detail2 = {};
   let detail3 = {};
   let detail4 = {};
+  let detail5 = {};
+  let detail6 = {};
   let detailHD = {};
   let emptyReturnData = { list: [] };
 
@@ -245,13 +291,23 @@ export async function getServerSideProps({ params, req, res, query }) {
         )}`
       ).then((res) => res.json()),
       fetch(
+        `${process.env.MOVIE_API_SOURCE_5}/?ac=detail&wd=${encodeURI(
+          resourceName || videoName
+        )}`
+      ).then((res) => res.json()),
+      fetch(
+        `${process.env.MOVIE_API_SOURCE_6}/?ac=detail&wd=${encodeURI(
+          resourceName || videoName
+        )}`
+      ).then((res) => res.json()),
+      fetch(
         `${process.env.MOVIE_API_SOURCE_HD}?ac=list&wd=${encodeURI(
           resourceName || videoName
         )}`
       )
         .then((res) => res.json())
         .then((res) => {
-          let tempList = res.list.map((item) => item.vod_id).join(",");
+          let tempList = res.list.map((item) => item?.vod_id).join(",");
           return fetch(
             `${process.env.MOVIE_API_SOURCE_HD}?ac=detail&ids=${tempList}`
           ).then((res) => res.json());
@@ -279,7 +335,7 @@ export async function getServerSideProps({ params, req, res, query }) {
   // map and filter results for return needed
   let filteredByName = successes.map((item) => {
     let temp = [];
-    temp[0] = item.list.find(
+    temp[0] = item?.list.find(
       (item) =>
         removeAllSpecialCharactersFromString(item?.vod_name) ===
           removeAllSpecialCharactersFromString(videoName) ||
@@ -302,7 +358,8 @@ export async function getServerSideProps({ params, req, res, query }) {
     );
   }
 
-  [detail1, detail2, detail3, detail4, detailHD] = filteredByName;
+  [detail1, detail2, detail3, detail4, detail5, detail6, detailHD] =
+    filteredByName;
   return {
     props: {
       id: params.id,
@@ -311,6 +368,8 @@ export async function getServerSideProps({ params, req, res, query }) {
       detail2: detail2 !== undefined ? detail2 : emptyReturnData,
       detail3: detail3 !== undefined ? detail3 : emptyReturnData,
       detail4: detail4 !== undefined ? detail4 : emptyReturnData,
+      detail5: detail5 !== undefined ? detail5 : emptyReturnData,
+      detail6: detail6 !== undefined ? detail6 : emptyReturnData,
       detailHD: detailHD !== undefined ? detailHD : emptyReturnData,
     },
   };

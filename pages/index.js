@@ -120,19 +120,19 @@ export async function getStaticProps() {
 
   // get hot movie list from douban API
   const doubanHotTvList = await gerVideoListFromDoubanApiHotList(
-    "/j/search_subjects?type=tv&tag=热门&sort=recommend&page_limit=40&page_start=0"
+    "/j/search_subjects?type=tv&tag=热门&sort=recommend&page_limit=30&page_start=0"
   );
   const doubanHotMovieList = await gerVideoListFromDoubanApiHotList(
-    "/j/search_subjects?type=movie&tag=热门&sort=recommend&page_limit=40&page_start=0"
+    "/j/search_subjects?type=movie&tag=热门&sort=recommend&page_limit=30&page_start=0"
   );
 
   const doubanNewMovieList = await gerVideoListFromDoubanApiHotList(
-    "/j/search_subjects?type=movie&tag=最新&sort=recommend&page_limit=40&page_start=0"
+    "/j/search_subjects?type=movie&tag=最新&sort=recommend&page_limit=30&page_start=0"
   );
 
   const selectedVideosForHero = shuffle([
+    ...doubanNewMovieList.list,
     ...doubanHotTvList.list,
-    ...doubanHotMovieList.list,
   ]).slice(0, 6);
 
   return {
