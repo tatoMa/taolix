@@ -134,7 +134,7 @@ function Detail({
             )}
             {detail6?.list?.length > 0 && (
               <VideoPlayList
-                index={detailHD?.resource === 7 ? "HD" : 7 - detailHD?.resource}
+                index={detail6?.resource === 7 ? "HD" : 7 - detail6?.resource}
                 title={false}
                 videoList={videoList6}
                 setPlay={setPlay}
@@ -145,7 +145,7 @@ function Detail({
             )}
             {detail5?.list?.length > 0 && (
               <VideoPlayList
-                index={detailHD?.resource === 7 ? "HD" : 7 - detailHD?.resource}
+                index={detail5?.resource === 7 ? "HD" : 7 - detail5?.resource}
                 title={false}
                 videoList={videoList5}
                 setPlay={setPlay}
@@ -156,7 +156,7 @@ function Detail({
             )}
             {detail4?.list?.length > 0 && (
               <VideoPlayList
-                index={detailHD?.resource === 7 ? "HD" : 7 - detailHD?.resource}
+                index={detail4?.resource === 7 ? "HD" : 7 - detail4?.resource}
                 title={false}
                 videoList={videoList4}
                 setPlay={setPlay}
@@ -167,7 +167,7 @@ function Detail({
             )}
             {detail3?.list?.length > 0 && (
               <VideoPlayList
-                index={detailHD?.resource === 7 ? "HD" : 7 - detailHD?.resource}
+                index={detail3?.resource === 7 ? "HD" : 7 - detail3?.resource}
                 title={false}
                 videoList={videoList3}
                 setPlay={setPlay}
@@ -178,7 +178,7 @@ function Detail({
             )}
             {detail2?.list?.length > 0 && (
               <VideoPlayList
-                index={detailHD?.resource === 7 ? "HD" : 7 - detailHD?.resource}
+                index={detail2?.resource === 7 ? "HD" : 7 - detail2?.resource}
                 title={false}
                 videoList={videoList2}
                 setPlay={setPlay}
@@ -189,7 +189,7 @@ function Detail({
             )}
             {detail1?.list?.length > 0 && (
               <VideoPlayList
-                index={detailHD?.resource === 7 ? "HD" : 7 - detailHD?.resource}
+                index={detail1?.resource === 7 ? "HD" : 7 - detail1?.resource}
                 title={false}
                 videoList={videoList1}
                 setPlay={setPlay}
@@ -200,7 +200,7 @@ function Detail({
             )}
             {detail?.list?.length > 0 && (
               <VideoPlayList
-                index={detailHD?.resource === 7 ? "HD" : 7 - detailHD?.resource}
+                index={detail?.resource === 7 ? "HD" : 7 - detail?.resource}
                 title={false}
                 videoList={videoList}
                 setPlay={setPlay}
