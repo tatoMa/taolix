@@ -85,6 +85,16 @@ export async function getServerSideProps({ params }) {
         `${process.env.MOVIE_API_SOURCE_4}/?ac=detail&wd=${encodeURI(
           params.key
         )}`
+      ).then((res) => res.json()),
+      fetch(
+        `${process.env.MOVIE_API_SOURCE_5}/?ac=detail&wd=${encodeURI(
+          params.key
+        )}`
+      ).then((res) => res.json()),
+      fetch(
+        `${process.env.MOVIE_API_SOURCE_6}/?ac=detail&wd=${encodeURI(
+          params.key
+        )}`
       ).then((res) => res.json())
     ]);
   } catch (error) {
@@ -109,13 +119,18 @@ export async function getServerSideProps({ params }) {
     searchResultsFromApi1,
     searchResultsFromApi2,
     searchResultsFromApi3,
+    searchResultsFromApi4,
+    searchResultsFromApi5,
   ] = successes;
   
   // filter all results into one unique array of items
   const movieList = [...(searchResultsFromApi0?.list?.map(item=>{return {...item,resource:0}}) || []),
     ...(searchResultsFromApi1?.list?.map(item=>{return {...item,resource:1}}) || []),
     ...(searchResultsFromApi2?.list?.map(item=>{return {...item,resource:2}}) || []),
-    ...(searchResultsFromApi3?.list?.map(item=>{return {...item,resource:3}}) || []),]
+    ...(searchResultsFromApi3?.list?.map(item=>{return {...item,resource:3}}) || []),
+    ...(searchResultsFromApi4?.list?.map(item=>{return {...item,resource:4}}) || []),
+    ...(searchResultsFromApi5?.list?.map(item=>{return {...item,resource:5}}) || []),
+  ]
   const uniqueMovieList = movieList.reduce((unique, o) => {
     if(!unique.some(obj => obj?.vod_name === o?.vod_name)) {
       unique.push(o);

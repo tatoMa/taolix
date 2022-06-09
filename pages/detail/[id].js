@@ -320,7 +320,7 @@ export async function getServerSideProps({ params, req, res, query }) {
   // add resource id into result array
   resultsPromiseAll.map((item, index) => {
     let temp = item;
-    temp.value.resource = index + 1;
+    temp?.value?.resource = index + 1;
     return temp;
   });
   // handle promise allSettled returns successes and failures
