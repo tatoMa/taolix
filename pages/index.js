@@ -8,13 +8,12 @@ export default function Home({
   doubanHotTvList,
   doubanHotMovieList,
   doubanNewMovieList,
-  // videosNewCnTvShow,
-  // videosNewKrTvShow,
-  // videosNewUsTvShow,
-  // videosNewCnReality,
-  // videosNewJpAnime,
+  videosNewCnTvShow,
+  videosNewKrTvShow,
+  videosNewUsTvShow,
+  videosNewCnReality,
+  videosNewJpAnime,
 }) {
-  // console.log(selectedVideosForHero);
   return (
     <>
       {/* Main section */}
@@ -41,34 +40,34 @@ export default function Home({
           <GroupSwiper videos={doubanNewMovieList} />
 
           {/* Line Break  */}
-          {/* <LineBreak title="CHINESE TV SHOWS" /> */}
+          <LineBreak title="CHINESE TV SHOWS" />
 
           {/* Video List Section */}
-          {/* <GroupSwiper videos={videosNewCnTvShow} /> */}
+          <GroupSwiper videos={videosNewCnTvShow} />
 
           {/* Line Break  */}
-          {/* <LineBreak title="KOREAN TV SHOWS" /> */}
+          <LineBreak title="KOREAN TV SHOWS" />
 
           {/* Video List Section */}
-          {/* <GroupSwiper videos={videosNewKrTvShow} /> */}
+          <GroupSwiper videos={videosNewKrTvShow} />
 
           {/* Line Break  */}
-          {/* <LineBreak title="AMERICAN TV SHOWS" /> */}
+          <LineBreak title="AMERICAN TV SHOWS" />
 
           {/* Video List Section */}
-          {/* <GroupSwiper videos={videosNewUsTvShow} /> */}
+          <GroupSwiper videos={videosNewUsTvShow} />
 
           {/* Line Break  */}
-          {/* <LineBreak title="JAPANESE ANIME" /> */}
+          <LineBreak title="JAPANESE ANIME" />
 
           {/* Video List Section */}
-          {/* <GroupSwiper videos={videosNewJpAnime} /> */}
+          <GroupSwiper videos={videosNewJpAnime} />
 
           {/* Line Break  */}
-          {/* <LineBreak title="CHINESE REALITY TV" /> */}
+          <LineBreak title="CHINESE REALITY TV" />
 
           {/* Video List Section */}
-          {/* <GroupSwiper videos={videosNewCnReality} /> */}
+          <GroupSwiper videos={videosNewCnReality} />
         </div>
       </div>
     </>
@@ -76,47 +75,47 @@ export default function Home({
 }
 
 export async function getStaticProps() {
-  // let resultsPromiseAll;
-  // try {
-  //   resultsPromiseAll = await Promise.allSettled([
-  //     fetch(`${process.env.MOVIE_API}/?ac=detail&t=33`).then((res) =>
-  //       res.json()
-  //     ),
-  //     fetch(`${process.env.MOVIE_API}/?ac=detail&t=34`).then((res) =>
-  //       res.json()
-  //     ),
-  //     fetch(`${process.env.MOVIE_API}/?ac=detail&t=36`).then((res) =>
-  //       res.json()
-  //     ),
-  //     fetch(`${process.env.MOVIE_API}/?ac=detail&t=41`).then((res) =>
-  //       res.json()
-  //     ),
-  //     fetch(`${process.env.MOVIE_API}/?ac=detail&t=46`).then((res) =>
-  //       res.json()
-  //     ),
-  //   ]);
-  // } catch (error) {
-  //   console.error(error);
-  // }
+  let resultsPromiseAll;
+  try {
+    resultsPromiseAll = await Promise.allSettled([
+      fetch(`${process.env.MOVIE_API}/?ac=detail&t=15`).then((res) =>
+        res.json()
+      ),
+      fetch(`${process.env.MOVIE_API}/?ac=detail&t=19`).then((res) =>
+        res.json()
+      ),
+      fetch(`${process.env.MOVIE_API}/?ac=detail&t=18`).then((res) =>
+        res.json()
+      ),
+      fetch(`${process.env.MOVIE_API}/?ac=detail&t=22`).then((res) =>
+        res.json()
+      ),
+      fetch(`${process.env.MOVIE_API}/?ac=detail&t=28`).then((res) =>
+        res.json()
+      ),
+    ]);
+  } catch (error) {
+    console.error(error);
+  }
 
-  // const successes = resultsPromiseAll
-  //   .filter((x) => x.status === "fulfilled")
-  //   .map((x) => x.value);
+  const successes = resultsPromiseAll
+    .filter((x) => x.status === "fulfilled")
+    .map((x) => x.value);
 
-  // const failures = resultsPromiseAll
-  //   .filter((x) => x.status === "rejected")
-  //   .map((x) => x.reason);
-  // if (!failures || failures?.length !== 0)
-  //   console.error("index page fetching error", failures);
+  const failures = resultsPromiseAll
+    .filter((x) => x.status === "rejected")
+    .map((x) => x.reason);
+  if (!failures || failures?.length !== 0)
+    console.error("index page fetching error", failures);
 
-  // // asign all return needed data
-  // const [
-  //   videosNewCnTvShow = {},
-  //   videosNewKrTvShow = {},
-  //   videosNewUsTvShow = {},
-  //   videosNewCnReality = {},
-  //   videosNewJpAnime = {},
-  // ] = successes;
+  // asign all return needed data
+  const [
+    videosNewCnTvShow = {},
+    videosNewKrTvShow = {},
+    videosNewUsTvShow = {},
+    videosNewCnReality = {},
+    videosNewJpAnime = {},
+  ] = successes;
 
   // get hot movie list from douban API
   const doubanHotTvList = await gerVideoListFromDoubanApiHotList(
@@ -141,11 +140,11 @@ export async function getStaticProps() {
       doubanHotTvList,
       doubanHotMovieList,
       doubanNewMovieList,
-      // videosNewCnTvShow,
-      // videosNewKrTvShow,
-      // videosNewUsTvShow,
-      // videosNewCnReality,
-      // videosNewJpAnime,
+      videosNewCnTvShow,
+      videosNewKrTvShow,
+      videosNewUsTvShow,
+      videosNewCnReality,
+      videosNewJpAnime,
     },
     revalidate: 3500,
   };
