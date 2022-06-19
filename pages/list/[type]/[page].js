@@ -45,10 +45,10 @@ export async function getStaticProps({ params: { type, page } }) {
   let videos = {};
 
   if (
-    (parseInt(page) > 0 && parseInt(type) > 0 && parseInt(type) < 11) ||
-    (parseInt(type) > 32 && parseInt(type) < 39) ||
-    (parseInt(type) > 40 && parseInt(type) < 44) ||
-    (parseInt(type) > 44 && parseInt(type) < 49)
+    (parseInt(page) > 0 && parseInt(type) > 1 && parseInt(type) < 14) ||
+    (parseInt(type) > 14 && parseInt(type) < 21) ||
+    (parseInt(type) > 21 && parseInt(type) < 26) ||
+    (parseInt(type) > 26 && parseInt(type) < 30)
   ) {
     try {
       let response = await fetch(
@@ -69,37 +69,12 @@ export async function getStaticProps({ params: { type, page } }) {
     revalidate: 7200,
   };
 }
+const paths = GENRES.map((item) => {
+  return { params: { type: item.type.toString(), page: "1" } };
+});
 export async function getStaticPaths() {
   return {
-    paths: [
-      { params: { type: "1", page: "1" } },
-      { params: { type: "2", page: "1" } },
-      { params: { type: "3", page: "1" } },
-      { params: { type: "4", page: "1" } },
-      { params: { type: "5", page: "1" } },
-      { params: { type: "6", page: "1" } },
-      { params: { type: "7", page: "1" } },
-      { params: { type: "8", page: "1" } },
-      { params: { type: "9", page: "1" } },
-      { params: { type: "10", page: "1" } },
-
-      { params: { type: "33", page: "1" } },
-      { params: { type: "34", page: "1" } },
-      { params: { type: "35", page: "1" } },
-      { params: { type: "36", page: "1" } },
-      { params: { type: "37", page: "1" } },
-      { params: { type: "38", page: "1" } },
-
-      { params: { type: "41", page: "1" } },
-      { params: { type: "40", page: "1" } },
-      { params: { type: "42", page: "1" } },
-      { params: { type: "43", page: "1" } },
-
-      { params: { type: "46", page: "1" } },
-      { params: { type: "45", page: "1" } },
-      { params: { type: "47", page: "1" } },
-      { params: { type: "48", page: "1" } },
-    ],
+    paths,
     fallback: "blocking",
   };
 }
