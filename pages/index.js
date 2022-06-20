@@ -1,4 +1,9 @@
-import { shuffle, gerVideoListFromDoubanApiHotList } from "../utils/utils";
+import {
+  shuffle,
+  gerVideoListFromDoubanApiHotList,
+  genresForIndexFetch,
+  filterNeededVideoInfo,
+} from "../utils/utils";
 import HeroSwiper from "../components/HeroSwiper";
 import LineBreak from "../components/LineBreak";
 import GroupSwiper from "../components/GroupSwiper";
@@ -76,24 +81,29 @@ export default function Home({
 
 export async function getStaticProps() {
   let resultsPromiseAll;
+
+  // map from selected genre list to fetch promise list
+  const fetchMovieListsFromSelectedGenreList = genresForIndexFetch.map(
+    async (genre) => {
+      return new Promise(async (resolve, reject) => {
+        try {
+          const res = await fetch(
+            `${process.env.MOVIE_API}/?ac=detail&t=${genre.type}`
+          );
+          const result = await res.json();
+          result.list = result?.list?.map((i) => filterNeededVideoInfo(i));
+          resolve(result);
+        } catch (error) {
+          reject(error);
+        }
+      });
+    }
+  );
+
   try {
-    resultsPromiseAll = await Promise.allSettled([
-      fetch(`${process.env.MOVIE_API}/?ac=detail&t=15`).then((res) =>
-        res.json()
-      ),
-      fetch(`${process.env.MOVIE_API}/?ac=detail&t=19`).then((res) =>
-        res.json()
-      ),
-      fetch(`${process.env.MOVIE_API}/?ac=detail&t=18`).then((res) =>
-        res.json()
-      ),
-      fetch(`${process.env.MOVIE_API}/?ac=detail&t=22`).then((res) =>
-        res.json()
-      ),
-      fetch(`${process.env.MOVIE_API}/?ac=detail&t=28`).then((res) =>
-        res.json()
-      ),
-    ]);
+    resultsPromiseAll = await Promise.allSettled(
+      fetchMovieListsFromSelectedGenreList
+    );
   } catch (error) {
     console.error(error);
   }

@@ -86,10 +86,10 @@ const GroupSwiper = ({ videos }) => {
               remarks={movie.vod_remarks}
               id={movie.vod_id}
               rate={
-                movie.rate
-                  ? movie.rate
-                  : movie.vod_douban_score != 0
-                  ? movie.vod_douban_score
+                Number(movie.rate)
+                  ? Number(movie.rate)
+                  : Number(movie.vod_douban_score) != 0
+                  ? Number(movie.vod_douban_score)
                   : ""
               }
             />

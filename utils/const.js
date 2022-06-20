@@ -34,7 +34,7 @@ export const GENRES = [
     name: "hongkong taiwan reality",
     classify: "reality show",
   },
-  { group: 22, type: 43, name: "english reality", classify: "reality show" },
+  { group: 22, type: 25, name: "english reality", classify: "reality show" },
 
   { group: 27, type: 28, name: "japanese", classify: "anime" },
   { group: 27, type: 27, name: "chinese", classify: "anime" },

@@ -1,3 +1,24 @@
+import { GENRES } from "./const";
+
+export const genresForIndexFetch = [
+  GENRES.find(
+    (genre) => genre.name === "chinese" && genre.classify === "tv show"
+  ),
+  GENRES.find(
+    (genre) => genre.name === "korean" && genre.classify === "tv show"
+  ),
+  GENRES.find(
+    (genre) => genre.name === "american" && genre.classify === "tv show"
+  ),
+  GENRES.find(
+    (genre) =>
+      genre.name === "chinese reality" && genre.classify === "reality show"
+  ),
+  GENRES.find(
+    (genre) => genre.name === "japanese" && genre.classify === "anime"
+  ),
+];
+
 export const findResourceFromDoubanItem = async (item) => {
   try {
     let temp = await findMovieFromApiByTitle(item.title, process.env.MOVIE_API);
@@ -114,8 +135,8 @@ export const filterNeededVideoInfo = (
     vod_pic,
     vod_remarks,
     vod_id,
-    rate,
-    vod_douban_score,
+    rate: rate || vod_douban_score,
+    vod_douban_score: rate || vod_douban_score,
   };
 };
 
