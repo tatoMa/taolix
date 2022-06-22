@@ -1,7 +1,7 @@
 import VideoItem from "../../components/VideoItem";
 import NextHeadSeo from "next-head-seo";
+import { fetchWithTimeout } from "../../utils/tools";
 const translate = require("@vitalets/google-translate-api");
-import { AbortController } from "node-abort-controller";
 
 function Detail({ uniqueMovieList, searchKey }) {
   return (
@@ -62,72 +62,68 @@ export async function getServerSideProps({ params }) {
 
   // fetch all search results from APIs
   let resultsPromiseAll;
-
   const timeout = 5000;
-  const controller = new AbortController();
-  const id = setTimeout(() => controller.abort(), timeout);
-
   try {
     resultsPromiseAll = await Promise.allSettled([
-      fetch(`${process.env.MOVIE_API}/?ac=detail&wd=${encodeURI(params.key)}`, {
-        timeout: timeout,
-        signal: controller.signal,
-      }).then((res) => res.json()),
-      fetch(
+      fetchWithTimeout(
+        `${process.env.MOVIE_API}/?ac=detail&wd=${encodeURI(params.key)}`,
+        {
+          timeout,
+        }
+      ).then((res) => res.json()),
+      fetchWithTimeout(
         `${process.env.MOVIE_API_SOURCE_2}/?ac=detail&wd=${encodeURI(
           params.key
         )}`,
         {
-          timeout: timeout,
-          signal: controller.signal,
+          timeout,
         }
       ).then((res) => res.json()),
-      fetch(
+      fetchWithTimeout(
         `${process.env.MOVIE_API_SOURCE_3}/?ac=detail&wd=${encodeURI(
           params.key
         )}`,
         {
-          timeout: timeout,
-          signal: controller.signal,
+          timeout,
         }
       ).then((res) => res.json()),
-      fetch(
+      fetchWithTimeout(
         `${process.env.MOVIE_API_SOURCE_4}/?ac=detail&wd=${encodeURI(
           params.key
         )}`,
         {
-          timeout: timeout,
-          signal: controller.signal,
+          timeout,
         }
       ).then((res) => res.json()),
-      fetch(
+      fetchWithTimeout(
         `${process.env.MOVIE_API_SOURCE_5}/?ac=detail&wd=${encodeURI(
           params.key
         )}`,
         {
-          timeout: timeout,
-          signal: controller.signal,
+          timeout,
         }
       ).then((res) => res.json()),
-      fetch(
+      fetchWithTimeout(
         `${process.env.MOVIE_API_SOURCE_6}/?ac=detail&wd=${encodeURI(
           params.key
         )}`,
         {
-          timeout: timeout,
-          signal: controller.signal,
+          timeout,
         }
       ).then((res) => res.json()),
     ]);
   } catch (error) {
     console.error(error);
   }
-  clearTimeout(id);
 
-  resultsPromiseAll = resultsPromiseAll.map((res, index) => {
-    if (res.value && res.value.resource) res.value.resource = index;
-    return res;
+  // add resource id into result array
+  resultsPromiseAll.map((item, index) => {
+    if (item.value) item.value.resource = index;
   });
+  // resultsPromiseAll = resultsPromiseAll.map((res, index) => {
+  //   if (res.value && res.value.resource) res.value.resource = index;
+  //   return res;
+  // });
   const successes = resultsPromiseAll
     .filter((x) => x.status === "fulfilled")
     .map((x) => x.value);
