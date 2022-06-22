@@ -9,10 +9,10 @@ import LineBreak from "../components/LineBreak";
 import GroupSwiper from "../components/GroupSwiper";
 
 export default function Home({
-  selectedVideosForHero,
-  doubanHotTvList,
-  doubanHotMovieList,
-  doubanNewMovieList,
+  // selectedVideosForHero,
+  // doubanHotTvList,
+  // doubanHotMovieList,
+  // doubanNewMovieList,
   videosNewCnTvShow,
   videosNewKrTvShow,
   videosNewUsTvShow,
@@ -24,25 +24,25 @@ export default function Home({
       {/* Main section */}
       <div className="mx-auto h-full w-full max-w-screen-2xl ">
         {/* Swiper section */}
-        <HeroSwiper top5={selectedVideosForHero} />
+        <HeroSwiper top5={videosNewCnTvShow.list} />
         <div className="-translate-y-9">
           {/* Line Break  */}
           <LineBreak title="WHATS ON MOVIES" />
 
           {/* Video List Section */}
-          <GroupSwiper videos={doubanHotMovieList} />
+          {/* <GroupSwiper videos={doubanHotMovieList} /> */}
 
           {/* Line Break  */}
           <LineBreak title="WHATS ON TV" />
 
           {/* Video List Section */}
-          <GroupSwiper videos={doubanHotTvList} />
+          {/* <GroupSwiper videos={doubanHotTvList} /> */}
 
           {/* Line Break  */}
           <LineBreak title="NEW MOVIES" />
 
           {/* Video List Section */}
-          <GroupSwiper videos={doubanNewMovieList} />
+          {/* <GroupSwiper videos={doubanNewMovieList} /> */}
 
           {/* Line Break  */}
           <LineBreak title="CHINESE TV SHOWS" />
@@ -127,29 +127,29 @@ export async function getStaticProps() {
     videosNewJpAnime = {},
   ] = successes;
 
-  // get hot movie list from douban API
-  const doubanHotTvList = await gerVideoListFromDoubanApiHotList(
-    "/j/search_subjects?type=tv&tag=热门&sort=recommend&page_limit=30&page_start=0"
-  );
-  const doubanHotMovieList = await gerVideoListFromDoubanApiHotList(
-    "/j/search_subjects?type=movie&tag=热门&sort=recommend&page_limit=30&page_start=0"
-  );
+  // // get hot movie list from douban API
+  // const doubanHotTvList = await gerVideoListFromDoubanApiHotList(
+  //   "/j/search_subjects?type=tv&tag=热门&sort=recommend&page_limit=30&page_start=0"
+  // );
+  // const doubanHotMovieList = await gerVideoListFromDoubanApiHotList(
+  //   "/j/search_subjects?type=movie&tag=热门&sort=recommend&page_limit=30&page_start=0"
+  // );
 
-  const doubanNewMovieList = await gerVideoListFromDoubanApiHotList(
-    "/j/search_subjects?type=movie&tag=最新&sort=recommend&page_limit=30&page_start=0"
-  );
+  // const doubanNewMovieList = await gerVideoListFromDoubanApiHotList(
+  //   "/j/search_subjects?type=movie&tag=最新&sort=recommend&page_limit=30&page_start=0"
+  // );
 
-  const selectedVideosForHero = shuffle([
-    ...doubanNewMovieList.list,
-    ...doubanHotTvList.list,
-  ]).slice(0, 6);
+  // const selectedVideosForHero = shuffle([
+  //   ...doubanNewMovieList.list,
+  //   ...doubanHotTvList.list,
+  // ]).slice(0, 6);
 
   return {
     props: {
-      selectedVideosForHero,
-      doubanHotTvList,
-      doubanHotMovieList,
-      doubanNewMovieList,
+      // selectedVideosForHero,
+      // doubanHotTvList,
+      // doubanHotMovieList,
+      // doubanNewMovieList,
       videosNewCnTvShow,
       videosNewKrTvShow,
       videosNewUsTvShow,

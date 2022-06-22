@@ -66,40 +66,65 @@ export async function getServerSideProps({ params }) {
 
   // fetch all search results from APIs
   let resultsPromiseAll;
+
+  const timeout = 5000  ;
+  const controller = new AbortController();
+  const id = setTimeout(() => controller.abort(), timeout);
+
   try {
     resultsPromiseAll = await Promise.allSettled([
       fetch(
-        `${process.env.MOVIE_API}/?ac=detail&wd=${encodeURI(params.key)}`
+        `${process.env.MOVIE_API}/?ac=detail&wd=${encodeURI(params.key)}`, {
+          timeout :timeout,
+          signal: controller.signal  
+        }
       ).then((res) => res.json()),
       fetch(
         `${process.env.MOVIE_API_SOURCE_2}/?ac=detail&wd=${encodeURI(
           params.key
-        )}`
+        )}`, {
+          timeout :timeout,
+          signal: controller.signal  
+        }
       ).then((res) => res.json()),
       fetch(
         `${process.env.MOVIE_API_SOURCE_3}/?ac=detail&wd=${encodeURI(
           params.key
-        )}`
+        )}`, {
+          timeout :timeout,
+          signal: controller.signal  
+        }
       ).then((res) => res.json()),
       fetch(
         `${process.env.MOVIE_API_SOURCE_4}/?ac=detail&wd=${encodeURI(
           params.key
-        )}`
+        )}`, {
+          timeout :timeout,
+          signal: controller.signal  
+        }
       ).then((res) => res.json()),
       fetch(
         `${process.env.MOVIE_API_SOURCE_5}/?ac=detail&wd=${encodeURI(
           params.key
-        )}`
+        )}`, {
+          timeout :timeout,
+          signal: controller.signal  
+        }
       ).then((res) => res.json()),
       fetch(
         `${process.env.MOVIE_API_SOURCE_6}/?ac=detail&wd=${encodeURI(
           params.key
-        )}`
+        )}`, {
+          timeout :timeout,
+          signal: controller.signal  
+        }
       ).then((res) => res.json())
     ]);
   } catch (error) {
     console.error(error);
   }
+  clearTimeout(id);
+
   resultsPromiseAll = resultsPromiseAll.map((res, index) => {
     res?.value?.resource = index;
     return res;
