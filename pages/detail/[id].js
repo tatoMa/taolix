@@ -11,6 +11,9 @@ import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/outline";
 
 import VideoPlayList from "../../components/VideoPlayList";
 
+import { APILISTS } from "../../utils/const";
+import { fetchWithTimeout } from "../../utils/tools";
+
 function Detail({
   id,
   detail,
@@ -228,17 +231,8 @@ export async function getServerSideProps({ params, req, res, query }) {
   }
   res.setHeader(
     "Cache-Control",
-    "public, s-maxage=600, stale-while-revalidate=3600"
+    "public, s-maxage=600, stale-while-revalidate=3600" // 600 seconds for fresh, 3600 seconds for stale and still using but fetch on background
   );
-  const API_LIST = [
-    process.env.MOVIE_API,
-    process.env.MOVIE_API_SOURCE_2,
-    process.env.MOVIE_API_SOURCE_3,
-    process.env.MOVIE_API_SOURCE_4,
-    process.env.MOVIE_API_SOURCE_5,
-    process.env.MOVIE_API_SOURCE_6,
-    process.env.MOVIE_API_SOURCE_HD,
-  ];
 
   let detail = {};
   let videoName = "";
@@ -246,7 +240,7 @@ export async function getServerSideProps({ params, req, res, query }) {
   if (!resourceId) {
     try {
       let response = await fetch(
-        `${API_LIST[resourceId]}/?ac=detail&ids=${params.id}`
+        `${APILISTS[resourceId]}/?ac=detail&ids=${params.id}`
       );
       detail = await response.json();
     } catch (error) {
@@ -267,43 +261,64 @@ export async function getServerSideProps({ params, req, res, query }) {
   let emptyReturnData = { list: [] };
 
   let resultsPromiseAll;
-
+  const timeout = 4000;
   try {
     resultsPromiseAll = await Promise.allSettled([
-      fetch(
+      fetchWithTimeout(
         `${process.env.MOVIE_API}/?ac=detail&wd=${encodeURI(
           resourceName || videoName
-        )}`
+        )}`,
+        {
+          timeout,
+        }
       ).then((res) => res.json()),
-      fetch(
+      fetchWithTimeout(
         `${process.env.MOVIE_API_SOURCE_2}/?ac=detail&wd=${encodeURI(
           resourceName || videoName
-        )}`
+        )}`,
+        {
+          timeout,
+        }
       ).then((res) => res.json()),
-      fetch(
+      fetchWithTimeout(
         `${process.env.MOVIE_API_SOURCE_3}/?ac=detail&wd=${encodeURI(
           resourceName || videoName
-        )}`
+        )}`,
+        {
+          timeout,
+        }
       ).then((res) => res.json()),
-      fetch(
+      fetchWithTimeout(
         `${process.env.MOVIE_API_SOURCE_4}/?ac=detail&wd=${encodeURI(
           resourceName || videoName
-        )}`
+        )}`,
+        {
+          timeout,
+        }
       ).then((res) => res.json()),
-      fetch(
+      fetchWithTimeout(
         `${process.env.MOVIE_API_SOURCE_5}/?ac=detail&wd=${encodeURI(
           resourceName || videoName
-        )}`
+        )}`,
+        {
+          timeout,
+        }
       ).then((res) => res.json()),
-      fetch(
+      fetchWithTimeout(
         `${process.env.MOVIE_API_SOURCE_6}/?ac=detail&wd=${encodeURI(
           resourceName || videoName
-        )}`
+        )}`,
+        {
+          timeout,
+        }
       ).then((res) => res.json()),
-      fetch(
+      fetchWithTimeout(
         `${process.env.MOVIE_API_SOURCE_HD}?ac=list&wd=${encodeURI(
           resourceName || videoName
-        )}`
+        )}`,
+        {
+          timeout,
+        }
       )
         .then((res) => res.json())
         .then((res) => {
@@ -319,9 +334,7 @@ export async function getServerSideProps({ params, req, res, query }) {
 
   // add resource id into result array
   resultsPromiseAll.map((item, index) => {
-    let temp = item;
-    temp?.value?.resource = index + 1;
-    return temp;
+    if (item.value) item.value.resource = index + 1;
   });
   // handle promise allSettled returns successes and failures
   const successes = resultsPromiseAll

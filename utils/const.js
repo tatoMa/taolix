@@ -1,3 +1,4 @@
+// this is the genre for api.yulecj.com
 export const GENRES = [
   { group: 2, type: 2, name: "adventure", classify: "movie" },
   { group: 2, type: 3, name: "comedy", classify: "movie" },
@@ -48,6 +49,16 @@ export const MAJORS = [
   GENRES.find((item) => item.classify == "tv show"),
   GENRES.find((item) => item.classify == "reality show"),
   GENRES.find((item) => item.classify == "anime"),
+];
+
+export const APILISTS = [
+  process.env.MOVIE_API,
+  process.env.MOVIE_API_SOURCE_2,
+  process.env.MOVIE_API_SOURCE_3,
+  process.env.MOVIE_API_SOURCE_4,
+  process.env.MOVIE_API_SOURCE_5,
+  process.env.MOVIE_API_SOURCE_6,
+  process.env.MOVIE_API_SOURCE_HD,
 ];
 
 // this is the genre for api.ylzy1.com
