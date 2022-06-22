@@ -2,10 +2,7 @@ import VideoItem from "../../components/VideoItem";
 import NextHeadSeo from "next-head-seo";
 const translate = require("@vitalets/google-translate-api");
 
-function Detail({ 
-  uniqueMovieList,
-  searchKey })
-  {
+function Detail({ uniqueMovieList, searchKey }) {
   return (
     <>
       <NextHeadSeo
@@ -20,8 +17,7 @@ function Detail({
         </h1>
 
         <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-4 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8">
-          
-          {uniqueMovieList?.length > 0 && (
+          {uniqueMovieList?.length > 0 &&
             uniqueMovieList?.map((movie) => (
               <VideoItem
                 name={movie.vod_name}
@@ -31,9 +27,8 @@ function Detail({
                 key={movie.vod_id}
                 resource={movie.resource}
               />
-            ))
-          )} 
-          
+            ))}
+
           {/* If no video found */}
           {uniqueMovieList?.length === 0 && (
             <div className="mt-12 text-2xl text-gray-400">
@@ -66,42 +61,70 @@ export async function getServerSideProps({ params }) {
 
   // fetch all search results from APIs
   let resultsPromiseAll;
+
+  const timeout = 5000;
+  const controller = new AbortController();
+  const id = setTimeout(() => controller.abort(), timeout);
+
   try {
     resultsPromiseAll = await Promise.allSettled([
-      fetch(
-        `${process.env.MOVIE_API}/?ac=detail&wd=${encodeURI(params.key)}`
-      ).then((res) => res.json()),
+      fetch(`${process.env.MOVIE_API}/?ac=detail&wd=${encodeURI(params.key)}`, {
+        timeout: timeout,
+        signal: controller.signal,
+      }).then((res) => res.json()),
       fetch(
         `${process.env.MOVIE_API_SOURCE_2}/?ac=detail&wd=${encodeURI(
           params.key
-        )}`
+        )}`,
+        {
+          timeout: timeout,
+          signal: controller.signal,
+        }
       ).then((res) => res.json()),
       fetch(
         `${process.env.MOVIE_API_SOURCE_3}/?ac=detail&wd=${encodeURI(
           params.key
-        )}`
+        )}`,
+        {
+          timeout: timeout,
+          signal: controller.signal,
+        }
       ).then((res) => res.json()),
       fetch(
         `${process.env.MOVIE_API_SOURCE_4}/?ac=detail&wd=${encodeURI(
           params.key
-        )}`
+        )}`,
+        {
+          timeout: timeout,
+          signal: controller.signal,
+        }
       ).then((res) => res.json()),
       fetch(
         `${process.env.MOVIE_API_SOURCE_5}/?ac=detail&wd=${encodeURI(
           params.key
-        )}`
+        )}`,
+        {
+          timeout: timeout,
+          signal: controller.signal,
+        }
       ).then((res) => res.json()),
       fetch(
         `${process.env.MOVIE_API_SOURCE_6}/?ac=detail&wd=${encodeURI(
           params.key
-        )}`
-      ).then((res) => res.json())
+        )}`,
+        {
+          timeout: timeout,
+          signal: controller.signal,
+        }
+      ).then((res) => res.json()),
     ]);
   } catch (error) {
     console.error(error);
   }
+  clearTimeout(id);
+
   resultsPromiseAll = resultsPromiseAll.map((res, index) => {
-    res?.value?.resource = index;
+    if (res.value && res.value.resource) res.value.resource = index;
     return res;
   });
   const successes = resultsPromiseAll
@@ -113,7 +136,7 @@ export async function getServerSideProps({ params }) {
     .map((x) => x.reason);
   if (!failures || failures?.length !== 0)
     console.error("search page fetching error", failures);
-    
+
   const [
     searchResultsFromApi0,
     searchResultsFromApi1,
@@ -122,21 +145,34 @@ export async function getServerSideProps({ params }) {
     searchResultsFromApi4,
     searchResultsFromApi5,
   ] = successes;
-  
+
   // filter all results into one unique array of items
-  const movieList = [...(searchResultsFromApi0?.list?.map(item=>{return {...item,resource:0}}) || []),
-    ...(searchResultsFromApi1?.list?.map(item=>{return {...item,resource:1}}) || []),
-    ...(searchResultsFromApi2?.list?.map(item=>{return {...item,resource:2}}) || []),
-    ...(searchResultsFromApi3?.list?.map(item=>{return {...item,resource:3}}) || []),
-    ...(searchResultsFromApi4?.list?.map(item=>{return {...item,resource:4}}) || []),
-    ...(searchResultsFromApi5?.list?.map(item=>{return {...item,resource:5}}) || []),
-  ]
+  const movieList = [
+    ...(searchResultsFromApi0?.list?.map((item) => {
+      return { ...item, resource: 0 };
+    }) || []),
+    ...(searchResultsFromApi1?.list?.map((item) => {
+      return { ...item, resource: 1 };
+    }) || []),
+    ...(searchResultsFromApi2?.list?.map((item) => {
+      return { ...item, resource: 2 };
+    }) || []),
+    ...(searchResultsFromApi3?.list?.map((item) => {
+      return { ...item, resource: 3 };
+    }) || []),
+    ...(searchResultsFromApi4?.list?.map((item) => {
+      return { ...item, resource: 4 };
+    }) || []),
+    ...(searchResultsFromApi5?.list?.map((item) => {
+      return { ...item, resource: 5 };
+    }) || []),
+  ];
   const uniqueMovieList = movieList.reduce((unique, o) => {
-    if(!unique.some(obj => obj?.vod_name === o?.vod_name)) {
+    if (!unique.some((obj) => obj?.vod_name === o?.vod_name)) {
       unique.push(o);
     }
     return unique;
-},[]);
+  }, []);
 
   return {
     props: {
