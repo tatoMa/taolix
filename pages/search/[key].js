@@ -1,6 +1,7 @@
 import VideoItem from "../../components/VideoItem";
 import NextHeadSeo from "next-head-seo";
 const translate = require("@vitalets/google-translate-api");
+import { AbortController } from "node-abort-controller";
 
 function Detail({ uniqueMovieList, searchKey }) {
   return (
