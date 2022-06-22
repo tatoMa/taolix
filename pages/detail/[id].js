@@ -11,6 +11,8 @@ import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/outline";
 
 import VideoPlayList from "../../components/VideoPlayList";
 
+import { AbortController } from "node-abort-controller";
+
 function Detail({
   id,
   detail,
@@ -267,43 +269,74 @@ export async function getServerSideProps({ params, req, res, query }) {
   let emptyReturnData = { list: [] };
 
   let resultsPromiseAll;
+  const timeout = 4000;
+  const controller = new AbortController();
+  const id = setTimeout(() => controller.abort(), timeout);
 
   try {
     resultsPromiseAll = await Promise.allSettled([
       fetch(
         `${process.env.MOVIE_API}/?ac=detail&wd=${encodeURI(
           resourceName || videoName
-        )}`
+        )}`,
+        {
+          timeout: timeout,
+          signal: controller.signal,
+        }
       ).then((res) => res.json()),
       fetch(
         `${process.env.MOVIE_API_SOURCE_2}/?ac=detail&wd=${encodeURI(
           resourceName || videoName
-        )}`
+        )}`,
+        {
+          timeout: timeout,
+          signal: controller.signal,
+        }
       ).then((res) => res.json()),
       fetch(
         `${process.env.MOVIE_API_SOURCE_3}/?ac=detail&wd=${encodeURI(
           resourceName || videoName
-        )}`
+        )}`,
+        {
+          timeout: timeout,
+          signal: controller.signal,
+        }
       ).then((res) => res.json()),
       fetch(
         `${process.env.MOVIE_API_SOURCE_4}/?ac=detail&wd=${encodeURI(
           resourceName || videoName
-        )}`
+        )}`,
+        {
+          timeout: timeout,
+          signal: controller.signal,
+        }
       ).then((res) => res.json()),
       fetch(
         `${process.env.MOVIE_API_SOURCE_5}/?ac=detail&wd=${encodeURI(
           resourceName || videoName
-        )}`
+        )}`,
+        {
+          timeout: timeout,
+          signal: controller.signal,
+        }
       ).then((res) => res.json()),
       fetch(
         `${process.env.MOVIE_API_SOURCE_6}/?ac=detail&wd=${encodeURI(
           resourceName || videoName
-        )}`
+        )}`,
+        {
+          timeout: timeout,
+          signal: controller.signal,
+        }
       ).then((res) => res.json()),
       fetch(
         `${process.env.MOVIE_API_SOURCE_HD}?ac=list&wd=${encodeURI(
           resourceName || videoName
-        )}`
+        )}`,
+        {
+          timeout: timeout,
+          signal: controller.signal,
+        }
       )
         .then((res) => res.json())
         .then((res) => {
@@ -316,7 +349,7 @@ export async function getServerSideProps({ params, req, res, query }) {
   } catch (error) {
     console.error(error);
   }
-
+  clearTimeout(id);
   // add resource id into result array
   resultsPromiseAll.map((item, index) => {
     let temp = item;
