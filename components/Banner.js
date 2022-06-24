@@ -68,7 +68,7 @@ const Banner = ({ detail, index = 1 }) => {
 
   return (
     <div
-      className={`relative w-full md:aspect-[3/2] lg:aspect-[16/7] ${
+      className={`relative aspect-[4/7] w-full md:aspect-[3/2] lg:aspect-[16/7] ${
         detail.mode === "homePage" && "cursor-pointer px-0 md:px-6 lg:px-8"
       }`}
       onClick={() => indexButtonHandler()}
@@ -131,7 +131,7 @@ const Banner = ({ detail, index = 1 }) => {
       <main className="group relative z-10 flex h-full w-full flex-col-reverse md:flex-row">
         <div className="z-20 flex -translate-y-10 items-center text-white md:w-1/2 md:translate-y-10 md:pr-4 lg:w-3/5">
           <div className="relative w-full overflow-hidden xl:w-[90%]">
-            <div className="relative border-b border-red-500 bg-gradient-to-br from-orange-600 to-red-600 bg-clip-text text-4xl font-extrabold text-transparent md:pr-0">
+            <div className="relative border-b border-red-500 bg-gradient-to-br from-orange-600 to-red-600 bg-clip-text text-4xl font-extrabold text-transparent animate-in slide-in-from-left md:pr-0">
               <h1
                 className={`${
                   detail.mode !== "homePage" && "w-[calc(100%-6rem)]"
@@ -139,11 +139,11 @@ const Banner = ({ detail, index = 1 }) => {
               >
                 {vod_name && vod_name}
               </h1>
-              <h2 className="text-sm font-light text-red-700/60 line-clamp-1">
+              <h2 className="text-sm font-light text-red-700/60 delay-150 line-clamp-1 animate-in slide-in-from-left">
                 {vod_sub && vod_sub}
               </h2>
             </div>
-            <div className="absolute right-0 top-6 mt-4 text-sm text-gray-200/75">
+            <div className="absolute right-0 top-6 mt-4 text-sm text-gray-200/75 delay-200 animate-in slide-in-from-left">
               {vod_lang && vod_lang}
             </div>
 
@@ -180,14 +180,14 @@ const Banner = ({ detail, index = 1 }) => {
                 ))}
             </div>
 
-            <h2 className="mt-4 text-sm text-gray-200/90 line-clamp-1">
+            <h2 className="mt-4 text-sm text-gray-200/90 delay-300 line-clamp-1 animate-in fade-in">
               {vod_director && "Direct: " + vod_director}
             </h2>
-            <h2 className="mt-1 text-sm text-gray-200/90 line-clamp-1">
+            <h2 className="mt-1 text-sm text-gray-200/90 delay-300 line-clamp-1 animate-in fade-in">
               {vod_actor && "Actor: " + vod_actor}
             </h2>
 
-            <p className="mt-3 text-sm text-gray-400 opacity-90 line-clamp-4 md:line-clamp-3 lg:line-clamp-5">
+            <p className="mt-3 text-sm text-gray-400 opacity-90 delay-300 line-clamp-4 animate-in fade-in md:line-clamp-3 lg:line-clamp-5">
               {vod_blurb ? vod_blurb : filterHtmlTagsFromString(vod_content)}
             </p>
           </div>
@@ -210,7 +210,7 @@ const Banner = ({ detail, index = 1 }) => {
           <img
             src={vod_pic}
             alt="vod_name"
-            className={`z-10 h-full w-full object-cover ${
+            className={`z-10 h-full w-full object-cover delay-150 animate-in slide-in-from-left ${
               detail.mode === "homePage" &&
               "duration-300 group-hover:scale-110 group-focus:scale-110 group-active:scale-110"
             }`}

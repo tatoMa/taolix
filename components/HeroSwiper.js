@@ -22,6 +22,7 @@ import "swiper/css/free-mode";
 
 import Banner from "./Banner";
 import { useState } from "react";
+import HeroSwiperThumbItem from "./HeroSwiperThumbItem";
 SwiperCore.use([Navigation, Pagination, Scrollbar, Autoplay, Virtual, Thumbs]);
 
 const HeroSwiper = ({ top5 }) => {
@@ -30,6 +31,7 @@ const HeroSwiper = ({ top5 }) => {
   return (
     <>
       <Swiper
+        className="mt-0  lg:mt-16"
         // virtual={{
         //   addSlidesAfter: 2,
         //   cache: true,
@@ -39,8 +41,8 @@ const HeroSwiper = ({ top5 }) => {
         thumbs={{ swiper: thumbsSwiper }}
         lazy={true}
         autoplay={{
-          delay: 8000,
-          disableOnInteraction: true,
+          delay: 7000,
+          // disableOnInteraction: true,
         }}
         // effect="coverflow"
         loop
@@ -50,6 +52,7 @@ const HeroSwiper = ({ top5 }) => {
         pagination={{ clickable: true }}
         keyboard={{ enabled: true }}
         scrollbar={{ draggable: true }}
+
         // onSwiper={(swiper) => console.log()}
         // onSlideChange={() => console.log("slide change")}
       >
@@ -87,50 +90,71 @@ const HeroSwiper = ({ top5 }) => {
               rgba(10, 10, 10, 0.3)
             );
           }
-          .swiper-button-next:hover,
-          .swiper-button-prev:hover {
-            color: #888;
-          }
           .swiper-button-next,
           .swiper-button-prev {
             color: white;
+            z-index: 50;
           }
           .swiper-button-next.swiper-button-disabled,
           .swiper-button-prev.swiper-button-disabled {
             opacity: 0.1;
           }
           .mySwiper .swiper-slide {
-            clip-path: polygon(35% 0, 90% 0, 65% 100%, 10% 100%);
-            transition: clip-path 1s;
-            height: 20vh;
-            opacity: 0.4;
+            clip-path: polygon(20% 0, 105% 0, 80% 100%, -5% 100%);
+            transition: all 1s;
           }
-
+          .mySwiper .swiper-slide .thumb-picture {
+            filter: grayscale(80%) saturate(0.8);
+            transition: all 1s;
+          }
+          .mySwiper .swiper-slide .thumb-picture:hover {
+            filter: grayscale(0) saturate(0.8);
+          }
           .mySwiper .swiper-slide-thumb-active {
-            transition: clip-path 1s;
-            clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
-            opacity: 1;
+            clip-path: polygon(10% 0%, 115% 0%, 90% 100%, -15% 100%);
+          }
+          .mySwiper .swiper-slide-thumb-active .thumb-picture {
+            filter: grayscale(0) saturate(1.3);
+          }
+          .mySwiper .swiper-slide .thumb-text {
+            top: 87%;
+            left: 0px;
+            transition: all 1s;
+          }
+          .mySwiper .swiper-slide-thumb-active .thumb-text {
+            top: 82%;
+            left: 10%;
           }
         `}</style>
       </Swiper>
       <Swiper
         onSwiper={setThumbsSwiper}
-        loop={true}
+        // loop={true}
         spaceBetween={0}
-        slidesPerView={8}
+        slidesPerView={10}
         freeMode={true}
         watchSlidesProgress={true}
         modules={[FreeMode, Navigation, Thumbs]}
         className="mySwiper"
+        breakpoints={{
+          1: { slidesPerView: 3 },
+          768: {
+            slidesPerView: 4,
+          },
+          1024: {
+            slidesPerView: 6,
+          },
+          1280: {
+            slidesPerView: 8,
+          },
+          1536: {
+            slidesPerView: 10,
+          },
+        }}
       >
         {top5.map((movie, index) => (
           <SwiperSlide key={movie.vod_id}>
-            <img
-              src={movie.vod_pic}
-              alt={movie.vod_name}
-              className="h-full w-full object-cover "
-              referrerPolicy="no-referrer"
-            />
+            <HeroSwiperThumbItem movie={movie} />
           </SwiperSlide>
         ))}
       </Swiper>
