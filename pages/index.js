@@ -25,7 +25,7 @@ export default function Home({
       <div className="mx-auto h-full w-full max-w-screen-2xl ">
         {/* Swiper section */}
         <HeroSwiper top5={selectedVideosForHero} />
-        <div className="-translate-y-9">
+        <div>
           {/* Line Break  */}
           <LineBreak title="WHATS ON MOVIES" />
 
@@ -142,7 +142,7 @@ export async function getStaticProps() {
   const selectedVideosForHero = shuffle([
     ...doubanNewMovieList.list,
     ...doubanHotTvList.list,
-  ]).slice(0, 6);
+  ]).slice(0, 16);
 
   return {
     props: {
