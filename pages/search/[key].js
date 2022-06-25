@@ -26,7 +26,15 @@ function Detail({ uniqueMovieList, searchKey }) {
                 pic={movie.vod_pic}
                 id={movie.vod_id}
                 key={movie.vod_id}
+                remarks={movie.vod_remarks}
                 resource={movie.resource}
+                rate={
+                  Number(movie.rate)
+                    ? Number(movie.rate)
+                    : Number(movie.vod_douban_score) != 0
+                    ? Number(movie.vod_douban_score)
+                    : ""
+                }
               />
             ))}
 
