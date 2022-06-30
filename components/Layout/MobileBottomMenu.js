@@ -8,6 +8,7 @@ import {
 
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { MAJORS } from "../../utils/const";
 
 const MobileBottomMenu = () => {
   const router = useRouter();
@@ -21,22 +22,22 @@ const MobileBottomMenu = () => {
     },
     {
       name: "MOVIE",
-      linkUrl: "/list/1/1",
+      linkUrl: `/list/${MAJORS[0].type}/1`,
       icon: FilmIcon,
     },
     {
       name: "TV SHOW",
-      linkUrl: "/list/33/1",
+      linkUrl: `/list/${MAJORS[1].type}/1`,
       icon: VideoCameraIcon,
     },
     {
       name: "REALITY",
-      linkUrl: "/list/41/1",
+      linkUrl: `/list/${MAJORS[2].type}/1`,
       icon: UserGroupIcon,
     },
     {
       name: "ANIME",
-      linkUrl: "/list/46/1",
+      linkUrl: `/list/${MAJORS[3].type}/1`,
       icon: PhotographIcon,
     },
   ];
