@@ -46,7 +46,7 @@ const HeroSwiper = ({ top5 }) => {
           // disableOnInteraction: true,
         }}
         // effect="coverflow"
-        loop={typeof window !== "undefined"}
+        loop={false}
         spaceBetween={50}
         slidesPerView={1}
         navigation
