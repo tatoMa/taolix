@@ -34,7 +34,7 @@ function Detail({ uniqueMovieList, searchKey }) {
                     ? Number(movie.rate)
                     : Number(movie.vod_douban_score) != 0
                     ? Number(movie.vod_douban_score)
-                    : ""
+                    : 0
                 }
               />
             ))}
