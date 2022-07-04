@@ -1,5 +1,6 @@
+import { GetServerSideProps } from "next";
 import Banner from "../../components/Banner";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import LineBreak from "../../components/LineBreak";
 import PlayerWrapper from "../../components/Player/PlayerWrapper";
 import NextHeadSeo from "next-head-seo";
@@ -80,7 +81,7 @@ function Detail({
   }, []);
 
   return (
-    <>
+    <React.Fragment>
       <NextHeadSeo
         title={`${detail.list[0]?.vod_name} free to play - Taolix`}
         description={`${detail.list[0]?.vod_name} video users can play online for free.`}
@@ -215,13 +216,18 @@ function Detail({
           </div>
         )}
       </main>
-    </>
+    </React.Fragment>
   );
 }
 
 export default Detail;
 
-export async function getServerSideProps({ params, req, res, query }) {
+export const getServerSideProps: GetServerSideProps = async ({
+  params,
+  req,
+  res,
+  query,
+}) => {
   // fetch the primary data
   let resourceId = 0;
   let resourceName = "";
@@ -386,4 +392,4 @@ export async function getServerSideProps({ params, req, res, query }) {
       detailHD: detailHD !== undefined ? detailHD : emptyReturnData,
     },
   };
-}
+};

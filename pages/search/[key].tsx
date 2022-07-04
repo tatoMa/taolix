@@ -1,6 +1,7 @@
 import VideoItem from "../../components/VideoItem";
 import NextHeadSeo from "next-head-seo";
 import { fetchWithTimeout } from "../../utils/tools";
+import { GetServerSideProps } from "next";
 const translate = require("@vitalets/google-translate-api");
 
 function Detail({ uniqueMovieList, searchKey }) {
@@ -43,8 +44,7 @@ function Detail({ uniqueMovieList, searchKey }) {
 }
 
 export default Detail;
-
-export async function getServerSideProps({ params }) {
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   // detect if the input text is Chinese
   var re = /[^\u4e00-\u9fa5]/;
   if (re.test(params.key)) {
@@ -177,4 +177,4 @@ export async function getServerSideProps({ params }) {
       searchKey: params.key,
     },
   };
-}
+};
