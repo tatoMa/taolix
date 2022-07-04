@@ -3,6 +3,7 @@ import Pagination from "../../../components/Pagination";
 import GenreList from "../../../components/GenreList";
 import NextHeadSeo from "next-head-seo";
 import { GENRES } from "../../../utils/const";
+import { GetStaticProps } from "next";
 
 export default function Home({ videos, page, t }) {
   const group = GENRES.find((item) => item.type == t);
@@ -41,7 +42,11 @@ export default function Home({ videos, page, t }) {
   );
 }
 
-export async function getStaticProps({ params: { type, page } }) {
+export const getStaticProps: GetStaticProps = async ({
+  params: { type, page },
+}: {
+  params: { type: string; page: string };
+}) => {
   let videos = {};
 
   if (
@@ -68,7 +73,7 @@ export async function getStaticProps({ params: { type, page } }) {
     },
     revalidate: 7200,
   };
-}
+};
 const paths = GENRES.map((item) => {
   return { params: { type: item.type.toString(), page: "1" } };
 });

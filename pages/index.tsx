@@ -7,6 +7,7 @@ import {
 import HeroSwiper from "../components/HeroSwiper";
 import LineBreak from "../components/LineBreak";
 import GroupSwiper from "../components/GroupSwiper";
+import { GetStaticProps } from "next";
 
 export default function Home({
   selectedVideosForHero,
@@ -79,7 +80,7 @@ export default function Home({
   );
 }
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async (context) => {
   let resultsPromiseAll;
 
   // map from selected genre list to fetch promise list
@@ -158,4 +159,4 @@ export async function getStaticProps() {
     },
     revalidate: 3500,
   };
-}
+};

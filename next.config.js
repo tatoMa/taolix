@@ -1,3 +1,5 @@
+/** @type {import('next').NextConfig} */
+
 const withPWA = require("next-pwa");
 const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
@@ -24,6 +26,7 @@ module.exports = withBundleAnalyzer(
         "!windows11/**/*",
         "!splashscreens/**/*",
       ],
+      disable: process.env.NODE_ENV !== "production",
     },
     images: {
       // loader: "custom",
