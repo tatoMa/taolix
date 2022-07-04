@@ -17,6 +17,7 @@ import "swiper/css/scrollbar";
 import "swiper/css/autoplay";
 import "swiper/css/thumbs";
 import "swiper/css/free-mode";
+import "swiper/css/virtual";
 
 // import "swiper/css/effect-coverflow";
 
@@ -31,9 +32,9 @@ const HeroSwiper = ({ top5 }) => {
   return (
     <>
       <Swiper
-        className="mt-0  lg:mt-16"
+        className="mt-0 lg:mt-16"
         // virtual={{
-        //   addSlidesAfter: 2,
+        //   addSlidesAfter: 8,
         //   cache: true,
         //   // addSlidesBefore: 8,
         //   // slides: [1, 2, 3, 4, 5, 6, 7, 8],
@@ -45,10 +46,11 @@ const HeroSwiper = ({ top5 }) => {
           // disableOnInteraction: true,
         }}
         // effect="coverflow"
-        loop
+        loop={false}
         spaceBetween={50}
         slidesPerView={1}
         navigation
+        removeClippedSubviews={false}
         pagination={{ clickable: true }}
         keyboard={{ enabled: true }}
         scrollbar={{ draggable: true }}
@@ -101,11 +103,11 @@ const HeroSwiper = ({ top5 }) => {
           }
           .mySwiper .swiper-slide {
             clip-path: polygon(20% 0, 105% 0, 80% 100%, -5% 100%);
-            transition: all 1s;
+            transition: clip-path 1s, filter 0.5s;
           }
           .mySwiper .swiper-slide .thumb-picture {
             filter: grayscale(80%) saturate(0.8);
-            transition: all 1s;
+            transition: clip-path 1s, filter 0.5s;
           }
           .mySwiper .swiper-slide .thumb-picture:hover {
             filter: grayscale(0) saturate(0.8);
@@ -119,7 +121,7 @@ const HeroSwiper = ({ top5 }) => {
           .mySwiper .swiper-slide .thumb-text {
             top: 87%;
             left: 0px;
-            transition: all 1s;
+            transition: clip-path 1s, filter 0.5s, top 1s, left 1s;
           }
           .mySwiper .swiper-slide-thumb-active .thumb-text {
             top: 82%;
@@ -128,8 +130,15 @@ const HeroSwiper = ({ top5 }) => {
         `}</style>
       </Swiper>
       <Swiper
+        // virtual={{
+        //   addSlidesAfter: 8,
+        //   cache: true,
+        //   // addSlidesBefore: 8,
+        //   // slides: [1, 2, 3, 4, 5, 6, 7, 8],
+        // }}
         onSwiper={setThumbsSwiper}
         // loop={true}
+        lazy={true}
         spaceBetween={0}
         slidesPerView={10}
         freeMode={true}

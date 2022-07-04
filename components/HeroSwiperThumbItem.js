@@ -3,6 +3,7 @@ const HeroSwiperThumbItem = ({ movie }) => {
     <section className="relative">
       <div className="thumb-picture">
         <img
+          loading="lazy"
           src={movie.vod_pic}
           alt={movie.vod_name}
           className="aspect-[3/4] w-full scale-125 duration-300 animate-in fade-in hover:scale-150 hover:brightness-110 "

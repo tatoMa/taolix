@@ -210,7 +210,7 @@ const Banner = ({ detail, index = 1 }) => {
           <img
             src={vod_pic}
             alt="vod_name"
-            className={`z-10 h-full w-full object-cover delay-150 animate-in slide-in-from-left ${
+            className={`z-10 h-full w-full object-cover px-6 delay-150 animate-in slide-in-from-left sm:px-0 ${
               detail.mode === "homePage" &&
               "duration-300 group-hover:scale-110 group-focus:scale-110 group-active:scale-110"
             }`}
