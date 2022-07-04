@@ -25,7 +25,11 @@ export const findResourceFromDoubanItem = async (item) => {
     if (temp && temp.list.length) {
       // temp = { ...temp.list[0], ...item };
       temp = {
-        ...filterNeededVideoInfoForHero({ ...temp.list[0], ...item }),
+        ...filterNeededVideoInfoForHero({
+          ...temp.list[0],
+          ...item,
+          rate: item.rate,
+        }),
       };
       if (temp.vod_id) return temp;
     }
@@ -261,7 +265,6 @@ export const gerVideoListFromDoubanApiHotList = async (url) => {
   } catch (e) {
     console.error("error: ", e);
   }
-
   // using Douban ranking video list fetch all individual resource from API
   let videosHotListDoubanFindResource = await Promise.allSettled(
     videosHotListDouban.map(async (item) => {

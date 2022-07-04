@@ -8,11 +8,12 @@ import HeroSwiper from "../components/HeroSwiper";
 import LineBreak from "../components/LineBreak";
 import GroupSwiper from "../components/GroupSwiper";
 import { GetStaticProps } from "next";
+import { DOUBAN_HOT_URLS } from "utils/const";
 
 export default function Home({
   selectedVideosForHero,
-  doubanHotTvList,
   doubanHotMovieList,
+  doubanHotTvList,
   doubanNewMovieList,
   videosNewCnTvShow,
   videosNewKrTvShow,
@@ -81,8 +82,8 @@ export default function Home({
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  let resultsPromiseAll;
-
+  let resultsPromiseAllFromMovieApi;
+  let resultsPromiseAllFromDouban;
   // map from selected genre list to fetch promise list
   const fetchMovieListsFromSelectedGenreList = genresForIndexFetch.map(
     async (genre) => {
@@ -101,24 +102,21 @@ export const getStaticProps: GetStaticProps = async (context) => {
     }
   );
 
-  try {
-    resultsPromiseAll = await Promise.allSettled(
-      fetchMovieListsFromSelectedGenreList
-    );
-  } catch (error) {
-    console.error(error);
-  }
+  resultsPromiseAllFromMovieApi = await Promise.allSettled(
+    fetchMovieListsFromSelectedGenreList
+  );
 
-  const successes = resultsPromiseAll
+  const successesFromMovieApi = resultsPromiseAllFromMovieApi
     .filter((x) => x.status === "fulfilled")
     .map((x) => x.value);
 
-  const failures = resultsPromiseAll
+  const failuresFromMovieApi = resultsPromiseAllFromMovieApi
     .filter((x) => x.status === "rejected")
     .map((x) => x.reason);
-  if (!failures || failures?.length !== 0)
-    console.error("index page fetching error", failures);
+  if (!failuresFromMovieApi || failuresFromMovieApi?.length !== 0)
+    console.error("index page fetching error", failuresFromMovieApi);
 
+  console.time("douban");
   // asign all return needed data
   const [
     videosNewCnTvShow = {},
@@ -126,30 +124,62 @@ export const getStaticProps: GetStaticProps = async (context) => {
     videosNewUsTvShow = {},
     videosNewCnReality = {},
     videosNewJpAnime = {},
-  ] = successes;
+  ] = successesFromMovieApi;
+
+  const fetchMovieListsFromDouban = DOUBAN_HOT_URLS.map(async (doubanUrl) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const res = await gerVideoListFromDoubanApiHotList(doubanUrl);
+        resolve(res);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  });
+
+  resultsPromiseAllFromDouban = await Promise.allSettled(
+    fetchMovieListsFromDouban
+  );
+
+  const successesFromDouban = resultsPromiseAllFromDouban
+    .filter((x) => x.status === "fulfilled")
+    .map((x) => x.value);
+
+  const failuresFromDouban = resultsPromiseAllFromDouban
+    .filter((x) => x.status === "rejected")
+    .map((x) => x.reason);
+  if (!failuresFromDouban || failuresFromDouban?.length !== 0)
+    console.error("index page fetching error", failuresFromDouban);
+
+  const [
+    doubanHotMovieList = {},
+    doubanHotTvList = {},
+    doubanNewMovieList = {},
+  ] = successesFromDouban;
 
   // get hot movie list from douban API
-  const doubanHotTvList = await gerVideoListFromDoubanApiHotList(
-    "/j/search_subjects?type=tv&tag=热门&sort=recommend&page_limit=30&page_start=0"
-  );
-  const doubanHotMovieList = await gerVideoListFromDoubanApiHotList(
-    "/j/search_subjects?type=movie&tag=热门&sort=recommend&page_limit=30&page_start=0"
-  );
+  // const doubanHotTvList = await gerVideoListFromDoubanApiHotList(
+  //   "/j/search_subjects?type=tv&tag=热门&sort=recommend&page_limit=30&page_start=0"
+  // );
+  // const doubanHotMovieList = await gerVideoListFromDoubanApiHotList(
+  //   "/j/search_subjects?type=movie&tag=热门&sort=recommend&page_limit=30&page_start=0"
+  // );
 
-  const doubanNewMovieList = await gerVideoListFromDoubanApiHotList(
-    "/j/search_subjects?type=movie&tag=最新&sort=recommend&page_limit=30&page_start=0"
-  );
+  // const doubanNewMovieList = await gerVideoListFromDoubanApiHotList(
+  //   "/j/search_subjects?type=movie&tag=最新&sort=recommend&page_limit=30&page_start=0"
+  // );
 
   const selectedVideosForHero = shuffle([
+    // ...doubanHotMovieList.list,
     ...doubanNewMovieList.list,
     ...doubanHotTvList.list,
   ]).slice(0, 16);
-
+  console.timeEnd("douban");
   return {
     props: {
       selectedVideosForHero,
-      doubanHotTvList,
       doubanHotMovieList,
+      doubanHotTvList,
       doubanNewMovieList,
       videosNewCnTvShow,
       videosNewKrTvShow,

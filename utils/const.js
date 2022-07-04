@@ -61,6 +61,11 @@ export const APILISTS = [
   process.env.MOVIE_API_SOURCE_HD,
 ];
 
+export const DOUBAN_HOT_URLS = [
+  "/j/search_subjects?type=movie&tag=热门&sort=recommend&page_limit=30&page_start=0",
+  "/j/search_subjects?type=tv&tag=热门&sort=recommend&page_limit=30&page_start=0",
+  "/j/search_subjects?type=movie&tag=最新&sort=recommend&page_limit=30&page_start=0",
+];
 // this is the genre for api.ylzy1.com
 // export const genres = [
 //   { group: 6, type: 6, name: "adventure", classify: "movie" },
