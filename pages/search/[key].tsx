@@ -44,17 +44,18 @@ function Detail({ uniqueMovieList, searchKey }) {
 }
 
 export default Detail;
+interface Params {
+  key: string;
+}
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   // detect if the input text is Chinese
   var re = /[^\u4e00-\u9fa5]/;
-  if (re.test(params.key)) {
+  let key = params.key as string;
+  if (re.test(key)) {
     // translate if the input English to Chinese
     try {
-      const resTranslate = await translate(params.key, { to: "zh-CN" });
-      params.key =
-        resTranslate.from.language.iso === "en"
-          ? resTranslate.text
-          : params.key;
+      const resTranslate = await translate(key, { to: "zh-CN" });
+      key = resTranslate.from.language.iso === "en" ? resTranslate.text : key;
     } catch (error) {
       console.error(error);
     }
@@ -66,47 +67,37 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   try {
     resultsPromiseAll = await Promise.allSettled([
       fetchWithTimeout(
-        `${process.env.MOVIE_API}/?ac=detail&wd=${encodeURI(params.key)}`,
+        `${process.env.MOVIE_API}/?ac=detail&wd=${encodeURI(key)}`,
         {
           timeout,
         }
       ).then((res) => res.json()),
       fetchWithTimeout(
-        `${process.env.MOVIE_API_SOURCE_2}/?ac=detail&wd=${encodeURI(
-          params.key
-        )}`,
+        `${process.env.MOVIE_API_SOURCE_2}/?ac=detail&wd=${encodeURI(key)}`,
         {
           timeout,
         }
       ).then((res) => res.json()),
       fetchWithTimeout(
-        `${process.env.MOVIE_API_SOURCE_3}/?ac=detail&wd=${encodeURI(
-          params.key
-        )}`,
+        `${process.env.MOVIE_API_SOURCE_3}/?ac=detail&wd=${encodeURI(key)}`,
         {
           timeout,
         }
       ).then((res) => res.json()),
       fetchWithTimeout(
-        `${process.env.MOVIE_API_SOURCE_4}/?ac=detail&wd=${encodeURI(
-          params.key
-        )}`,
+        `${process.env.MOVIE_API_SOURCE_4}/?ac=detail&wd=${encodeURI(key)}`,
         {
           timeout,
         }
       ).then((res) => res.json()),
       fetchWithTimeout(
-        `${process.env.MOVIE_API_SOURCE_5}/?ac=detail&wd=${encodeURI(
-          params.key
-        )}`,
+        `${process.env.MOVIE_API_SOURCE_5}/?ac=detail&wd=${encodeURI(key)}`,
         {
           timeout,
         }
       ).then((res) => res.json()),
       fetchWithTimeout(
-        `${process.env.MOVIE_API_SOURCE_6}/?ac=detail&wd=${encodeURI(
-          params.key
-        )}`,
+        `${process.env.MOVIE_API_SOURCE_6}/?ac=detail&wd=${encodeURI(key)}`,
         {
           timeout,
         }
@@ -174,7 +165,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   return {
     props: {
       uniqueMovieList,
-      searchKey: params.key,
+      searchKey: key,
     },
   };
 };

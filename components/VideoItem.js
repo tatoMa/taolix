@@ -13,8 +13,8 @@ const VideoItem = ({
   type,
   pic,
   id,
-  remarks,
-  rate,
+  remarks = 0,
+  rate = 0,
   hd = false,
   resource = 0,
 }) => {
@@ -99,7 +99,7 @@ const VideoItem = ({
             <div className="absolute top-0 right-0 bg-black/80 pt-1 text-sm text-gray-300">
               {remarks}
             </div>
-            {rate && (
+            {Number(rate) > 0 && (
               <div
                 className={`absolute top-0 left-0 bg-black/80 pt-1 pl-1 text-sm  ${
                   rate > 9

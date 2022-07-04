@@ -44,6 +44,8 @@ export default function Home({ videos, page, t }) {
 
 export const getStaticProps: GetStaticProps = async ({
   params: { type, page },
+}: {
+  params: { type: string; page: string };
 }) => {
   let videos = {};
 

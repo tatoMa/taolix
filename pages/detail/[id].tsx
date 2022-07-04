@@ -90,7 +90,7 @@ function Detail({
           title: `${detail.list[0]?.vod_name} free to play - Taolix`,
           description: `${detail.list[0]?.vod_name} video users can play online for free.`,
           image: detail.list[0]?.vod_pic,
-          type: "video.movie",
+          type: "website",
           siteName: "Taolix",
         }}
       />
@@ -228,19 +228,26 @@ export const getServerSideProps: GetServerSideProps = async ({
   res,
   query,
 }) => {
+  interface Detail {
+    resource?: number;
+    list?: [Video];
+  }
+  interface Video {
+    vod_name?: string;
+  }
   // fetch the primary data
-  let resourceId = 0;
-  let resourceName = "";
+  let resourceId: number = 0;
+  let resourceName: string = "";
   if (query.resource) {
-    resourceId = query.resource;
-    resourceName = query.name;
+    resourceId = Number(query.resource);
+    resourceName = query.name.toString();
   }
   res.setHeader(
     "Cache-Control",
     "public, s-maxage=600, stale-while-revalidate=3600" // 600 seconds for fresh, 3600 seconds for stale and still using but fetch on background
   );
 
-  let detail = {};
+  let detail: Detail = {};
   let videoName = "";
 
   if (!resourceId) {
@@ -253,7 +260,10 @@ export const getServerSideProps: GetServerSideProps = async ({
       console.error("error: ", error);
     }
     detail.resource = 0;
-    videoName = removeAllSpecialCharactersFromString(detail?.list[0]?.vod_name);
+    if (detail?.list[0])
+      videoName = removeAllSpecialCharactersFromString(
+        detail?.list[0]?.vod_name
+      );
   }
 
   // fetch the secondary data

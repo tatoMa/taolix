@@ -1,9 +1,8 @@
 import NextHeadSeo from "next-head-seo";
-import {useFocus} from "../hooks/useFocus";
-import {useRef} from "react";
+import { useFocus } from "../hooks/useFocus";
+import { useRef } from "react";
 
 const about = () => {
-
   const titleRef = useRef(null);
 
   useFocus(titleRef);
@@ -24,34 +23,50 @@ const about = () => {
               alt=""
             />
           </div>
-          <div className="flex bg-black text-gray-100 justify-center p-10">
+          <div className="flex justify-center bg-black p-10 text-gray-100">
             <div className="mb-auto mt-auto max-w-lg">
-              <h1 className="text-3xl uppercase text-center" data-testid={'title'} ref={titleRef} tabIndex={'0'}>TAOLIX</h1>
+              <h1
+                className="text-center text-3xl uppercase"
+                data-testid={"title"}
+                ref={titleRef}
+                tabIndex={0}
+              >
+                TAOLIX
+              </h1>
               <div>
-                <p className="font-semibold mb-5 text-center" data-testid={'sub-title'}>
+                <p
+                  className="mb-5 text-center font-semibold"
+                  data-testid={"sub-title"}
+                >
                   A blazing fast online video streaming service.
                 </p>
-                <p className="mb-4 text-gray-400" data-testid={'taolix-intro'}>
+                <p className="mb-4 text-gray-400" data-testid={"taolix-intro"}>
                   TAOLIX is a open source project that focus on the user
                   experiences with blazing fast browsing speed and free for all
                   contents.
                 </p>
-                <p className="mb-4 text-gray-400" data-testid={'taolix-disclaimer-video-source'}>
+                <p
+                  className="mb-4 text-gray-400"
+                  data-testid={"taolix-disclaimer-video-source"}
+                >
                   All videos on TAOLIX are NOT hosted on TAOLIX server. We only
                   collect links and information from the Internet. Every videos
                   on TAOLIX are links to 3rd party. We do not provides any video
                   from our end.
                 </p>
-                <p className="mb-4 text-gray-400" data-testid={'taolix-disclaimer-delete'}>
+                <p
+                  className="mb-4 text-gray-400"
+                  data-testid={"taolix-disclaimer-delete"}
+                >
                   If you find any video are violated to your privacy please
                   contact us. I will remove it as fast as possible.
                 </p>
               </div>
 
               <a
-                className="mt-4 block border text-center py-4 hover:bg-white hover:text-black"
+                className="mt-4 block border py-4 text-center hover:bg-white hover:text-black"
                 href="mailto:taolixtv@gmail.com"
-                data-testid={'taolix-contact'}
+                data-testid={"taolix-contact"}
               >
                 taolixtv@gmail.com
               </a>
