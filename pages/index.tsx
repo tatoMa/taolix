@@ -117,7 +117,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     console.error("index page fetching error", failuresFromMovieApi);
 
   console.time("douban");
-  // asign all return needed data
+  // assign all return needed data
   const [
     videosNewCnTvShow = {},
     videosNewKrTvShow = {},

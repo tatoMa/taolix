@@ -114,6 +114,9 @@ npm run build
 - [x] Player playback speed control
 - [x] Added 1080P video source
 - [x] Translation text for search purpose
+- [x] Update to Next 12.2
+- [x] Update to React 18.2
+- [x] Refactor from JS to TS
 - [ ] i18n
 - [ ] Adaptive design
 - [ ] History page
