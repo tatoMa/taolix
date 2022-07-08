@@ -36,7 +36,7 @@ const VideoItem = ({
           prefetch
         >
           <a
-            className="group relative block cursor-pointer overflow-hidden bg-black transition duration-500 hover:saturate-150"
+            className="group relative block cursor-pointer overflow-hidden  transition duration-500 hover:saturate-150"
             onClick={() => {
               setIsLoading(true);
               setTimeout(() => {
@@ -90,18 +90,18 @@ const VideoItem = ({
             /> */}
             </div>
 
-            <div className="absolute bottom-0 left-0 bg-black/75 text-xl font-bold text-white line-clamp-3">
+            <div className="absolute bottom-0 left-0 bg-base-300/80 text-xl font-bold text-base-content line-clamp-3">
               {name}
-              <span className="block text-xs text-gray-400 line-clamp-1">
+              <span className="block text-xs font-light line-clamp-1">
                 {type}
               </span>
             </div>
-            <div className="absolute top-0 right-0 bg-black/80 pt-1 text-sm text-gray-300">
+            <div className="absolute top-0 right-0 bg-base-300/80 pt-1 text-sm ">
               {remarks}
             </div>
             {Number(rate) > 0 && (
               <div
-                className={`absolute top-0 left-0 bg-black/80 pt-1 pl-1 text-sm  ${
+                className={`absolute top-0 left-0 bg-base-300/80 pt-1 pl-1 text-sm  ${
                   rate > 9
                     ? "text-red-500"
                     : rate > 7

@@ -17,7 +17,7 @@ const VideoPlayList = ({
           <div
             className={`my-2 mt-4 inline-block rounded-full  px-6 py-1 text-sm  ${
               index === "HD"
-                ? " bg-yellow-400 text-neutral-700"
+                ? " text-neutral-700 bg-yellow-400"
                 : "bg-red-500 text-white"
             }`}
           >
@@ -34,9 +34,10 @@ const VideoPlayList = ({
               return (
                 <a
                   key={name}
-                  className={`group flex cursor-pointer items-center overflow-hidden border-y border-gray-400 bg-neutral-900 py-3 text-gray-400 hover:border-white hover:text-white hover:brightness-150 md:first:border-b-2 md:last:border-t-2 md:odd:bg-neutral-900 md:even:bg-neutral-800 ${
-                    index === "HD" &&
-                    " border-yellow-600 text-yellow-400 md:odd:bg-stone-900 md:even:bg-stone-800"
+                  className={`btn btn-square btn-outline btn-block justify-start rounded-none ${
+                    index === "HD"
+                      ? " border-y border-x-0 border-yellow-600 text-yellow-600"
+                      : "border-y border-x-0 border-base-content"
                   }`}
                   onClick={() => {
                     setPlay(true);
@@ -55,7 +56,7 @@ const VideoPlayList = ({
                       }`}
                     />
                   </div>
-                  <div className="truncate">{name}</div>
+                  <div className="truncate font-light">{name}</div>
                 </a>
               );
             })}

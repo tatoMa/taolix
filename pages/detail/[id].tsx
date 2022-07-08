@@ -112,7 +112,7 @@ function Detail({
             any video resources.
           </p>
           <button
-            className="ml-4 border border-gray-400/75 py-1 pl-5 pr-3 text-gray-300 duration-200 hover:bg-gray-500/50"
+            className="btn btn-outline btn-sm"
             onClick={handleButtonChangeOrder}
           >
             Order:{" "}

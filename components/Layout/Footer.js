@@ -7,24 +7,24 @@ const Footer = () => {
       <div className="mx-2 mb-4 mt-4 sm:mx-6 md:mx-10 lg:mx-14">
         <hr className="my-6 h-px  border-none bg-gray-700" />
         <div className="lg:flex">
-          <div className="-mx-6 w-full lg:w-2/5">
-            <div className="px-6">
+          <div className="mx-0 w-full lg:-mx-6 lg:w-2/5">
+            <div className="px-0 text-center lg:px-6">
               <div>
                 <Link href="/">
-                  <a className="text-xl font-bold text-white hover:text-gray-300">
+                  <a className="btn btn-ghost btn-sm text-xl font-bold text-accent-content">
                     TAOLIX
                   </a>
                 </Link>
               </div>
 
-              <p className="mt-2 max-w-full pr-6 text-gray-400 lg:max-w-md">
+              <p className="mt-2 max-w-full pr-0 text-gray-400 lg:max-w-md lg:pr-6">
                 Your Favorite Free Movie, Tv Show and Anime Streaming Service!
               </p>
 
-              <div className="-mx-2 mt-4 flex">
+              <div className="-mx-2 mt-4 flex justify-center">
                 <Link href="#">
                   <a
-                    className="mx-2 text-gray-200 hover:text-gray-400"
+                    className="btn btn-ghost btn-sm mx-2"
                     aria-label="Linkedin"
                   >
                     <svg className="h-4 w-4 fill-current" viewBox="0 0 512 512">
@@ -35,7 +35,7 @@ const Footer = () => {
 
                 <Link href="#">
                   <a
-                    className="mx-2 text-gray-200 hover:text-gray-400"
+                    className="btn btn-ghost btn-sm mx-2"
                     aria-label="Facebook"
                   >
                     <svg className="h-4 w-4 fill-current" viewBox="0 0 512 512">
@@ -45,10 +45,7 @@ const Footer = () => {
                 </Link>
 
                 <Link href="#">
-                  <a
-                    className="mx-2 text-gray-200 hover:text-gray-400"
-                    aria-label="Twitter"
-                  >
+                  <a className="btn btn-ghost btn-sm mx-2" aria-label="Twitter">
                     <svg className="h-4 w-4 fill-current" viewBox="0 0 512 512">
                       <path d="M496,109.5a201.8,201.8,0,0,1-56.55,15.3,97.51,97.51,0,0,0,43.33-53.6,197.74,197.74,0,0,1-62.56,23.5A99.14,99.14,0,0,0,348.31,64c-54.42,0-98.46,43.4-98.46,96.9a93.21,93.21,0,0,0,2.54,22.1,280.7,280.7,0,0,1-203-101.3A95.69,95.69,0,0,0,36,130.4C36,164,53.53,193.7,80,211.1A97.5,97.5,0,0,1,35.22,199v1.2c0,47,34,86.1,79,95a100.76,100.76,0,0,1-25.94,3.4,94.38,94.38,0,0,1-18.51-1.8c12.51,38.5,48.92,66.5,92.05,67.3A199.59,199.59,0,0,1,39.5,405.6,203,203,0,0,1,16,404.2,278.68,278.68,0,0,0,166.74,448c181.36,0,280.44-147.7,280.44-275.8,0-4.2-.11-8.4-.31-12.5A198.48,198.48,0,0,0,496,109.5Z" />
                     </svg>
@@ -61,10 +58,12 @@ const Footer = () => {
           <div className="mt-6 lg:mt-0 lg:flex-1">
             <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-3">
               <div>
-                <div className="uppercase text-white">Video</div>
+                <div className="text-center uppercase text-accent-content">
+                  Video
+                </div>
                 {MAJORS.map((link) => (
                   <Link href={`/list/${link.type}/1`} key={link.type}>
-                    <a className="mt-2 block text-sm uppercase text-gray-400 hover:text-white">
+                    <a className="btn btn-ghost btn-xs mt-2 block text-sm uppercase">
                       {link.classify}
                     </a>
                   </Link>
@@ -72,17 +71,19 @@ const Footer = () => {
               </div>
 
               <div>
-                <div className="uppercase text-white">Products</div>
+                <div className="text-center uppercase text-accent-content">
+                  Products
+                </div>
                 <a
                   href="https://www.taolix.com/"
-                  className="mt-2 block text-sm text-gray-400 hover:text-white"
+                  className="btn btn-ghost btn-xs mt-2 block text-sm uppercase"
                   target="_blank"
                 >
                   TAOLIX
                 </a>
                 <a
                   href="https://www.taotify.com/"
-                  className="mt-2 block text-sm text-gray-400 hover:text-white"
+                  className="btn btn-ghost btn-xs mt-2 block text-sm uppercase"
                   target="_blank"
                   rel="noreferrer"
                 >
@@ -91,15 +92,19 @@ const Footer = () => {
               </div>
 
               <div>
-                <div className="uppercase text-white">About</div>
+                <div className="text-center uppercase text-accent-content">
+                  About
+                </div>
                 <Link href="/about">
-                  <a className="mt-2 mb-4 block text-sm text-gray-400 hover:text-white">
+                  <a className="btn btn-ghost btn-xs mt-2 block text-sm uppercase">
                     ABOUT
                   </a>
                 </Link>
 
-                <div className="uppercase text-white">Contact</div>
-                <div className="mt-2 block text-sm text-gray-400 hover:text-white">
+                <div className="text-center uppercase text-accent-content">
+                  Contact
+                </div>
+                <div className="btn btn-ghost btn-xs mt-2 block text-sm uppercase">
                   <a href="mailto:taolixtv@gmail.com">taolixtv@gmail.com</a>
                 </div>
               </div>
@@ -110,7 +115,7 @@ const Footer = () => {
         <hr className="my-4 h-px  border-none bg-gray-700" />
 
         <div>
-          <p className="text-center text-white">
+          <p className="text-center text-sm">
             © TAOLIX 2021 - All rights reserved
             <br />
             Made with all ❤️ &nbsp;by TATO

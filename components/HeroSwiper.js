@@ -75,26 +75,26 @@ const HeroSwiper = ({ top5 }) => {
             padding: 0.4rem;
           }
           .swiper-button-next {
-            transform: translate(0.65rem, -41%);
+            transform: translate(0.65rem, -45%);
             height: 100%;
             background-image: linear-gradient(
               to right,
-              rgba(0, 0, 0, 0),
-              rgba(10, 10, 10, 0.3)
+              hsl(var(--b1) / 0.1),
+              hsl(var(--b1))
             );
           }
           .swiper-button-prev {
-            transform: translate(-0.65rem, -40%);
+            transform: translate(-0.65rem, -45%);
             height: 100%;
             background-image: linear-gradient(
               to left,
-              rgba(0, 0, 0, 0),
-              rgba(10, 10, 10, 0.3)
+              hsl(var(--b1) / 0.1),
+              hsl(var(--b1))
             );
           }
           .swiper-button-next,
           .swiper-button-prev {
-            color: white;
+            color: hsl(var(--bc));
             z-index: 50;
           }
           .swiper-button-next.swiper-button-disabled,

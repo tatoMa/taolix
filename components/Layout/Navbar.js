@@ -6,8 +6,9 @@ import { useRouter } from "next/router";
 
 import Loading from "./Loading";
 import { MAJORS } from "../../utils/const";
+import ThemeSwitcher from "components/ThemeSwitcher";
 
-function Header() {
+function Navbar() {
   const router = useRouter();
   const scrolled = useOnScrolled();
   const [menu, setMenu] = useState(false);
@@ -29,27 +30,31 @@ function Header() {
   };
 
   return (
-    <div
-      className={`fixed top-0 z-30 flex h-16 w-full justify-center bg-gradient-to-b from-black to-transparent transition duration-1000 ${
-        scrolled ? "bg-black" : ""
+    <nav
+      className={`fixed top-0 z-30 flex h-12 w-full justify-center transition duration-500 lg:h-16 ${
+        scrolled ? "bg-base-200/95" : "bg-base-100/50"
       }`}
     >
       {/* Loading spinner */}
       <Loading isLoading={isSearching} setIsLoading={setIsSearching} />
 
-      <div className="flex h-16 max-w-screen-2xl grow items-center justify-between px-1 sm:px-6 md:px-10 lg:px-14">
+      <ol className="flex max-w-screen-2xl grow items-center justify-end px-1 sm:px-4 md:px-8 lg:justify-between lg:px-14">
         {/* Logo */}
-        <div className="z-30">
+        <li className="z-30 grow">
           <Link href="/">
             <a className="ml-0 block w-32 cursor-pointer py-[0.4em] px-2 duration-100 hover:scale-110 active:scale-110 lg:w-40">
-              <img src="/logo.png" alt="logo" className="object-contain" />
+              <img
+                src="/logo.png"
+                alt="logo"
+                className="bg-neutral object-contain"
+              />
             </a>
           </Link>
-        </div>
+        </li>
 
         {/* Navigation Links */}
-        <div
-          className={`absolute left-0 top-0 flex h-screen w-screen flex-col bg-black/90 transition-all duration-200 lg:relative lg:block lg:h-6 lg:w-fit lg:bg-transparent ${
+        <li
+          className={`absolute left-0 top-0 flex h-screen w-screen flex-col bg-base-300/90 transition-all duration-200 lg:relative lg:block lg:h-6 lg:w-fit lg:grow lg:bg-transparent ${
             menu
               ? "flex animate-[animation-fade-in_0.3s_ease-in-out] items-center justify-center"
               : "hidden"
@@ -65,10 +70,12 @@ function Header() {
               font-medium
               uppercase
               transition
-              duration-300 hover:text-white
+              duration-300 hover:text-secondary-focus
               md:mt-0 md:text-4xl lg:text-base
               xl:p-3
-              ${router.asPath == "/" ? "text-white" : "text-gray-400"}
+              ${
+                router.asPath == "/" ? "text-secondary-focus" : "text-secondary"
+              }
             `}
             >
               home
@@ -85,58 +92,58 @@ function Header() {
               font-medium
               uppercase
               transition
-              duration-300 hover:text-white
+              duration-300 hover:text-secondary-focus
               md:mt-0 md:text-4xl lg:text-base
               xl:p-3
-              ${router.query.type == link.type ? "text-white" : "text-gray-400"}
+              ${
+                router.query.type == link.type
+                  ? "text-secondary-focus"
+                  : "text-secondary"
+              }
             `}
               >
                 {link.classify}
               </a>
             </Link>
           ))}
-        </div>
+        </li>
 
         {/* <!-- Search input on desktop screen --> */}
-        <div className={`mr-2 ml-4  md:block md:translate-x-6 lg:mx-0 `}>
-          <div className="relative flex">
-            <span className="absolute inset-y-0 left-0 flex items-center pl-3">
-              <svg
-                className="h-5 w-5 text-gray-400"
-                viewBox="0 0 24 24"
-                fill="none"
-              >
-                <path
-                  d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z"
+        <li className={`mr-2 ml-4 md:block lg:mx-0 `}>
+          <div class="form-control">
+            <label class="input-group input-group-sm">
+              <input
+                type="search"
+                placeholder="Search…"
+                class="input input-bordered input-sm w-24 sm:w-auto lg:w-24"
+                onKeyDown={handleKeyDown}
+                onChange={(e) => setSearchText(e.target.value)}
+              />
+              <button class="btn btn-square btn-sm" onClick={handleSearching}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
                   stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                ></path>
-              </svg>
-            </span>
-
-            <input
-              type="search"
-              className="focus:ring-red w-full border border-white bg-black py-1 pl-10 text-white focus:border-red-500 focus:outline-none dark:focus:border-red-500 sm:mr-[11vw] lg:mr-0 lg:w-40 xl:w-60"
-              placeholder="Search"
-              onKeyDown={handleKeyDown}
-              onChange={(e) => setSearchText(e.target.value)}
-            />
-            {/* {searchText && (
-              <a
-                className="absolute right-2 hidden p-1 lg:block"
-                onClick={() => handleSearching(e)}
-                href=""
-              >
-                ↩
-              </a>
-            )} */}
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
+                </svg>
+              </button>
+            </label>
           </div>
-        </div>
+        </li>
+
+        {/* Theme color switcher */}
+        <ThemeSwitcher />
 
         {/* Auth components */}
-        <div className="hidden lg:block">
+        <li className="hidden md:block">
           {session ? (
             <div className="flex items-center gap-2">
               <img
@@ -150,18 +157,18 @@ function Header() {
           ) : (
             <button
               onClick={() => signIn()}
-              className="border border-white bg-white px-4 py-1 text-black transition-colors duration-200 hover:bg-black hover:text-white "
+              className="btn btn-secondary btn-sm"
             >
               Sign in
             </button>
           )}
-        </div>
+        </li>
 
-        {/* <!-- Mobile menu button --> */}
+        {/* <!-- Mobile icon menu button --> */}
         <div className="flex lg:hidden">
           <button
             type="button"
-            className="z-20 p-4 text-white hover:text-gray-600 focus:text-white focus:outline-none"
+            className="z-20 p-4 hover:text-gray-600 focus:outline-none"
             aria-label="toggle menu"
             onClick={() => setMenu(!menu)}
           >
@@ -189,9 +196,9 @@ function Header() {
             )}
           </button>
         </div>
-      </div>
-    </div>
+      </ol>
+    </nav>
   );
 }
 
-export default Header;
+export default Navbar;

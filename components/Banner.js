@@ -32,8 +32,8 @@ const Banner = ({ detail, index = 1 }) => {
 
   return (
     <div
-      className={`relative aspect-[4/7] w-full md:aspect-[3/2] lg:aspect-[16/7] ${
-        mode === "homePage" && "cursor-pointer px-0 md:px-6 lg:px-8"
+      className={`base-content relative aspect-[16/30] w-full md:aspect-[3/2] lg:aspect-[2/1] ${
+        mode === "homePage" && "cursor-pointer px-4 md:px-6 lg:px-8"
       }`}
       onClick={goToDetailPageHandler}
     >
@@ -74,7 +74,7 @@ const Banner = ({ detail, index = 1 }) => {
           priority={`${index === 0}`}
         />
       </div>
-      <div className="absolute left-0 -bottom-1 h-1/4 w-full bg-gradient-to-t from-black via-transparent to-transparent"></div>
+      <div className="absolute left-0 -bottom-1 h-1/4 w-full bg-gradient-to-t from-base-100 via-transparent to-transparent"></div>
 
       {/* main section */}
       <main className="group relative z-10 flex h-full w-full flex-col-reverse md:flex-row">
@@ -88,11 +88,11 @@ const Banner = ({ detail, index = 1 }) => {
                 {vod_sub && vod_sub}
               </h2>
             </div>
-            <div className="absolute right-0 top-6 mt-4 text-sm text-gray-200/75 delay-200 animate-in slide-in-from-left">
+            <div className="absolute right-0 top-6 mt-4 text-sm text-base-content/75 delay-200 animate-in slide-in-from-left">
               {vod_lang && vod_lang}
             </div>
 
-            <div className="mt-7 flex text-sm text-gray-400">
+            <div className="mt-7 flex text-sm text-base-content/75">
               <div className="flex-1">{vod_remarks}</div>
               <div>{vod_time && vod_time.split(" ")[0]}</div>
             </div>
@@ -109,14 +109,14 @@ const Banner = ({ detail, index = 1 }) => {
                 ))}
             </div>
 
-            <h2 className="mt-4 text-sm text-gray-200/90 delay-300 line-clamp-1 animate-in fade-in">
+            <h2 className="mt-4 text-sm text-base-content/90 delay-300 line-clamp-1 animate-in fade-in">
               {vod_director && "Direct: " + vod_director}
             </h2>
-            <h2 className="mt-1 text-sm text-gray-200/90 delay-300 line-clamp-1 animate-in fade-in">
+            <h2 className="mt-1 text-sm text-base-content/90 delay-300 line-clamp-1 animate-in fade-in">
               {vod_actor && "Actor: " + vod_actor}
             </h2>
 
-            <p className="mt-3 text-sm text-gray-400 opacity-90 delay-300 line-clamp-4 animate-in fade-in md:line-clamp-3 lg:line-clamp-5">
+            <p className="mt-3 text-sm text-base-content opacity-90 delay-300 line-clamp-4 animate-in fade-in md:line-clamp-3 lg:line-clamp-5">
               {vod_blurb ? vod_blurb : filterHtmlTagsFromString(vod_content)}
             </p>
           </div>
@@ -127,7 +127,7 @@ const Banner = ({ detail, index = 1 }) => {
           <img
             src={vod_pic}
             alt="vod_name"
-            className={`z-10 h-full w-full object-cover px-6 delay-150 animate-in slide-in-from-left sm:px-0 ${
+            className={`z-10 h-full w-full object-cover px-0 delay-150 animate-in slide-in-from-left sm:px-0  ${
               mode === "homePage" &&
               "duration-300 group-hover:scale-110 group-focus:scale-110 group-active:scale-110"
             }`}
@@ -149,7 +149,7 @@ const Banner = ({ detail, index = 1 }) => {
               {"豆瓣 " + rate + "★"}
             </div>
           )}
-          <div className="absolute bottom-0 h-1/6 w-full bg-gradient-to-t from-black via-black/70 to-transparent"></div>
+          <div className="absolute bottom-0 h-1/6 w-full bg-gradient-to-t from-base-100 via-base-100/70 to-transparent"></div>
         </div>
       </main>
     </div>

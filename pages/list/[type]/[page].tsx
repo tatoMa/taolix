@@ -22,7 +22,7 @@ export default function Home({ videos, page, t }) {
         canonical={`https://www.taolix.com/list/${t}/1`}
       />
       {/* Main section */}
-      <div className="mx-auto mt-8 h-full w-full max-w-screen-2xl pt-6 md:pb-8">
+      <div className="mx-auto h-full w-full max-w-screen-2xl pt-12 md:pb-8">
         {Object.keys(videos).length !== 0 ? (
           <>
             <GenreList t={t} page={page} />

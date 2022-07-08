@@ -25,7 +25,7 @@ function signin({ providers }) {
 
           <button
             onClick={() => signIn("google")}
-            className="mt-4 flex w-full transform items-center justify-center rounded-lg border text-gray-600 transition-colors duration-200 hover:bg-gray-50 dark:border-gray-700 dark:text-gray-200 dark:hover:bg-gray-600"
+            className="btn btn-primary btn-block"
           >
             <div className="px-4 py-2">
               <svg className="h-6 w-6" viewBox="0 0 40 40">
@@ -104,9 +104,7 @@ function signin({ providers }) {
           </div>
 
           <div className="mt-8">
-            <button className="w-full transform rounded bg-gray-700 px-4 py-2 tracking-wide text-white transition-colors duration-200 hover:bg-gray-600 focus:bg-gray-600 focus:outline-none">
-              Login
-            </button>
+            <button className="btn btn-block">Login</button>
           </div>
 
           <div className="mt-4 flex items-center justify-between">

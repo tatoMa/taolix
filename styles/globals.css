@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+/* :root {
   --primary-color: #e50914;
   --primary-color-rgb: 229, 9, 20;
   --secondary-color: #525759;
@@ -11,7 +11,7 @@
   --background-color-rgb: 20, 20, 20;
   --typography-color: #e5e5d8;
   --typography-color-rgb: 229, 229, 216;
-}
+} */
 
 /* @font-face {
   font-family: "Helvetica", "Arial", "sans-serif";
@@ -26,7 +26,9 @@
 } */
 
 body {
-  background-color: var(--background-color);
+  /* background-color: var(--background-color); */
+  /* transition: background-color 1000ms; */
+  /* height: 100vh; */
 }
 
 #app {

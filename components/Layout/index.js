@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
 import HeadSeo from "./HeadSeo";
-import { default as Navbar } from "./Header";
+import Navbar from "./Navbar";
 import Footer from "./Footer";
 const MobileBottomMenu = dynamic(() => import("./MobileBottomMenu"));
 

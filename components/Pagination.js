@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const Pagination = ({ page, t }) => {
   return (
-    <div className="w-full h-full max-w-screen-2xl mx-auto flex justify-center mt-8 md:mt-0 mb-16">
+    <div className="mx-auto mt-8 mb-10 flex h-full w-full max-w-screen-2xl justify-center md:mt-0">
       <Link
         href={
           t
@@ -11,10 +11,8 @@ const Pagination = ({ page, t }) => {
         }
       >
         <a
-          className={`px-4 py-2 mx-1 ${
-            page == 1
-              ? "text-gray-500 cursor-not-allowed bg-black border border-white"
-              : "text-white transition-colors duration-200 transform bg-black border border-white hover:bg-white hover:text-black"
+          className={`btn btn-outline btn-secondary mx-1 px-4 py-2  ${
+            page == 1 ? "btn-disabled cursor-not-allowed" : ""
           }`}
         >
           PREV
@@ -28,7 +26,19 @@ const Pagination = ({ page, t }) => {
             : `/list?page=${parseInt(page) + 1}`
         }
       >
-        <a className="px-4 py-2 mx-1 text-white transition-colors duration-200 transform bg-black border border-white hover:bg-white hover:text-black">
+        <p className="btn btn-secondary btn-active btn-square mx-1 cursor-not-allowed px-4 py-2">
+          {parseInt(page)}
+        </p>
+      </Link>
+
+      <Link
+        href={
+          t
+            ? `/list/${t}/${parseInt(page) + 1}`
+            : `/list?page=${parseInt(page) + 1}`
+        }
+      >
+        <a className="btn btn-outline btn-square mx-1 px-4 py-2 ">
           {parseInt(page) + 1}
         </a>
       </Link>
@@ -39,7 +49,7 @@ const Pagination = ({ page, t }) => {
             : `/list?page=${parseInt(page) + 2}`
         }
       >
-        <a className="px-4 py-2 mx-1 text-white transition-colors duration-200 transform bg-black border border-white hover:bg-white hover:text-black">
+        <a className="btn btn-outline btn-square mx-1 px-4 py-2 ">
           {parseInt(page) + 2}
         </a>
       </Link>
@@ -50,7 +60,7 @@ const Pagination = ({ page, t }) => {
             : `/list?page=${parseInt(page) + 3}`
         }
       >
-        <a className="px-4 py-2 mx-1 text-white transition-colors duration-200 transform bg-black border border-white hover:bg-white hover:text-black">
+        <a className="btn btn-outline btn-square mx-1 px-4 py-2 ">
           {parseInt(page) + 3}
         </a>
       </Link>
@@ -61,7 +71,7 @@ const Pagination = ({ page, t }) => {
             : `/list?page=${parseInt(page) + 4}`
         }
       >
-        <a className="hidden md:block px-4 py-2 mx-1 text-white transition-colors duration-200 transform bg-black border border-white hover:bg-white hover:text-black">
+        <a className="btn btn-outline btn-square mx-1 hidden px-4 py-2 md:inline-flex">
           {parseInt(page) + 4}
         </a>
       </Link>
@@ -72,7 +82,7 @@ const Pagination = ({ page, t }) => {
             : `/list?page=${parseInt(page) + 5}`
         }
       >
-        <a className="hidden md:block px-4 py-2 mx-1 text-white transition-colors duration-200 transform bg-black border border-white hover:bg-white hover:text-black">
+        <a className="btn btn-outline btn-square mx-1 hidden px-4 py-2 md:inline-flex">
           {parseInt(page) + 5}
         </a>
       </Link>
@@ -83,7 +93,7 @@ const Pagination = ({ page, t }) => {
             : `/list?page=${parseInt(page) + 6}`
         }
       >
-        <a className="hidden md:block px-4 py-2 mx-1 text-white transition-colors duration-200 transform bg-black border border-white hover:bg-white hover:text-black">
+        <a className="btn btn-outline btn-square mx-1 hidden px-4 py-2 md:inline-flex">
           {parseInt(page) + 6}
         </a>
       </Link>
@@ -95,9 +105,7 @@ const Pagination = ({ page, t }) => {
             : `/list?page=${parseInt(page) + 1}`
         }
       >
-        <a className="px-4 py-2 mx-1 text-white transition-colors duration-200 transform bg-black border border-white hover:bg-white hover:text-black">
-          NEXT
-        </a>
+        <a className="btn btn-outline btn-secondary mx-1 px-4 py-2 ">NEXT</a>
       </Link>
     </div>
   );
