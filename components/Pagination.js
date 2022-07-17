@@ -11,7 +11,7 @@ const Pagination = ({ page, t }) => {
         }
       >
         <a
-          className={`btn btn-outline btn-secondary mx-1 px-4 py-2  ${
+          className={`btn btn-outline btn-secondary rounded-none px-4 py-2  ${
             page == 1 ? "btn-disabled cursor-not-allowed" : ""
           }`}
         >
@@ -26,7 +26,7 @@ const Pagination = ({ page, t }) => {
             : `/list?page=${parseInt(page) + 1}`
         }
       >
-        <p className="btn btn-secondary btn-active btn-square mx-1 cursor-not-allowed px-4 py-2">
+        <p className="btn btn-secondary btn-active btn-square cursor-not-allowed rounded-none px-4 py-2">
           {parseInt(page)}
         </p>
       </Link>
@@ -38,7 +38,7 @@ const Pagination = ({ page, t }) => {
             : `/list?page=${parseInt(page) + 1}`
         }
       >
-        <a className="btn btn-outline btn-square mx-1 px-4 py-2 ">
+        <a className="btn btn-outline btn-square rounded-none px-4 py-2 ">
           {parseInt(page) + 1}
         </a>
       </Link>
@@ -49,7 +49,7 @@ const Pagination = ({ page, t }) => {
             : `/list?page=${parseInt(page) + 2}`
         }
       >
-        <a className="btn btn-outline btn-square mx-1 px-4 py-2 ">
+        <a className="btn btn-outline btn-square rounded-none px-4 py-2 ">
           {parseInt(page) + 2}
         </a>
       </Link>
@@ -60,7 +60,7 @@ const Pagination = ({ page, t }) => {
             : `/list?page=${parseInt(page) + 3}`
         }
       >
-        <a className="btn btn-outline btn-square mx-1 px-4 py-2 ">
+        <a className="btn btn-outline btn-square rounded-none px-4 py-2 ">
           {parseInt(page) + 3}
         </a>
       </Link>
@@ -71,7 +71,7 @@ const Pagination = ({ page, t }) => {
             : `/list?page=${parseInt(page) + 4}`
         }
       >
-        <a className="btn btn-outline btn-square mx-1 hidden px-4 py-2 md:inline-flex">
+        <a className="btn btn-outline btn-square hidden rounded-none px-4 py-2 md:inline-flex">
           {parseInt(page) + 4}
         </a>
       </Link>
@@ -82,7 +82,7 @@ const Pagination = ({ page, t }) => {
             : `/list?page=${parseInt(page) + 5}`
         }
       >
-        <a className="btn btn-outline btn-square mx-1 hidden px-4 py-2 md:inline-flex">
+        <a className="btn btn-outline btn-square hidden rounded-none px-4 py-2 md:inline-flex">
           {parseInt(page) + 5}
         </a>
       </Link>
@@ -93,7 +93,7 @@ const Pagination = ({ page, t }) => {
             : `/list?page=${parseInt(page) + 6}`
         }
       >
-        <a className="btn btn-outline btn-square mx-1 hidden px-4 py-2 md:inline-flex">
+        <a className="btn btn-outline btn-square hidden rounded-none px-4 py-2 md:inline-flex">
           {parseInt(page) + 6}
         </a>
       </Link>
@@ -105,7 +105,9 @@ const Pagination = ({ page, t }) => {
             : `/list?page=${parseInt(page) + 1}`
         }
       >
-        <a className="btn btn-outline btn-secondary mx-1 px-4 py-2 ">NEXT</a>
+        <a className="btn btn-outline btn-secondary rounded-none px-4 py-2 ">
+          NEXT
+        </a>
       </Link>
     </div>
   );
