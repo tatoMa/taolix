@@ -1,17 +1,13 @@
 import {
   shuffle,
-  gerVideoListFromDoubanApiHotList,
   fetchMovieListsFromSelectedGenreList,
   genresForIndexFetch,
-  filterNeededVideoInfo,
   FulfilledAndRejectedResultsFromPromiseAllSettled,
   fetchMovieListsFromDouban,
 } from "../utils/utils";
 import HeroSwiper from "../components/HeroSwiper";
 import LineBreak from "../components/LineBreak";
 import GroupSwiper from "../components/GroupSwiper";
-import { GetStaticProps } from "next";
-import { DOUBAN_HOT_URLS } from "utils/const";
 
 export default function Home({
   selectedVideosForHero,
@@ -29,7 +25,7 @@ export default function Home({
       {/* Main section */}
       <div className="mx-auto h-full w-full max-w-screen-2xl ">
         {/* Swiper section */}
-        <HeroSwiper top5={selectedVideosForHero} />
+        <HeroSwiper movieList={selectedVideosForHero} />
         <div>
           {/* Line Break  */}
           <LineBreak title="WHATS ON MOVIES" />

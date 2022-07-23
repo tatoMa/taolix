@@ -26,7 +26,7 @@ import { useState } from "react";
 import HeroSwiperThumbItem from "./HeroSwiperThumbItem";
 SwiperCore.use([Navigation, Pagination, Scrollbar, Autoplay, Virtual, Thumbs]);
 
-const HeroSwiper = ({ top5 }) => {
+const HeroSwiper = ({ movieList }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
   return (
@@ -58,7 +58,7 @@ const HeroSwiper = ({ top5 }) => {
         // onSwiper={(swiper) => console.log()}
         // onSlideChange={() => console.log("slide change")}
       >
-        {top5.map((movie, index) => (
+        {movieList.map((movie, index) => (
           <SwiperSlide key={movie.vod_id}>
             <Banner
               detail={{
@@ -161,7 +161,7 @@ const HeroSwiper = ({ top5 }) => {
           },
         }}
       >
-        {top5.map((movie, index) => (
+        {movieList.map((movie, index) => (
           <SwiperSlide key={movie.vod_id}>
             <HeroSwiperThumbItem movie={movie} />
           </SwiperSlide>
