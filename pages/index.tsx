@@ -8,6 +8,7 @@ import {
 import HeroSwiper from "../components/HeroSwiper";
 import LineBreak from "../components/LineBreak";
 import GroupSwiper from "../components/GroupSwiper";
+import { GetStaticProps } from "next";
 
 export default function Home({
   selectedVideosForHero,
