@@ -70,11 +70,14 @@ const Banner = ({ detail, index = 1 }) => {
         <Image
           src={vod_pic}
           alt="vod_name"
-          layout="fill"
+          layout="responsive"
+          width={400}
+          height={800}
           className="relative h-full w-full object-cover opacity-20 blur-sm"
           referrerPolicy="no-referrer"
           priority={index === 0 || index === 1}
           unoptimized={!index === 0 || !index === 1}
+          quality={15}
         />
       </div>
       <div className="absolute left-0 -bottom-1 h-1/4 w-full bg-gradient-to-t from-base-100 via-transparent to-transparent"></div>
@@ -127,7 +130,7 @@ const Banner = ({ detail, index = 1 }) => {
 
         {/* movie poster section */}
         <div className="relative aspect-[3/4] min-h-[60vh] w-full overflow-hidden md:min-h-full md:w-1/2 lg:w-2/5">
-          <img
+          <Image
             src={vod_pic}
             alt="vod_name"
             className={`z-10 h-full w-full object-cover px-0 delay-150 animate-in slide-in-from-left sm:px-0  ${
@@ -135,7 +138,12 @@ const Banner = ({ detail, index = 1 }) => {
               "duration-300 group-hover:scale-110 group-focus:scale-110 group-active:scale-110"
             }`}
             referrerPolicy="no-referrer"
-            priority={`${index === 0}`}
+            layout="responsive"
+            width={400}
+            height={800}
+            priority={index === 0 || index === 1}
+            unoptimized={!index === 0 || !index === 1}
+            quality={15}
           />
           {rate && (
             <div

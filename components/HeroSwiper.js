@@ -163,7 +163,7 @@ const HeroSwiper = ({ movieList }) => {
       >
         {movieList.map((movie, index) => (
           <SwiperSlide key={movie.vod_id}>
-            <HeroSwiperThumbItem movie={movie} />
+            <HeroSwiperThumbItem movie={movie} index={index} />
           </SwiperSlide>
         ))}
       </Swiper>

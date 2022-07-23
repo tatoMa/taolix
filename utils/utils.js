@@ -20,6 +20,7 @@ export const genresForIndexFetch = [
 ];
 
 export const findResourceFromDoubanItem = async (item) => {
+  const hiresImageUrl = item.cover.replace("s_ratio_poster", "l");
   try {
     let temp = await findMovieFromApiByTitle(item.title, process.env.MOVIE_API);
     if (temp && temp.list.length) {
@@ -29,6 +30,7 @@ export const findResourceFromDoubanItem = async (item) => {
           ...temp.list[0],
           ...item,
           rate: item.rate,
+          vod_pic: hiresImageUrl,
         }),
       };
       if (temp.vod_id) return temp;
