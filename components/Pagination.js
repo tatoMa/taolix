@@ -26,7 +26,7 @@ const Pagination = ({ page, t }) => {
             : `/list?page=${parseInt(page) + 1}`
         }
       >
-        <p className="btn btn-secondary btn-active btn-square cursor-not-allowed rounded-none px-4 py-2">
+        <p className="btn btn-disabled btn-outline btn-square cursor-not-allowed rounded-none px-4 py-2">
           {parseInt(page)}
         </p>
       </Link>
