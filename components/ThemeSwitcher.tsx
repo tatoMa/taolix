@@ -16,13 +16,14 @@ const ThemeSwitcher = () => {
     console.log(themeState);
   }, []);
   return (
-    <label className="swap-rotate swap ml-1 md:mx-2 md:px-1">
+    <label className="swap swap-rotate ml-1 md:mx-2 md:px-1">
       <input
         type="checkbox"
         onClick={() => {
           setThemeState(themeState === "dark" ? "" : "dark");
         }}
         checked={themeState !== "dark"}
+        readOnly
       />
       <svg
         data-set-theme=""
