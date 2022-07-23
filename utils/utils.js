@@ -1,4 +1,4 @@
-import { GENRES } from "./const";
+import { DOUBAN_HOT_URLS, GENRES } from "./const";
 
 export const genresForIndexFetch = [
   GENRES.find(
@@ -285,3 +285,43 @@ export const gerVideoListFromDoubanApiHotList = async (url) => {
     .map((item) => item.value);
   return videosHotListDoubanFiltered;
 };
+
+export const fetchMovieListsFromSelectedGenreList = (list) =>
+  list.map(async (genre) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const res = await fetch(
+          `${process.env.MOVIE_API}/?ac=detail&t=${genre.type}`
+        );
+        const result = await res.json();
+        result.list = result?.list?.map((i) => filterNeededVideoInfo(i));
+        resolve(result);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  });
+
+export const FulfilledAndRejectedResultsFromPromiseAllSettled = (result) => {
+  if (!Array.isArray(result)) return;
+  const success = result
+    .filter((x) => x.status === "fulfilled")
+    .map((x) => x.value);
+
+  const failed = result
+    .filter((x) => x.status === "rejected")
+    .map((x) => x.reason);
+  return [success, failed];
+};
+
+export const fetchMovieListsFromDouban = () =>
+  DOUBAN_HOT_URLS.map(async (doubanUrl) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const res = await gerVideoListFromDoubanApiHotList(doubanUrl);
+        resolve(res);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  });

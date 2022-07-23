@@ -1,8 +1,11 @@
 import {
   shuffle,
   gerVideoListFromDoubanApiHotList,
+  fetchMovieListsFromSelectedGenreList,
   genresForIndexFetch,
   filterNeededVideoInfo,
+  FulfilledAndRejectedResultsFromPromiseAllSettled,
+  fetchMovieListsFromDouban,
 } from "../utils/utils";
 import HeroSwiper from "../components/HeroSwiper";
 import LineBreak from "../components/LineBreak";
@@ -84,40 +87,26 @@ export default function Home({
 export const getStaticProps: GetStaticProps = async (context) => {
   let resultsPromiseAllFromMovieApi;
   let resultsPromiseAllFromDouban;
-  // map from selected genre list to fetch promise list
-  const fetchMovieListsFromSelectedGenreList = genresForIndexFetch.map(
-    async (genre) => {
-      return new Promise(async (resolve, reject) => {
-        try {
-          const res = await fetch(
-            `${process.env.MOVIE_API}/?ac=detail&t=${genre.type}`
-          );
-          const result = await res.json();
-          result.list = result?.list?.map((i) => filterNeededVideoInfo(i));
-          resolve(result);
-        } catch (error) {
-          reject(error);
-        }
-      });
-    }
-  );
+
+  // All data fetching related to movie apis
+  const dataFromFetchMovieListsWithSelectedGenres =
+    fetchMovieListsFromSelectedGenreList(genresForIndexFetch);
 
   resultsPromiseAllFromMovieApi = await Promise.allSettled(
-    fetchMovieListsFromSelectedGenreList
+    dataFromFetchMovieListsWithSelectedGenres
   );
 
-  const successesFromMovieApi = resultsPromiseAllFromMovieApi
-    .filter((x) => x.status === "fulfilled")
-    .map((x) => x.value);
+  const [successesFromMovieApi, failuresFromMovieApi] =
+    FulfilledAndRejectedResultsFromPromiseAllSettled(
+      resultsPromiseAllFromMovieApi
+    );
 
-  const failuresFromMovieApi = resultsPromiseAllFromMovieApi
-    .filter((x) => x.status === "rejected")
-    .map((x) => x.reason);
   if (!failuresFromMovieApi || failuresFromMovieApi?.length !== 0)
-    console.error("index page fetching error", failuresFromMovieApi);
+    console.error(
+      "index page fetching error from movie api",
+      failuresFromMovieApi
+    );
 
-  console.time("douban");
-  // assign all return needed data
   const [
     videosNewCnTvShow = {},
     videosNewKrTvShow = {},
@@ -126,30 +115,23 @@ export const getStaticProps: GetStaticProps = async (context) => {
     videosNewJpAnime = {},
   ] = successesFromMovieApi;
 
-  const fetchMovieListsFromDouban = DOUBAN_HOT_URLS.map(async (doubanUrl) => {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const res = await gerVideoListFromDoubanApiHotList(doubanUrl);
-        resolve(res);
-      } catch (error) {
-        reject(error);
-      }
-    });
-  });
+  // All data fetching related to Douban apis
+  const dataFromFetchMovieListsFromDouban = fetchMovieListsFromDouban();
 
   resultsPromiseAllFromDouban = await Promise.allSettled(
-    fetchMovieListsFromDouban
+    dataFromFetchMovieListsFromDouban
   );
 
-  const successesFromDouban = resultsPromiseAllFromDouban
-    .filter((x) => x.status === "fulfilled")
-    .map((x) => x.value);
+  const [successesFromDouban, failuresFromDouban] =
+    FulfilledAndRejectedResultsFromPromiseAllSettled(
+      resultsPromiseAllFromDouban
+    );
 
-  const failuresFromDouban = resultsPromiseAllFromDouban
-    .filter((x) => x.status === "rejected")
-    .map((x) => x.reason);
   if (!failuresFromDouban || failuresFromDouban?.length !== 0)
-    console.error("index page fetching error", failuresFromDouban);
+    console.error(
+      "index page fetching error from Douban api",
+      failuresFromDouban
+    );
 
   const [
     doubanHotMovieList = {},
@@ -157,24 +139,12 @@ export const getStaticProps: GetStaticProps = async (context) => {
     doubanNewMovieList = {},
   ] = successesFromDouban;
 
-  // get hot movie list from douban API
-  // const doubanHotTvList = await gerVideoListFromDoubanApiHotList(
-  //   "/j/search_subjects?type=tv&tag=热门&sort=recommend&page_limit=30&page_start=0"
-  // );
-  // const doubanHotMovieList = await gerVideoListFromDoubanApiHotList(
-  //   "/j/search_subjects?type=movie&tag=热门&sort=recommend&page_limit=30&page_start=0"
-  // );
-
-  // const doubanNewMovieList = await gerVideoListFromDoubanApiHotList(
-  //   "/j/search_subjects?type=movie&tag=最新&sort=recommend&page_limit=30&page_start=0"
-  // );
-
   const selectedVideosForHero = shuffle([
     // ...doubanHotMovieList.list,
     ...doubanNewMovieList.list,
     ...doubanHotTvList.list,
   ]).slice(0, 16);
-  console.timeEnd("douban");
+
   return {
     props: {
       selectedVideosForHero,
