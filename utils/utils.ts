@@ -1,4 +1,5 @@
-import { DOUBAN_HOT_URLS, GENRES } from "./const";
+import { APILIST, DOUBAN_HOT_URLS, GENRES } from "./const";
+import { fetchWithTimeout } from "./tools";
 
 export const genresForIndexFetch = [
   GENRES.find(
@@ -221,7 +222,7 @@ export async function getVideosListFromDouban(url) {
     const res = await fetch(url);
     const result = await res.json();
     if (res.status !== 200) {
-      console.error(json);
+      console.error(res);
       throw new Error("Failed to fetch API");
     }
     // result.list = result.subjects.map((i) => filterNeededVideoInfo(i));
@@ -238,7 +239,7 @@ export async function findMovieFromApiByTitle(title, api) {
     const res = await fetch(`${api}/?ac=detail&wd=${encodeURI(title)}`);
     const result = await res.json();
     if (res.status !== 200) {
-      console.error(json);
+      console.error(res);
       throw new Error("Failed to fetch API");
     }
     if (!result.total) return false;
@@ -256,34 +257,39 @@ export function removeAllSpecialCharactersFromString(str) {
 }
 
 export const gerVideoListFromDoubanApiHotList = async (url) => {
-  let videosHotListDouban = {};
-
+  interface PromiseAllSettledType {
+    status?: string;
+    value?: object;
+  }
   try {
-    videosHotListDouban = await getVideosListFromDouban(
+    const videosHotListDouban = await getVideosListFromDouban(
       `${process.env.DOUBAN_URL}${encodeURI(url)}`
     );
+    // using Douban ranking video list fetch all individual resource from API
+    const videosHotListDoubanFindResource = await Promise.allSettled(
+      videosHotListDouban.map(async (item) => {
+        try {
+          const res = await findResourceFromDoubanItem(item);
+          return res;
+        } catch (e) {
+          console.error("error: ", e);
+        }
+      })
+    );
+    // filter unnecessary items
+    const videosHotListDoubanFiltered = { list: null };
+    videosHotListDoubanFiltered.list = videosHotListDoubanFindResource
+      .filter(Boolean)
+      .filter(
+        (item) => item.status === "fulfilled" && item.value !== undefined
+      ) as PromiseFulfilledResult<any>[];
+    videosHotListDoubanFiltered.list = videosHotListDoubanFiltered.list.map(
+      (item) => item.value
+    );
+    return videosHotListDoubanFiltered;
   } catch (e) {
     console.error("error: ", e);
   }
-  // using Douban ranking video list fetch all individual resource from API
-  let videosHotListDoubanFindResource = await Promise.allSettled(
-    videosHotListDouban.map(async (item) => {
-      try {
-        const res = await findResourceFromDoubanItem(item);
-        return res;
-      } catch (e) {
-        console.error("error: ", e);
-      }
-    })
-  );
-
-  // filter unnecessary items
-  const videosHotListDoubanFiltered = {};
-  videosHotListDoubanFiltered.list = videosHotListDoubanFindResource
-    .filter(Boolean)
-    .filter((item) => item.status === "fulfilled" && item.value !== undefined)
-    .map((item) => item.value);
-  return videosHotListDoubanFiltered;
 };
 
 export const fetchMovieListsFromSelectedGenreList = (list) =>
@@ -324,4 +330,128 @@ export const fetchMovieListsFromDouban = () =>
         reject(error);
       }
     });
+  });
+
+export const getIdAndNameFromQuery = (query) => {
+  const resourceId: number = Number(query?.resource) || 0;
+  const resourceName: string = query?.name?.toString() || "";
+  return { resourceId, resourceName };
+};
+
+export const fetchMovieDetailFromDefaultApi = async (id) => {
+  let movieDetail = null;
+  try {
+    let response = await fetch(`${APILIST[0]}/?ac=detail&ids=${id}`);
+    movieDetail = await response.json();
+    movieDetail.resource = 0;
+  } catch (error) {
+    console.error("error: ", error);
+  }
+  return movieDetail;
+};
+
+export const getMovieNameFromFetchedDetailData = (movieDetail) => {
+  if (movieDetail?.list[0])
+    return removeAllSpecialCharactersFromString(movieDetail?.list[0]?.vod_name);
+};
+
+export const fetchMovieDetailsListFromAllApisByName = async (
+  resourceName,
+  videoName
+) => {
+  let resultsPromiseAll;
+  const timeout = 6000;
+  try {
+    resultsPromiseAll = await Promise.allSettled([
+      fetchWithTimeout(
+        `${process.env.MOVIE_API_SOURCE_HD}?ac=list&wd=${encodeURI(
+          resourceName || videoName
+        )}`,
+        {
+          timeout,
+        }
+      )
+        .then((res) => res.json())
+        .then((res) => {
+          let tempList = res.list.map((item) => item?.vod_id).join(",");
+          return fetch(
+            `${process.env.MOVIE_API_SOURCE_HD}?ac=detail&ids=${tempList}`
+          ).then((res) => res.json());
+        }),
+      fetchWithTimeout(
+        `${process.env.MOVIE_API}/?ac=detail&wd=${encodeURI(
+          resourceName || videoName
+        )}`,
+        {
+          timeout,
+        }
+      ).then((res) => res.json()),
+      fetchWithTimeout(
+        `${process.env.MOVIE_API_SOURCE_2}/?ac=detail&wd=${encodeURI(
+          resourceName || videoName
+        )}`,
+        {
+          timeout,
+        }
+      ).then((res) => res.json()),
+      fetchWithTimeout(
+        `${process.env.MOVIE_API_SOURCE_3}/?ac=detail&wd=${encodeURI(
+          resourceName || videoName
+        )}`,
+        {
+          timeout,
+        }
+      ).then((res) => res.json()),
+      fetchWithTimeout(
+        `${process.env.MOVIE_API_SOURCE_4}/?ac=detail&wd=${encodeURI(
+          resourceName || videoName
+        )}`,
+        {
+          timeout,
+        }
+      ).then((res) => res.json()),
+      fetchWithTimeout(
+        `${process.env.MOVIE_API_SOURCE_5}/?ac=detail&wd=${encodeURI(
+          resourceName || videoName
+        )}`,
+        {
+          timeout,
+        }
+      ).then((res) => res.json()),
+      fetchWithTimeout(
+        `${process.env.MOVIE_API_SOURCE_6}/?ac=detail&wd=${encodeURI(
+          resourceName || videoName
+        )}`,
+        {
+          timeout,
+        }
+      ).then((res) => res.json()),
+    ]);
+  } catch (error) {
+    console.error(error);
+  }
+  // add resource id into result array
+  resultsPromiseAll.map((item, index) => {
+    if (item.value) item.value.resource = index + 1;
+  });
+  return resultsPromiseAll;
+};
+
+export const filterMovieDetailsListByMovieName = (
+  resourceName: string,
+  videoName: string,
+  movieDetailList
+) =>
+  movieDetailList.map((item) => {
+    let temp = [];
+    temp[0] = item?.list.find(
+      (item) =>
+        removeAllSpecialCharactersFromString(item?.vod_name) ===
+          removeAllSpecialCharactersFromString(videoName) ||
+        removeAllSpecialCharactersFromString(item?.vod_name) ===
+          removeAllSpecialCharactersFromString(resourceName) ||
+        item?.vod_name === videoName ||
+        item?.vod_name === resourceName
+    );
+    return { ...item, list: temp[0] !== undefined ? temp : [] };
   });

@@ -51,7 +51,7 @@ export const MAJORS = [
   GENRES.find((item) => item.classify == "anime"),
 ];
 
-export const APILISTS = [
+export const APILIST = [
   process.env.MOVIE_API,
   process.env.MOVIE_API_SOURCE_2,
   process.env.MOVIE_API_SOURCE_3,
