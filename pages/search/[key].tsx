@@ -55,7 +55,14 @@ export default Detail;
 interface Params {
   key: string;
 }
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  params,
+  res,
+}) => {
+  res.setHeader(
+    "Cache-Control",
+    "public, s-maxage=120, stale-while-revalidate=600" // 600 seconds for fresh, 3600 seconds for stale and still using but fetch on background
+  );
   // detect if the input text is Chinese
   var re = /[^\u4e00-\u9fa5]/;
   let key = params.key as string;

@@ -228,6 +228,10 @@ export const getServerSideProps: GetServerSideProps = async ({
   res,
   query,
 }) => {
+  res.setHeader(
+    "Cache-Control",
+    "public, s-maxage=600, stale-while-revalidate=3600" // 600 seconds for fresh, 3600 seconds for stale and still using but fetch on background
+  );
   interface Detail {
     resource?: number;
     list?: [Video];
@@ -242,10 +246,6 @@ export const getServerSideProps: GetServerSideProps = async ({
     resourceId = Number(query.resource);
     resourceName = query.name.toString();
   }
-  res.setHeader(
-    "Cache-Control",
-    "public, s-maxage=600, stale-while-revalidate=3600" // 600 seconds for fresh, 3600 seconds for stale and still using but fetch on background
-  );
 
   let detail: Detail = {};
   let videoName = "";

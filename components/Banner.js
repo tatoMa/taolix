@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { filterHtmlTagsFromString } from "../utils/utils";
@@ -67,14 +66,13 @@ const Banner = ({ detail, index = 1 }) => {
 
       {/* background image section */}
       <div className="pointer-events-none absolute top-0 left-0 z-0 h-full w-full">
-        <Image
+        <img
           src={vod_pic}
           alt="vod_name"
           layout="fill"
           className="relative h-full w-full object-cover opacity-20 blur-sm"
           referrerPolicy="no-referrer"
           priority={index === 0 || index === 1}
-          unoptimized={!index === 0 || !index === 1}
         />
       </div>
       <div className="absolute left-0 -bottom-1 h-1/4 w-full bg-gradient-to-t from-base-100 via-transparent to-transparent"></div>
