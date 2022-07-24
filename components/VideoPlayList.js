@@ -1,15 +1,33 @@
 import { PlayIcon } from "@heroicons/react/solid";
-import LineBreak from "./LineBreak";
+import { CheckCircleIcon } from "@heroicons/react/outline";
+import { useEffect, useState } from "react";
 
 const VideoPlayList = ({
   listOrderAsc,
   videoList,
   url,
-  setPlay,
-  setUrl,
+  clickUrlButton,
   title = true,
   index,
 }) => {
+  const [playedUrls, setPlayedUrls] = useState([]);
+  const handlePlayedUrlsLocalStorage = (url) => {
+    const REMOVE_AFTER = 10000;
+    const playedUrlsSaved = loadPlayedUrlsLocalStorage().slice(0, REMOVE_AFTER);
+    const newPlayedUrls = [...playedUrlsSaved, url];
+    setPlayedUrls(newPlayedUrls);
+    localStorage.setItem("playedUrls", JSON.stringify(newPlayedUrls));
+  };
+  const loadPlayedUrlsLocalStorage = () => {
+    const playedUrls = JSON.parse(localStorage.getItem("playedUrls"));
+    if (playedUrls) {
+      setPlayedUrls(playedUrls);
+    }
+    return playedUrls;
+  };
+  useEffect(() => {
+    loadPlayedUrlsLocalStorage();
+  }, []);
   return (
     <>
       {videoList && (
@@ -34,14 +52,14 @@ const VideoPlayList = ({
               return (
                 <a
                   key={name}
-                  className={`btn btn-square btn-outline btn-block justify-start rounded-none ${
+                  className={`btn btn-outline btn-square btn-block justify-start rounded-none ${
                     index === "HD"
                       ? " border-y border-x-0 border-yellow-600 text-yellow-600"
                       : "border-y border-x-0 border-base-content"
                   }`}
                   onClick={() => {
-                    setPlay(true);
-                    setUrl(url);
+                    handlePlayedUrlsLocalStorage(url);
+                    clickUrlButton(url);
                     // scroll(0, 0);
                     document.documentElement.style.overflowY = "hidden";
                   }}
@@ -50,11 +68,19 @@ const VideoPlayList = ({
                   // }}
                 >
                   <div>
-                    <PlayIcon
-                      className={`ml-1 mr-4 h-8 w-8 text-gray-500 duration-100 group-hover:translate-x-2 group-hover:text-white md:ml-2 ${
-                        index === "HD" && "text-yellow-600 "
-                      }`}
-                    />
+                    {playedUrls.includes(url) ? (
+                      <CheckCircleIcon
+                        className={`ml-1 mr-4 h-8 w-8 text-gray-500 duration-100 group-hover:translate-x-2 group-hover:text-white md:ml-2 ${
+                          index === "HD" && "text-yellow-600 "
+                        }`}
+                      />
+                    ) : (
+                      <PlayIcon
+                        className={`ml-1 mr-4 h-8 w-8 text-gray-500 duration-100 group-hover:translate-x-2 group-hover:text-white md:ml-2 ${
+                          index === "HD" && "text-yellow-600 "
+                        }`}
+                      />
+                    )}
                   </div>
                   <div className="truncate font-light">{name}</div>
                 </a>
