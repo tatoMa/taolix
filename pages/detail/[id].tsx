@@ -16,31 +16,36 @@ import {
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/outline";
 import VideoPlayList from "../../components/VideoPlayList";
 import { Detail } from "utils/interfaces";
+import useLocalStorage from "hooks/useLocalStorage";
 
 function Detail({ id, primaryMovieDetail, secondaryMovieDetailsList }) {
+  const [play, setPlay] = useState(false);
+  const [listOrderAsc, setListOrderAsc] = useState(false);
+  const [loadingStorage, setLoadingStorage] = useState(true);
+  const [url, setUrl] = useState("");
+  const [playedUrls, setPlayedUrls] = useLocalStorage("playedUrls", []);
+
   const allMovieDetailsList = [
     ...secondaryMovieDetailsList,
     primaryMovieDetail,
   ];
+
   const getPlayListFromMovieDetailObject = (source) => {
     if (Object.keys(source).length > 0 && source?.list?.length > 0) {
       return getVideoUrlsFromUrlStr(source?.list[0]?.vod_play_url);
     }
   };
+
   const allVideoUrlLists = [
     ...secondaryMovieDetailsList.map((movieDetail) =>
       getPlayListFromMovieDetailObject(movieDetail)
     ),
     getVideoUrlsFromUrlStr(primaryMovieDetail.list[0]?.vod_play_url),
   ];
+
   const imageUrl = allMovieDetailsList.find(
     (detail) => detail?.list[0]?.vod_pic
   ).list[0].vod_pic;
-
-  const [play, setPlay] = useState(false);
-  const [listOrderAsc, setListOrderAsc] = useState(false);
-  const [loadingStorage, setLoadingStorage] = useState(true);
-  const [url, setUrl] = useState("");
 
   const handleButtonChangeOrder = () => {
     localStorage.setItem("listOrderAsc", JSON.stringify(!listOrderAsc));
@@ -50,6 +55,15 @@ function Detail({ id, primaryMovieDetail, secondaryMovieDetailsList }) {
   const handleClickUrlButton = (url) => {
     setUrl(url);
     setPlay(true);
+    handlePlayedUrlsSaveOnLocalStorage(url);
+  };
+
+  const handlePlayedUrlsSaveOnLocalStorage = (url) => {
+    const REMOVE_AFTER_ITEMS = 10000;
+    setPlayedUrls((prevValue) => [
+      url,
+      ...prevValue.slice(0, REMOVE_AFTER_ITEMS),
+    ]);
   };
 
   useEffect(() => {
@@ -114,6 +128,7 @@ function Detail({ id, primaryMovieDetail, secondaryMovieDetailsList }) {
                 clickUrlButton={handleClickUrlButton}
                 url={url}
                 listOrderAsc={listOrderAsc}
+                playedUrls={playedUrls}
               />
             ))}
           </div>

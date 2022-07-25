@@ -1,6 +1,7 @@
 import { PlayIcon } from "@heroicons/react/solid";
 import { CheckCircleIcon } from "@heroicons/react/outline";
 import { useEffect, useState } from "react";
+import useLocalStorage from "hooks/useLocalStorage";
 
 const VideoPlayList = ({
   listOrderAsc,
@@ -9,25 +10,8 @@ const VideoPlayList = ({
   clickUrlButton,
   title = true,
   index,
+  playedUrls,
 }) => {
-  const [playedUrls, setPlayedUrls] = useState([]);
-  const handlePlayedUrlsLocalStorage = (url) => {
-    const REMOVE_AFTER = 10000;
-    const playedUrlsSaved = loadPlayedUrlsLocalStorage().slice(0, REMOVE_AFTER);
-    const newPlayedUrls = [...playedUrlsSaved, url];
-    setPlayedUrls(newPlayedUrls);
-    localStorage.setItem("playedUrls", JSON.stringify(newPlayedUrls));
-  };
-  const loadPlayedUrlsLocalStorage = () => {
-    const playedUrls = JSON.parse(localStorage.getItem("playedUrls"));
-    if (playedUrls) {
-      setPlayedUrls(playedUrls);
-    }
-    return playedUrls;
-  };
-  useEffect(() => {
-    loadPlayedUrlsLocalStorage();
-  }, []);
   return (
     <>
       {videoList && (
@@ -58,7 +42,7 @@ const VideoPlayList = ({
                       : "border-y border-x-0 border-base-content"
                   }`}
                   onClick={() => {
-                    handlePlayedUrlsLocalStorage(url);
+                    // handlePlayedUrlsSaveOnLocalStorage(url);
                     clickUrlButton(url);
                     // scroll(0, 0);
                     document.documentElement.style.overflowY = "hidden";

@@ -1,5 +1,5 @@
 import { APILIST, DOUBAN_HOT_URLS, GENRES } from "./const";
-import { fetchWithTimeout } from "./tools";
+import { fetchWithTimeout } from "../lib/fetch";
 
 export const genresForIndexFetch = [
   GENRES.find(
@@ -360,7 +360,7 @@ export const fetchMovieDetailsListFromAllApisByName = async (
   videoName
 ) => {
   let resultsPromiseAll;
-  const timeout = 6000;
+  const timeout = 5000;
   try {
     resultsPromiseAll = await Promise.allSettled([
       fetchWithTimeout(

@@ -1,6 +1,6 @@
 import VideoItem from "../../components/VideoItem";
 import NextHeadSeo from "next-head-seo";
-import { fetchWithTimeout } from "../../utils/tools";
+import { fetchWithTimeout } from "../../lib/fetch";
 import { GetServerSideProps } from "next";
 const translate = require("@vitalets/google-translate-api");
 
