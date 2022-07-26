@@ -7,7 +7,7 @@ const mylist = () => {
       <ContinuePlay />
 
       <LineBreak title="FAVORITE MOVIES..." />
-      <p className="mt-4 text-lg font-light">Coming Soon...</p>
+      <p className="mt-4 text-lg font-light">Coming soon...</p>
     </div>
   );
 };

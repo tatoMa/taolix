@@ -32,11 +32,11 @@ export default function Home({
           {/* Line Break  */}
           <LineBreak title="WHATS ON MOVIES" />
 
-          {/* Continue Play Swiper */}
-          <ContinuePlay />
-
           {/* Video List Section */}
           <GroupSwiper videos={doubanHotMovieList} />
+
+          {/* Continue Play Swiper */}
+          <ContinuePlay />
 
           {/* Line Break  */}
           <LineBreak title="WHATS ON TV" />
