@@ -9,6 +9,7 @@ import HeroSwiper from "../components/HeroSwiper";
 import LineBreak from "../components/LineBreak";
 import GroupSwiper from "../components/GroupSwiper";
 import { GetStaticProps } from "next";
+import ContinuePlay from "features/ContinuePlay";
 
 export default function Home({
   selectedVideosForHero,
@@ -30,6 +31,9 @@ export default function Home({
         <div>
           {/* Line Break  */}
           <LineBreak title="WHATS ON MOVIES" />
+
+          {/* Continue Play Swiper */}
+          <ContinuePlay />
 
           {/* Video List Section */}
           <GroupSwiper videos={doubanHotMovieList} />

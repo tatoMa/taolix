@@ -35,21 +35,16 @@ const VideoPlayList = ({
               const { name, url } = video;
               return (
                 <a
-                  key={name}
+                  key={url}
                   className={`btn btn-outline btn-square btn-block justify-start rounded-none ${
                     index === "HD"
                       ? " border-y border-x-0 border-yellow-600 text-yellow-600"
                       : "border-y border-x-0 border-base-content"
                   }`}
                   onClick={() => {
-                    // handlePlayedUrlsSaveOnLocalStorage(url);
                     clickUrlButton(url);
-                    // scroll(0, 0);
                     document.documentElement.style.overflowY = "hidden";
                   }}
-                  // onClick={() => {
-                  //   window.location.href = url;
-                  // }}
                 >
                   <div>
                     {playedUrls.includes(url) ? (

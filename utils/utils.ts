@@ -333,9 +333,9 @@ export const fetchMovieListsFromDouban = () =>
   });
 
 export const getIdAndNameFromQuery = (query) => {
-  const resourceId: number = Number(query?.resource) || 0;
-  const resourceName: string = query?.name?.toString() || "";
-  return { resourceId, resourceName };
+  const resourceApiId: number = Number(query?.resource) || 0;
+  const resourceMovieName: string = query?.name?.toString() || "";
+  return { resourceApiId, resourceMovieName };
 };
 
 export const fetchMovieDetailFromDefaultApi = async (id) => {
@@ -455,3 +455,10 @@ export const filterMovieDetailsListByMovieName = (
     );
     return { ...item, list: temp[0] !== undefined ? temp : [] };
   });
+
+export const playedMovieInfoForSaveOnLocalStorage = (
+  movieName,
+  imageUrl,
+  id,
+  resourceApiId
+) => `${movieName},${imageUrl},${id},${resourceApiId}`;

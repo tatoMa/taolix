@@ -106,6 +106,29 @@ function Navbar() {
               </a>
             </Link>
           ))}
+          <Link href={`/mylist`}>
+            <a
+              onClick={() => setMenu(false)}
+              className={`
+              mt-6
+              p-2
+              text-4xl
+              font-medium
+              uppercase
+              transition
+              duration-300 hover:text-secondary-focus
+              md:mt-0 md:text-4xl lg:text-base
+              xl:p-3
+              ${
+                router.asPath == "/mylist"
+                  ? "text-secondary-focus"
+                  : "text-secondary"
+              }
+            `}
+            >
+              my list
+            </a>
+          </Link>
         </li>
 
         {/* <!-- Search input on desktop screen --> */}

@@ -12,18 +12,29 @@ import {
   getIdAndNameFromQuery,
   getMovieNameFromFetchedDetailData,
   getVideoUrlsFromUrlStr,
+  playedMovieInfoForSaveOnLocalStorage,
 } from "../../utils/utils";
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/outline";
 import VideoPlayList from "../../components/VideoPlayList";
 import { Detail } from "utils/interfaces";
 import useLocalStorage from "hooks/useLocalStorage";
 
-function Detail({ id, primaryMovieDetail, secondaryMovieDetailsList }) {
+function Detail({
+  id,
+  resourceApiId,
+  resourceMovieName,
+  primaryMovieDetail,
+  secondaryMovieDetailsList,
+}) {
   const [play, setPlay] = useState(false);
-  const [listOrderAsc, setListOrderAsc] = useState(false);
   const [loadingStorage, setLoadingStorage] = useState(true);
   const [url, setUrl] = useState("");
   const [playedUrls, setPlayedUrls] = useLocalStorage("playedUrls", []);
+  const [playedMovies, setPlayedMovies] = useLocalStorage("playedMovies", []);
+  const [listOrderAsc, setListOrderAsc] = useLocalStorage(
+    "listOrderAsc",
+    false
+  );
 
   const allMovieDetailsList = [
     ...secondaryMovieDetailsList,
@@ -48,8 +59,7 @@ function Detail({ id, primaryMovieDetail, secondaryMovieDetailsList }) {
   ).list[0].vod_pic;
 
   const handleButtonChangeOrder = () => {
-    localStorage.setItem("listOrderAsc", JSON.stringify(!listOrderAsc));
-    setListOrderAsc(!listOrderAsc);
+    setListOrderAsc((prevValue) => !prevValue);
   };
 
   const handleClickUrlButton = (url) => {
@@ -64,13 +74,21 @@ function Detail({ id, primaryMovieDetail, secondaryMovieDetailsList }) {
       url,
       ...prevValue.slice(0, REMOVE_AFTER_ITEMS),
     ]);
+    setPlayedMovies((prevValue) => {
+      // const playedMovie = `${primaryMovieDetail.list[0]?.vod_name} ${imageUrl}`;
+      const playedMovie = playedMovieInfoForSaveOnLocalStorage(
+        primaryMovieDetail.list[0]?.vod_name,
+        imageUrl,
+        id,
+        resourceApiId
+      );
+
+      if (prevValue.includes(playedMovie)) return prevValue;
+      return [playedMovie, ...playedMovies];
+    });
   };
 
   useEffect(() => {
-    const items = JSON.parse(localStorage.getItem("listOrderAsc"));
-    if (items) {
-      setListOrderAsc(items);
-    }
     setLoadingStorage(false);
   }, []);
 
@@ -150,32 +168,32 @@ export const getServerSideProps: GetServerSideProps = async ({
     "public, s-maxage=600, stale-while-revalidate=3600" // 600 seconds for fresh, 3600 seconds for stale and still using but fetch on background
   );
 
-  const { resourceId, resourceName } = getIdAndNameFromQuery(query);
+  const { resourceApiId, resourceMovieName } = getIdAndNameFromQuery(query);
 
   // fetch the primary data
   let primaryMovieDetail: Detail = {};
   let videoName = "";
 
-  if (!resourceId) {
+  if (!resourceApiId) {
     primaryMovieDetail = await fetchMovieDetailFromDefaultApi(params.id);
     videoName = getMovieNameFromFetchedDetailData(primaryMovieDetail);
   }
 
   const resultsPromiseAll = await fetchMovieDetailsListFromAllApisByName(
-    resourceName,
+    resourceMovieName,
     videoName
   );
   const [successes, failures] =
     FulfilledAndRejectedResultsFromPromiseAllSettled(resultsPromiseAll);
 
   let secondaryMovieDetailsList = filterMovieDetailsListByMovieName(
-    resourceName,
+    resourceMovieName,
     videoName,
     successes
   );
 
   // making the first matched resource as the primary data if source id provided
-  if (resourceId) {
+  if (resourceApiId) {
     primaryMovieDetail = secondaryMovieDetailsList.find(
       (item) => item?.list?.length > 0
     );
@@ -187,6 +205,8 @@ export const getServerSideProps: GetServerSideProps = async ({
   return {
     props: {
       id: params.id,
+      resourceApiId,
+      resourceMovieName,
       primaryMovieDetail,
       secondaryMovieDetailsList,
     },

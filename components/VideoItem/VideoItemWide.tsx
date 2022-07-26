@@ -1,21 +1,9 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useInView } from "react-intersection-observer";
+import { HeartIcon } from "@heroicons/react/outline";
 
-const myLoader = ({ src, width, quality }) => {
-  return `https://example.com/${src}?w=${width}&q=${quality || 75}`;
-};
-
-const VideoItem = ({
-  name,
-  type,
-  pic,
-  id,
-  remarks = 0,
-  rate = 0,
-  hd = false,
-  resource = 0,
-}) => {
+const VideoItem = ({ name, imageUrl, id, resource }) => {
   const [isLoading, setIsLoading] = useState(false);
   const { ref, inView, entry } = useInView({
     /* Optional options */
@@ -28,12 +16,13 @@ const VideoItem = ({
       {inView ? (
         <Link
           href={`/detail/${id}${
-            resource ? `?resource=${resource}${name && "&name=" + name}` : ""
+            resource && resource !== "0"
+              ? `?resource=${resource}${name && "&name=" + name}`
+              : ""
           }`}
-          prefetch
         >
           <a
-            className="group relative block cursor-pointer overflow-hidden  transition duration-500 hover:saturate-150"
+            className="group relative block cursor-pointer overflow-hidden transition duration-500 hover:saturate-150"
             onClick={() => {
               setIsLoading(true);
               setTimeout(() => {
@@ -46,7 +35,7 @@ const VideoItem = ({
                 <svg
                   viewBox="-2 -2 42 42"
                   xmlns="http://www.w3.org/2000/svg"
-                  className="mb-10 aspect-square w-1/2 stroke-red-500"
+                  className="mb-5 aspect-square w-1/2 stroke-red-500"
                 >
                   <g fill="none" fillRule="evenodd">
                     <g transform="translate(1 1)" strokeWidth="5">
@@ -66,9 +55,9 @@ const VideoItem = ({
                 </svg>
               </div>
             )}
-            <div className="relative aspect-[3/4] w-full">
+            <div className="relative aspect-[16/10] w-full">
               <img
-                src={pic}
+                src={imageUrl}
                 alt=""
                 className="h-full w-full object-cover duration-300 group-hover:scale-125 group-focus:scale-110 group-active:scale-110 md:h-full"
                 referrerPolicy="no-referrer"
@@ -77,32 +66,15 @@ const VideoItem = ({
 
             <div className="absolute bottom-0 left-0 bg-base-300/80 text-xl font-semibold text-base-content line-clamp-3">
               {name}
-              <span className="block text-xs font-light line-clamp-1">
-                {type}
-              </span>
             </div>
-            <div className="absolute top-0 right-0 bg-base-300/80 pt-1 text-sm ">
-              {remarks}
-            </div>
-            {Number(rate) > 0 && (
-              <div
-                className={`absolute top-0 left-0 bg-base-300/80 pt-1 pl-1 text-sm  ${
-                  rate > 9
-                    ? "text-red-500"
-                    : rate > 7
-                    ? "text-orange-400"
-                    : rate > 5
-                    ? "text-yellow-400"
-                    : "text-yellow-300/75"
-                }`}
-              >
-                豆瓣{rate}★
-              </div>
-            )}
+
+            <HeartIcon
+              className={`absolute top-1 right-0 h-8 w-8 text-accent-content duration-200 hover:text-secondary-focus`}
+            />
           </a>
         </Link>
       ) : (
-        <div className="aspect-[3/4] w-full animate-pulse rounded bg-slate-200 p-2"></div>
+        <div className="aspect-[16/10] w-full animate-pulse rounded bg-slate-200 p-2"></div>
       )}
     </div>
   );

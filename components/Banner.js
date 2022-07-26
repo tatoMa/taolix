@@ -69,12 +69,8 @@ const Banner = ({ detail, index = 1 }) => {
         <img
           src={vod_pic}
           alt="vod_name"
-          layout="responsive"
-          width={400}
-          height={800}
           className="relative h-full w-full object-cover opacity-20 blur-sm"
           referrerPolicy="no-referrer"
-          priority={index === 0 || index === 1}
         />
       </div>
       <div className="absolute left-0 -bottom-1 h-1/4 w-full bg-gradient-to-t from-base-100 via-transparent to-transparent"></div>
@@ -135,10 +131,6 @@ const Banner = ({ detail, index = 1 }) => {
               "duration-300 group-hover:scale-110 group-focus:scale-110 group-active:scale-110"
             }`}
             referrerPolicy="no-referrer"
-            layout="responsive"
-            width={400}
-            height={800}
-            priority={index === 0 || index === 1}
           />
           {rate && (
             <div

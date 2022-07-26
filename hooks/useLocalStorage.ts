@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const useLocalStorage = (key, initialValue) => {
   // State to store our value
   // Pass initial state function to useState so logic is only executed once
-  const [storedValue, setStoredValue] = useState(() => {
+  const [storedValue, setStoredValue] = useState(null);
+  const initialize = (key) => {
     if (typeof window === "undefined") {
       return initialValue;
     }
@@ -17,7 +18,10 @@ const useLocalStorage = (key, initialValue) => {
       console.log(error);
       return initialValue;
     }
-  });
+  };
+  useEffect(() => {
+    setStoredValue(initialize(key));
+  }, []);
   // Return a wrapped version of useState's setter function that ...
   // ... persists the new value to localStorage.
   const setValue = (value) => {
