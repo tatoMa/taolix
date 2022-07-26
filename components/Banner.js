@@ -32,7 +32,7 @@ const Banner = ({ detail, index = 1 }) => {
 
   return (
     <div
-      className={`base-content relative aspect-[16/30] w-full md:aspect-[3/2] lg:aspect-[2/1] ${
+      className={`base-content relative aspect-[16/30] w-full md:aspect-[3/2] lg:aspect-[2/1] lg:max-h-[60vh] ${
         mode === "homePage" && "cursor-pointer px-4 md:px-6 lg:px-8"
       }`}
       onClick={goToDetailPageHandler}
@@ -73,7 +73,7 @@ const Banner = ({ detail, index = 1 }) => {
           referrerPolicy="no-referrer"
         />
       </div>
-      <div className="absolute left-0 -bottom-1 h-1/4 w-full bg-gradient-to-t from-base-100 via-transparent to-transparent"></div>
+      <div className="from-background absolute left-0 -bottom-1 h-1/4 w-full bg-gradient-to-t via-transparent to-transparent"></div>
 
       {/* main section */}
       <main className="group relative z-10 flex h-full w-full flex-col-reverse md:flex-row">
@@ -147,7 +147,7 @@ const Banner = ({ detail, index = 1 }) => {
               {"豆瓣 " + rate + "★"}
             </div>
           )}
-          <div className="absolute bottom-0 h-1/6 w-full bg-gradient-to-t from-base-100 via-base-100/70 to-transparent"></div>
+          <div className="from-background absolute bottom-0 h-1/6 w-full bg-gradient-to-t via-base-100/70 to-transparent"></div>
         </div>
       </main>
     </div>

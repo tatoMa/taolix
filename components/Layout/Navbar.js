@@ -74,7 +74,9 @@ function Navbar() {
               md:mt-0 md:text-4xl lg:text-base
               xl:p-3
               ${
-                router.asPath == "/" ? "text-secondary-focus" : "text-secondary"
+                router.asPath == "/"
+                  ? "border-b border-secondary text-secondary-focus"
+                  : ""
               }
             `}
             >
@@ -97,8 +99,8 @@ function Navbar() {
               xl:p-3
               ${
                 router.query.type == link.type
-                  ? "text-secondary-focus"
-                  : "text-secondary"
+                  ? "border-b border-secondary text-secondary-focus"
+                  : ""
               }
             `}
               >
@@ -121,8 +123,8 @@ function Navbar() {
               xl:p-3
               ${
                 router.asPath == "/mylist"
-                  ? "text-secondary-focus"
-                  : "text-secondary"
+                  ? "border-b border-secondary text-secondary-focus"
+                  : ""
               }
             `}
             >
@@ -194,7 +196,7 @@ function Navbar() {
         <div className="flex lg:hidden">
           <button
             type="button"
-            className="z-20 p-4 hover:text-gray-600 focus:outline-none"
+            className="z-20 p-4 hover:text-gray-600 focus:text-secondary focus:outline-none"
             aria-label="toggle menu"
             onClick={() => setMenu(!menu)}
           >
