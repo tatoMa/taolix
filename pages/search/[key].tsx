@@ -1,7 +1,10 @@
 import VideoItem from "../../components/VideoItem";
 import NextHeadSeo from "next-head-seo";
-import { fetchWithTimeout } from "../../lib/fetch";
 import { GetServerSideProps } from "next";
+import {
+  fetchMovieDetailsListFromAllApisByName,
+  FulfilledAndRejectedResultsFromPromiseAllSettled,
+} from "utils/utils";
 const translate = require("@vitalets/google-translate-api");
 
 function Detail({ uniqueMovieList, searchKey }) {
@@ -63,113 +66,42 @@ export const getServerSideProps: GetServerSideProps = async ({
     "Cache-Control",
     "public, s-maxage=120, stale-while-revalidate=600" // 600 seconds for fresh, 3600 seconds for stale and still using but fetch on background
   );
-  // detect if the input text is Chinese
-  var re = /[^\u4e00-\u9fa5]/;
-  let key = params.key as string;
-  if (re.test(key)) {
-    // translate if the input English to Chinese
-    try {
-      const resTranslate = await translate(key, { to: "zh-CN" });
-      key = resTranslate.from.language.iso === "en" ? resTranslate.text : key;
-    } catch (error) {
-      console.error(error);
+  const input = params.key as string;
+  // detect if the input text is Chinese, if not then translate to Chinese
+  const checkAndTranslateEngToChn = async (input) => {
+    const hasChnInputChecker = /[^\u4e00-\u9fa5]/;
+    if (hasChnInputChecker.test(input)) {
+      // translate if the input English to Chinese
+      try {
+        const resTranslate = await translate(input, { to: "zh-CN" });
+        return resTranslate.from.language.iso === "en"
+          ? resTranslate.text
+          : input;
+      } catch (error) {
+        console.error(error);
+      }
     }
-  }
+  };
+  const searchText = (await checkAndTranslateEngToChn(input)) || input;
 
-  // fetch all search results from APIs
-  let resultsPromiseAll;
-  const timeout = 5000;
-  try {
-    resultsPromiseAll = await Promise.allSettled([
-      fetchWithTimeout(
-        `${process.env.MOVIE_API}/?ac=detail&wd=${encodeURI(key)}`,
-        {
-          timeout,
-        }
-      ).then((res) => res.json()),
-      fetchWithTimeout(
-        `${process.env.MOVIE_API_SOURCE_2}/?ac=detail&wd=${encodeURI(key)}`,
-        {
-          timeout,
-        }
-      ).then((res) => res.json()),
-      fetchWithTimeout(
-        `${process.env.MOVIE_API_SOURCE_3}/?ac=detail&wd=${encodeURI(key)}`,
-        {
-          timeout,
-        }
-      ).then((res) => res.json()),
-      fetchWithTimeout(
-        `${process.env.MOVIE_API_SOURCE_4}/?ac=detail&wd=${encodeURI(key)}`,
-        {
-          timeout,
-        }
-      ).then((res) => res.json()),
-      fetchWithTimeout(
-        `${process.env.MOVIE_API_SOURCE_5}/?ac=detail&wd=${encodeURI(key)}`,
-        {
-          timeout,
-        }
-      ).then((res) => res.json()),
-      fetchWithTimeout(
-        `${process.env.MOVIE_API_SOURCE_6}/?ac=detail&wd=${encodeURI(key)}`,
-        {
-          timeout,
-        }
-      ).then((res) => res.json()),
-    ]);
-  } catch (error) {
-    console.error(error);
-  }
+  // fetch data from all apis by movie name
+  const resultsPromiseAll = await fetchMovieDetailsListFromAllApisByName(
+    searchText
+  );
+  const [successes, failures] =
+    FulfilledAndRejectedResultsFromPromiseAllSettled(resultsPromiseAll);
 
-  // add resource id into result array
-  resultsPromiseAll.map((item, index) => {
-    if (item.value) item.value.resource = index;
-  });
-  // resultsPromiseAll = resultsPromiseAll.map((res, index) => {
-  //   if (res.value && res.value.resource) res.value.resource = index;
-  //   return res;
-  // });
-  const successes = resultsPromiseAll
-    .filter((x) => x.status === "fulfilled")
-    .map((x) => x.value);
-
-  const failures = resultsPromiseAll
-    .filter((x) => x.status === "rejected")
-    .map((x) => x.reason);
-  if (!failures || failures?.length !== 0)
-    console.error("search page fetching error", failures);
-
-  const [
-    searchResultsFromApi0,
-    searchResultsFromApi1,
-    searchResultsFromApi2,
-    searchResultsFromApi3,
-    searchResultsFromApi4,
-    searchResultsFromApi5,
-  ] = successes;
-
-  // filter all results into one unique array of items
-  const movieList = [
-    ...(searchResultsFromApi0?.list?.map((item) => {
-      return { ...item, resource: 0 };
-    }) || []),
-    ...(searchResultsFromApi1?.list?.map((item) => {
-      return { ...item, resource: 1 };
-    }) || []),
-    ...(searchResultsFromApi2?.list?.map((item) => {
-      return { ...item, resource: 2 };
-    }) || []),
-    ...(searchResultsFromApi3?.list?.map((item) => {
-      return { ...item, resource: 3 };
-    }) || []),
-    ...(searchResultsFromApi4?.list?.map((item) => {
-      return { ...item, resource: 4 };
-    }) || []),
-    ...(searchResultsFromApi5?.list?.map((item) => {
-      return { ...item, resource: 5 };
-    }) || []),
-  ];
+  // map fetched list with resource id (-1 for hd resource)
+  const movieList = [].concat
+    .apply(
+      [],
+      successes.map((item, index) =>
+        item?.list?.map((item) => {
+          return { ...item, resource: index - 1 };
+        })
+      )
+    )
+    .filter((item) => item.resource !== -1);
   const uniqueMovieList = movieList.reduce((unique, o) => {
     if (!unique.some((obj) => obj?.vod_name === o?.vod_name)) {
       unique.push(o);
@@ -180,7 +112,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   return {
     props: {
       uniqueMovieList,
-      searchKey: key,
+      searchKey: searchText,
     },
   };
 };

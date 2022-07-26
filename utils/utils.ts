@@ -356,8 +356,8 @@ export const getMovieNameFromFetchedDetailData = (movieDetail) => {
 };
 
 export const fetchMovieDetailsListFromAllApisByName = async (
-  resourceName,
-  videoName
+  videoName,
+  resourceName = ""
 ) => {
   let resultsPromiseAll;
   const timeout = 5000;
