@@ -15,6 +15,7 @@ function Navbar() {
   const [searchText, setSearchText] = useState("");
   const { data: session } = useSession();
   const [isSearching, setIsSearching] = useState(false);
+  const [theme, setTheme] = useState(false);
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter" && e.target.value && !isSearching) {
@@ -29,6 +30,11 @@ function Navbar() {
     router.push("/search/" + searchText);
   };
 
+  const setThemeForLogo = (theme) => {
+    setTheme(theme);
+  };
+  // useEffect(() => {}, theme);
+
   return (
     <nav
       className={`fixed top-0 z-30 flex h-12 w-full justify-center transition duration-500 lg:h-16 ${
@@ -42,12 +48,22 @@ function Navbar() {
         {/* Logo */}
         <li className="z-30 grow">
           <Link href="/">
-            <a className="ml-0 block w-32 cursor-pointer py-[0.4em] px-2 duration-100 hover:scale-110 active:scale-110 lg:w-40">
-              <img
-                src="/logo.png"
-                alt="logo"
-                className="bg-neutral object-contain"
-              />
+            <a className="ml-0 block w-32 cursor-pointer py-1 px-2 duration-100 hover:scale-110 active:scale-110 lg:w-36">
+              {theme ? (
+                <img
+                  data-theme="dark"
+                  src="/logo_white.png"
+                  alt="logo"
+                  className="object-contain"
+                />
+              ) : (
+                <img
+                  data-theme="light"
+                  src="/logo_black.png"
+                  alt="logo"
+                  className="object-contain"
+                />
+              )}
             </a>
           </Link>
         </li>
@@ -134,13 +150,13 @@ function Navbar() {
         </li>
 
         {/* <!-- Search input on desktop screen --> */}
-        <li className={`mr-2 ml-4 md:block lg:mx-0 `}>
+        <li className={`mr-2 ml-1 sm:ml-4 md:block lg:mx-0 `}>
           <div className="form-control">
             <label className="input-group input-group-sm">
               <input
                 type="search"
                 placeholder="Search…"
-                className="input input-bordered input-sm w-24 sm:w-auto lg:w-24"
+                className="input input-bordered input-sm w-28 sm:w-auto lg:w-28"
                 onKeyDown={handleKeyDown}
                 onChange={(e) => setSearchText(e.target.value)}
               />
@@ -168,7 +184,7 @@ function Navbar() {
         </li>
 
         {/* Theme color switcher */}
-        <ThemeSwitcher />
+        <ThemeSwitcher setThemeForLogo={setThemeForLogo} />
 
         {/* Auth components */}
         <li className="hidden md:block">

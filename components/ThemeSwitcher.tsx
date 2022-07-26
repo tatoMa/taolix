@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { themeChange } from "theme-change";
 
-const ThemeSwitcher = () => {
+const ThemeSwitcher = ({ setThemeForLogo }) => {
   const [themeState, setThemeState] = useState("");
 
   useEffect(() => {
@@ -11,16 +11,16 @@ const ThemeSwitcher = () => {
 
   useEffect(() => {
     const theme = localStorage.getItem("theme");
-    console.log(theme);
     setThemeState(theme);
-    console.log(themeState);
+    setThemeForLogo(theme);
   }, []);
   return (
-    <label className="swap swap-rotate ml-1 md:mx-2 md:px-1">
+    <label className="swap-rotate swap ml-1 md:mx-2 md:px-1">
       <input
         type="checkbox"
         onClick={() => {
           setThemeState(themeState === "dark" ? "" : "dark");
+          setThemeForLogo(themeState === "dark" ? "" : "dark");
         }}
         checked={themeState !== "dark"}
         readOnly
