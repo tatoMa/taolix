@@ -5,12 +5,15 @@ import GoogleAnalytics from "../components/Layout/GoogleAnalytic";
 
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
+import { Session } from "next-auth";
 
 function MyApp({
   Component,
   pageProps: { session, ...pageProps },
   router,
-}: AppProps) {
+}: AppProps<{
+  session: Session;
+}>) {
   useEffect(() => {
     document.documentElement.lang = "en-us";
   });
