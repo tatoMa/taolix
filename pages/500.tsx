@@ -27,10 +27,10 @@ export default function Custom500({}) {
           <div className="flex flex-col items-center ">
             <p className=" text-md text-gray-400">500 ERROR</p>
             <p className=" text-2xl text-white md:text-4xl">
-              Uh oh! I think you're lost.
+              Uh oh! I think you&apos;re lost.
             </p>
             <p className=" md:text-md mt-1 text-sm text-gray-400">
-              It looks like the page you are looking for doesn't exist.
+              It looks like the page you are looking for doesn&apos;t exist.
             </p>
             <Link href="/">
               <a className="mt-4 border bg-white/30 py-1 px-6 text-xl font-bold text-white hover:bg-white/10 hover:text-gray-300">

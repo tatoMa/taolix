@@ -7,6 +7,7 @@ function signin({ providers }) {
         <img
           className="hidden object-cover sm:block sm:w-1/2"
           src="/auth_pic.jpg"
+          alt="a branding image"
         ></img>
 
         <div className="w-full px-6 py-8 sm:w-1/2 md:px-8">

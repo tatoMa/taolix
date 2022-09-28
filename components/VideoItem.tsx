@@ -12,8 +12,8 @@ interface VideoItemProps {
   id: number;
   remarks: string;
   rate: number;
-  hd: Boolean;
-  resource: number;
+  hd?: Boolean;
+  resource?: number;
 }
 const VideoItem = ({
   name,

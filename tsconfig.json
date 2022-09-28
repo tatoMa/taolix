@@ -21,7 +21,9 @@
     "**/*.ts",
     "**/*.tsx",
     "components/VideoItem/VideoItemWideSwiper.jsx",
-    "lib/tools.js"
+    "lib/tools.js",
+    "components/Layout/GoogleAnalytic.js",
+    "components/VideoItem.js"
   ],
   "exclude": ["node_modules"]
 }

@@ -2,7 +2,7 @@ import NextHeadSeo from "next-head-seo";
 import { useFocus } from "../hooks/useFocus";
 import { useRef } from "react";
 
-const about = () => {
+const About = () => {
   const titleRef = useRef(null);
 
   useFocus(titleRef);
@@ -78,4 +78,4 @@ const about = () => {
   );
 };
 
-export default about;
+export default About;

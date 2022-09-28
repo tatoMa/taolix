@@ -1,11 +1,11 @@
 /** @type {import('next').NextConfig} */
 
 const withPWA = require("next-pwa");
-const withBundleAnalyzer = require("@next/bundle-analyzer")({
-  enabled: process.env.ANALYZE === "true",
-});
-module.exports = withBundleAnalyzer(
-  withPWA({
+// const withBundleAnalyzer = require("@next/bundle-analyzer")({
+//   enabled: process.env.ANALYZE === "true",
+// });
+// module.exports = withBundleAnalyzer(
+  module.exports = withPWA({
     redirects() {
       return [
         process.env.MAINTENANCE_MODE === "1"
@@ -54,4 +54,4 @@ module.exports = withBundleAnalyzer(
       ],
     },
   })
-);
+// );

@@ -45,7 +45,7 @@ function Detail({ uniqueMovieList, searchKey }) {
           {/* If no video found */}
           {uniqueMovieList?.length === 0 && (
             <div className="mt-12 text-2xl text-gray-400">
-              Can't find this video
+              Can&apos;t find this video
             </div>
           )}
         </div>

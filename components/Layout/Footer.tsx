@@ -78,6 +78,7 @@ const Footer = () => {
                   href="https://www.taolix.com/"
                   className="btn btn-ghost btn-xs mt-2 block text-sm uppercase"
                   target="_blank"
+                  rel="noreferrer"
                 >
                   TAOLIX
                 </a>
