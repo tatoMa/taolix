@@ -4,9 +4,18 @@ import GenreList from "../../../components/GenreList";
 import NextHeadSeo from "next-head-seo";
 import { GENRES } from "../../../utils/const";
 import { GetStaticProps } from "next";
+import { IVideosResponse } from "utils/interfaces";
 
-export default function Home({ videos, page, t }) {
-  const group = GENRES.find((item) => item.type == t);
+export default function Home({
+  videos,
+  page,
+  t,
+}: {
+  videos: IVideosResponse;
+  page: string;
+  t: string;
+}) {
+  const group = GENRES.find((item) => item.type.toString() === t);
   // console.log(videos);
   return (
     <>
@@ -59,12 +68,11 @@ export const getStaticProps: GetStaticProps = async ({
       let response = await fetch(
         `${process.env.SITE_URL}/api/list/${type}/${page}`
       );
-      videos = await response.json();
+      videos = (await response.json()) as IVideosResponse;
     } catch (e) {
       console.error("error: ", e);
     }
   }
-
   return {
     props: {
       videos,

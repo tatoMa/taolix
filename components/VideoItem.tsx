@@ -5,17 +5,26 @@ import { useInView } from "react-intersection-observer";
 const myLoader = ({ src, width, quality }) => {
   return `https://example.com/${src}?w=${width}&q=${quality || 75}`;
 };
-
+interface VideoItemProps {
+  name: string;
+  type: string;
+  pic: string;
+  id: number;
+  remarks: string;
+  rate: number;
+  hd: Boolean;
+  resource: number;
+}
 const VideoItem = ({
   name,
   type,
   pic,
   id,
-  remarks = 0,
+  remarks = "",
   rate = 0,
   hd = false,
   resource = 0,
-}) => {
+}: VideoItemProps) => {
   const [isLoading, setIsLoading] = useState(false);
   const { ref, inView, entry } = useInView({
     /* Optional options */

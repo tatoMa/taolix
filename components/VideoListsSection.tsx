@@ -1,7 +1,7 @@
-import VideoItem from "../components/VideoItem";
+import { IVideosResponse } from "utils/interfaces";
+import VideoItem from "./VideoItem";
 
-const VideoListsSection = ({ videos }) => {
-  // console.log(videos);
+const VideoListsSection = ({ videos }: { videos: IVideosResponse }) => {
   return (
     <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-4 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8">
       {videos.list.map((movie) => (
@@ -15,9 +15,9 @@ const VideoListsSection = ({ videos }) => {
           rate={
             Number(movie.rate)
               ? Number(movie.rate)
-              : Number(movie.vod_douban_score) != 0
+              : Number(movie.vod_douban_score) !== 0
               ? Number(movie.vod_douban_score)
-              : ""
+              : 0
           }
         />
       ))}

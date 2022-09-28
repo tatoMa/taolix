@@ -1,7 +1,6 @@
 import { PlayIcon } from "@heroicons/react/solid";
 import { CheckCircleIcon } from "@heroicons/react/outline";
 import { useEffect, useState } from "react";
-import useLocalStorage from "hooks/useLocalStorage";
 
 const VideoPlayList = ({
   listOrderAsc,

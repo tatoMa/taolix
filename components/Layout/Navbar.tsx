@@ -89,7 +89,7 @@ function Navbar() {
               md:mt-0 md:text-4xl lg:text-base
               xl:p-3
               ${
-                router.asPath == "/"
+                router.asPath === "/"
                   ? "border-b border-secondary text-secondary-focus"
                   : ""
               }
@@ -137,7 +137,7 @@ function Navbar() {
               md:mt-0 md:text-4xl lg:text-base
               xl:p-3
               ${
-                router.asPath == "/mylist"
+                router.asPath === "/mylist"
                   ? "border-b border-secondary text-secondary-focus"
                   : ""
               }

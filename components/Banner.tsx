@@ -20,7 +20,7 @@ const Banner = ({ detail, index = 1 }) => {
   } = detail;
 
   const router = useRouter();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const goToDetailPageHandler = (e) => {
     if (mode === "homePage") {

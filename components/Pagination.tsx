@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const Pagination = ({ page, t }) => {
+const Pagination = ({ page, t }: { page: string; t: string }) => {
   return (
     <div className="mx-auto mt-8 mb-10 flex h-full w-full max-w-screen-2xl justify-center md:mt-0">
       <Link
@@ -12,7 +12,7 @@ const Pagination = ({ page, t }) => {
       >
         <a
           className={`btn btn-outline btn-secondary rounded-none px-4 py-2  ${
-            page == 1 ? "btn-disabled cursor-not-allowed" : ""
+            page === "1" ? "btn-disabled cursor-not-allowed" : ""
           }`}
         >
           PREV
