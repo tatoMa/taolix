@@ -33,7 +33,6 @@ function Navbar() {
   const setThemeForLogo = (theme) => {
     setTheme(theme);
   };
-  // useEffect(() => {}, theme);
 
   return (
     <nav

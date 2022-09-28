@@ -1,8 +1,12 @@
 import { RefreshIcon } from "@heroicons/react/outline";
 import { NextRouter, useRouter } from "next/router";
-import { useEffect } from "react";
+import { Dispatch, SetStateAction, useEffect } from "react";
 
-const Loading = ({ isLoading, setIsLoading }) => {
+interface ILoading {
+  isLoading: boolean;
+  setIsLoading: Dispatch<SetStateAction<boolean>>;
+}
+const Loading = ({ isLoading, setIsLoading }: ILoading) => {
   const router: NextRouter = useRouter();
 
   useEffect(() => {

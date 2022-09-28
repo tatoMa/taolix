@@ -3,7 +3,6 @@ import { useState } from "react";
 import { filterHtmlTagsFromString } from "../utils/utils";
 
 const Banner = ({ detail, index = 1 }) => {
-  // console.log(detail);
   let {
     vod_name,
     vod_pic,

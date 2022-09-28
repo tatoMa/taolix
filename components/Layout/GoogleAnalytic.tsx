@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import Script from "next/script";
 import * as gtag from "../../lib/gtag";
 import { useEffect } from "react";
-const GoogleAnalytics = (Component, pageProps) => {
+const GoogleAnalytics = () => {
   const router = useRouter();
   useEffect(() => {
     const handleRouteChange = (url) => {
