@@ -3,8 +3,8 @@ import HeadSeo from "./HeadSeo";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 const MobileBottomMenu = dynamic(() => import("./MobileBottomMenu"));
-
-export default function Layout({ children }) {
+type Child = React.ReactElement;
+export default function Layout({ children }: { children: Child }): JSX.Element {
   return (
     <>
       {/* HTML Head Element */}
