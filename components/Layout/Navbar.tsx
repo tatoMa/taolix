@@ -113,7 +113,7 @@ function Navbar() {
               md:mt-0 md:text-4xl lg:text-base
               xl:p-3
               ${
-                router.query.type == link.type
+                router.query.type === link.type.toString()
                   ? "border-b border-secondary text-secondary-focus"
                   : ""
               }
