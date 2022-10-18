@@ -59,10 +59,15 @@ export const getStaticProps: GetStaticProps = async ({
   let videos = {};
 
   if (
-    (parseInt(page) > 0 && parseInt(type) > 1 && parseInt(type) < 14) ||
-    (parseInt(type) > 14 && parseInt(type) < 21) ||
-    (parseInt(type) > 21 && parseInt(type) < 26) ||
-    (parseInt(type) > 26 && parseInt(type) < 30)
+    // this is the genre for wujinapi api
+    parseInt(page) > 0 &&
+    parseInt(type) > 5 &&
+    parseInt(type) < 36
+    // this is the genre for api.yulecj.com
+    // (parseInt(page) > 0 && parseInt(type) > 1 && parseInt(type) < 14) ||
+    // (parseInt(type) > 14 && parseInt(type) < 21) ||
+    // (parseInt(type) > 21 && parseInt(type) < 26) ||
+    // (parseInt(type) > 26 && parseInt(type) < 30)
   ) {
     try {
       let response = await fetch(
