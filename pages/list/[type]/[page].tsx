@@ -5,6 +5,7 @@ import NextHeadSeo from "next-head-seo";
 import { GENRES } from "../../../utils/const";
 import { GetStaticProps } from "next";
 import { IVideosResponse } from "utils/interfaces";
+import { genresForListPageTypeIds } from "utils/utils";
 
 export default function Home({
   videos,
@@ -57,18 +58,7 @@ export const getStaticProps: GetStaticProps = async ({
   params: { type: string; page: string };
 }) => {
   let videos = {};
-
-  if (
-    // this is the genre for wujinapi api
-    parseInt(page) > 0 &&
-    parseInt(type) > 5 &&
-    parseInt(type) < 36
-    // this is the genre for api.yulecj.com
-    // (parseInt(page) > 0 && parseInt(type) > 1 && parseInt(type) < 14) ||
-    // (parseInt(type) > 14 && parseInt(type) < 21) ||
-    // (parseInt(type) > 21 && parseInt(type) < 26) ||
-    // (parseInt(type) > 26 && parseInt(type) < 30)
-  ) {
+  if (parseInt(page) > 0 && genresForListPageTypeIds.includes(Number(type))) {
     try {
       let response = await fetch(
         `${process.env.SITE_URL}/api/list/${type}/${page}`

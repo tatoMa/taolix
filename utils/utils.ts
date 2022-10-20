@@ -20,6 +20,8 @@ export const genresForIndexFetch = [
   ),
 ];
 
+export const genresForListPageTypeIds = GENRES.map((item) => item.type);
+
 export const findResourceFromDoubanItem = async (item) => {
   try {
     let temp = await findMovieFromApiByTitle(item.title, process.env.MOVIE_API);
