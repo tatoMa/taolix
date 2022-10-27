@@ -17,8 +17,8 @@ const VideoItem = ({ name, imageUrl, id, resource }) => {
         <Link
           href={`/detail/${id}${
             resource && resource !== "0"
-              ? `?resource=${resource}${name && "&name=" + name}`
-              : ""
+              ? `?resource=${1}${name && "&name=" + name}`
+              : `?resource=${1}${name && "&name=" + name}`
           }`}
         >
           <a
