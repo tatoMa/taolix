@@ -66,11 +66,15 @@ export const getServerSideProps: GetServerSideProps = async ({
     "Cache-Control",
     "public, s-maxage=120, stale-while-revalidate=600" // 600 seconds for fresh, 3600 seconds for stale and still using but fetch on background
   );
-  const input = params.key as string;
+  const input = (params.key as string).trim();
   // detect if the input text is Chinese, if not then translate to Chinese
   const checkAndTranslateEngToChn = async (input) => {
-    const hasChnInputChecker = /[^\u4e00-\u9fa5]/;
-    if (hasChnInputChecker.test(input)) {
+    const hasChnInputCheckerForChn = /[^\u4e00-\u9fa5]/;
+    const hasChnInputCheckerForNumber = /[0-9]+/;
+    if (
+      hasChnInputCheckerForChn.test(input) &&
+      !hasChnInputCheckerForNumber.test(input)
+    ) {
       // translate if the input English to Chinese
       try {
         const resTranslate = await translate(input, { to: "zh-CN" });
