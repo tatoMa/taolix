@@ -362,7 +362,7 @@ export const fetchMovieDetailsListFromAllApisByName = async (
   resourceName = ""
 ) => {
   let resultsPromiseAll;
-  const timeout = 2000;
+  const timeout = 3500;
   try {
     resultsPromiseAll = await Promise.allSettled([
       fetchWithTimeout(
