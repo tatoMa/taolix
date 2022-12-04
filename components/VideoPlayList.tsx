@@ -23,7 +23,7 @@ const VideoPlayList = ({
             }`}
           >
             {index === "HD" ? "1080P " : `Source ${index}`}
-            {index === "HD" && <span className=" text-red-600">🚫 PRC IP</span>}
+            {index === "HD" && <span className="text-red-600 ">🚫 PRC IP</span>}
           </div>
           <div
             className={`mt-1 flex gap-x-2 gap-y-0 ${
@@ -41,8 +41,13 @@ const VideoPlayList = ({
                       : "border-y border-x-0 border-base-content"
                   }`}
                   onClick={() => {
-                    clickUrlButton(url);
-                    document.documentElement.style.overflowY = "hidden";
+                    if(index === "HD"){
+                      window.open("https://dp.haiwaikan.com/index.html?url="+url, '_blank', 'noopener,noreferrer');
+                    }
+                    else{
+                      clickUrlButton(url);
+                      document.documentElement.style.overflowY = "hidden";
+                    }
                   }}
                 >
                   <div>
@@ -60,7 +65,7 @@ const VideoPlayList = ({
                       />
                     )}
                   </div>
-                  <div className="truncate font-light">{name}</div>
+                  <div className="font-light truncate">{name}</div>
                 </a>
               );
             })}
