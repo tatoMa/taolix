@@ -119,7 +119,7 @@ function Detail({
         <Banner detail={{ ...primaryMovieDetail.list[0], vod_pic: imageUrl }} />
         <LineBreak title="PLAY LIST" />
         <div className="flex items-center justify-between">
-          <p className="my-3 flex-1 text-sm text-gray-400">
+          <p className="flex-1 my-3 text-sm text-gray-400">
             ALL resources are from 3rd party sources. We do NOT store or save
             any video resources.
           </p>
@@ -129,9 +129,9 @@ function Detail({
           >
             Order:{" "}
             {listOrderAsc ? (
-              <ChevronUpIcon className="inline-block h-5 w-5 " />
+              <ChevronUpIcon className="inline-block w-5 h-5 " />
             ) : (
-              <ChevronDownIcon className="inline-block h-5 w-5 " />
+              <ChevronDownIcon className="inline-block w-5 h-5 " />
             )}
           </button>
         </div>

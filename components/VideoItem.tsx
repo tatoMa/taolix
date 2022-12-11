@@ -36,13 +36,13 @@ const VideoItem = ({
     <div ref={ref}>
       {inView ? (
         <Link
-          href={`/detail/${id}${
-            resource ? `?resource=${resource}${name && "&name=" + name}` : ""
-          }`}
+          href={`/detail/${id}${`?resource=${resource}${
+            name && "&name=" + name
+          }`}`}
           prefetch
         >
           <a
-            className="group relative block cursor-pointer overflow-hidden  transition duration-500 hover:saturate-150"
+            className="relative block overflow-hidden transition duration-500 cursor-pointer group hover:saturate-150"
             onClick={() => {
               setIsLoading(true);
               setTimeout(() => {
@@ -51,11 +51,11 @@ const VideoItem = ({
             }}
           >
             {isLoading && (
-              <div className="absolute top-0 left-0 z-10 flex h-full w-full items-center justify-center bg-gray-500/60">
+              <div className="absolute top-0 left-0 z-10 flex items-center justify-center w-full h-full bg-gray-500/60">
                 <svg
                   viewBox="-2 -2 42 42"
                   xmlns="http://www.w3.org/2000/svg"
-                  className="mb-10 aspect-square w-1/2 stroke-red-500"
+                  className="w-1/2 mb-10 aspect-square stroke-red-500"
                 >
                   <g fill="none" fillRule="evenodd">
                     <g transform="translate(1 1)" strokeWidth="5">
@@ -79,18 +79,18 @@ const VideoItem = ({
               <img
                 src={pic}
                 alt=""
-                className="h-full w-full object-cover duration-300 group-hover:scale-125 group-focus:scale-110 group-active:scale-110 md:h-full"
+                className="object-cover w-full h-full duration-300 group-hover:scale-125 group-focus:scale-110 group-active:scale-110 md:h-full"
                 referrerPolicy="no-referrer"
               />
             </div>
 
-            <div className="absolute bottom-0 left-0 bg-base-300/80 text-xl font-semibold text-base-content line-clamp-3">
+            <div className="absolute bottom-0 left-0 text-xl font-semibold bg-base-300/80 text-base-content line-clamp-3">
               {name}
               <span className="block text-xs font-light line-clamp-1">
                 {type}
               </span>
             </div>
-            <div className="absolute top-0 right-0 bg-base-300/80 pt-1 text-sm ">
+            <div className="absolute top-0 right-0 pt-1 text-sm bg-base-300/80 ">
               {remarks}
             </div>
             {Number(rate) > 0 && (
