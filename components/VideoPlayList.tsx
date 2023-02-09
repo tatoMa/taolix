@@ -44,19 +44,17 @@ const VideoPlayList = ({
                       : "border-y border-x-0 border-base-content"
                   }`}
                   onClick={() => {
-                    clickUrlButton(url);
-                    document.documentElement.style.overflowY = "hidden";
                     // THIS IS FOR WHEN HD VIDEO NOT PLAY ON DEFAULT PLAYER
-                    // if (isHdSource) {
-                    //   window.open(
-                    //     "https://dp.haiwaikan.com/index.html?url=" + url,
-                    //     "_blank",
-                    //     "noopener,noreferrer"
-                    //   );
-                    // } else {
-                    //   clickUrlButton(url);
-                    //   document.documentElement.style.overflowY = "hidden";
-                    // }
+                    if (isHdSource) {
+                      window.open(
+                        "https://dp.haiwaikan.com/index.html?url=" + url,
+                        "_blank",
+                        "noopener,noreferrer"
+                      );
+                    } else {
+                      clickUrlButton(url);
+                      document.documentElement.style.overflowY = "hidden";
+                    }
                   }}
                 >
                   <div>
