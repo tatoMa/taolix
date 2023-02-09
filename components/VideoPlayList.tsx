@@ -45,7 +45,7 @@ const VideoPlayList = ({
                   }`}
                   onClick={() => {
                     // THIS IS FOR WHEN HD VIDEO NOT PLAY ON DEFAULT PLAYER
-                    if (isHdSource) {
+                    if (index === "HD") {
                       window.open(
                         "https://dp.haiwaikan.com/index.html?url=" + url,
                         "_blank",
