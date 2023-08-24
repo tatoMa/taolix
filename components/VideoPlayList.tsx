@@ -10,6 +10,7 @@ const VideoPlayList = ({
   title = true,
   index,
   playedUrls,
+  playedUrlsSaveOnLocalStorage,
 }) => {
   const isHdSource = index === "HD" || index === 3;
   return (
@@ -55,6 +56,7 @@ const VideoPlayList = ({
                       clickUrlButton(url);
                       document.documentElement.style.overflowY = "hidden";
                     }
+                    playedUrlsSaveOnLocalStorage(url);
                   }}
                 >
                   <div>
@@ -72,7 +74,7 @@ const VideoPlayList = ({
                       />
                     )}
                   </div>
-                  <div className="truncate font-light">{name}</div>
+                  <div className="font-light truncate">{name}</div>
                 </a>
               );
             })}

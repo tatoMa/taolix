@@ -65,7 +65,6 @@ function Detail({
   const handleClickUrlButton = (url) => {
     setUrl(url);
     setPlay(true);
-    handlePlayedUrlsSaveOnLocalStorage(url);
   };
 
   const handlePlayedUrlsSaveOnLocalStorage = (url) => {
@@ -147,6 +146,9 @@ function Detail({
                 url={url}
                 listOrderAsc={listOrderAsc}
                 playedUrls={playedUrls}
+                playedUrlsSaveOnLocalStorage={
+                  handlePlayedUrlsSaveOnLocalStorage
+                }
               />
             ))}
           </div>
