@@ -12,7 +12,7 @@ const LoadingAnimation = () => {
 
   return (
     <div className="fixed top-0 left-0 z-50 flex items-center justify-center w-screen h-screen bg-base-300/80">
-      <section className="-translate-y-1/2">
+      <section className="-translate-y-1/3">
         <svg className="gegga">
           <defs>
             <filter id="gegga">
@@ -31,6 +31,9 @@ const LoadingAnimation = () => {
             </filter>
           </defs>
         </svg>
+        <div className="text-5xl font-semibold text-center text-transparent bg-gradient-to-br from-pink-500 via-red-500 to-yellow-600 bg-clip-text">
+          TAOLIX
+        </div>
         <svg className="snurra" width="200" height="200" viewBox="0 0 200 200">
           <defs>
             <linearGradient id="linjärGradient">
