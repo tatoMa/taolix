@@ -5,7 +5,6 @@ import dynamic from "next/dynamic";
 const Player = dynamic(() => import("./Player.js"));
 
 export default function PlayerWrapper({ url, setPlay }) {
-  // console.log(url);
   const videoJsOptions = {
     // lookup the options in the docs for more options
     playbackRates: [0.5, 1, 1.5, 2, 3],
@@ -39,7 +38,7 @@ export default function PlayerWrapper({ url, setPlay }) {
 
   return (
     <div
-      className="pointer-events-auto fixed top-0 left-0 z-50 flex h-full w-full items-center bg-black/60 "
+      className="fixed top-0 left-0 z-50 flex items-center w-full h-full pointer-events-auto bg-black/60 "
       onKeyDown={handleKeyDown}
     >
       <div
@@ -50,7 +49,7 @@ export default function PlayerWrapper({ url, setPlay }) {
         }}
       >
         <XIcon
-          className="pointer-events-auto absolute right-0 z-50 h-20 max-h-[8vw] w-20 max-w-[8vw] animate-fadeIn cursor-pointer bg-black/20 text-white/50 duration-1000 hover:bg-white hover:text-black"
+          className="animate-fadeIn pointer-events-auto absolute right-0 z-50 h-20 max-h-[8vw] w-20 max-w-[8vw] cursor-pointer bg-black/20 text-white/50 duration-1000 hover:bg-white hover:text-black"
           onClick={() => {
             setPlay(false);
             document.documentElement.style.overflowY = "auto";

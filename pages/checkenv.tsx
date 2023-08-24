@@ -9,7 +9,6 @@ export default checkenv;
 
 export const getStaticProps: GetServerSideProps = async (context) => {
   let allApiLists = APILIST;
-  console.log(allApiLists);
   return {
     props: {
       allApiLists,

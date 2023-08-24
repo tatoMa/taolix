@@ -54,9 +54,6 @@ const HeroSwiper = ({ movieList }) => {
         pagination={{ clickable: true }}
         keyboard={{ enabled: true }}
         scrollbar={{ draggable: true }}
-
-        // onSwiper={(swiper) => console.log()}
-        // onSlideChange={() => console.log("slide change")}
       >
         {movieList.map((movie, index) => (
           <SwiperSlide key={movie.vod_id}>

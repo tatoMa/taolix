@@ -12,8 +12,6 @@ import { MAJORS } from "../../utils/const";
 
 const MobileBottomMenu = () => {
   const router = useRouter();
-
-  // console.log(router.asPath);
   const links = [
     {
       name: "HOME",
@@ -44,7 +42,7 @@ const MobileBottomMenu = () => {
   return (
     <section
       id="bottom-navigation"
-      className="fixed inset-x-0 bottom-0 z-10 block bg-base-300 shadow lg:hidden"
+      className="fixed inset-x-0 bottom-0 z-10 block shadow bg-base-300 lg:hidden"
     >
       <div id="tabs" className="flex justify-between">
         {links.map((link) => {
@@ -57,8 +55,8 @@ const MobileBottomMenu = () => {
                   router.asPath == link.linkUrl && " btn-secondary border-t-2"
                 }`}
               >
-                <Icon className="mb-1 inline-block h-6 w-6" />
-                <span className="tab-home tab mb-1 block h-5 text-xs font-light text-gray-200 hover:text-secondary-content">
+                <Icon className="inline-block w-6 h-6 mb-1" />
+                <span className="block h-5 mb-1 text-xs font-light text-gray-200 tab-home tab hover:text-secondary-content">
                   {link.name}
                 </span>
               </a>
