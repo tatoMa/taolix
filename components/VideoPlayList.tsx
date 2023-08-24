@@ -10,6 +10,7 @@ const VideoPlayList = ({
   title = true,
   index,
   playedUrls,
+  playedUrlsSaveOnLocalStorage,
 }) => {
   const isHdSource = index === "HD" || index === 3;
   return (
@@ -45,16 +46,17 @@ const VideoPlayList = ({
                   }`}
                   onClick={() => {
                     // THIS IS FOR WHEN HD VIDEO NOT PLAY ON DEFAULT PLAYER
-                    // if (index === "HD") {
-                    //   window.open(
-                    //     "https://dp.haiwaikan.com/index.html?url=" + url,
-                    //     "_blank",
-                    //     "noopener,noreferrer"
-                    //   );
-                    // } else {
-                    clickUrlButton(url);
-                    document.documentElement.style.overflowY = "hidden";
-                    // }
+                    if (index === "HD") {
+                      window.open(
+                        "https://dp.haiwaikan.com/index.html?url=" + url,
+                        "_blank",
+                        "noopener,noreferrer"
+                      );
+                    } else {
+                      clickUrlButton(url);
+                      document.documentElement.style.overflowY = "hidden";
+                    }
+                    playedUrlsSaveOnLocalStorage(url);
                   }}
                 >
                   <div>
