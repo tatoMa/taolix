@@ -21,16 +21,19 @@ function MyApp({
     document.documentElement.lang = "en-us";
   });
   useEffect(() => {
+    let timer;
+
     const handleStart = (url: string) => {
       console.log(`Loading: ${url}`);
-      setLoading(true);
-      // NProgress.start()
+      timer = setTimeout(() => {
+        setLoading(true);
+      }, 150);
     };
 
     const handleStop = (url: string) => {
       console.log(`Done: ${url}`);
+      clearTimeout(timer);
       setLoading(false);
-      // NProgress.done()
     };
 
     router.events.on("routeChangeStart", handleStart);
