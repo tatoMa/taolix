@@ -46,7 +46,7 @@ const GroupSwiper = ({ videos }) => {
         slidesPerView={2.25}
         slidesPerGroup={2}
         spaceBetween={6}
-        className="mx-10 mb-4 mt-4 h-full"
+        className="h-full mx-10 mt-4 mb-4"
         lazy={true}
         breakpoints={{
           630: { slidesPerView: 7.25, slidesPerGroup: 2, spaceBetween: 6 },
