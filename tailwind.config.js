@@ -7,6 +7,7 @@ module.exports = {
     require("daisyui"),
     require("@tailwindcss/line-clamp"),
     require("tailwindcss-animate"),
+    require("postcss-100vh-fix"),
   ],
   // daisyUI config (optional)
   daisyui: {
