@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { SessionProvider } from "next-auth/react";
 import Layout from "../components/Layout/index";
 import GoogleAnalytics from "../components/Layout/GoogleAnalytic";
@@ -17,22 +17,21 @@ function MyApp({
 }>) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  let timer = useRef(null);
   useEffect(() => {
     document.documentElement.lang = "en-us";
   });
   useEffect(() => {
-    let timer;
-
     const handleStart = (url: string) => {
       console.log(`Loading: ${url}`);
-      timer = setTimeout(() => {
+      timer.current = setTimeout(() => {
         setLoading(true);
       }, 150);
     };
 
     const handleStop = (url: string) => {
       console.log(`Done: ${url}`);
-      clearTimeout(timer);
+      clearTimeout(timer.current);
       setLoading(false);
     };
 
