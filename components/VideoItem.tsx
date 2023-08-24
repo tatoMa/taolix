@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { useState } from "react";
 import { useInView } from "react-intersection-observer";
-
 const myLoader = ({ src, width, quality }) => {
   return `https://example.com/${src}?w=${width}&q=${quality || 75}`;
 };
@@ -33,7 +32,7 @@ const VideoItem = ({
   });
 
   return (
-    <div ref={ref}>
+    <div ref={ref} className="aspect-[3/4]">
       {inView ? (
         <Link
           href={`/detail/${id}${`?resource=${resource}${
@@ -42,7 +41,7 @@ const VideoItem = ({
           prefetch
         >
           <a
-            className="relative block overflow-hidden transition duration-500 cursor-pointer group hover:saturate-150"
+            className="relative block w-full h-full overflow-hidden transition duration-500 cursor-pointer group rounded-xl hover:saturate-150"
             onClick={() => {
               setIsLoading(true);
               setTimeout(() => {
@@ -75,7 +74,7 @@ const VideoItem = ({
                 </svg>
               </div>
             )}
-            <div className="relative aspect-[3/4] w-full">
+            <div className="w-full h-full">
               <img
                 src={pic}
                 alt=""
@@ -83,31 +82,32 @@ const VideoItem = ({
                 referrerPolicy="no-referrer"
               />
             </div>
-
-            <div className="absolute bottom-0 left-0 text-xl font-semibold bg-base-300/80 text-base-content line-clamp-3">
-              {name}
-              <span className="block text-xs font-light line-clamp-1">
-                {type}
-              </span>
-            </div>
-            <div className="absolute top-0 right-0 pt-1 text-sm bg-base-300/80 ">
-              {remarks}
-            </div>
-            {Number(rate) > 0 && (
-              <div
-                className={`absolute top-0 left-0 bg-base-300/80 pt-1 pl-1 text-sm  ${
-                  rate > 9
-                    ? "text-red-500"
-                    : rate > 7
-                    ? "text-orange-400"
-                    : rate > 5
-                    ? "text-yellow-400"
-                    : "text-yellow-300/75"
-                }`}
-              >
-                豆瓣{rate}★
-              </div>
-            )}
+            <section>
+              <p className="absolute top-0 right-0 bg-base-300/80 pt-[3px] pr-[2px] text-sm ">
+                {remarks}
+              </p>
+              <h2 className="absolute bottom-0 left-0 bg-base-300/90 pt-[1px] pb-[2px] pl-[2px] text-xl font-semibold text-accent-content line-clamp-3">
+                {name}
+                <span className="block pt-[1px] text-xs font-light text-base-content line-clamp-1">
+                  {type}
+                </span>
+              </h2>
+              {Number(rate) > 0 && (
+                <div
+                  className={`absolute top-0 left-0 bg-base-300/80 pt-[3px] pl-[2px] text-sm  ${
+                    rate > 9
+                      ? "text-red-500"
+                      : rate > 7
+                      ? "text-orange-400"
+                      : rate > 5
+                      ? "text-yellow-400"
+                      : "text-yellow-300/75"
+                  }`}
+                >
+                  ★ {rate}
+                </div>
+              )}
+            </section>
           </a>
         </Link>
       ) : (

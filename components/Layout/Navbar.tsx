@@ -43,11 +43,11 @@ function Navbar() {
       {/* Loading spinner */}
       <Loading isLoading={isSearching} setIsLoading={setIsSearching} />
 
-      <ol className="flex max-w-screen-2xl grow items-center justify-end px-1 sm:px-4 md:px-8 lg:justify-between lg:px-14">
+      <ol className="flex items-center justify-end px-1 max-w-screen-2xl grow sm:px-4 md:px-8 lg:justify-between lg:px-14">
         {/* Logo */}
         <li className="z-30 grow">
           <Link href="/">
-            <a className="ml-0 block w-32 cursor-pointer py-1 px-2 duration-100 hover:scale-110 active:scale-110 lg:w-36">
+            <a className="block w-32 px-2 py-1 ml-0 duration-100 cursor-pointer hover:scale-110 active:scale-110 lg:w-36">
               {theme ? (
                 <img
                   data-theme="dark"
@@ -90,8 +90,8 @@ function Navbar() {
               xl:p-3
               ${
                 router.asPath === "/"
-                  ? "border-b border-secondary text-secondary-focus"
-                  : ""
+                  ? "border-b-2 border-secondary text-secondary"
+                  : "text-accent-content"
               }
             `}
             >
@@ -114,8 +114,8 @@ function Navbar() {
               xl:p-3
               ${
                 router.query.type === link.type.toString()
-                  ? "border-b border-secondary text-secondary-focus"
-                  : ""
+                  ? "border-b-2 border-secondary text-secondary"
+                  : "text-accent-content"
               }
             `}
               >
@@ -138,8 +138,8 @@ function Navbar() {
               xl:p-3
               ${
                 router.asPath === "/mylist"
-                  ? "border-b border-secondary text-secondary-focus"
-                  : ""
+                  ? "border-b-2 border-secondary text-secondary"
+                  : "text-accent-content"
               }
             `}
             >
@@ -165,7 +165,7 @@ function Navbar() {
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
+                  className="w-6 h-6"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -191,7 +191,7 @@ function Navbar() {
             <div className="flex items-center gap-2">
               <img
                 onClick={() => signOut()}
-                className="inline-block h-10 w-10 rounded-full"
+                className="inline-block w-10 h-10 rounded-full"
                 src={session.user.image}
                 alt=""
                 referrerPolicy="no-referrer"
