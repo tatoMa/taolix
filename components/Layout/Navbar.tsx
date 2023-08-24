@@ -3,8 +3,6 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import useOnScrolled from "../../hooks/useOnScrolled";
 import { useState } from "react";
 import { useRouter } from "next/router";
-
-import Loading from "./Loading";
 import { MAJORS } from "../../utils/const";
 import ThemeSwitcher from "components/ThemeSwitcher";
 
@@ -41,7 +39,7 @@ function Navbar() {
       }`}
     >
       {/* Loading spinner */}
-      <Loading isLoading={isSearching} setIsLoading={setIsSearching} />
+      {/* <Loading isLoading={isSearching} setIsLoading={setIsSearching} /> */}
 
       <ol className="flex items-center justify-end px-1 max-w-screen-2xl grow sm:px-4 md:px-8 lg:justify-between lg:px-14">
         {/* Logo */}
