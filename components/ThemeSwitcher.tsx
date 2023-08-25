@@ -1,34 +1,35 @@
 // import useLocalStorage from "hooks/useLocalStorage";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { themeChange } from "theme-change";
 
-const ThemeSwitcher = ({ setThemeForLogo }) => {
-  const [themeState, setThemeState] = useState("");
+const DARK_THEME = "dark";
 
+const ThemeSwitcher = ({ theme, setTheme }) => {
   useEffect(() => {
     themeChange(false);
   }, []);
 
   useEffect(() => {
-    const theme = localStorage.getItem("theme");
-    setThemeState(theme);
-    setThemeForLogo(theme);
+    const themeFromLocalStorage = localStorage.getItem("theme");
+    setTheme(themeFromLocalStorage);
   }, []);
+
+  const switchTheme = () => {
+    setTheme(theme === DARK_THEME ? "" : DARK_THEME);
+  };
+
   return (
-    <label className="swap-rotate swap ml-1 md:mx-2 md:px-1">
+    <label className="ml-1 swap-rotate swap md:mx-2 md:px-1">
       <input
         type="checkbox"
-        onClick={() => {
-          setThemeState(themeState === "dark" ? "" : "dark");
-          setThemeForLogo(themeState === "dark" ? "" : "dark");
-        }}
-        checked={themeState !== "dark"}
+        onClick={switchTheme}
+        checked={theme !== "dark"}
         readOnly
       />
       <svg
         data-set-theme=""
         data-act-class="ACTIVECLASS"
-        className="swap-on h-6 w-6 fill-current"
+        className="w-6 h-6 fill-current swap-on"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
       >
@@ -37,7 +38,7 @@ const ThemeSwitcher = ({ setThemeForLogo }) => {
       <svg
         data-set-theme="dark"
         data-act-class="ACTIVECLASS"
-        className="swap-off h-6 w-6 fill-current"
+        className="w-6 h-6 fill-current swap-off"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
       >

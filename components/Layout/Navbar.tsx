@@ -12,18 +12,16 @@ function Navbar() {
   const [menu, setMenu] = useState(false);
   const [searchText, setSearchText] = useState("");
   const { data: session } = useSession();
-  const [isSearching, setIsSearching] = useState(false);
   const [theme, setTheme] = useState(false);
 
   const handleKeyDown = (e) => {
-    if (e.key === "Enter" && e.target.value && !isSearching) {
-      handleSearching(e);
+    if (e.key === "Enter" && e.target.value) {
       e.target.value = "";
+      handleSearching(e);
     }
   };
   const handleSearching = (e) => {
     e.preventDefault();
-    setIsSearching(true);
     setMenu(false);
     router.push("/search/" + searchText);
   };
@@ -38,9 +36,6 @@ function Navbar() {
         scrolled ? "bg-base-200/95" : "bg-base-100/50"
       }`}
     >
-      {/* Loading spinner */}
-      {/* <Loading isLoading={isSearching} setIsLoading={setIsSearching} /> */}
-
       <ol className="flex items-center justify-end px-1 max-w-screen-2xl grow sm:px-4 md:px-8 lg:justify-between lg:px-14">
         {/* Logo */}
         <li className="z-30 grow">
@@ -181,7 +176,7 @@ function Navbar() {
         </li>
 
         {/* Theme color switcher */}
-        <ThemeSwitcher setThemeForLogo={setThemeForLogo} />
+        <ThemeSwitcher theme={theme} setTheme={setTheme} />
 
         {/* Auth components */}
         <li className="hidden md:block">
