@@ -20,14 +20,11 @@ function Navbar() {
       handleSearching(e);
     }
   };
+
   const handleSearching = (e) => {
     e.preventDefault();
     setMenu(false);
     router.push("/search/" + searchText);
-  };
-
-  const setThemeForLogo = (theme) => {
-    setTheme(theme);
   };
 
   return (
