@@ -7,14 +7,14 @@ const useRouterLoading = (setLoading) => {
 
   useEffect(() => {
     const handleStart = (url: string) => {
-      console.log(`Loading: ${url}`);
+      //   console.log(`Loading: ${url}`);
       timer.current = setTimeout(() => {
         setLoading(true);
       }, 150);
     };
 
     const handleStop = (url: string) => {
-      console.log(`Done: ${url}`);
+      //   console.log(`Done: ${url}`);
       clearTimeout(timer.current);
       setLoading(false);
     };
