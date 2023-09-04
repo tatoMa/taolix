@@ -50,6 +50,10 @@ module.exports = withPWA({
       "xk.3v7.net",
     ],
   },
+  i18n: {
+    locales: ["en", "zh"],
+    defaultLocale: "en",
+  },
 });
 // const withPWA = require("next-pwa");
 // const withBundleAnalyzer = require("@next/bundle-analyzer")({

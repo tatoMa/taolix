@@ -5,6 +5,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { MAJORS } from "../../utils/const";
 import ThemeSwitcher from "components/ThemeSwitcher";
+import { useTranslations } from "next-intl";
 
 function Navbar() {
   const router = useRouter();
@@ -13,6 +14,7 @@ function Navbar() {
   const [searchText, setSearchText] = useState("");
   const { data: session } = useSession();
   const [theme, setTheme] = useState(false);
+  const t = useTranslations("Layout");
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter" && e.target.value) {
@@ -34,11 +36,11 @@ function Navbar() {
         scrolled ? "bg-base-200/95" : "bg-base-100/50"
       }`}
     >
-      <section className="flex items-center justify-end mx-2 max-w-screen-2xl grow sm:mx-6 md:mx-10 lg:mx-14 lg:justify-between ">
+      <section className="mx-2 flex max-w-screen-2xl grow items-center justify-end sm:mx-6 md:mx-10 lg:mx-14 lg:justify-between ">
         {/* Logo */}
         <section className="z-30 grow">
           <Link href="/">
-            <a className="relative inline-block px-1 py-0 ml-0 text-lg font-medium tracking-widest transition duration-200 bg-transparent cursor-pointer group text-accent-content outline outline-1 hover:outline-secondary active:outline-secondary sm:text-2xl">
+            <a className="group relative ml-0 inline-block cursor-pointer bg-transparent px-1 py-0 text-lg font-medium tracking-widest text-accent-content outline outline-1 transition duration-200 hover:outline-secondary active:outline-secondary sm:text-2xl">
               <div className="text-accent-content group-hover:animate-[logo_0.3s_1] group-hover:text-secondary group-active:animate-[logo_0.3s_1] group-active:text-secondary">
                 TAOLIX
               </div>
@@ -74,7 +76,7 @@ function Navbar() {
               }
             `}
             >
-              home
+              {t(`nav.home`)}
             </a>
           </Link>
           {MAJORS.map((link) => (
@@ -98,7 +100,9 @@ function Navbar() {
               }
             `}
               >
-                {link.classify}
+                {/* 
+            // @ts-ignore */}
+                {t(`nav.${link.classify}`)}
               </a>
             </Link>
           ))}
@@ -122,7 +126,7 @@ function Navbar() {
               }
             `}
             >
-              my list
+              {t(`nav.my-list`)}
             </a>
           </Link>
         </section>
@@ -143,7 +147,7 @@ function Navbar() {
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="w-6 h-6"
+                className="h-6 w-6"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -168,7 +172,7 @@ function Navbar() {
             <div className="flex items-center gap-2">
               <img
                 onClick={() => signOut()}
-                className="inline-block w-10 h-10 rounded-full"
+                className="inline-block h-10 w-10 rounded-full"
                 src={session.user.image}
                 alt=""
                 referrerPolicy="no-referrer"

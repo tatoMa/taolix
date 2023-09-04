@@ -1,0 +1,12 @@
+{
+  "Layout": {
+    "nav": {
+      "home": "主 页",
+      "movie": "电 影",
+      "tv show": "剧 集",
+      "reality show": "综 艺",
+      "anime": "动 漫",
+      "my-list": "收 藏"
+    }
+  }
+}

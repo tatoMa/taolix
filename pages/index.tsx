@@ -148,6 +148,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
   return {
     props: {
+      messages: (await import(`../i18n/${context.locale}.json`)).default,
       selectedVideosForHero,
       doubanHotMovieList,
       doubanHotTvList,

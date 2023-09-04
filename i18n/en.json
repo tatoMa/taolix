@@ -1,0 +1,12 @@
+{
+  "Layout": {
+    "nav": {
+      "home": "home",
+      "movie": "movie",
+      "tv show": "tv show",
+      "reality show": "reality show",
+      "anime": "anime",
+      "my-list": "mylist"
+    }
+  }
+}

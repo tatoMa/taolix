@@ -39,7 +39,7 @@ export default function Home({
             <VideoListsSection videos={videos} />
           </>
         ) : (
-          <div className=" mt-10 text-center text-2xl text-red-500">
+          <div className="mt-10 text-center text-2xl text-red-500 ">
             Fetching error. Please use another link or go back. <br />
             Cannot find page {page} with genre {t}.
           </div>
@@ -54,8 +54,10 @@ export default function Home({
 
 export const getStaticProps: GetStaticProps = async ({
   params: { type, page },
+  locale,
 }: {
   params: { type: string; page: string };
+  locale: string;
 }) => {
   let videos = {};
   if (parseInt(page) > 0 && genresForListPageTypeIds.includes(Number(type))) {
@@ -70,6 +72,7 @@ export const getStaticProps: GetStaticProps = async ({
   }
   return {
     props: {
+      messages: (await import(`../../../i18n/${locale}.json`)).default,
       videos,
       page,
       t: type,

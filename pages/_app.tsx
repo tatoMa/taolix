@@ -9,12 +9,19 @@ import { Session } from "next-auth";
 import useRouterLoading from "hooks/useRouterLoading";
 import LoadingAnimation from "components/Layout/Loading";
 
-function MyApp({
-  Component,
-  pageProps: { session, ...pageProps },
-}: AppProps<{
+import { NextIntlClientProvider } from "next-intl";
+
+type PageProps = {
+  messages: IntlMessages;
+  now: number;
   session: Session;
-}>) {
+};
+
+type Props = Omit<AppProps<PageProps>, "pageProps"> & {
+  pageProps: PageProps;
+};
+
+function MyApp({ Component, pageProps: { session, ...pageProps } }: Props) {
   const [loading, setLoading] = useState(false);
   useRouterLoading(setLoading);
 
@@ -29,13 +36,16 @@ function MyApp({
       {/* @ts-ignore*/}
       <GoogleAnalytics Component pageProps />
       {/* layout of app */}
-      <Layout>
-        <>
-          {loading && <LoadingAnimation />}
-          {/* main section of all pages */}
-          <Component {...pageProps} />
-        </>
-      </Layout>
+
+      <NextIntlClientProvider messages={pageProps.messages}>
+        <Layout>
+          <>
+            {loading && <LoadingAnimation />}
+            {/* main section of all pages */}
+            <Component {...pageProps} />
+          </>
+        </Layout>
+      </NextIntlClientProvider>
     </SessionProvider>
   );
 }
