@@ -4,15 +4,15 @@ import { MAJORS } from "../../utils/const";
 const Footer = () => {
   return (
     <footer className="mx-auto mb-20 max-w-screen-2xl lg:mb-0">
-      <div className="mx-2 mb-4 mt-4 sm:mx-6 md:mx-10 lg:mx-14">
-        <hr className="my-6 h-px  border-none bg-gray-700" />
+      <div className="mx-2 mt-4 mb-4 sm:mx-6 md:mx-10 lg:mx-14">
+        <hr className="my-6 h-px border-none bg-gray-700" />
         <div className="lg:flex">
           <div className="mx-0 w-full lg:-mx-6 lg:w-2/5">
             <div className="px-0 text-center lg:px-6">
               <div>
                 <Link href="/">
                   <a className="btn btn-ghost btn-sm text-xl font-bold text-accent-content">
-                    TAOLIX
+                    TAOLIX new
                   </a>
                 </Link>
               </div>
@@ -113,7 +113,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <hr className="my-4 h-px  border-none bg-gray-700" />
+        <hr className="my-4 h-px border-none bg-gray-700" />
 
         <div>
           <p className="text-center text-sm">
