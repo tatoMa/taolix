@@ -12,7 +12,7 @@ const Footer = () => {
               <div>
                 <Link href="/">
                   <a className="btn btn-ghost btn-sm text-xl font-bold text-accent-content">
-                    TAOLIX new
+                    TAOLIX
                   </a>
                 </Link>
               </div>
