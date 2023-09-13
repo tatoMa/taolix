@@ -118,7 +118,7 @@ function Detail({
         <Banner detail={{ ...primaryMovieDetail.list[0], vod_pic: imageUrl }} />
         <LineBreak title="PLAY LIST" />
         <div className="flex items-center justify-between">
-          <p className="flex-1 my-3 text-sm text-gray-400">
+          <p className="my-3 flex-1 text-sm text-gray-400">
             ALL resources are from 3rd party sources. We do NOT store or save
             any video resources.
           </p>
@@ -128,15 +128,20 @@ function Detail({
           >
             Order:{" "}
             {listOrderAsc ? (
-              <ChevronUpIcon className="inline-block w-5 h-5 " />
+              <ChevronUpIcon className="inline-block h-5 w-5 " />
             ) : (
-              <ChevronDownIcon className="inline-block w-5 h-5 " />
+              <ChevronDownIcon className="inline-block h-5 w-5 " />
             )}
           </button>
         </div>
         {!loadingStorage && (
           <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-6">
-            {allMovieDetailsList.map((movieInfo, index) => (
+            <h1 className="text-xl text-red-500">
+              Due to copyright policy, we can not provide any sources and direct
+              link to play these videos. Please find all these videos from
+              somewhere else. Thank you for all your support.
+            </h1>
+            {/* {allMovieDetailsList.map((movieInfo, index) => (
               <VideoPlayList
                 key={index}
                 index={movieInfo?.resource === 1 ? "HD" : movieInfo?.resource}
@@ -150,7 +155,7 @@ function Detail({
                   handlePlayedUrlsSaveOnLocalStorage
                 }
               />
-            ))}
+            ))} */}
           </div>
         )}
       </main>
