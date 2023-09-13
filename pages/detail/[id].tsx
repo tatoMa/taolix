@@ -138,8 +138,9 @@ function Detail({
           <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-6">
             <h1 className="text-xl text-red-500">
               Due to copyright policy, we can not provide any sources and direct
-              link to play these videos. Please find all these videos from
-              somewhere else. Thank you for all your support.
+              link to play these videos anymore. Please find all these videos
+              from somewhere else and support legit copy. Thank you for all your
+              support.
             </h1>
             {/* {allMovieDetailsList.map((movieInfo, index) => (
               <VideoPlayList
