@@ -178,8 +178,8 @@ export const getServerSideProps: GetServerSideProps = async ({
   );
 
   // filer all sensitive info
-  if (FILTERSLIST.includes(parseInt(params.id as string)))
-    return { notFound: true };
+  // if (FILTERSLIST.includes(parseInt(params.id as string)))
+  return { notFound: true };
 
   const { resourceApiId, resourceMovieName } = getIdAndNameFromQuery(query);
 
